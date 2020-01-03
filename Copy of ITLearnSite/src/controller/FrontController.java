@@ -29,7 +29,7 @@ public class FrontController extends HttpServlet{
 	public void init(ServletConfig sc) throws ServletException {
 		serv = new MemberService();
 		mBean = new MemberBean();
-
+		System.out.println();
 	}
 	
 	@Override
