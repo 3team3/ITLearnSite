@@ -1,0 +1,5 @@
+@charset "UTF-8";
+.container{
+	background-color: skyblue; position: relative;
+	min-height:700px;
+}
