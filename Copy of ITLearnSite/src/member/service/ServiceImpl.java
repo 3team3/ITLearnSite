@@ -15,4 +15,7 @@ public interface ServiceImpl {
 	/*멤버리스트 가져오기*/
 	public List<MemberBean> getMemberlist();
 	
+	/*회원탈퇴*/
+	public int deleteMember(MemberBean bean);
+	
 }

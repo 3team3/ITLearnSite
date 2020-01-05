@@ -33,4 +33,10 @@ public class MemberService implements ServiceImpl{
 		List<MemberBean> listMember = dao.getMemberlist();
 		return listMember;
 	}
+	//회원탈퇴
+	@Override
+	public int deleteMember(MemberBean bean) {
+		int result = dao.deleteMember(bean);
+		return 0;
+	}
 }

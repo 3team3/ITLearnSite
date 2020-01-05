@@ -154,7 +154,7 @@ public class MemberDAO implements MemberDAOImpl{
 	
 	//회원탈퇴
 	@Override
-	public int deleteMember(String email){ 
+	public int deleteMember(MemberBean bean){ 
 		   
 		   Connection con = null;
 	       PreparedStatement pstmt = null;
@@ -163,7 +163,7 @@ public class MemberDAO implements MemberDAOImpl{
 	       try {	         
 	  		 con =getConnection();
 			 pstmt = con.prepareStatement("delete from MEMBER where email = ?");		     
-		        pstmt.setString(1, email.trim());
+		        pstmt.setString(1, bean.getEmail().trim());
 		      check = pstmt.executeUpdate(); //쿼리실행으로 삭제된 레코드 수 반환    
 	       }catch(Exception e){
 	    	   System.out.println("deleteMember()메소드에서 오류 :"+e);

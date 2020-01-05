@@ -15,175 +15,184 @@ import javax.servlet.http.HttpSession;
 import member.member.db.MemberBean;
 import member.member.db.MemberDAO;
 import member.service.MemberService;
-public class FrontController extends HttpServlet{
-	
+
+public class FrontController extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	MemberService serv= null;
+	MemberService serv = null;
 	MemberDAO dao = null;
 	MemberBean mBean = null;
-	
+
 	int result = 0; // 상태를 나타낼 변수
-	
+
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		serv = new MemberService();
 		mBean = new MemberBean();
 		System.out.println();
 	}
-	
+
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		/*##test code##*/
-	    System.out.println("service()");
-		
-		
+		/* ##test code## */
+		System.out.println("service()");
+
 		String url = request.getRequestURI();
 		System.out.println(url);
-		
+
 		String contextPath = request.getContextPath();
 		System.out.println(contextPath);
-		
+
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-		MemberDAO memberDao =null;
-		try 
-		{
-			//인덱스 페이지 요청
-			if(path == null)
+		MemberDAO memberDao = null;
+		try {
+			// 인덱스 페이지 요청
+			if (path == null) 
 			{
 				nextPage = "/index.jsp";
-			}
-			else if(path.equals("/index.do"))
+			} 
+			else if (path.equals("/index.do")) 
 			{
 				nextPage = "/main.jsp";
+				System.out.println("asdf");
 			}
-			//##########회원가입########## Start
-			else if(path.equals("/joinMember.do"))
+			// ##########회원가입########## Start
+			else if (path.equals("/joinMember.do")) 
 			{
-				//회원가입 페이지이동
+				// 회원가입 페이지이동
 				nextPage = "/member/join.jsp";
 			}
-			//회원가입 페이지에서 중복체크해주는 ajax부분
-			else if(path.equals("/emailDupChk.do")){
+			// 회원가입 페이지에서 중복체크해주는 ajax부분
+			else if (path.equals("/emailDupChk.do")) 
+			{
 				mBean = getMemberBeanProperty(request, response);
 				result = serv.emailDupChk(mBean);
 				System.out.println(result);
-				
+
 				PrintWriter out = response.getWriter();
-				if(result == 1){
+				if (result == 1) 
+				{
 					out.print(1);
-				}else if(result == 0){
+				} 
+				else if (result == 0) 
+				{
 					out.print(2);
 				}
 			}
-			//회원가입시 submit버튼 눌럿을 시 요청
-			else if(path.equals("/insertMember.do"))
+			// 회원가입시 submit버튼 눌럿을 시 요청
+			else if (path.equals("/insertMember.do")) 
 			{
-				mBean = getMemberBeanProperty(request, response); //MemberBean에 값을 셋팅해주고 반환해주는 메소드
-				result = serv.InsertMember(mBean);//MemberService에 있는 메서드를 호출 // MemberService serv = new MemberService() 
-				nextPage = "/main.jsp";//회원가입후 main으로 페이지 이동
+				mBean = getMemberBeanProperty(request, response); // MemberBean에 값을 셋팅해주고 반환해주는 메소드
+				result = serv.InsertMember(mBean);// MemberService에 있는 메서드를 호출 // MemberService serv = new
+													// MemberService()
+				nextPage = "/main.jsp";// 회원가입후 main으로 페이지 이동
 			}
-			//##########회원가입########## End
-			
-			//##########회원리스트########## Start
-			else if(path.equals("/memberlist.do"))
+			// ##########회원가입########## End
+
+			// ##########회원리스트########## Start
+			else if (path.equals("/memberlist.do")) 
 			{
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
 				nextPage = "/member/memberlist.jsp";
-				
+
 			}
-			//##########회원리스트########## End
-			
-			//##########로그인/로그아웃########## Start
-			//로그인 버튼 누를시
-			else if(path.equals("/login.do"))
+			// ##########회원리스트########## End
+
+			// ##########로그인/로그아웃########## Start
+			// 로그인 버튼 누를시
+			else if (path.equals("/login.do"))
 			{
-				nextPage="/member/login.jsp";
-			}
-			else if(path.equals("/login1.do"))
+				nextPage = "/member/login.jsp";
+			} 
+			else if (path.equals("/login1.do")) 
 			{
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
-				
+
 				MemberDAO mDao = MemberDAO.getInstance();
 				int loginResult = mDao.login(email, pw);
-				
-				if (loginResult == 1)
+
+				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
 					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 					rd.forward(request, response);
-				}
-				else
+				} 
+				else 
 				{
 					request.setAttribute("loginResult", loginResult);
 					RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
 					rd.forward(request, response);
 				}
-				nextPage="/main.jsp";
-			}
-			else if(path.equals("/logout.do"))
+				nextPage = "/main.jsp";
+			} 
+			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
 				session.invalidate();
-				
+
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-				rd.forward(request, response);		
+				rd.forward(request, response);
 			}
-			//##########로그인/로그아웃########## END
-			
-			//##########회원탈퇴 ############## Start
-			else if(path.equals("/MemberDeleteAction.do"))
+			// ##########로그인/로그아웃########## END
+
+			// ##########회원탈퇴 ############## Start
+			else if (path.equals("/MemberDeleteAction.do")) 
 			{
-				nextPage="/member/memberDelete.jsp";
-			}
-			else if(path.equals("/MemberDeleteAction1.do"))
+				nextPage = "/member/memberDelete.jsp";
+			} 
+			else if (path.equals("/MemberDeleteAction1.do")) 
 			{
 				mBean = getMemberBeanProperty(request, response);
-			    int check = serv.deleteMember(mBean);		
-					
-				if(check !=0){			
+				int check = serv.deleteMember(mBean);
+
+				if (check != 0) 
+				{
 					HttpSession session = request.getSession();
-					session.invalidate();			
+					session.invalidate();
 					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out=response.getWriter();
+					PrintWriter out = response.getWriter();
 					out.println("<script>");
-					out.println("alert('탈퇴되었습니다');");		
+					out.println("alert('탈퇴되었습니다');");
 					out.println("window.location.href='/ITLearnSite/main.jsp'");
 					out.println("</script>");
 					out.close();
-				}else{
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter out=response.getWriter();
-						out.println("<script>");
-						out.println("alert('탈퇴실패');");
-						out.println("history.back();");
-						out.println("</script>");
-						out.close();		*/
-				nextPage="/main.jsp";
+				} 
+				else 
+				{
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('탈퇴실패');");
+					out.println("history.back();");
+					out.println("</script>");
+					out.close();
+					nextPage = "/main.jsp";
+				}
+				// ##########회원탈퇴 ############## End
+
 			}
-			//##########회원탈퇴 ############## End
-						
-			System.out.println(nextPage);
-			//null PointException
-			if(nextPage != null){
+			System.out.println("nextPAge" + nextPage);
+			// null PointException
+			if (nextPage != null) 
+			{
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 			}
 			
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-		
-	private MemberBean getMemberBeanProperty(HttpServletRequest request, HttpServletResponse response){
+
+	private MemberBean getMemberBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		String email = null;
 		String pw = null;
 		String name = null;
@@ -196,73 +205,73 @@ public class FrontController extends HttpServlet{
 		String address1 = null;
 		String address2 = null;
 		int sms = 0;
-		
+
 		// 1. 파라미터 추출
 		// 2. 유효성 : 값이 넘어왔는지 여부
 		/* 값을 받아왔을 경우에만 처리하기 위해서 */
 		// 3. 받은 request파라미터에만 mBean에 값 셋팅
 		mBean = new MemberBean();
-		if(request.getParameter("email") != null){
+		if (request.getParameter("email") != null) {
 			email = request.getParameter("email");
 			mBean.setEmail(email);
 			System.out.println("email =" + email);
 		}
-		if(request.getParameter("pw1") != null){
+		if (request.getParameter("pw1") != null) {
 			pw = request.getParameter("pw1");
 			mBean.setPw(pw);
-			System.out.println("pw = "+ pw);
+			System.out.println("pw = " + pw);
 		}
-		if(request.getParameter("name") != null){
+		if (request.getParameter("name") != null) {
 			name = request.getParameter("name");
 			mBean.setName(name);
-			System.out.println("name = "+ name);
+			System.out.println("name = " + name);
 		}
-		if(Integer.parseInt(request.getParameter("gender")) != 0){
+		if (Integer.parseInt(request.getParameter("gender")) != 0) {
 			gender = Integer.parseInt(request.getParameter("gender"));
 			mBean.setGender(gender);
 			System.out.println("gender=" + gender);
 		}
-		if(request.getParameter("birth_year") != null){
+		if (request.getParameter("birth_year") != null) {
 			birth_year = request.getParameter("birth_year");
 			mBean.setBirth_year(birth_year);
 			System.out.println("birthyear = " + birth_year);
 		}
-		if(request.getParameter("birth_month") != null){
+		if (request.getParameter("birth_month") != null) {
 			birth_month = request.getParameter("birth_month");
 			mBean.setBirth_month(birth_month);
-			System.out.println("birthmonth = "+ birth_month);
+			System.out.println("birthmonth = " + birth_month);
 		}
-		if(request.getParameter("birth_day") != null){
+		if (request.getParameter("birth_day") != null) {
 			birth_day = request.getParameter("birth_day");
 			mBean.setBirth_day(birth_day);
 			System.out.println("birthday = " + birth_day);
 		}
-		if(request.getParameter("phonenumber") != null){
+		if (request.getParameter("phonenumber") != null) {
 			phonenumber = request.getParameter("phonenumber");
 			mBean.setPhonenumber(phonenumber);
 			System.out.println("phonenubmer = " + phonenumber);
 		}
-		if(request.getParameter("address") != null){
+		if (request.getParameter("address") != null) {
 			address = request.getParameter("address");
 			mBean.setAddress(address);
 			System.out.println("address=" + address);
 		}
-		if(request.getParameter("address1") != null){
+		if (request.getParameter("address1") != null) {
 			address1 = request.getParameter("address1");
 			mBean.setAddress1(address1);
-			System.out.println("address1 = "+address1);
+			System.out.println("address1 = " + address1);
 		}
-		if(request.getParameter("address2") != null){
+		if (request.getParameter("address2") != null) {
 			address2 = request.getParameter("address2");
 			mBean.setAddress2(address2);
 			System.out.println("address2 =" + address2);
 		}
-		if(Integer.parseInt(request.getParameter("sms")) != 0){
+		if (Integer.parseInt(request.getParameter("sms")) != 0) {
 			sms = Integer.parseInt(request.getParameter("sms"));
 			mBean.setSms(sms);
-			System.out.println("sms수신동의 = "+ sms);
+			System.out.println("sms수신동의 = " + sms);
 		}
-		//3. mBean 객체 리턴
+		// 3. mBean 객체 리턴
 		return mBean;
 	}
 }
