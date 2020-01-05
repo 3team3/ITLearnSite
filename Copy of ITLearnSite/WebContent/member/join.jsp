@@ -24,8 +24,8 @@
 			<input type="text" name="name" id="name" onkeyup="nameChk();">
 			<br>
 			<h5>성별</h5>
-			<br> <input type="radio" name="gender" id="gender1" value=1>남
-			&nbsp; <input type="radio" name="gender" id="gender2" value=2>여<br>
+			<br> <input type="radio" name="gender" id="gender1" value="1">남
+			&nbsp; <input type="radio" name="gender" id="gender2" value="2">여<br>
 			<h5>생년월일</h5>
 			<br>
 			<h5>연</h5>
@@ -58,7 +58,7 @@
 				readonly="readonly"> <br> <input type="text"
 				name="address2" id="address2" placeholder="상세주소"> <br>
 			<h5>sms수신동의</h5>
-			<input type="checkbox" name="sms" id="sms" value=1><br>
+			<input type="checkbox" name="sms" id="sms" value="1"><br>
 			<input type="submit" value="이메인 인증">
 		</form>
 	</div>
