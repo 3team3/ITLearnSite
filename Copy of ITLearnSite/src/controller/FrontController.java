@@ -216,57 +216,57 @@ public class FrontController extends HttpServlet {
 			mBean.setEmail(email);
 			System.out.println("email =" + email);
 		}
-		else if (request.getParameter("pw1") != null) {
+		if (request.getParameter("pw1") != null) {
 			pw = request.getParameter("pw1");
 			mBean.setPw(pw);
 			System.out.println("pw = " + pw);
 		}
-		else if (request.getParameter("name") != null) {
+		if (request.getParameter("name") != null) {
 			name = request.getParameter("name");
 			mBean.setName(name);
 			System.out.println("name = " + name);
 		}
-		else if (Integer.parseInt(request.getParameter("gender")) != 0) {
+		if (request.getParameter("gender") != null) {
 			gender = Integer.parseInt(request.getParameter("gender"));
 			mBean.setGender(gender);
 			System.out.println("gender=" + gender);
 		}
-		else if (request.getParameter("birth_year") != null) {
+		if (request.getParameter("birth_year") != null) {
 			birth_year = request.getParameter("birth_year");
 			mBean.setBirth_year(birth_year);
 			System.out.println("birthyear = " + birth_year);
 		}
-		else if (request.getParameter("birth_month") != null) {
+		if (request.getParameter("birth_month") != null) {
 			birth_month = request.getParameter("birth_month");
 			mBean.setBirth_month(birth_month);
 			System.out.println("birthmonth = " + birth_month);
 		}
-		else if (request.getParameter("birth_day") != null) {
+		if (request.getParameter("birth_day") != null) {
 			birth_day = request.getParameter("birth_day");
 			mBean.setBirth_day(birth_day);
 			System.out.println("birthday = " + birth_day);
 		}
-		else if (request.getParameter("phonenumber") != null) {
+		if (request.getParameter("phonenumber") != null) {
 			phonenumber = request.getParameter("phonenumber");
 			mBean.setPhonenumber(phonenumber);
 			System.out.println("phonenubmer = " + phonenumber);
 		}
-		else if (request.getParameter("address") != null) {
+		if (request.getParameter("address") != null) {
 			address = request.getParameter("address");
 			mBean.setAddress(address);
 			System.out.println("address=" + address);
 		}
-		else if (request.getParameter("address1") != null) {
+		if (request.getParameter("address1") != null) {
 			address1 = request.getParameter("address1");
 			mBean.setAddress1(address1);
 			System.out.println("address1 = " + address1);
 		}
-		else if (request.getParameter("address2") != null) {
+		if (request.getParameter("address2") != null) {
 			address2 = request.getParameter("address2");
 			mBean.setAddress2(address2);
 			System.out.println("address2 =" + address2);
 		}
-		else if (Integer.parseInt(request.getParameter("sms")) != 0) {
+		if ((request.getParameter("sms")) != null) {
 			sms = Integer.parseInt(request.getParameter("sms"));
 			mBean.setSms(sms);
 			System.out.println("sms수신동의 = " + sms);

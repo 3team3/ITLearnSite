@@ -43,6 +43,7 @@ public class MemberDAO implements MemberDAOImpl{
 	@Override
 	public int insertMember(MemberBean mBean) {
 		int check = 0;
+		System.out.println(mBean.getEmail() + mBean.getPw());
 		try 
 		{
 			

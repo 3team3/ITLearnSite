@@ -110,13 +110,14 @@ function nameChk(){
 }
 
 function selectGenderChk(){
-	var genChk = $("#gender").val();
+	var man = $("#gender1").val();
+	var woman = $("#gender2").val();
 	
-	if(genChk == 1)
+	if(man == 1)
 	{
 		chkGender = true;
 	}
-	else if(genChk == 2)
+	else if(woman == 2)
 	{
 		chkGender = true;
 	}
@@ -148,19 +149,7 @@ function addressChk(){
 	var addr1 = $("#address1").val();
 	var addr2 = $("#address2").val();
 	
-	if(addr == null)
-	{
-		chkAddr = false;
-	}
-	else if(addr1 == null)
-	{
-		chkAddr = false;
-	}
-	else if(addr2 == null)
-	{
-		chkAddr = false;
-	}
-	else
+	if(addr != "" && addr1 != "" && addr2 != "")
 	{
 		chkAddr = true;
 	}
@@ -168,30 +157,42 @@ function addressChk(){
 
 
 function submitter(){
-	if(chkEmail != true)
+	alert("chkEmail=" + chkEmail 
+			+ "\nchkPw1=" + chkPw1 
+			+ "\nchkPw2=" + chkPw2 
+			+ "\nchkName=" + chkName
+			+"\nchkGender=" + chkGender 
+			+ "\nchkPhone=" + chkPhone 	  
+			+ "\nchkAddr=" + chkAddr );
+	
+	if(chkEmail != true || $("#email").val() == "")
 	{
 		$("#email").focus();
 		return false;
 	}
-	else if(chkPw1 != true)
+	else if(chkPw1 != true || $("#pw1").val() == "" || chkPw1 != chkPw2)
 	{
-		$("#email").focus();
+		$("#pw1").focus();
 		return false;
 	}
-	else if(chkPw2 != true)
+	else if(chkPw2 != true || $("#pw2").val() == "")
 	{
+		$("#pw2").focus();
 		return false;
 	}
-	else if(chkName != true)
+	else if(chkName != true || $("#name").val() == "")
 	{
+		$("#name").focus();
 		return false;
 	}
-	else if(chkGender != true)
+	else if(chkGender != true || $("#gender").val() == "")
 	{
+		$("#gender").focus();
 		return false;
 	}
 	else if(chkAddr != true)
 	{
+		$("#address").focus();
 		return false;
 	}
 	else
