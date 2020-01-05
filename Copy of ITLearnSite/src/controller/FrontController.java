@@ -142,11 +142,10 @@ public class FrontController extends HttpServlet{
 						out.println("history.back();");
 						out.println("</script>");
 						out.close();		*/
-				}
 				nextPage="/main.jsp";
-			}
-			
-			
+				}
+				
+						
 			System.out.println(nextPage);
 			//null PointException
 			if(nextPage != null){
