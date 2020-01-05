@@ -48,7 +48,7 @@ public class FrontController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-		MemberDAO memberDao = null;
+		
 		try {
 			// 인덱스 페이지 요청
 			if (path == null) 
