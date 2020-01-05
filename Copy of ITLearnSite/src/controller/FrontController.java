@@ -80,7 +80,7 @@ public class FrontController extends HttpServlet {
 				} 
 				else if (result == 0) 
 				{
-					out.print(2);
+					out.print(0);
 				}
 			}
 			// 회원가입시 submit버튼 눌럿을 시 요청
