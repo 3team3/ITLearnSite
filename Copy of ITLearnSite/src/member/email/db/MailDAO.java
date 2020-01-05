@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import member.member.db.MemberBean;
+
 public class MailDAO implements MailDAOImpl {
 	Connection con = null;
     PreparedStatement pstmt = null;
@@ -38,7 +40,7 @@ public class MailDAO implements MailDAOImpl {
     
 	/*이메일 중복 체크*/
 	@Override
-	public int mailDupChk(String email) {
+	public int mailDupChk(MemberBean bean) {
 		int check = 0;
 		try 
 		{
@@ -46,7 +48,7 @@ public class MailDAO implements MailDAOImpl {
 			sql = "SELECT COUNT(email) FROM MEMBER WHERE EMAIL=?";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, email);
+			pstmt.setString(1, bean.getEmail());
 			rs = pstmt.executeQuery();
 		
 			
