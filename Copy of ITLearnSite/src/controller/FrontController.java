@@ -150,12 +150,13 @@ public class FrontController extends HttpServlet {
 			} 
 			else if (path.equals("/MemberDeleteAction1.do")) 
 			{
-				mBean = getMemberBeanProperty(request, response);
-				int check = serv.deleteMember(mBean);
+				HttpSession session = request.getSession();
+				String email = (String) session.getAttribute("email");
+				int check = serv.deleteMember(email);
 
 				if (check != 0) 
 				{
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.invalidate();
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();

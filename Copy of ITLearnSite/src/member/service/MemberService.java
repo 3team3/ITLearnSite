@@ -35,8 +35,8 @@ public class MemberService implements ServiceImpl{
 	}
 	//회원탈퇴
 	@Override
-	public int deleteMember(MemberBean bean) {
-		int result = dao.deleteMember(bean);
-		return 0;
+	public int deleteMember(String email) {
+		int result = dao.deleteMember(email);
+		return result;
 	}
 }

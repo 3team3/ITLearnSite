@@ -16,6 +16,6 @@ public interface ServiceImpl {
 	public List<MemberBean> getMemberlist();
 	
 	/*회원탈퇴*/
-	public int deleteMember(MemberBean bean);
+	public int deleteMember(String email);
 	
 }
