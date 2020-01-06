@@ -202,8 +202,40 @@ public class FrontController extends HttpServlet {
 					nextPage = "/main.jsp";
 				}
 				// ##########회원탈퇴 ############## End
-
+				
+				// ##########회원수정 ############## Start
+				}
+			else if(path.equals("/MemberUpdateAction.do")){
+				dao = new MemberDAO();
+				String email = (String)request.getSession().getAttribute("email"); 
+				MemberBean mBean = dao.callMember(email);
+				request.setAttribute("mBean", mBean);
+				nextPage="/member/modify.jsp";
 			}
+			else if(path.equals("/UpdateMember.do")){
+				
+				getMemberBeanProperty(request, response);
+					dao= new MemberDAO();
+					int check = dao.updateMember(mBean);
+					if(check == 1){
+						System.out.println("수정성공");
+						response.setContentType("text/html; charset=utf-8");
+						PrintWriter out = response.getWriter();
+						out.println("<script type='text/javascript'>");
+						out.println("alert('수정되었습니다.');");
+						out.println("</script>");
+					}else{
+						System.out.println(check);
+						System.out.println("수정실패");
+					}
+					nextPage="/main.jsp";
+				}
+				// ##########회원수정 ############## End
+				
+				
+				
+				
+				
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) 

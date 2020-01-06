@@ -17,7 +17,6 @@
 		<jsp:include page="/include/header.jsp"></jsp:include>
 	</div>
 	<div class="container">
-		<a href="${path}/MemberDeleteAction.do">회원탈퇴</a>
 	
 	</div>
 	<div>

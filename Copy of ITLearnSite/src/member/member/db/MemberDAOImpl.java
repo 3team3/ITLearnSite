@@ -16,4 +16,9 @@ public interface MemberDAOImpl{
 	public List<MemberBean> getMemberlist();
 	/*email 인증*/
 	public void emailAuth(String email);
+	/*회원 정보 불러오기*/
+	public MemberBean callMember(String email);
+	/*회원 수정*/ 
+	public int updateMember (MemberBean mBean);
+	
 }

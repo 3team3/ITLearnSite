@@ -39,6 +39,13 @@
                     <ul>
                         <li><a href="${path}/login.do"> 로그인 </a></li>
                     </ul>
+                    <ul>
+                    	<li> | </li>
+                    </ul>
+                    <ul>
+                        <li><a href="${path}/joinMember.do"> 회원가입 </a></li>
+                    </ul>
+                    
                     </c:if>
                     <c:if test="${email != null }">
                     <ul>
@@ -46,16 +53,22 @@
 					</ul>	
 					<ul>
 						<li><a href="logout.do"><button>로그아웃</button></a></li>
-					</ul>				
-					</c:if>
-
-                    <ul>
+					</ul>
+					
+					<ul>
                     	<li> | </li>
                     </ul>
-						
+                    
                     <ul>
-                        <li><a href="${path}/joinMember.do"> 회원가입 </a></li>
-                    </ul>
+                    	<li><a href="${path}/MemberUpdateAction.do">회원수정</a></li>
+                    </ul>				
+					</c:if>
+
+                   
+						
+                 
+                    	
+		
                 </div>
             </div>
         </div>

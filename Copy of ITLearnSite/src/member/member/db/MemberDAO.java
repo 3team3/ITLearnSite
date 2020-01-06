@@ -197,4 +197,86 @@ public class MemberDAO implements MemberDAOImpl{
 			closeConnection();
 		}
 	}
+	
+	
+	//회원정보 불러오기
+		@Override
+		public MemberBean callMember(String email) {
+			
+			Connection con = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        MemberBean mBean = new MemberBean();
+			
+			try{
+				con = getConnection();
+				String sql ="select * from member where email=?";
+				pstmt = con.prepareStatement(sql);
+	        	pstmt.setString(1, email);
+	        	rs = pstmt.executeQuery();
+	        	
+	        	if(rs.next()){
+	        		mBean.setEmail(rs.getString("email"));
+	        		mBean.setPw(rs.getString("pw"));
+	        		mBean.setName(rs.getString("name"));
+	        		mBean.setGender(rs.getInt("gender"));
+	        		mBean.setBirth_year(rs.getString("birth_year"));
+	        		mBean.setBirth_month(rs.getString("birth_month"));
+	        		mBean.setBirth_day(rs.getString("birth_day"));
+	        		mBean.setPhonenumber(rs.getString("phonenumber"));
+	        		mBean.setAddress(rs.getString("address"));
+	        		mBean.setAddress1(rs.getString("address1"));
+	        		mBean.setAddress2(rs.getString("address2"));
+	        		mBean.setSms(rs.getInt("sms")); 
+	        	}
+				
+			}catch(Exception e){
+				System.out.println("callMember()메소드에서 오류 :"+e);
+			}finally{
+				closeConnection(); 
+			}
+			return mBean;
+		}
+		
+		
+		//회원정보수정
+		@Override
+		public int updateMember(MemberBean mBean) {
+			int check = 0;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+	 		try{
+				con = getConnection();
+				
+				String sql = "update member set pw=?, name=?, gender=?, "
+							+ "birth_year=?, birth_month=?, birth_day=?, phonenumber=?, "
+							+ "address=?, address1=?, address2=?, sms=?"
+							+ " where email=?";
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, mBean.getPw());
+				pstmt.setString(2, mBean.getName());
+				pstmt.setInt(3, mBean.getGender());
+				pstmt.setString(4, mBean.getBirth_year());
+				pstmt.setString(5, mBean.getBirth_month());
+				pstmt.setString(6, mBean.getBirth_day());
+				pstmt.setString(7, mBean.getPhonenumber());
+				pstmt.setString(8, mBean.getAddress());
+				pstmt.setString(9, mBean.getAddress1());
+				pstmt.setString(10, mBean.getAddress2());
+				pstmt.setInt(11, mBean.getSms());
+				pstmt.setString(12, mBean.getEmail());
+
+				check = pstmt.executeUpdate();
+				
+			}catch(Exception e){
+				System.out.println("updateMember()메소드에서 오류 : "+e);
+				
+			}finally{
+				closeConnection();  			
+			}
+			return check;
+		}
+		
+	
 }
