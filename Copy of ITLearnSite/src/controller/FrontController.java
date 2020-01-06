@@ -31,9 +31,11 @@ public class FrontController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
+		System.out.println("init()");
 		serv = new MemberService();
+		System.out.println("MemberService() 객체 생성");
 		mBean = new MemberBean();
-		System.out.println();
+		System.out.println("MemberBean() 객체 생성");
 	}
 
 	@Override
@@ -87,12 +89,14 @@ public class FrontController extends HttpServlet {
 				}
 			}
 			// 회원가입시 submit버튼 눌럿을 시 요청
+			// 이메일 발송
 			else if (path.equals("/insertMember.do")) 
 			{
 				mBean = getMemberBeanProperty(request, response); // MemberBean에 값을 셋팅해주고 반환해주는 메소드
 				result = serv.InsertMember(mBean);// MemberService에 있는 메서드를 호출 // MemberService serv = new
 													// MemberService()
-				JoinMail mail = new JoinMail(mBean.getEmail());
+				String message = "<a href = " + request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/emailAuth.do?email="+mBean.getEmail()+">" +"링크"+ "</a>";
+				JoinMail mail = new JoinMail(mBean.getEmail(), message);
 				try {
 					mail.sendMail();//메일 전송
 				} catch (UnsupportedEncodingException | MessagingException e) {
@@ -100,6 +104,16 @@ public class FrontController extends HttpServlet {
 					e.printStackTrace();
 				}
 				nextPage = "/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+			}
+			//이메일 인증
+			else if(path.equals("/emailAuth.do"))
+			{
+				//이메일로 온 링크 클릭시 나오는 주소에 email=? 파라미터 값
+				String email = request.getParameter("email");
+				System.out.println(email);
+				serv.emailAuth(email);
+				
+				nextPage = "/member/emailAuthSuccess.jsp";
 			}
 			// ##########회원가입########## End
 

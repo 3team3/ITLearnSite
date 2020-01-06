@@ -174,6 +174,27 @@ public class MemberDAO implements MemberDAOImpl{
 	       return check;
 		   
 	   }
-	
-	
+	//이메일 인증
+	@Override
+	public void emailAuth(String email) {
+		try 
+		{
+			
+			con = getConnection();
+			sql = "update member set auth='y' where email=?";
+	        pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, email);
+	        pstmt.executeUpdate();
+	    
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("이메일 인증 오류 : "+e);
+			e.printStackTrace();
+		}
+		finally
+		{
+			closeConnection();
+		}
+	}
 }

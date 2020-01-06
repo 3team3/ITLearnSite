@@ -14,5 +14,6 @@ public interface MemberDAOImpl{
 	public int deleteMember(String email); 
 	/*전체 회원 정보 조회*/
 	public List<MemberBean> getMemberlist();
-	
+	/*email 인증*/
+	public void emailAuth(String email);
 }

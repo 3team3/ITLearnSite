@@ -3,7 +3,6 @@ package member.service;
 import java.util.List;
 
 import member.member.db.MemberBean;
-import member.member.db.MemberDAO;
 
 public interface ServiceImpl {
 	/*회원 가입*/
@@ -17,5 +16,8 @@ public interface ServiceImpl {
 	
 	/*회원탈퇴*/
 	public int deleteMember(String email);
+	
+	/*이메일 인증 */
+	public void emailAuth(String email);
 	
 }

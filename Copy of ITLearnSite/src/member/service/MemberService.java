@@ -39,4 +39,8 @@ public class MemberService implements ServiceImpl{
 		int result = dao.deleteMember(email);
 		return result;
 	}
+	//이메일 인증
+	public void emailAuth(String email) {
+		dao.emailAuth(email);
+	}
 }
