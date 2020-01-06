@@ -147,32 +147,27 @@ public class FrontController extends HttpServlet {
 					request.setAttribute("loginResult", loginResult);
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
-					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-					rd.forward(request, response);
+					
+					nextPage = "/index.jsp";
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
 				{
 					request.setAttribute("loginResult", loginResult);
-					RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
-					rd.forward(request, response);
+					nextPage = "/login.do";
 				}
 				//비번은 맞고 이메일 인증 안됫을 시
 				else if(loginResult == -1) 
 				{
 					request.setAttribute("loginResult", loginResult);
-					RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
-					rd.forward(request, response);
+					nextPage = "/login.do";
 				}
-				nextPage = "/main.jsp";
 			} 
 			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
 				session.invalidate();
-
-				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-				rd.forward(request, response);
+				nextPage = "/index.jsp";
 			}
 			// ##########로그인/로그아웃########## END
 
