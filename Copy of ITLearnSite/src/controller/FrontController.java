@@ -2,8 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import email.emailSend.JoinMail;
 import member.member.db.MemberBean;
 import member.member.db.MemberDAO;
 import member.service.MemberService;
@@ -89,7 +92,14 @@ public class FrontController extends HttpServlet {
 				mBean = getMemberBeanProperty(request, response); // MemberBean에 값을 셋팅해주고 반환해주는 메소드
 				result = serv.InsertMember(mBean);// MemberService에 있는 메서드를 호출 // MemberService serv = new
 													// MemberService()
-				nextPage = "/main.jsp";// 회원가입후 main으로 페이지 이동
+				JoinMail mail = new JoinMail(mBean.getEmail());
+				try {
+					mail.sendMail();//메일 전송
+				} catch (UnsupportedEncodingException | MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				nextPage = "/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
 			}
 			// ##########회원가입########## End
 

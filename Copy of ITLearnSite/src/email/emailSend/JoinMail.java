@@ -5,22 +5,19 @@ import javax.mail.MessagingException;
 
 public class JoinMail 
 {
-	private String targetMail;
+	String targetMail;
 	
 	
 	public String getTargetMail() {
 		return targetMail;
 	}
-
-
-	public void setTargetMail(String targetMail) {
+	
+	public JoinMail(String targetMail){
 		this.targetMail = targetMail;
 	}
 
-
-	public static void main(String[] args) throws UnsupportedEncodingException, MessagingException
+	public void sendMail() throws UnsupportedEncodingException, MessagingException
 	{
-		
 		SendMail mail = new SendMail();
 		//메일의 출발지 정보 : 본인이메일 셋팅할 내용
 		String FROM = "mailtester645@gmail.com";
@@ -33,7 +30,7 @@ public class JoinMail
 		// 클라이언트에게 보낼내용
 		String SUBJECT = "강의 사이트에서 발신되는 회원가입 인증메일입니다.";
 		String MESSAGE = "회원가입 링크 나중에 달기"; 
-		String TARGET = new JoinMail().getTargetMail();
+		String TARGET = getTargetMail();
 		
 		/*보안 수준 낮은 앱허용 설정해주어야함 구글은*/
 		mail.setServer(FROM, FROMNAME, SMTP_USERNAME, SMTP_PASSWORD, HOST, PORT, AUTH);
@@ -41,5 +38,4 @@ public class JoinMail
 		mail.set_SSL();
 		//mail.set_TSL();	
 	}
-	
 }
