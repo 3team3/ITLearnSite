@@ -140,7 +140,8 @@ public class FrontController extends HttpServlet {
 
 				MemberDAO mDao = MemberDAO.getInstance();
 				int loginResult = mDao.login(email, pw);
-
+				
+				//로그인 성공시
 				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
@@ -149,7 +150,15 @@ public class FrontController extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 					rd.forward(request, response);
 				} 
-				else 
+				//비번 틀렸을 시
+				else if(loginResult == 0)
+				{
+					request.setAttribute("loginResult", loginResult);
+					RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
+					rd.forward(request, response);
+				}
+				//비번은 맞고 이메일 인증 안됫을 시
+				else if(loginResult == -1) 
 				{
 					request.setAttribute("loginResult", loginResult);
 					RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");

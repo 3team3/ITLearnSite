@@ -60,12 +60,16 @@ input {
 
 <body>
 	<body>
-	<c:if test="${ loginResult == -1 || loginResult == 0 }">
+	<c:if test="${ loginResult == 0 }">
 		<script>
 			alert("이메일 혹은 비밀번호가 틀렸습니다.");
 		</script>
 	</c:if>
-
+	<c:if test="${loginResult == -1 }">
+		<script>
+			alert("이메일 인증을 해주세요");
+		</script>
+	</c:if>
 	<c:if test="${email != null }">
 		<script>
 			alert("이미 로그인 중입니다.");
