@@ -140,30 +140,34 @@ public class FrontController extends HttpServlet {
 
 				MemberDAO mDao = MemberDAO.getInstance();
 				int loginResult = mDao.login(email, pw);
-
+				
+				//로그인 성공시
 				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
-					RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-					rd.forward(request, response);
+					
+					nextPage = "/index.jsp";
 				} 
-				else 
+				//비번 틀렸을 시
+				else if(loginResult == 0)
 				{
 					request.setAttribute("loginResult", loginResult);
-					RequestDispatcher rd = request.getRequestDispatcher("/member/login.jsp");
-					rd.forward(request, response);
+					nextPage = "/login.do";
 				}
-				nextPage = "/main.jsp";
+				//비번은 맞고 이메일 인증 안됫을 시
+				else if(loginResult == -1) 
+				{
+					request.setAttribute("loginResult", loginResult);
+					nextPage = "/login.do";
+				}
 			} 
 			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
 				session.invalidate();
-
-				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-				rd.forward(request, response);
+				nextPage = "/index.jsp";
 			}
 			// ##########로그인/로그아웃########## END
 

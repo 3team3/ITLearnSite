@@ -131,15 +131,28 @@ public class MemberDAO implements MemberDAOImpl{
 		try {
 			con = getConnection();
 			StringBuffer query = new StringBuffer();
-			query.append("SELECT pw").append(" FROM member").append(" WHERE email = ?");
+			query.append("SELECT pw, auth").append(" FROM member").append(" WHERE email = ?");
 			pstmt = con.prepareStatement(query.toString());
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
 				if(rs.getString("pw").equals(pw)) {
-					return 1;
-				} else {
+					 //비밀번호 맞음
+					if(rs.getString("auth").equals("y"))
+					{
+						//비번이 ok email ok
+						return 1;
+					}
+					else
+					{
+						//비번 ok email fail
+						return -1;
+					}
+				} 
+				else
+				{
+					//비번틀림
 					return 0;
 				}
 			}
