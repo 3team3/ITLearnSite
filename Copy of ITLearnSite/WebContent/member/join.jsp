@@ -51,7 +51,7 @@
 			<input type="text" name="address1" id="address1" placeholder="주소" readonly="readonly"	onblur="addressChk();"> <br> 
 			<input type="text" name="address2" id="address2" placeholder="상세주소" onblur="addressChk();"> <br>
 			<h5>sms수신동의</h5>
-			<input type="checkbox" name="sms" id="sms" value="1"><br> <input type="submit" value="이메인 인증">
+			<input type="checkbox" name="sms" id="sms" value="1"><br> <input type="submit" value="이메일 인증">
 		</form>
 	</div>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
