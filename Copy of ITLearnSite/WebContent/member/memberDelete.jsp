@@ -98,7 +98,7 @@ String email = (String)session.getAttribute("email");
 탈퇴 후에는 아이디로 다시 가입할 수 없으며 아이디와 데이터는 복구할 수 없습니다.<br>
 게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.<br>
 </p>
-<form action="${path}/MemberDeleteAction1.do" name="del" id="del" method="post" onsubmit="return checkForm();"> 
+<form action="MemberDeleteAction1.do" name="del" id="del" method="post" onsubmit="return checkForm();"> 
 <p>안내사항을 모두 확인하였으며, 이에 동의합니다. <input type="checkbox" id="agree"/> </p> 
 <input type="hidden" name="email" id="email">
 <input type="submit" value="탈퇴" class="btn_1">

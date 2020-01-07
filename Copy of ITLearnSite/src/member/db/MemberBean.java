@@ -1,4 +1,4 @@
-package member.member.db;
+package member.db;
 
 public class MemberBean {
 	String email;

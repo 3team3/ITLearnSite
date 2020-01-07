@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<form onsubmit="return submitter();" action="${path}/insertMember.do" method="post">
+		<form onsubmit="return submitter();" action="insertMember.do" method="post">
 			<h5>아이디</h5>
 			<input type="email" name="email" id="email" onkeyup="emailDupChk();"> <br>
 			<h5>패스워드</h5>

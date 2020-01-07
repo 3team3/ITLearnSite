@@ -29,7 +29,7 @@
                         <li><a href="#">시나공 TOEIC</a></li>
                     </ul>
                      <ul>
-                        <li><a href="${path}/memberlist.do">회원정보</a></li>
+                        <li><a href="memberlist.do">회원정보</a></li>
                     </ul>
                 </div>
 
@@ -37,13 +37,13 @@
                     <!-- 회원가입 버튼/ 로그인 버튼 -->
                     <c:if test="${email == null }">
                     <ul>
-                        <li><a href="${path}/login.do"> 로그인 </a></li>
+                        <li><a href="login.do"> 로그인 </a></li>
                     </ul>
                     <ul>
                     	<li> | </li>
                     </ul>
                     <ul>
-                        <li><a href="${path}/joinMember.do"> 회원가입 </a></li>
+                        <li><a href="joinMember.do"> 회원가입 </a></li>
                     </ul>
                     
                     </c:if>
@@ -60,7 +60,7 @@
                     </ul>
                     
                     <ul>
-                    	<li><a href="${path}/relogin.do">회원수정</a></li>
+                    	<li><a href="relogin.do">회원수정</a></li>
                     </ul>				
 					</c:if>
 
@@ -96,7 +96,7 @@
 					</ul>
 					<ul>
 						<li>
-							<a href="#">자료실</a>
+							<a href="boardList.bo">자료실</a>
 							<ul class="submenu">
 								<li>
 									<a href="#">실습예제</a>

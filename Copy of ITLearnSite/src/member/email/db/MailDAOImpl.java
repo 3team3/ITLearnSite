@@ -1,6 +1,6 @@
 package member.email.db;
 
-import member.member.db.MemberBean;
+import member.db.MemberBean;
 
 public interface MailDAOImpl {
 	/*이메일 중복 체크 */

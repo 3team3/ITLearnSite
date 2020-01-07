@@ -2,9 +2,9 @@ package member.service;
 
 import java.util.List;
 
+import member.db.MemberBean;
+import member.db.MemberDAO;
 import member.email.db.MailDAO;
-import member.member.db.MemberBean;
-import member.member.db.MemberDAO;
 
 public class MemberService implements ServiceImpl{
 	

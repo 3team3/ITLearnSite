@@ -2,7 +2,7 @@ package member.service;
 
 import java.util.List;
 
-import member.member.db.MemberBean;
+import member.db.MemberBean;
 
 public interface ServiceImpl {
 	/*회원 가입*/

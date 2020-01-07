@@ -10,7 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import member.member.db.MemberBean;
+import member.db.MemberBean;
 
 public class MailDAO implements MailDAOImpl {
 	Connection con = null;

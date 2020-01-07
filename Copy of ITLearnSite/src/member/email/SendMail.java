@@ -1,4 +1,4 @@
-package email.emailSend;
+package member.email;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 

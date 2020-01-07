@@ -74,7 +74,7 @@ input {
         </div>
         	<h5><span>본인확인을 위해 비밀번호를 다시한번 입력해주세요</span></h5>
         <hr/>
-        <form action="${path}/relogin1.do" method="post">
+        <form action="relogin1.do" method="post">
         	<input type="hidden" name = "email" value="${requestScope.email}">
             <input type="password" placeholder="비밀번호" name="pw" required style="height:30px; width: 380px" /><br />
             <input type="submit" value="로그인" class="login" />

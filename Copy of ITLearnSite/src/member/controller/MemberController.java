@@ -1,4 +1,4 @@
-package controller;
+package member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,9 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.Session;
 
-import email.emailSend.JoinMail;
-import member.member.db.MemberBean;
-import member.member.db.MemberDAO;
+import member.db.MemberBean;
+import member.db.MemberDAO;
+import member.email.JoinMail;
 import member.service.MemberService;
 
 public class MemberController extends HttpServlet {
@@ -168,6 +168,8 @@ public class MemberController extends HttpServlet {
 			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
+				PrintWriter out = response.getWriter();
+				System.out.println("로그아웃되었습니다.");
 				session.invalidate();
 				nextPage = "/index.jsp";
 			}

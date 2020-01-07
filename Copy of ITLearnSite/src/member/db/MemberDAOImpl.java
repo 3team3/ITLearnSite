@@ -1,4 +1,4 @@
-package member.member.db;
+package member.db;
 
 import java.util.List;
 
