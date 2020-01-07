@@ -43,4 +43,17 @@ public class MemberService implements ServiceImpl{
 	public void emailAuth(String email) {
 		dao.emailAuth(email);
 	}
+	//본인 회원정보 얻기
+	@Override
+	public MemberBean callMember(String email) {
+		MemberBean mBean = dao.callMember(email);
+		return mBean;
+	}
+	//회원정보 수정
+	@Override
+	public int updateMember(MemberBean mBean) {
+		int check = dao.updateMember(mBean);
+		return check;
+	}
+	
 }

@@ -9,8 +9,8 @@
 <meta charset="UTF-8">
 <title>회원정보수정</title>
 <%
-request.setCharacterEncoding("UTF-8");
-String email = (String)session.getAttribute("email"); 
+	request.setCharacterEncoding("UTF-8");
+	String email = (String)session.getAttribute("email"); 
 %>
 
 </head>
@@ -29,8 +29,8 @@ String email = (String)session.getAttribute("email");
 			<h5>이름</h5>
 				<input type="text" name="name" id="name" value="${mBean.name}" readonly="readonly"> <br>
 			<h5>성별</h5> <br>
-				<input type="radio" name="gender" id="gender1" value=1 required="required">남 &nbsp; 
-				<input type="radio" name="gender" id="gender2" value=2 required="required">여<br>
+				<input type="radio" name="gender" id="gender1" value="1" required="required">남 &nbsp; 
+				<input type="radio" name="gender" id="gender2" value="2" required="required">여<br>
 			<h5>생년월일</h5>
 			<br>
 			<h5>연</h5>
@@ -50,7 +50,7 @@ String email = (String)session.getAttribute("email");
 			<input type="text" name="address1" id="address1" placeholder="주소" value="${mBean.address1}" readonly="readonly" required="required"> <br> 
 			<input type="text" name="address2" id="address2" placeholder="상세주소" value="${mBean.address2}" required="required"> <br>
 		 	<h5>sms수신동의</h5>
-			<input type="checkbox" name="sms" id="sms" value=1><br>
+			<input type="checkbox" name="sms" id="sms" value="1"><br>
 			<input type="submit" id="submit" value="수정하기" onclick="checkSms();">
 			<input type="button" value="탈퇴하기" onclick="location.href='${path}/MemberDeleteAction.do'" >
 		</fieldset>

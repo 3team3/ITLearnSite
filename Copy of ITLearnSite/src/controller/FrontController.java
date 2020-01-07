@@ -210,17 +210,15 @@ public class FrontController extends HttpServlet {
 				// ##########회원수정 ############## Start
 				}
 			else if(path.equals("/MemberUpdateAction.do")){
-				dao = new MemberDAO();
 				String email = (String)request.getSession().getAttribute("email"); 
-				MemberBean mBean = dao.callMember(email);
+				MemberBean mBean = serv.callMember(email);
 				request.setAttribute("mBean", mBean);
 				nextPage="/member/modify.jsp";
 			}
 			else if(path.equals("/UpdateMember.do")){
 				
 				getMemberBeanProperty(request, response);
-					dao= new MemberDAO();
-					int check = dao.updateMember(mBean);
+					int check = serv.updateMember(mBean);
 					if(check == 1){
 						System.out.println("수정성공");
 						response.setContentType("text/html; charset=utf-8");

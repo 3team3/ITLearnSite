@@ -20,4 +20,9 @@ public interface ServiceImpl {
 	/*이메일 인증 */
 	public void emailAuth(String email);
 	
+	/*회원 수정 페이지 정보 얻기*/
+	public MemberBean callMember(String email);
+	
+	/*회원 정보 수정*/
+	public int updateMember(MemberBean mBean);
 }
