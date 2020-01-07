@@ -14,7 +14,7 @@
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>front</servlet-name>
-		<servlet-class>controller.FrontController</servlet-class>
+		<servlet-class>controller.MemberController</servlet-class>
 	</servlet>
 
 	<!-- URL패턴 맵핑 -->

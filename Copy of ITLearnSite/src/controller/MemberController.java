@@ -21,7 +21,7 @@ import member.member.db.MemberBean;
 import member.member.db.MemberDAO;
 import member.service.MemberService;
 
-public class FrontController extends HttpServlet {
+public class MemberController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
