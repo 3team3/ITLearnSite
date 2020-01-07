@@ -17,20 +17,26 @@
 <body>
 
 	<h1>회원정보수정</h1>
-	<form action="${path}/UpdateMember.do" method ="post">
+	<form onsubmit="return modifySubmitter();" action="${path}/UpdateMember.do" method ="post">
 		<fieldset>
 			<legend>기본 정보</legend>
 			<h5>아이디</h5>
 				<input type="email" name="email" id="email" readonly value="${mBean.email}" > <br>
 			<h5>패스워드</h5>
-				<input type="password" name="pw1" id="pw1" onkeyup="pwdRegChk();" required="required"> <br>
+				<input type="password" name="pw1" id="pw1" onblur="pwdRegChk();" required="required"> <br>
 			<h5>패스워드 확인</h5>
-				<input type="password" name="pw2" id="pw2" onkeyup="pwdEqualChk()"; required="required"> <br>
+				<input type="password" name="pw2" id="pw2" onkeyup="pwdEqualChk();" required="required"> <br>
 			<h5>이름</h5>
 				<input type="text" name="name" id="name" value="${mBean.name}" readonly="readonly"> <br>
 			<h5>성별</h5> <br>
-				<input type="radio" name="gender" id="gender1" value="1" required="required">남 &nbsp; 
-				<input type="radio" name="gender" id="gender2" value="2" required="required">여<br>
+				<c:if test="${mBean.gender eq '1'}">
+					<input type="radio" name="gender" id="gender1" value="1" required="required" checked="checked">남 &nbsp; 
+					<input type="radio" name="gender" id="gender2" value="2" required="required" disabled="disabled">여<br>
+				</c:if>
+				<c:if test="${mBean.gender eq '2'}">
+					<input type="radio" name="gender" id="gender1" value="1" required="required" disabled="disabled">남 &nbsp; 
+					<input type="radio" name="gender" id="gender2" value="2" required="required" checked="checked">여<br>
+				</c:if>
 			<h5>생년월일</h5>
 			<br>
 			<h5>연</h5>
@@ -51,7 +57,7 @@
 			<input type="text" name="address2" id="address2" placeholder="상세주소" value="${mBean.address2}" required="required"> <br>
 		 	<h5>sms수신동의</h5>
 			<input type="checkbox" name="sms" id="sms" value="1"><br>
-			<input type="submit" id="submit" value="수정하기" onclick="checkSms();">
+			<input type="submit" id="submit" value="수정하기">
 			<input type="button" value="탈퇴하기" onclick="location.href='${path}/MemberDeleteAction.do'" >
 		</fieldset>
 		

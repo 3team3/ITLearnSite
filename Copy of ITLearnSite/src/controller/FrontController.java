@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.cj.Session;
+
 import email.emailSend.JoinMail;
 import member.member.db.MemberBean;
 import member.member.db.MemberDAO;
@@ -209,7 +211,35 @@ public class FrontController extends HttpServlet {
 				
 				// ##########회원수정 ############## Start
 				}
-			else if(path.equals("/MemberUpdateAction.do")){
+			else if(path.equals("/relogin.do")){
+				nextPage="/member/relogin.jsp";
+			}
+			else if (path.equals("/relogin1.do")) 
+			{
+				HttpSession session = request.getSession();
+				String email = (String)session.getAttribute("email");
+				String pw = request.getParameter("pw");
+				System.out.println(email);
+				System.out.println(pw);
+
+				MemberDAO mDao = MemberDAO.getInstance();
+				int loginResult = mDao.login(email, pw);
+				System.out.println(loginResult);
+				//로그인 성공시
+				if (loginResult == 1) 
+				{
+					request.setAttribute("loginResult", loginResult);
+					nextPage = "/MemberUpdateAction.do";
+				} 
+				//비번 틀렸을 시
+				else if(loginResult == 0)
+				{
+					request.setAttribute("loginResult", loginResult);
+					nextPage = "/relogin.do";
+				}
+			} 
+			else if(path.equals("/MemberUpdateAction.do"))
+			{
 				String email = (String)request.getSession().getAttribute("email"); 
 				MemberBean mBean = serv.callMember(email);
 				request.setAttribute("mBean", mBean);

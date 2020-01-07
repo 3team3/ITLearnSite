@@ -60,7 +60,7 @@
                     </ul>
                     
                     <ul>
-                    	<li><a href="${path}/MemberUpdateAction.do">회원수정</a></li>
+                    	<li><a href="${path}/relogin.do">회원수정</a></li>
                     </ul>				
 					</c:if>
 

@@ -201,6 +201,47 @@ function submitter(){
 	}
 }
 
+function modifySubmitter(){
+	alert(
+			 "\nchkPw1=" + chkPw1 
+			+ "\nchkPw2=" + chkPw2 );
+	
+	
+	if(chkPw1 != true || $("#pw1").val() == "" || chkPw1 != chkPw2)
+	{
+		$("#pw1").focus();
+		return false;
+	}
+	else if(chkPw2 != true || $("#pw2").val() == "")
+	{
+		$("#pw2").focus();
+		return false;
+	}
+	else if($("#address").val() == "")
+	{
+		$("#address").focus();
+		return false;
+	}
+	else if($("#address1").val() == "")
+	{
+		$("#address1").focus();
+		return false;
+	}
+	else if($("#address2").val() == "")
+	{
+		$("#address2").focus();
+		return false;
+	}
+	else if($("#phonenumber").val() == "")
+	{
+		$("#phonenumber").focus();
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
 
 
 
