@@ -92,7 +92,7 @@ input {
             <button onclick="location.href='${path}/index.do';" class="login" >HOME</button>
         </form>
         <hr />
-        <p><a href="${path}/join.do"><input type="button" value="회원가입" id="signup" /></a></p>
+        <p><a href="${path}/joinMember.do"><input type="button" value="회원가입" id="signup" /></a></p>
     </div>
 </body>
 </html>
