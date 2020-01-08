@@ -8,5 +8,8 @@
 </head>
 <body>
 	<h1>BoardList.jsp</h1>
+	<form action="asdf.bo">
+		<input type="submit" value="test">
+	</form>
 </body>
 </html>

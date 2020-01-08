@@ -1,0 +1,6 @@
+BoardDAOImpl.java -> BoardDAO 에서 메서드 구현해서 사용
+BoardDAOImpl.java
+{
+	DAO에서 쓸 메서드 미리 적어놓고
+	BoardDAO에서 구현해서 사용
+}

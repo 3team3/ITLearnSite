@@ -150,7 +150,7 @@ public class MemberController extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
 					
-					nextPage = "/index.jsp";
+					nextPage = "/index.do";
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
