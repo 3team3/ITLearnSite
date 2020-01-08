@@ -1,6 +1,6 @@
 /*회원 테이블*/
 create table member(
-email varchar(20) primary key,
+email varchar(40) primary key,
 pw varchar(20) not null,
 name varchar(10) not null,
 gender int(2) ,
