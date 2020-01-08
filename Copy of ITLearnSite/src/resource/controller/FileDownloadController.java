@@ -1,4 +1,4 @@
-package board.controller;
+package resource.controller;
 
 public class FileDownloadController {
 

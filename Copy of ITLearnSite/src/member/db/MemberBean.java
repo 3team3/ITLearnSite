@@ -1,18 +1,18 @@
 package member.db;
 
 public class MemberBean {
-	String email;
-	String pw;
-	String name;
-	int gender;
-	String birth_year;
-	String birth_month;
-	String birth_day;
-	String phonenumber;
-	String address;
-	String address1;
-	String address2;
-	int sms;
+	private String email;
+	private String pw;
+	private String name;
+	private int gender;
+	private String birth_year;
+	private String birth_month;
+	private String birth_day;
+	private String phonenumber;
+	private String address;
+	private String address1;
+	private String address2;
+	private int sms;
 	
 	public String getEmail() {
 		return email;

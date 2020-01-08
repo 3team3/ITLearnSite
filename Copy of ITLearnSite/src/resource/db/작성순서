@@ -1,0 +1,6 @@
+ResourceDAOImpl.java -> ResourceDAO 에서 메서드 구현해서 사용
+ResourceDAOImpl.java
+{
+	DAO에서 쓸 메서드 미리 적어놓고
+	ResourceDAO에서 구현해서 사용
+}

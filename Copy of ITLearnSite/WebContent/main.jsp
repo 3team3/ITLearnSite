@@ -15,6 +15,7 @@
 		<jsp:include page="/include/header.jsp"></jsp:include>
 	</div>
 	<div class="container">
+		
 	</div>
 	<div>
 		<jsp:include page="/include/footer.jsp"></jsp:include>

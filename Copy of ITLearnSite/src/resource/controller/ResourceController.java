@@ -1,40 +1,35 @@
-package board.controller;
+package resource.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 
-import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import member.db.MemberBean;
-import member.db.MemberDAO;
-import member.email.JoinMail;
-import member.service.MemberService;
+import resource.db.ResourceBean;
+import resource.db.ResourceDAO;
+import resource.service.ResourceService;
 
-public class BoardController extends HttpServlet{
+
+public class ResourceController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
-	MemberService serv = null;
-	MemberDAO dao = null;
-	MemberBean mBean = null;
+	ResourceService serv = null;
+	ResourceDAO rDao = null;
+	ResourceBean rBean = null;
 
 	int result = 0; // 상태를 나타낼 변수
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		System.out.println("init()");
-		serv = new MemberService();
-		System.out.println("MemberService() 객체 생성");
-		mBean = new MemberBean();
-		System.out.println("MemberBean() 객체 생성");
+		serv = new ResourceService();
+		System.out.println("ResourceService() 객체 생성");
+		rBean = new ResourceBean();
+		System.out.println("ResourceBean() 객체 생성");
 	}
 
 	@Override
@@ -54,11 +49,11 @@ public class BoardController extends HttpServlet{
 		String nextPage = null;
 		
 		try {
-			if(path.equals("/boardList.bo"))
+			if(path.equals("/resourceList.bo"))
 			{
-				System.out.println("boardList.bo");
+				System.out.println("resourceList.bo");
 				System.out.println("Test");
-				nextPage = "/board/BoardList.jsp";
+				nextPage = "/resource/ResourceList.jsp";
 			}
 			System.out.println("nextPAge" + nextPage);
 			if (nextPage != null) 
