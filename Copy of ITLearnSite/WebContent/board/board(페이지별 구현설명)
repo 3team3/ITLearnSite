@@ -13,16 +13,6 @@
 			페이지 필요x
 			목록 - 비로그인 로그인 상관없이
 			
-create table board
-(
-	level int,
-	articleNO int ,
-	parentNO int ,
-	title varchar(100) ,
-	content varchar(4096) ,
-	imageFileName varchar(100),
-	email varchar(50),
-	writeDate Date  
-);
+
 	
 

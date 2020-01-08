@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.Session;
 
 import member.db.MemberBean;
 import member.db.MemberDAO;
@@ -43,9 +42,7 @@ public class MemberController extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		/* ##test code## */
-		System.out.println("service()");
-
+		
 		String url = request.getRequestURI();
 		System.out.println(url);
 
