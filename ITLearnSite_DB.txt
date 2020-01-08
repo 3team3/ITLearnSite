@@ -1,0 +1,171 @@
+/*회원 테이블*/
+create table member(
+email varchar(20) primary key,
+pw varchar(20) not null,
+name varchar(10) not null,
+gender int(2) ,
+birth_year varchar(10),
+birth_month varchar(10),
+birth_day varchar(10),
+phonenumber varchar(20),
+address varchar(10),
+address1 varchar(100),
+address2 varchar(100),
+sms int(2),
+auth varchar(2) default 'N'
+);
+
+
+/*자료실 테이블*/
+create table resource_table(
+res_no int(100) primary key AUTO_INCREMENT,
+res_title varchar(50),
+res_email varchar(20),
+rest_content varchar(1000),
+res_filename varchar(50),
+res_writedate datetime
+);
+
+/*자료실 댓글 테이블*/
+create table resource_comments(
+co_no int(100) primary key AUTO_INCREMENT,
+res_no int(100),
+co_email varchar(100),
+co_pw varchar(100),
+co_date timestamp,
+co_content varchar(1000)
+);
+
+
+
+/*이용문의게시판*/
+create table question_table(
+ques_no int(100) primary key AUTO_INCREMENT,
+ques_title varchar(50),
+ques_email varchar(10),
+ques_pw varchar(10),
+ques_content varchar(1000),
+ques_writedate datetime,
+ques_main_seq int(100),
+ques_main_tab int(100),
+ques_sub_seq int(100) ,
+ques_readcount int(100)
+);
+
+/*공지사항*/
+create table  notice_table(
+noti_no int(100) primary key AUTO_INCREMENT,
+noti_title varchar(50),
+noti_email varchar(10),
+noti_pw varchar(10),
+noti_content varchar(1000),
+noti_writedate datetime,
+noti_readcount int(100) 
+);
+
+/*강의게시판*/
+create table lecture_table(
+lec_no int(100) primary key AUTO_INCREMENT,
+lec_title varchar(50),
+lec_email varchar(10),
+lec_pw varchar(10),
+lec_content varchar(1000),
+lec_filename varchar(50),
+lec_uploaddate datetime
+);
+
+/*교재게시판*/
+create table textbook_table(
+book_no int(100) primary key AUTO_INCREMENT,
+book_title varchar(50),
+book_email varchar(10),
+book_pw varchar(10),
+book_content varchar(1000),
+book_filename varchar(50),
+book_uploaddate datetime
+);
+
+
+/*장바구니*/
+create table cart_table(
+cart_no int(100) primary key AUTO_INCREMENT,
+cart_email varchar(100),
+cart_book1 int(100),
+cart_book1_num int(100),
+cart_book2 int(100),
+cart_book2_num int(100),
+cart_book3 int(100),
+cart_book3_num int(100),
+cart_book4 int(100),
+cart_book4_num int(100),
+cart_book5 int(100),
+cart_book5_num int(100),
+cart_lecture1 int(100),
+cart_lecture1_num int(100),
+cart_lecture2 int(100),
+cart_lecture2_num int(100),
+cart_lecture3 int(100),
+cart_lecture3_num int(100),
+cart_lecture4 int(100),
+cart_lecture4_num int(100),
+cart_lecture5 int(100),
+cart_lecture5_num int(100)
+);
+
+/*결제*/
+create table payment_table(
+pay_no int(100) primary key AUTO_INCREMENT,
+pay_cart_no int(100),
+pay_email varchar(100),
+pay_name varchar(50),
+pay_address varchar(50),
+pay_address1 varchar(50),
+pay_address2 varchar(50),
+pay_option varchar(50),
+pay_total varchar(10000),
+pay_book1 int(100),
+pay_book1_num int(100),
+pay_book2 int(100),
+pay_book2_num int(100),
+pay_book3 int(100),
+pay_book3_num int(100),
+pay_book4 int(100),
+pay_book4_num int(100),
+pay_book5 int(100),
+pay_book5_num int(100),
+pay_lecture1 int(100),
+pay_lecture1_num int(100),
+pay_lecture2 int(100),
+pay_lecture2_num int(100),
+pay_lecture3 int(100),
+pay_lecture3_num int(100),
+pay_lecture4 int(100),
+pay_lecture4_num int(100),
+pay_lecture5 int(100),
+pay_lecture5_num int(100)
+);
+
+/*회원 삭제시 회원의 장바구니도 함께 삭제*/
+alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;
+
+/*회원*/
+insert into member(email,pw,name,auth) values('admin@admin.com','1234','관리자','y');
+insert into member values
+('test@test.com','1234','회원1',1,'2000','12','12','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y'),
+('test1@test.com','1234','회원2',1,'1995','1','11','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
+
+
+
+
+/*select문*/
+/*
+select * from cart_table;
+select * from lecture_table;
+select * from member;
+select * from notice_table;
+select * from payment_table;
+select * from question_table;
+select * from resource_comments;
+select * from resource_table;
+select * from textbook_table;
+*/
