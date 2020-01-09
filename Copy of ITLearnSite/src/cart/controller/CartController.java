@@ -21,7 +21,9 @@ public class CartController extends HttpServlet{
 	
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		
+		caDao = new CartDAO();
+		caServ = new CartService();
+		caBean = new CartBean();
 	}
 
 	@Override

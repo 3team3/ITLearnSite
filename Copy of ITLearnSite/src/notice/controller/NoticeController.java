@@ -22,7 +22,9 @@ public class NoticeController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-
+		nBean = new NoticeBean();
+		nDao = new NoticeDAO();
+		nServ = new NoticeService();
 	}
 
 	@Override

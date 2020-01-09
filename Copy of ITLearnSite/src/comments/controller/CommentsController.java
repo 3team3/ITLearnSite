@@ -25,7 +25,9 @@ public class CommentsController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-
+		cServ = new CommentsService();
+		cDao = new CommentsDAO();
+		cBean = new CommentsBean();
 	}
 
 	@Override

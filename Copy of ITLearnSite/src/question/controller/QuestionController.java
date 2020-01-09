@@ -22,7 +22,9 @@ public class QuestionController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-
+		qBean = new QuestionBean();
+		qDao = new QuestionDAO();
+		qServ = new QuestionService();
 	}
 
 	@Override

@@ -22,7 +22,9 @@ public class LectureController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-
+		lDao = new LectureDAO();
+		lBean = new LectureBean();
+		lServ = new LectureService();
 	}
 
 	@Override
