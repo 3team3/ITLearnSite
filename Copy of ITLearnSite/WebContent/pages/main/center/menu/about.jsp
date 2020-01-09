@@ -4,19 +4,11 @@
 <html lang="en">
 
 <head>
-<jsp:include page="../inc/css.jsp"/>
-
-
-
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
   <div class="site-wrap">
-
-     <jsp:include page="../inc/top.jsp"/>
-
-    
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
         <div class="container">
           <div class="row align-items-end">
@@ -185,15 +177,6 @@
         </div>
       </div>
     </div>
-
-
-    
-    
-
-
-    
-
-    
     <div class="site-section ftco-subscribe-1" style="background-image: url('../images/bg_1.jpg')">
       <div class="container">
         <div class="row align-items-center">
@@ -210,17 +193,7 @@
         </div>
       </div>
     </div> 
-
-
-     <jsp:include page="../inc/footer.jsp"/>
-    
-
   </div>
-  <!-- .site-wrap -->
-
-  <!-- loader -->
-<jsp:include page="../inc/js.jsp"/>
-
 </body>
 
 </html>

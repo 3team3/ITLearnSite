@@ -57,12 +57,16 @@ public class MemberController extends HttpServlet {
 			// 인덱스 페이지 요청
 			if (path == null) 
 			{
-				nextPage = "/index.jsp";
+				nextPage = "/main.jsp";
 			} 
 			else if (path.equals("/index.do")) 
 			{
 				nextPage = "/main.jsp";
 				System.out.println("asdf");
+			}
+			else if(path.equals("/default.do"))
+			{
+				nextPage="/page/main/center/default.jsp";
 			}
 			// ##########회원가입########## Start
 			else if (path.equals("/joinMember.do")) 

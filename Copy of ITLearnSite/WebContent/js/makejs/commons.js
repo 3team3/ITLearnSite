@@ -11,7 +11,7 @@ chkEmail = false
 
 /*이메일(아이디) 유효성 체크 */
 function emailDupChk(){
-	var url = ctx+"/emailDupChk.do";
+	var url = "emailDupChk.do";
 	var email = $("#email").val();
 	var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 	
