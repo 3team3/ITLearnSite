@@ -1,131 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<display-name>ITLearnSite</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-	
-	<!-- 회원(member)  -->
-		<servlet>
-			<servlet-name>front</servlet-name>
-			<servlet-class>member.controller.MemberController</servlet-class>
-		</servlet>
-	
-		<!-- URL패턴 맵핑 -->
-		<servlet-mapping>
-			<servlet-name>front</servlet-name>
-			<url-pattern>*.do</url-pattern>
-		</servlet-mapping>
-		
-	<!-- 자료실(resource_table)  -->	
-		<servlet>
-			<servlet-name>resourceController</servlet-name>
-			<servlet-class>resource.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>resourceController</servlet-name>
-			<url-pattern>*.bo</url-pattern>
-		</servlet-mapping>
-	
-	<!-- 자료실 댓글(resource_comments)  -->	
-		<servlet>
-			<servlet-name>commentsController</servlet-name>
-			<servlet-class>comments.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>commentsController</servlet-name>
-			<url-pattern>*.co</url-pattern>
-		</servlet-mapping>
-	
-	<!-- 이용문의게시판(question_table)  -->	
-		<servlet>
-			<servlet-name>questionController</servlet-name>
-			<servlet-class>question.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>questionController</servlet-name>
-			<url-pattern>*.ques</url-pattern>
-		</servlet-mapping>
-	
-	<!-- 공지사항(notice_table)  -->	
-		<servlet>
-			<servlet-name>noticeController</servlet-name>
-			<servlet-class>notice.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>noticeController</servlet-name>
-			<url-pattern>*.noti</url-pattern>
-		</servlet-mapping>
-		
-	<!-- 강의게시판(lecture_table)  -->	
-		<servlet>
-			<servlet-name>lectureController</servlet-name>
-			<servlet-class>lecture.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>lectureController</servlet-name>
-			<url-pattern>*.lec</url-pattern>
-		</servlet-mapping>
-		
-	<!-- 교재게시판(textbook_table)  -->	
-		<servlet>
-			<servlet-name>textbookController</servlet-name>
-			<servlet-class>textbook.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>textbookController</servlet-name>
-			<url-pattern>*.text</url-pattern>
-		</servlet-mapping>
-	
-	<!-- 장바구니(cart_table)  -->	
-		<servlet>
-			<servlet-name>cartController</servlet-name>
-			<servlet-class>cart.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>cartController</servlet-name>
-			<url-pattern>*.cart</url-pattern>
-		</servlet-mapping>
-		
-	<!-- 결제(payment_table)  -->	
-		<servlet>
-			<servlet-name>paymentController</servlet-name>
-			<servlet-class>payment.controller.ResourceController</servlet-class>
-		</servlet>
-
-		<servlet-mapping>
-			<servlet-name>paymentController</servlet-name>
-			<url-pattern>*.pay</url-pattern>
-		</servlet-mapping>
-		
-		
-		
-			
-	
-	
-	
-	
-		<resource-ref>
-			<description>Connection</description>
-			<res-ref-name>jspbeginner</res-ref-name>
-			<res-type>javax.sql.DataSource</res-type>
-			<res-auth>Container</res-auth>
-		</resource-ref>
+   xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+   id="WebApp_ID" version="3.1">
+   <display-name>ITLearnSite</display-name>
+   <welcome-file-list>
+      <welcome-file>index.html</welcome-file>
+      <welcome-file>index.htm</welcome-file>
+      <welcome-file>index.jsp</welcome-file>
+      <welcome-file>default.html</welcome-file>
+      <welcome-file>default.htm</welcome-file>
+      <welcome-file>default.jsp</welcome-file>
+   </welcome-file-list>
+   
+   <!-- 회원(member)  -->
+      <servlet>
+         <servlet-name>front</servlet-name>
+         <servlet-class>member.controller.MemberController</servlet-class>
+      </servlet>
+   
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>front</servlet-name>
+         <url-pattern>*.do</url-pattern>
+      </servlet-mapping>
+      
+   <!-- 자료실(resource_table)  -->   
+      <servlet>
+         <servlet-name>resourceController</servlet-name>
+         <servlet-class>resource.controller.ResourceController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>resourceController</servlet-name>
+         <url-pattern>*.bo</url-pattern>
+      </servlet-mapping>
+   
+   <!-- 자료실 댓글(resource_comments)  -->   
+      <servlet>
+         <servlet-name>commentsController</servlet-name>
+         <servlet-class>comments.controller.CommentsController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>commentsController</servlet-name>
+         <url-pattern>*.co</url-pattern>
+      </servlet-mapping>
+   
+   <!-- 이용문의게시판(question_table)  -->   
+      <servlet>
+         <servlet-name>questionController</servlet-name>
+         <servlet-class>question.controller.QuestionController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>questionController</servlet-name>
+         <url-pattern>*.ques</url-pattern>
+      </servlet-mapping>
+   
+   <!-- 공지사항(notice_table)  -->   
+      <servlet>
+         <servlet-name>noticeController</servlet-name>
+         <servlet-class>notice.controller.NoticeController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>noticeController</servlet-name>
+         <url-pattern>*.noti</url-pattern>
+      </servlet-mapping>
+      
+   <!-- 강의게시판(lecture_table)  -->   
+      <servlet>
+         <servlet-name>lectureController</servlet-name>
+         <servlet-class>lecture.controller.LectureController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>lectureController</servlet-name>
+         <url-pattern>*.lec</url-pattern>
+      </servlet-mapping>
+      
+   <!-- 교재게시판(textbook_table)  -->   
+      <servlet>
+         <servlet-name>textbookController</servlet-name>
+         <servlet-class>textbook.controller.TextbookController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>textbookController</servlet-name>
+         <url-pattern>*.text</url-pattern>
+      </servlet-mapping>
+   
+   <!-- 장바구니(cart_table)  -->   
+      <servlet>
+         <servlet-name>cartController</servlet-name>
+         <servlet-class>cart.controller.CartController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>cartController</servlet-name>
+         <url-pattern>*.cart</url-pattern>
+      </servlet-mapping>
+      
+   <!-- 결제(payment_table)  -->   
+      <servlet>
+         <servlet-name>paymentController</servlet-name>
+         <servlet-class>payment.controller.PaymentController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>paymentController</servlet-name>
+         <url-pattern>*.pay</url-pattern>
+      </servlet-mapping>
+      
+      
+         
+   
+   
+   
+   
+      <resource-ref>
+         <description>Connection</description>
+         <res-ref-name>jspbeginner</res-ref-name>
+         <res-type>javax.sql.DataSource</res-type>
+         <res-auth>Container</res-auth>
+      </resource-ref>
 
 
 </web-app>

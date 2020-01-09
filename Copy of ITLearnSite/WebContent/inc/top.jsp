@@ -1,0 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+    
+      <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+    <div class="py-2 bg-light">
+      <div class="container">
+        <div class="row align-items-center">         
+        
+        </div>
+      </div>
+    </div>
+<header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+
+      <div class="container">
+        <div class="d-flex align-items-center">
+          <div class="site-logo">
+            <a href="${path}/main.jsp" class="d-block">
+              <img src="${path}/images/logo.jpg" alt="Image" class="img-fluid">
+            </a>
+          </div>
+          <div class="mr-auto">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">             
+                  <li>
+                  <a href="${path}/menu/admissions.jsp" class="nav-link text-left">강의</a>
+                </li>
+                <li>
+                  <a href="${path}/menu/admissions.jsp" class="nav-link text-left">도서</a>
+                </li>
+                <li>
+                  <a href="${path}/menu/admissions.jsp" class="nav-link text-left">자료실</a>
+                </li>
+                
+                <li class="has-children">
+                  <a href="${path}/menu/about.jsp" class="nav-link text-left">고객센터</a>
+                  <ul class="dropdown">
+                    <li><a href="${path}/menu/teachers.jsp">공지사항</a></li>
+                    <li><a href="${path}/menu/about.jsp">이용문의</a></li>
+                  </ul>
+                </li>
+                
+                 <li class="has-children">
+                  <a href="${path}/menu/about.jsp" class="nav-link text-left">마이페이지</a>
+                  <ul class="dropdown">
+                    <li><a href="${path}/menu/about.jsp">회원 정보</a></li>
+                    <li><a href="${path}/menu/teachers.jsp">내 강의실</a></li>
+                    <li><a href="${path}/menu/teachers.jsp">주문 확인</a></li>
+                    <li><a href="${path}/menu/teachers.jsp">주문 수정</a></li>                   
+                  </ul>
+                </li>
+                
+             <%--    <li class="has-children">
+                  <a href="${path}/menu/about.jsp" class="nav-link text-left">About Us</a>
+                  <ul class="dropdown">
+                    <li><a href="${path}/menu/teachers.jsp">Our Teachers</a></li>
+                    <li><a href="${path}/menu/about.jsp">Our School</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="${path}/menu/admissions.jsp" class="nav-link text-left">Admissions</a>
+                </li>
+                <li>
+                  <a href="${path}/menu/courses.jsp" class="nav-link text-left">Courses</a>
+                </li>
+                <li>
+                    <a href="${path}/menu/contact.jsp" class="nav-link text-left">Contact</a>
+                  </li> --%>
+              </ul>                                                                                                                                                                                                                                                                                          
+            </nav>
+
+          </div>
+                  
+               <div class="col-lg-3 text-right">
+               <c:if test="${email == null }">
+            <a href="${path}/member/login.jsp" class="small mr-3"><span class="icon-unlock-alt"></span> 로그인</a>
+            <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a>
+          </c:if>
+           <c:if test="${email != null }">
+           <a href="logout.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그아웃</a>
+           <!-- 장바구니 -->
+           <a href="${path}/member/register.jsp"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
+            <%-- <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a> --%>
+            </c:if>
+          </div>
+            
+          </div>
+         
+        </div>
+      
+
+    </header>
+    
