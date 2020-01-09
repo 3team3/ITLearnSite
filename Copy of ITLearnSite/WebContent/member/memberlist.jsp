@@ -36,6 +36,8 @@
 						<td>주소</td>
 						<td>상세주소</td>
 						<td>sms동의 여부</td>		
+						<td>주문정보</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>${memberlist.email}</td>
@@ -51,7 +53,10 @@
 						<td>${memberlist.address1}</td>
 						<td>${memberlist.address2}</td>
 						<td>${memberlist.sms}</td>
-					</tr>	
+						<td><input type="button" value="회원주문정보" onclick="location.href='${path}/AdminMemberOrder.do?email=${memberlist.email}'"></td>
+						<td><input type="button" value="회원삭제" onclick="location.href='${path}/AdminMemberDelete.do?email=${memberlist.email}'"></td>						
+					</tr>
+
 				<!-- j변수 값 1씩 증가 -->
 				<c:set var="j" value="${j+1}" />
 			</c:forEach>	
