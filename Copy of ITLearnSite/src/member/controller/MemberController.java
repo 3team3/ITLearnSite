@@ -52,6 +52,7 @@ public class MemberController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
+		String paging = null;
 		
 		try {
 			// 인덱스 페이지 요청
@@ -62,11 +63,8 @@ public class MemberController extends HttpServlet {
 			else if (path.equals("/index.do")) 
 			{
 				nextPage = "/main.jsp";
-				System.out.println("asdf");
-			}
-			else if(path.equals("/default.do"))
-			{
-				nextPage="/page/main/center/default.jsp";
+				paging = "/pages/main/center/default.jsp";
+				request.setAttribute("paging", paging);
 			}
 			// ##########회원가입########## Start
 			else if (path.equals("/joinMember.do")) 
@@ -148,7 +146,9 @@ public class MemberController extends HttpServlet {
 			// 로그인 버튼 누를시
 			else if (path.equals("/login.do"))
 			{
-				nextPage = "/member/login.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/login.jsp";
+				request.setAttribute("paging", paging);
 			} 
 			else if (path.equals("/login1.do")) 
 			{
