@@ -96,7 +96,7 @@
 					</ul>
 					<ul>
 						<li>
-							<a href="boardList.bo">자료실</a>
+							<a href="resourceList.bo">자료실</a>
 							<ul class="submenu">
 								<li>
 									<a href="#">실습예제</a>
