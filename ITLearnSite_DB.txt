@@ -21,7 +21,7 @@ create table resource_table(
 res_no int(100) primary key AUTO_INCREMENT,
 res_title varchar(50),
 res_email varchar(20),
-rest_content varchar(1000),
+res_content varchar(1000),
 res_filename varchar(50),
 res_writedate datetime
 );
