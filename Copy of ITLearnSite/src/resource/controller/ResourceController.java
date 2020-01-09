@@ -49,11 +49,30 @@ public class ResourceController extends HttpServlet {
 		String nextPage = null;
 
 		try {
+			//자료실 main페이지 - list
 			if (path.equals("/resourceList.bo")) {
 				System.out.println("resourceList.bo");
-				System.out.println("Test");
 				nextPage = "/resource/ResourceList.jsp";
 			}
+			//자료실게시판 - 글 내용보기 페이지
+			else if(path.equals("resourceView.bo"))
+			{
+				System.out.println("resourceView.bo");
+				nextPage = "/resource/ResourceView.jsp";
+			}
+			//자료실게시판 - 글 쓰기 페이지
+			else if(path.equals("resourceWrite.bo"))
+			{
+				System.out.println("resourceWrite.bo");
+				nextPage = "/resource/ResourceView.jsp";
+			}
+			//자료실게시판 - 글 글 수정 페이지
+			else if(path.equals("resourceModify.bo"))
+			{
+				System.out.println("resourceModify.bo");
+				nextPage = "/resource/ResourceModfiy.jsp";
+			}
+			
 			System.out.println("nextPAge" + nextPage);
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
@@ -68,7 +87,7 @@ public class ResourceController extends HttpServlet {
 		int res_no = 0;
 		String res_title = null;
 		String res_email = null;
-		String rest_content = null;
+		String res_content = null;
 		String res_filename = null;
 		Timestamp res_writedate = new Timestamp(System.currentTimeMillis());
 
@@ -87,10 +106,10 @@ public class ResourceController extends HttpServlet {
 			rBean.setRes_email(res_email);
 			System.out.println("res_email =" + res_email);
 		}
-		if (request.getParameter("rest_content") != null) {
-			rest_content = request.getParameter("rest_content");
-			rBean.setRest_content(rest_content);
-			System.out.println("rest_content =" + rest_content);
+		if (request.getParameter("res_content") != null) {
+			res_content = request.getParameter("res_content");
+			rBean.setRest_content(res_content);
+			System.out.println("rest_content =" + res_content);
 		}
 		if (request.getParameter("res_filename") != null) {
 			res_filename = request.getParameter("res_filename");

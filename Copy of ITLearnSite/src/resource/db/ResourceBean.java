@@ -6,7 +6,7 @@ public class ResourceBean {
 	private int res_no;
 	private String res_title;
 	private String res_email;
-	private String rest_content;
+	private String res_content;
 	private String res_filename;
 	private Timestamp res_writedate;
 	
@@ -29,10 +29,10 @@ public class ResourceBean {
 		this.res_email = res_email;
 	}
 	public String getRest_content() {
-		return rest_content;
+		return res_content;
 	}
-	public void setRest_content(String rest_content) {
-		this.rest_content = rest_content;
+	public void setRest_content(String res_content) {
+		this.res_content = res_content;
 	}
 	public String getRes_filename() {
 		return res_filename;
@@ -46,6 +46,4 @@ public class ResourceBean {
 	public void setRes_writedate(Timestamp res_writedate) {
 		this.res_writedate = res_writedate;
 	}
-	
-	
 }
