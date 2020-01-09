@@ -53,10 +53,18 @@
                  <li class="has-children">
                   <a href="${path}/menu/about.jsp" class="nav-link text-left">마이페이지</a>
                   <ul class="dropdown">
-                    <li><a href="${path}/menu/about.jsp">회원 정보</a></li>
+                    <li><a href="relogin.do">회원정보 수정</a></li>
                     <li><a href="${path}/menu/teachers.jsp">내 강의실</a></li>
                     <li><a href="${path}/menu/teachers.jsp">주문 확인</a></li>
                     <li><a href="${path}/menu/teachers.jsp">주문 수정</a></li>                   
+                  </ul>
+                </li>
+               
+                <li class="has-children">
+                  <a href="#" class="nav-link text-left">관리자</a>
+                  <ul class="dropdown">
+                    <li><a href="memberlist.do">회원 관리</a></li>
+                    <li><a href="#">주문 관리</a></li>                
                   </ul>
                 </li>
                 
@@ -81,17 +89,22 @@
 
           </div>
                   
-               <div class="col-lg-3 text-right">
-               <c:if test="${email == null }">
-            <a href="${path}/member/login.jsp" class="small mr-3"><span class="icon-unlock-alt"></span> 로그인</a>
-            <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a>
-          </c:if>
-           <c:if test="${email != null }">
-           <a href="logout.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그아웃</a>
-           <!-- 장바구니 -->
-           <a href="${path}/member/register.jsp"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
-            <%-- <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a> --%>
-            </c:if>
+         <div class="col-lg-3 text-right">
+	           <c:if test="${email == null }">
+		          <a href="login.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그인</a>
+		          <a href="joinMember.do" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a>       
+	          </c:if>
+	          
+	          <c:if test="${email != null }">
+	          	<ul>
+	          	  <small>${email} 로그인 중</small>
+	          	  <a href="logout.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그아웃</a>
+	          	 	<!-- 장바구니 -->
+			       <a href="#"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
+		       
+	          	</ul>  
+		          <%-- <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a> --%>
+	          </c:if>
           </div>
             
           </div>

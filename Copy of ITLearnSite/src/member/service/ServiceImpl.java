@@ -25,4 +25,7 @@ public interface ServiceImpl {
 	
 	/*회원 정보 수정*/
 	public int updateMember(MemberBean mBean);
+	
+	/*관리자권한 회원삭제*/
+	public void  AdmindeleteMember(String email);
 }

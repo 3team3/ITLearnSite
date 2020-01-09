@@ -9,5 +9,6 @@ public interface ResourceDAOImpl {
 	
 	/*자료 목록*/
 	
-	
+	/*자료 내용*/
+	public ResourceBean resourceView(int res_no);
 }

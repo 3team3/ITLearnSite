@@ -125,7 +125,21 @@ public class MemberController extends HttpServlet {
 
 			}
 			// ##########회원리스트########## End
-
+			
+			// ##########관리자권한 회원삭제########## Start
+			else if(path.equals("/AdminMemberDelete.do"))
+			{
+						
+				if(request.getParameter("email")!=null){
+					serv.AdmindeleteMember(request.getParameter("email"));	
+				}
+				List<MemberBean> memberlist = serv.getMemberlist();
+				request.setAttribute("memberlist", memberlist);
+				nextPage = "/member/memberlist.jsp";
+				
+			}
+			// ##########관리자권한 회원삭제########## End
+			
 			// ##########로그인/로그아웃########## Start
 			// 로그인 버튼 누를시
 			else if (path.equals("/login.do"))

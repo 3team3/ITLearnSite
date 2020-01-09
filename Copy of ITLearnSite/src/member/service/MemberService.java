@@ -56,4 +56,10 @@ public class MemberService implements ServiceImpl{
 		return check;
 	}
 	
+	//관리자권한 회원삭제
+	@Override
+	public void  AdmindeleteMember(String email){
+		dao.AdmindeleteMember(email);
+	}
+	
 }

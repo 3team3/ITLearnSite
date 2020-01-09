@@ -90,7 +90,7 @@ public class MemberDAO implements MemberDAOImpl{
     	List<MemberBean> memberList = new ArrayList<MemberBean>();
         try{
             con = getConnection();
-            sql = "select * from member";
+            sql = "select * from member where email!='admin@admin.com'";
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             while(rs.next()){
@@ -124,7 +124,21 @@ public class MemberDAO implements MemberDAOImpl{
 		}
 		return mDao;
 	}
- 
+    
+    //관리자권한 회원삭제
+    public void AdmindeleteMember(String email){
+    	try {	         
+	  		 con =getConnection();
+			 pstmt = con.prepareStatement("delete from member where email = ?");		     
+		     pstmt.setString(1, email);
+		     pstmt.executeUpdate();
+	       }catch(Exception e){
+	    	   System.out.println("AdmindeleteMember()메소드에서 오류 :"+e);
+	       }finally{
+	    	   closeConnection();  			
+	       }
+		   
+    }
     //회원 로그인
 	public int login(String email, String pw) {
 		

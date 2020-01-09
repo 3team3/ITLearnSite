@@ -20,5 +20,7 @@ public interface MemberDAOImpl{
 	public MemberBean callMember(String email);
 	/*회원 수정*/ 
 	public int updateMember (MemberBean mBean);
+	/*관리자권한 회원삭제*/
+	public void AdmindeleteMember(String email);
 	
 }

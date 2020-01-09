@@ -55,9 +55,12 @@ public class ResourceController extends HttpServlet {
 				nextPage = "/resource/ResourceList.jsp";
 			}
 			//자료실게시판 - 글 내용보기 페이지
-			else if(path.equals("resourceView.bo"))
+			else if(path.equals("/resourceView.bo"))
 			{
 				System.out.println("resourceView.bo");
+				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				rBean = serv.resourceView(res_no);
+				request.setAttribute("rBean", rBean);			
 				nextPage = "/resource/ResourceView.jsp";
 			}
 			//자료실게시판 - 글 쓰기 페이지
@@ -108,8 +111,8 @@ public class ResourceController extends HttpServlet {
 		}
 		if (request.getParameter("res_content") != null) {
 			res_content = request.getParameter("res_content");
-			rBean.setRest_content(res_content);
-			System.out.println("rest_content =" + res_content);
+			rBean.setRes_content(res_content);
+			System.out.println("res_content =" + res_content);
 		}
 		if (request.getParameter("res_filename") != null) {
 			res_filename = request.getParameter("res_filename");
