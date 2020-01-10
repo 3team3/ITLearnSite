@@ -65,17 +65,15 @@
 		<!-- 		String rest_content = null; -->
 		<!-- 		String res_filename = null; -->
 		<!-- 		Timestamp res_writedate = new Timestamp(System.currentTimeMillis()); -->
-		<div>
-
 			<div class="boardoutline">
 				<div class="content">
 					<table class="table">
 						<thead>
-							<tr>
-								<td>글번호</td>
+							<tr class="tb_head">
+								<td>번호</td>
 								<td>제목</td>
-								<td>작성자</td>
-								<td>일자</td>
+								<td>글쓴이</td>
+								<td>작성일</td>
 							</tr>
 						</thead>
 						<c:choose>
@@ -90,7 +88,6 @@
 											</p></td>
 									</tr>
 								</c:when>
-
 								<c:when test="${resourcesList != null }">
 									<%--
 					BoardController.java 서블릿으로부터 전달받은 request 영역에
@@ -98,6 +95,7 @@
 					검색한 글정보(ArticleVO)들을 ArrayList 객체 내부의 인덱스 위치로부터 글목록 표시 
 				 --%>
 									<c:forEach var="resource" items="${resourcesList }" varStatus="resourceNum">
+									<tbody>
 										<tr align="center">
 											<%-- varStatus의 count 속성을 이용 글번호를 1부터 자동으로 표시 --%>
 											<td width="5%">${resourceNum.count }</td>
@@ -126,6 +124,7 @@
 											</td>
 											<td width="10%">${resource.res_email }</td>
 											<td width="10%"><fmt:formatDate value="${resource.res_writedate }" /></td>
+											</tbody>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -194,6 +193,5 @@
 				</c:if>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

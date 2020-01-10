@@ -7,14 +7,37 @@
 	align-content: center;
 	justify-content: center;
 	display: flex;
-	width: 90%;
+	width: 1200px;
 	height: inherit;
 }
 
 .content {
 	text-align: center;
 	display: block;
+	width: 1000px;
 }
+
+thead{
+	color: black;/*컬럼 이름 색*/
+	border-top: 3px solid #3C4790;
+	border-spacing: auto 10px;
+}
+.tb_head>td{
+	border-bottom: 2px solid #3C4790;
+}
+.tb_head>td:nth-child(1){
+	width:150px;
+}
+.tb_head>td:nth-child(2){
+	width:500px;
+}
+.tb_head>td:nth-child(3){
+	width:200px;
+}
+.tb_head>td:nth-child(4){
+	width:150px;
+}
+
 /* Base */
 body {
 	line-height: 1.7;
