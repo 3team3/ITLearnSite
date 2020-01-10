@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import resource.db.ResourceBean;
 import resource.db.ResourceDAO;
@@ -38,6 +40,7 @@ public class ResourceController extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf=8");
 		/* ##test code## */
 		System.out.println("service()");
 
@@ -50,12 +53,34 @@ public class ResourceController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
+		
+		HttpSession session;
 
 		try {
+			
 			//자료실 main페이지 - list
 			if (path.equals("/resourceList.bo")) {
+				
 				System.out.println("resourceList.bo");
-				nextPage = "/resource/ResourceList.jsp";
+				
+				String _section=request.getParameter("section");
+				String _pageNum=request.getParameter("pageNum");
+				
+				int section = Integer.parseInt(((_section==null)? "1":_section) );
+				int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
+				
+				Map pagingMap=new HashMap();
+				
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				
+				Map resourcesMap=serv.listResource(pagingMap);
+				resourcesMap.put("section", section);
+				resourcesMap.put("pageNum", pageNum);
+				
+				request.setAttribute("resourcesMap", resourcesMap);
+				
+				nextPage = "/pages/main/center/resource/ResourceList.jsp";
 			}
 			//자료실게시판 - 글 내용보기 페이지
 			else if(path.equals("/resourceView.bo"))

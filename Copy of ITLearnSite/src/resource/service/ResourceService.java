@@ -28,7 +28,7 @@ public class ResourceService implements ResourceServiceImpl {
 	}
 
 	@Override
-	public Map listArticles(Map<String, Integer> pagingMap) {
+	public Map listResource(Map<String, Integer> pagingMap) {
 
 		Map resourcesMap = new HashMap();
 
