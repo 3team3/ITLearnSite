@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class QuestionBean {
 
-	private int ques_no;
+	private int ques_no, ques_parentno;
 	private String ques_title;
 	private String  ques_email;
 	private String ques_pw;
@@ -14,9 +14,16 @@ public class QuestionBean {
 	private int  ques_main_tab;
 	private int  ques_sub_seq; 
 	private int  ques_readcount;
+	
+	public int getQues_parentno() {
+		return ques_parentno;
+	}
+	public void setQues_parentno(int ques_parentno) {
+		this.ques_parentno = ques_parentno;
+	}
 	public int getQues_no() {
 		return ques_no;
-	}
+	}	
 	public void setQues_no(int ques_no) {
 		this.ques_no = ques_no;
 	}

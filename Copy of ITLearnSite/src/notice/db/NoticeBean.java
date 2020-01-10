@@ -1,16 +1,30 @@
 package notice.db;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class NoticeBean {
 	private int noti_no;
+	private int noti_parentno;	
 	private String noti_title;
 	private String noti_email;
 	private String noti_pw;
 	private String noti_content;
-	private Timestamp noti_writedate;
+	private Date noti_writedate;
 	private int noti_readcount;
+		
 	
+	public Date getNoti_writedate() {
+		return noti_writedate;
+	}
+	public void setNoti_writedate(Date noti_writedate) {
+		this.noti_writedate = noti_writedate;
+	}
+	public int getNoti_parentno() {
+		return noti_parentno;
+	}
+	public void setNoti_parentno(int noti_parentno) {
+		this.noti_parentno = noti_parentno;
+	}	
 	public int getNoti_no() {
 		return noti_no;
 	}
@@ -40,13 +54,7 @@ public class NoticeBean {
 	}
 	public void setNoti_content(String noti_content) {
 		this.noti_content = noti_content;
-	}
-	public Timestamp getNoti_writedate() {
-		return noti_writedate;
-	}
-	public void setNoti_writedate(Timestamp noti_writedate) {
-		this.noti_writedate = noti_writedate;
-	}
+	}	
 	public int getNoti_readcount() {
 		return noti_readcount;
 	}

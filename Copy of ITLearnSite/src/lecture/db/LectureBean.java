@@ -1,16 +1,35 @@
 package lecture.db;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class LectureBean {
-	private int lec_no;
-	private String lec_title;
+	private int lec_no, level;
+	private int lec_parentno;
+	private String lec_title;	
 	private String lec_email;
 	private String lec_pw;
 	private String lec_content;
 	private String lec_filename;
-	private Timestamp lec_uploaddate;
+	private Date lec_uploaddate;
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public Date getLec_uploaddate() {
+		return lec_uploaddate;
+	}
+	public int getLec_parentno() {
+		return lec_parentno;
+	}
+	public void setLec_parentno(int lec_parentno) {
+		this.lec_parentno = lec_parentno;
+	}
+	public void setLec_uploaddate(Date lec_uploaddate) {
+		this.lec_uploaddate = lec_uploaddate;
+	}
 	public int getLec_no() {
 		return lec_no;
 	}
@@ -47,11 +66,6 @@ public class LectureBean {
 	public void setLec_filename(String lec_filename) {
 		this.lec_filename = lec_filename;
 	}
-	public Timestamp getLec_uploaddate() {
-		return lec_uploaddate;
-	}
-	public void setLec_uploaddate(Timestamp lec_uploaddate) {
-		this.lec_uploaddate = lec_uploaddate;
-	}
+	
 	
 }
