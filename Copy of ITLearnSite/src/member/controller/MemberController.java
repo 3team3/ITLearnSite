@@ -142,7 +142,9 @@ public class MemberController extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				nextPage = "/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+				request.setAttribute("paging", paging);
 			}
 			//이메일 인증
 			else if(path.equals("/emailAuth.do"))
@@ -152,7 +154,7 @@ public class MemberController extends HttpServlet {
 				System.out.println(email);
 				serv.emailAuth(email);
 				
-				nextPage = "/member/emailAuthSuccess.jsp";
+				nextPage = "/pages/main/center/member/emailAuthSuccess.jsp";
 			}
 			// ##########회원가입########## End
 

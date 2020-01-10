@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
-  <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78"/></svg></div>
+  <div id="loader" class="show fullscreen">
+  <svg class="circular" width="48px" height="48px">
+  <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78"/></svg></div>
   <script src="${path}/js/jquery-3.3.1.min.js"></script>
   <script src="${path}/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="${path}/js/jquery-ui.js"></script>
@@ -18,3 +20,5 @@
   <script src="${path}/js/jquery.sticky.js"></script>
   <script src="${path}/js/jquery.mb.YTPlayer.min.js"></script>
   <script src="${path}/js/main.js"></script>
+  <script src="${path}/js/makejs/commons.js"></script>
+  <script src="${path}/js/makejs/DaumPostAPI.js"></script>

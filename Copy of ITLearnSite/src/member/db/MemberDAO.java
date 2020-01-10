@@ -23,9 +23,10 @@ public class MemberDAO implements MemberDAOImpl{
     private static MemberDAO mDao;
     
     private Connection getConnection() throws Exception {
-        Context ctx = new InitialContext();
-        ds = (DataSource)ctx.lookup("java:comp/env/jdbc/jspbeginner");
-        return ds.getConnection();
+    	  Context ctx = new InitialContext();
+          Context envContext =(Context)ctx.lookup("java:/comp/env");
+          ds = (DataSource)envContext.lookup("jdbc/oracle");
+          return ds.getConnection();
     }
     
     private void closeConnection(){
