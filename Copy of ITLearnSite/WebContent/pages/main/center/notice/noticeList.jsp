@@ -14,7 +14,6 @@
 				<br>
 				<div>pagemargin으로 묶어주면 상단에 100px만큼 밀려서 안겹침</div>
 				<div>
-				<c:set>
 					<table class="table">
 						<thead>
 							<tr>

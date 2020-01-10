@@ -1,6 +1,7 @@
 package lecture.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
@@ -60,7 +61,7 @@ public class LectureController extends HttpServlet {
 		String lec_pw = null;
 		String lec_content = null;
 		String lec_filename = null;
-		Timestamp lec_uploaddate = new Timestamp(System.currentTimeMillis());
+		Date lec_uploaddate = new Date(System.currentTimeMillis());
 
 		if (request.getParameter("lec_no") != null) {
 			lec_no = Integer.parseInt(request.getParameter("lec_no"));

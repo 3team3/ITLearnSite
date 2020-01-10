@@ -82,13 +82,7 @@ public class MemberController extends HttpServlet {
 				paging = "/pages/main/center/menu/books.jsp";
 				request.setAttribute("paging", paging);
 			}
-			//메뉴 - 자료실
-			else if(path.equals("/resource.do"))
-			{
-				nextPage = "/main.jsp";
-				paging = "/pages/main/center/menu/resource.jsp";
-				request.setAttribute("paging", paging);
-			}
+			
 			//메뉴 - 고객센터
 			else if(path.equals("/customer.do"))
 			{
@@ -265,7 +259,6 @@ public class MemberController extends HttpServlet {
 			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
-				PrintWriter out = response.getWriter();
 				System.out.println("로그아웃되었습니다.");
 				session.invalidate();
 				nextPage = "/index.jsp";

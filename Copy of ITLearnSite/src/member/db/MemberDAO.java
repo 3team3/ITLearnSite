@@ -187,7 +187,6 @@ public class MemberDAO implements MemberDAOImpl{
 		   
 		   Connection con = null;
 	       PreparedStatement pstmt = null;
-	       ResultSet rs = null;
 	       int check=0;
 	       try {	         
 	  		 con =getConnection();

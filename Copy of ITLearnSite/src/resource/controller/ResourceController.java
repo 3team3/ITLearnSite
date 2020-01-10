@@ -53,7 +53,7 @@ public class ResourceController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-		
+		String paging = null;
 		HttpSession session;
 
 		try {
@@ -80,7 +80,10 @@ public class ResourceController extends HttpServlet {
 				
 				request.setAttribute("resourcesMap", resourcesMap);
 				
-				nextPage = "/pages/main/center/resource/ResourceList.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/resource/resourceList.jsp";
+				request.setAttribute("paging", paging);
+				
 			}
 			//자료실게시판 - 글 내용보기 페이지
 			else if(path.equals("/resourceView.bo"))

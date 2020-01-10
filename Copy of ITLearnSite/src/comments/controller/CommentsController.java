@@ -1,7 +1,7 @@
 package comments.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -61,7 +61,7 @@ public class CommentsController extends HttpServlet {
 		int res_no = 0;
 		String co_email = null;
 		String co_pw = null;
-		Timestamp co_date = new Timestamp(System.currentTimeMillis());
+		Date co_date = new Date(System.currentTimeMillis());
 		String co_content = null;
 		
 		cBean = new CommentsBean();

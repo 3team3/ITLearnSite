@@ -1,7 +1,7 @@
 package notice.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -59,7 +59,7 @@ public class NoticeController extends HttpServlet {
 		String noti_email = null;
 		String noti_pw = null;
 		String noti_content = null;
-		Timestamp noti_writedate = new Timestamp(System.currentTimeMillis());
+		Date noti_writedate = new Date(System.currentTimeMillis());
 		int noti_readcount = 0;
 
 		if (request.getParameter("noti_no") != null) {

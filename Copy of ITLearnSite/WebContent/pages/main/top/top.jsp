@@ -31,12 +31,12 @@
 					<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
 						<li><a href="lectures.do" class="nav-link text-left">강의</a></li>
 						<li><a href="books.do" class="nav-link text-left">도서</a></li>
-						<li><a href="resource.do" class="nav-link text-left">자료실</a></li>
+						<li><a href="resourceList.bo" class="nav-link text-left">자료실</a></li>
 
 						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>
 							<ul class="dropdown">
-								<li><a href="noticelist.do">공지사항</a></li>
-								<li><a href="questionlist.do">이용문의</a></li>
+								<li><a href="noticelist.bo">공지사항</a></li>
+								<li><a href="questionlist.bo">이용문의</a></li>
 							</ul></li>
 
 						<li class="has-children"><a href="mypage.do" class="nav-link text-left">마이페이지</a>
