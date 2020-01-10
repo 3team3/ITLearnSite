@@ -56,34 +56,40 @@ public class MemberController extends HttpServlet {
 		
 		try {
 			// 인덱스 페이지 요청
+			//!-- V-C-V
 			if (path == null) 
 			{
 				nextPage = "/main.jsp";
 			} 
+			// 기본페이지
 			else if (path.equals("/index.do")) 
 			{
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/default.jsp";
 				request.setAttribute("paging", paging);
 			}
+			// 메뉴 - 강의
 			else if(path.equals("/lectures.do"))
-			{
-				nextPage = "/main.jsp";
+			{	
 				paging = "/pages/main/center/menu/lectures.jsp";
 				request.setAttribute("paging", paging);
+				nextPage="/main.jsp";
 			}
+			//메뉴 - 도서
 			else if(path.equals("/books.do"))
 			{
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/menu/books.jsp";
 				request.setAttribute("paging", paging);
 			}
+			//메뉴 - 자료실
 			else if(path.equals("/resource.do"))
 			{
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/menu/resource.jsp";
 				request.setAttribute("paging", paging);
 			}
+			//메뉴 - 고객센터
 			else if(path.equals("/customer.do"))
 			{
 				nextPage = "/main.jsp";
@@ -96,12 +102,46 @@ public class MemberController extends HttpServlet {
 				paging = "/pages/main/center/menu/mypage.jsp";
 				request.setAttribute("paging", paging);
 			}
+			//관리자
 			else if(path.equals("/admin.do"))
 			{
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/menu/admin.jsp";
 				request.setAttribute("paging", paging);
 			}
+			//고객센터-공지 게시판
+			else if(path.equals("/noticelist.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/notice/NoticeList.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//고객센터-문의 게시판
+			else if(path.equals("/questionlist.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/question/QuestionList.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//마이 페이지 - 내 강의실
+			else if(path.equals("/mylecture.do"))
+			{
+				nextPage = "/main.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//마이페이지 - 내 주문
+			else if(path.equals("/myorder.do"))
+			{
+				nextPage = "/main.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//고객센터- 주문 수정
+			else if(path.equals("/myorderchange.do"))
+			{
+				nextPage = "/main.jsp";
+				request.setAttribute("paging", paging);
+			}
+			
 			// ##########회원가입########## Start
 			else if (path.equals("/joinMember.do")) 
 			{
@@ -163,7 +203,7 @@ public class MemberController extends HttpServlet {
 			{
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/member/memberlist.jsp";
+				nextPage = "/pages/main/center/member/memberlist.jsp";
 
 			}
 			// ##########회원리스트########## End
@@ -205,7 +245,9 @@ public class MemberController extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
 					
-					nextPage = "/index.do";
+					nextPage = "/main.jsp";
+					paging = "/pages/main/center/default.jsp";
+					request.setAttribute("paging", paging);
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
@@ -233,7 +275,7 @@ public class MemberController extends HttpServlet {
 			// ##########회원탈퇴 ############## Start
 			else if (path.equals("/MemberDeleteAction.do")) 
 			{
-				nextPage = "/member/memberDelete.jsp";
+				nextPage = "/pages/main/center/member/memberDelete.jsp";
 			} 
 			else if (path.equals("/MemberDeleteAction1.do")) 
 			{
@@ -269,7 +311,9 @@ public class MemberController extends HttpServlet {
 				// ##########회원수정 ############## Start
 				}
 			else if(path.equals("/relogin.do")){
-				nextPage="/member/relogin.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/relogin.jsp";
+				request.setAttribute("paging", paging);
 			}
 			else if (path.equals("/relogin1.do")) 
 			{
@@ -286,7 +330,9 @@ public class MemberController extends HttpServlet {
 				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
-					nextPage = "/MemberUpdateAction.do";
+					nextPage = "main.jsp";
+					paging = "/pages/main/center/member/modify.jsp";
+					request.setAttribute("paging", paging);
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="pagemargin">
-		<h1>ResourceList.jsp</h1>
+		<h1>QuestionList.jsp</h1>
 		
 		<div>
 			<table>
