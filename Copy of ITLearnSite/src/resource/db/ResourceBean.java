@@ -4,11 +4,20 @@ import java.sql.Timestamp;
 
 public class ResourceBean {
 	private int res_no;
+	private int res_parentno;
 	private String res_title;
 	private String res_email;
 	private String res_content;
 	private String res_filename;
 	private Timestamp res_writedate;
+	
+	
+	public int getRes_parentno() {
+		return res_parentno;
+	}
+	public void setRes_parentno(int res_parentno) {
+		this.res_parentno = res_parentno;
+	}
 	public int getRes_no() {
 		return res_no;
 	}

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class NoticeBean {
 	private int noti_no;
+	private int noti_parentno;	
 	private String noti_title;
 	private String noti_email;
 	private String noti_pw;
@@ -11,6 +12,12 @@ public class NoticeBean {
 	private Timestamp noti_writedate;
 	private int noti_readcount;
 	
+	public int getNoti_parentno() {
+		return noti_parentno;
+	}
+	public void setNoti_parentno(int noti_parentno) {
+		this.noti_parentno = noti_parentno;
+	}	
 	public int getNoti_no() {
 		return noti_no;
 	}

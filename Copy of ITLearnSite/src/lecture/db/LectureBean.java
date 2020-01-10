@@ -1,16 +1,26 @@
 package lecture.db;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class LectureBean {
 	private int lec_no;
-	private String lec_title;
+	private int lec_parentno;
+	private String lec_title;	
 	private String lec_email;
 	private String lec_pw;
 	private String lec_content;
 	private String lec_filename;
-	private Timestamp lec_uploaddate;
+	private Date lec_uploaddate;
 	
+	public int getLec_parentno() {
+		return lec_parentno;
+	}
+	public void setLec_parentno(int lec_parentno) {
+		this.lec_parentno = lec_parentno;
+	}
+	public void setLec_uploaddate(Date lec_uploaddate) {
+		this.lec_uploaddate = lec_uploaddate;
+	}
 	public int getLec_no() {
 		return lec_no;
 	}

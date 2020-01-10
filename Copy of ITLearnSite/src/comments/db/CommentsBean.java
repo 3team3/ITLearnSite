@@ -1,13 +1,13 @@
 package comments.db;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class CommentsBean {
 	private int co_no;
 	private int  res_no;
 	private String co_email;
 	private String co_pw;
-	private Timestamp co_date;
+	private Date co_date;
 	private String co_content;
 	
 	public int getCo_no() {
