@@ -63,7 +63,7 @@ public class ResourceDAO implements ResourceDAOImpl {
 				rBean.setRes_email(rs.getString("res_email"));
 				rBean.setRes_content(rs.getString("res_content"));
 				rBean.setRes_filename(rs.getString("res_filename"));
-				rBean.setRes_writedate(rs.getTimestamp("res_writedate"));
+				rBean.setRes_writedate(rs.getDate("res_writedate"));
 			}
 
 		} catch (Exception e) {
@@ -149,5 +149,28 @@ public class ResourceDAO implements ResourceDAOImpl {
 		}
 
 		return resoursesList;
+	}
+	
+	//전체 글 개수
+	@Override
+	public int selectTotResources() {
+		try {
+			con = getConnection();
+			
+			//전체 글 수 조회
+			String query = "select count(res_no) from resource_table";
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				return (rs.getInt(1));				
+			}
+								
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {	
+			closeConnection();		
+		}
+		return 0;	
 	}
 }

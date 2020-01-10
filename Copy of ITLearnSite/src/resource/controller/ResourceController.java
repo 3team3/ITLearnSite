@@ -3,6 +3,7 @@ package resource.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
@@ -114,7 +115,7 @@ public class ResourceController extends HttpServlet {
 		String res_email = null;
 		String res_content = null;
 		String res_filename = null;
-		Timestamp res_writedate = new Timestamp(System.currentTimeMillis());
+		Date res_writedate = null;
 
 		if (request.getParameter("res_no") != null) {
 			res_no = Integer.parseInt(request.getParameter("res_no"));

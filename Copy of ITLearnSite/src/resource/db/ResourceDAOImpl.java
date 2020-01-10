@@ -15,6 +15,9 @@ public interface ResourceDAOImpl {
 	/*자료 목록*/
 	public List selectAllResources(Map pagingMap);
 	
+	/*전체 글 개수*/
+	public int selectTotResources();
+	
 	/*자료 내용*/
 	public ResourceBean resourceView(int res_no);
 }
