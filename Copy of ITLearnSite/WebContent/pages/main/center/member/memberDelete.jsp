@@ -25,7 +25,6 @@
 </head>
 <body>
 	<div class="header">
-		<jsp:include page="/include/header.jsp"></jsp:include>
 	</div>
 	<div class="container">
 		<div class="showcaseWrap">
@@ -61,7 +60,6 @@
 		</div>
 	</div>
 	<div>
-		<jsp:include page="/include/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

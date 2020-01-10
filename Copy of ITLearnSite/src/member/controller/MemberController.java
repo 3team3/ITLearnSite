@@ -66,11 +66,49 @@ public class MemberController extends HttpServlet {
 				paging = "/pages/main/center/default.jsp";
 				request.setAttribute("paging", paging);
 			}
+			else if(path.equals("/lectures.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/lectures.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/books.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/books.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/resource.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/resource.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/customer.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/customerService.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/mypage.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/mypage.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/admin.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/admin.jsp";
+				request.setAttribute("paging", paging);
+			}
 			// ##########회원가입########## Start
 			else if (path.equals("/joinMember.do")) 
 			{
 				// 회원가입 페이지이동
-				nextPage = "/member/join.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/join.jsp";
+				request.setAttribute("paging", paging);
 			}
 			// 회원가입 페이지에서 중복체크해주는 ajax부분
 			else if (path.equals("/emailDupChk.do")) 

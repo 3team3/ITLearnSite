@@ -27,17 +27,17 @@
 			<div class="mr-auto">
 				<nav class="site-navigation position-relative text-right" role="navigation">
 					<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-						<li><a href="${path}/menu/admissions.jsp" class="nav-link text-left">강의</a></li>
-						<li><a href="${path}/menu/admissions.jsp" class="nav-link text-left">도서</a></li>
-						<li><a href="${path}/menu/admissions.jsp" class="nav-link text-left">자료실</a></li>
+						<li><a href="lectures.do" class="nav-link text-left">강의</a></li>
+						<li><a href="books.do" class="nav-link text-left">도서</a></li>
+						<li><a href="resource.do" class="nav-link text-left">자료실</a></li>
 
-						<li class="has-children"><a href="${path}/menu/about.jsp" class="nav-link text-left">고객센터</a>
+						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>
 							<ul class="dropdown">
 								<li><a href="${path}/menu/teachers.jsp">공지사항</a></li>
 								<li><a href="${path}/menu/about.jsp">이용문의</a></li>
 							</ul></li>
 
-						<li class="has-children"><a href="${path}/menu/about.jsp" class="nav-link text-left">마이페이지</a>
+						<li class="has-children"><a href="mypage.do" class="nav-link text-left">마이페이지</a>
 							<ul class="dropdown">
 								<li><a href="relogin.do">회원정보 수정</a></li>
 								<li><a href="${path}/menu/teachers.jsp">내 강의실</a></li>
@@ -45,7 +45,7 @@
 								<li><a href="${path}/menu/teachers.jsp">주문 수정</a></li>
 							</ul></li>
 
-						<li class="has-children"><a href="#" class="nav-link text-left">관리자</a>
+						<li class="has-children"><a href="admin.do" class="nav-link text-left">관리자</a>
 							<ul class="dropdown">
 								<li><a href="memberlist.do">회원 관리</a></li>
 								<li><a href="#">주문 관리</a></li>

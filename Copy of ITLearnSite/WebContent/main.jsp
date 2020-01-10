@@ -7,24 +7,28 @@
 
 <head>
 <!-- All page css loading -->
-<jsp:include page="/pages/main/css.jsp"/>
+<jsp:include page="/pages/main/css.jsp" />
 <jsp:include page="/pages/main/js.jsp"></jsp:include>
 </head>
-<c:set var = "pages" value="${paging}"/>
+<c:set var="pages" value="${paging}" />
 <c:if test="${pages} == null">
-	<c:set var = "pages" value="/pages/main/center/default.jsp"/>
+	<c:set var="pages" value="/pages/main/center/default.jsp" />
 </c:if>
+
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	<div class="site-wrap">
-		<jsp:include page="/pages/main/top/top.jsp"/>
+	<header>
+		<div class="site-wrap">
+			<jsp:include page="/pages/main/top/top.jsp" />
+		</div>
+	</header>
+	<div class="center">
+		<jsp:include page="${pages}" />
 	</div>
-	<div>
-		<jsp:include page="${pages}"/>
-	</div>
-	<div>
-		<jsp:include page="/pages/main/footer/footer.jsp"/>
-	</div>
+	<footer>
+		<div>
+			<jsp:include page="/pages/main/footer/footer.jsp" />
+		</div>
+	</footer>
 	<!-- All page javaScript loading -->
-	
 </body>
 </html>
