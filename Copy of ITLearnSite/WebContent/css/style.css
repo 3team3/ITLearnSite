@@ -1088,3 +1088,57 @@ h1, h2, h3, h4, h5,
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+    
+
+.payment{
+    position: absolute;
+    top:0;
+    left: 10%;
+    line-height:40px;
+	font-family: serif;
+
+}
+
+
+.payment_left{
+	display: inline-table;
+	padding: 50px;
+	float: left;
+	text-align: left;
+	height: 100px;
+	min-width: 500px;
+
+}
+.payment_right{
+	display: inline-table;
+	padding: 50px;
+	margin-left:70px;
+	text-align: left;
+	max-height: 100%;
+	min-height: 100%;
+	min-width: 1000px;
+	
+	
+}
+ 
+.btn{
+	background-color: white;
+	border-color: olive;
+	border-top-left-radius: 5px; 
+	border-bottom-left-radius: 5px; 
+	margin-right:-4px;
+	border-top-right-radius: 5px; 
+	border-bottom-right-radius: 5px; 
+	margin-left:-3px;
+}
+
+.btn:HOVER {
+	background-color: olive;
+	border-color: olive;
+	border-top-left-radius: 5px; 
+	border-bottom-left-radius: 5px; 
+	margin-right:-4px;
+	border-top-right-radius: 5px; 
+	border-bottom-right-radius: 5px; 
+	margin-left:-3px;
+}

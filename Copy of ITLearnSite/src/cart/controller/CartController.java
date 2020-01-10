@@ -41,17 +41,25 @@ public class CartController extends HttpServlet{
 
 		
 		try {
+			if (path == null) 
+			{
+				nextPage = "/main.jsp";
+			} 
 			
-			System.out.println("nextPAge" + nextPage);
+			else if(path.equals("/cart.cart")){
+				nextPage ="/pages/main/center/member/memberCart.jsp";
+			}
+			
+			
+			System.out.println("nextPage = " + nextPage);
 			// null PointException
 			if (nextPage != null) 
 			{
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 			}
-		} 
-		catch (Exception e) 
-		{
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -323,7 +323,7 @@ public class MemberController extends HttpServlet {
 				
 				
 				
-			System.out.println("nextPAge" + nextPage);
+			System.out.println("nextPage = " + nextPage);
 			// null PointException
 			if (nextPage != null) 
 			{
