@@ -161,7 +161,9 @@ public class MemberController extends HttpServlet {
 			{
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/pages/main/center/member/memberlist.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/memberlist.jsp";
+				request.setAttribute("paging", paging);
 
 			}
 			// ##########회원리스트########## End
@@ -267,7 +269,9 @@ public class MemberController extends HttpServlet {
 				// ##########회원수정 ############## Start
 				}
 			else if(path.equals("/relogin.do")){
-				nextPage="/pages/main/center/member/relogin.jsp";
+				nextPage = "/main.jsp";
+				paging="/pages/main/center/member/relogin.jsp";
+				request.setAttribute("paging", paging);
 			}
 			else if (path.equals("/relogin1.do")) 
 			{

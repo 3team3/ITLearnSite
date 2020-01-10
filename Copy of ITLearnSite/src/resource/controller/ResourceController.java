@@ -58,12 +58,14 @@ public class ResourceController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-
+		String paging = null;
 		try {
 			//자료실 main페이지 - list
 			if (path.equals("/resourceList.bo")) {
 				System.out.println("resourceList.bo");
-				nextPage = "/pages/main/center/resource/ResourceList.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceList.jsp";
+				request.setAttribute("paging", paging);
 			}
 			//자료실게시판 - 글 내용보기 페이지
 			else if(path.equals("/resourceView.bo"))
@@ -71,20 +73,27 @@ public class ResourceController extends HttpServlet {
 				System.out.println("resourceView.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
 				rBean = serv.resourceView(res_no);
-				request.setAttribute("rBean", rBean);			
-				nextPage = "/pages/main/center/resource/ResourceView.jsp";
+				request.setAttribute("rBean", rBean);
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceView.jsp";
+				request.setAttribute("paging", paging);				
 			}
 			//자료실게시판 - 글 쓰기 페이지
 			else if(path.equals("/resourceWrite.bo"))
 			{
 				System.out.println("resourceWrite.bo");
-				nextPage = "/pages/main/center/resource/ResourceWrite.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceWrite.jsp";
+				request.setAttribute("paging", paging);
+				
 			}
 			//자료실게시판 - 글 글 수정 페이지
 			else if(path.equals("/resourceModify.bo"))
 			{
 				System.out.println("resourceModify.bo");
-				nextPage = "/pages/main/center/resource/ResourceModfiy.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceModify.jsp";
+				request.setAttribute("paging", paging);				
 			}
 			//자료실게시판 - 글 검색
 			else if(path.equals("/resourceSelect.bo"))
@@ -96,7 +105,9 @@ public class ResourceController extends HttpServlet {
 				System.out.println(select_content);
 				
 				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
-				nextPage = "/pages/main/center/resource/ResourceList.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceSelect.jsp";
+				request.setAttribute("paging", paging);
 			}
 			
 			System.out.println("nextPage = " + nextPage);

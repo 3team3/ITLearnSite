@@ -27,14 +27,14 @@
 			<div class="mr-auto">
 				<nav class="site-navigation position-relative text-right" role="navigation">
 					<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-						<li><a href="lectures.do" class="nav-link text-left">강의</a></li>
-						<li><a href="books.do" class="nav-link text-left">도서</a></li>
+						<li><a href="lectures.lec" class="nav-link text-left">강의</a></li>
+						<li><a href="book.text" class="nav-link text-left">도서</a></li>
 						<li><a href="resourceList.bo" class="nav-link text-left">자료실</a></li>
 
 						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>
 							<ul class="dropdown">
-								<li><a href="${path}/menu/teachers.jsp">공지사항</a></li>
-								<li><a href="${path}/menu/about.jsp">이용문의</a></li>
+								<li><a href="notice.noti">공지사항</a></li>
+								<li><a href="qna.ques">이용문의</a></li>
 							</ul></li>
 
 						<li class="has-children"><a href="mypage.do" class="nav-link text-left">마이페이지</a>
@@ -66,7 +66,7 @@
 						<small>${email} 로그인 중</small>
 						<a href="logout.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그아웃</a>
 						<!-- 장바구니 -->
-						<a href="#"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
+						<a href="cart.cart"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
 					</ul>
 					<%-- <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a> --%>
 				</c:if>

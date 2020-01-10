@@ -38,9 +38,14 @@ public class PaymentController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-
+		String paging = null;
 		try {
-
+			if(path.equals("/payment.pay"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/payment/payment.jsp";
+				request.setAttribute("paging", paging);
+			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) {
