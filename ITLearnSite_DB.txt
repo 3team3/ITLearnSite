@@ -29,6 +29,47 @@ res_writedate date default sysdate,
 constraint res_email_fk foreign key(res_email) references member(email)
 );
 
+insert into resource_table(res_no, res_title, res_email)
+values(1, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(2, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(3, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(4, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(5, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(6, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(7, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(8, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(9, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(10, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(11, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(12, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(13, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(14, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(15, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(16, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(17, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(18, 'asdf', 'test@test.com');
+
+commit;
+
+select * from resource_table;
+
 select * from resource_table;
 
 /*자료실 댓글 테이블*/
