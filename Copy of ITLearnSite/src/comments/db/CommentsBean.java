@@ -34,10 +34,11 @@ public class CommentsBean {
 	public void setCo_pw(String co_pw) {
 		this.co_pw = co_pw;
 	}
-	public Timestamp getCo_date() {
+	
+	public Date getCo_date() {
 		return co_date;
 	}
-	public void setCo_date(Timestamp co_date) {
+	public void setCo_date(Date co_date) {
 		this.co_date = co_date;
 	}
 	public String getCo_content() {

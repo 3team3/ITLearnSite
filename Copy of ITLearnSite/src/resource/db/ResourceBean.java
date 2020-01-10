@@ -1,17 +1,23 @@
 package resource.db;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class ResourceBean {
-	private int res_no;
+	private int res_no, level;
 	private int res_parentno;
 	private String res_title;
 	private String res_email;
 	private String res_content;
 	private String res_filename;
-	private Timestamp res_writedate;
+	private Date res_writedate;
 	
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public int getRes_parentno() {
 		return res_parentno;
 	}
@@ -48,12 +54,12 @@ public class ResourceBean {
 	public void setRes_filename(String res_filename) {
 		this.res_filename = res_filename;
 	}
-	public Timestamp getRes_writedate() {
+	public Date getRes_writedate() {
 		return res_writedate;
 	}
-	public void setRes_writedate(Timestamp res_writedate) {
+	public void setRes_writedate(Date res_writedate) {
 		this.res_writedate = res_writedate;
 	}
-	
+		
 	
 }

@@ -3,7 +3,7 @@ package lecture.db;
 import java.sql.Date;
 
 public class LectureBean {
-	private int lec_no;
+	private int lec_no, level;
 	private int lec_parentno;
 	private String lec_title;	
 	private String lec_email;
@@ -12,6 +12,15 @@ public class LectureBean {
 	private String lec_filename;
 	private Date lec_uploaddate;
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public Date getLec_uploaddate() {
+		return lec_uploaddate;
+	}
 	public int getLec_parentno() {
 		return lec_parentno;
 	}
@@ -57,11 +66,6 @@ public class LectureBean {
 	public void setLec_filename(String lec_filename) {
 		this.lec_filename = lec_filename;
 	}
-	public Timestamp getLec_uploaddate() {
-		return lec_uploaddate;
-	}
-	public void setLec_uploaddate(Timestamp lec_uploaddate) {
-		this.lec_uploaddate = lec_uploaddate;
-	}
+	
 	
 }
