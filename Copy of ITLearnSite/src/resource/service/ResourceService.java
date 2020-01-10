@@ -37,6 +37,8 @@ public class ResourceService implements ResourceServiceImpl {
 
 		// 테이블에 존재하는 전체 글 수 조회
 		int totResources = rDao.selectTotResources();
+		/*System.out.println(resourcesList);
+		System.out.println(totResources);*/
 
 		// 조회된 글 목록을 ArrayList에 저장, 다시 HashMap에 저장
 		resourcesMap.put("resourcesList", resourcesList);

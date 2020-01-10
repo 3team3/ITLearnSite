@@ -105,7 +105,7 @@ public class ResourceDAO implements ResourceDAOImpl {
 			con = getConnection();
 			String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
 					+ "res_no, res_parentno, res_title, res_email, res_writedate " + "from (select level as lvl, "
-					+ "res_no, res_parentno, res_title, res_email, res_writedate " + "from resource_table " + "start with parentNO=0 "
+					+ "res_no, res_parentno, res_title, res_email, res_writedate " + "from resource_table " + "start with res_parentno=0 "
 					+ "connect by prior res_no = res_parentno " + "order siblings by res_no desc))"
 					+ "where recNum between(?-1)*100+(?-1)*10+1 " + "and (?-1)*100+?*10";
 
@@ -129,6 +129,12 @@ public class ResourceDAO implements ResourceDAOImpl {
 				String res_title = rs.getString("res_title");
 				String res_email = rs.getString("res_email");
 				Date res_writedate = rs.getDate("res_writedate");
+				
+			/*	System.out.println(level);
+				System.out.println(res_no);
+				System.out.println(res_parentno);
+				System.out.println(res_email);
+				System.out.println(res_writedate);*/
 
 				ResourceBean bean = new ResourceBean();
 
@@ -140,7 +146,10 @@ public class ResourceDAO implements ResourceDAOImpl {
 				bean.setRes_writedate(res_writedate);
 
 				resoursesList.add(bean);
+				/*System.out.println("bean : " + bean);*/
 			}
+			
+			System.out.println("resoursesList : " + resoursesList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,6 +172,7 @@ public class ResourceDAO implements ResourceDAOImpl {
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
+				/*System.out.println(rs.getInt(1));*/
 				return (rs.getInt(1));				
 			}
 								
