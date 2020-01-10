@@ -54,7 +54,9 @@ h1, h2, h3, h4, h5,
   bottom: 0;
   opacity: 0;
   visibility: hidden; }
-
+.center{
+	margin-top: 100px;
+}
 .offcanvas-menu .site-wrap {
   height: 100%;
   width: 100%;

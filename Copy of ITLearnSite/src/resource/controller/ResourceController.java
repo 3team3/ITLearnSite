@@ -2,6 +2,7 @@ package resource.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -11,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import resource.db.ResourceBean;
-import resource.db.ResourceDAO;
+import resource.db.ResourceDAOImpl;
 import resource.service.ResourceService;
 
 public class ResourceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	ResourceService serv = null;
-	ResourceDAO rDao = null;
+	ResourceDAOImpl rDao = null;
 	ResourceBean rBean = null;
 
 	int result = 0; // 상태를 나타낼 변수
@@ -30,6 +31,16 @@ public class ResourceController extends HttpServlet {
 		System.out.println("ResourceService() 객체 생성");
 		rBean = new ResourceBean();
 		System.out.println("ResourceBean() 객체 생성");
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		service(request, response);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		service(request, response);
 	}
 
 	@Override
@@ -52,7 +63,7 @@ public class ResourceController extends HttpServlet {
 			//자료실 main페이지 - list
 			if (path.equals("/resourceList.bo")) {
 				System.out.println("resourceList.bo");
-				nextPage = "/resource/ResourceList.jsp";
+				nextPage = "/pages/main/center/resource/ResourceList.jsp";
 			}
 			//자료실게시판 - 글 내용보기 페이지
 			else if(path.equals("/resourceView.bo"))
@@ -61,22 +72,34 @@ public class ResourceController extends HttpServlet {
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);			
-				nextPage = "/resource/ResourceView.jsp";
+				nextPage = "/pages/main/center/resource/ResourceView.jsp";
 			}
 			//자료실게시판 - 글 쓰기 페이지
-			else if(path.equals("resourceWrite.bo"))
+			else if(path.equals("/resourceWrite.bo"))
 			{
 				System.out.println("resourceWrite.bo");
-				nextPage = "/resource/ResourceView.jsp";
+				nextPage = "/pages/main/center/resource/ResourceWrite.jsp";
 			}
 			//자료실게시판 - 글 글 수정 페이지
-			else if(path.equals("resourceModify.bo"))
+			else if(path.equals("/resourceModify.bo"))
 			{
 				System.out.println("resourceModify.bo");
-				nextPage = "/resource/ResourceModfiy.jsp";
+				nextPage = "/pages/main/center/resource/ResourceModfiy.jsp";
+			}
+			//자료실게시판 - 글 검색
+			else if(path.equals("/resourceSelect.bo"))
+			{
+				System.out.println("resourceSelect.bo");
+				String select_subject = request.getParameter("select_subject");
+				String select_content = request.getParameter("select_content");
+				System.out.println(select_subject);
+				System.out.println(select_content);
+				
+				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
+				nextPage = "/pages/main/center/resource/ResourceList.jsp";
 			}
 			
-			System.out.println("nextPAge" + nextPage);
+			System.out.println("nextPage = " + nextPage);
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);

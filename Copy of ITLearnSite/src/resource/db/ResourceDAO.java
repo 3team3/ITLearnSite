@@ -1,68 +1,18 @@
 package resource.db;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
-import member.db.MemberBean;
-
-
-public class ResourceDAO implements ResourceDAOImpl{
-	Connection con = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    DataSource ds = null;
-    String sql = "";
-    Statement stmt = null;
-    
-    private Connection getConnection() throws Exception {
-        Context ctx = new InitialContext();
-        ds = (DataSource)ctx.lookup("java:comp/env/jdbc/jspbeginner");
-        return ds.getConnection();
-    }
-    
-    private void closeConnection(){
-        try {
-            if(rs != null) rs.close();
-            if(pstmt != null) pstmt.close();
-            if(con != null) con.close();
-            if(stmt != null) stmt.close();
-          
-        } catch (SQLException e) {
-            System.out.println("closeConnection()메소드에서 오류 : " +e);
-        }
-    }
-    
-    //자료실 내용
-    @Override
-    public ResourceBean resourceView(int res_no){
-    	ResourceBean rBean = new ResourceBean();
-  		try{
-  			con = getConnection();
-  			String sql ="select * from resource_table where res_no=?";
-  			pstmt = con.prepareStatement(sql);
-  	        pstmt.setInt(1, res_no);
-  	        rs = pstmt.executeQuery();
-  	        if(rs.next()){
-  	        	rBean.setRes_no(res_no);
-  	        	rBean.setRes_title(rs.getString("res_title"));
-  	        	rBean.setRes_email(rs.getString("res_email"));
-  	        	rBean.setRes_content(rs.getString("res_content"));
-  	        	rBean.setRes_filename(rs.getString("res_filename"));
-  	        	rBean.setRes_writedate(rs.getTimestamp("res_writedate"));
-  	        }
-  				
-  			}catch(Exception e){
-  				System.out.println("callMember()메소드에서 오류 :"+e);
-  			}finally{
-  				closeConnection(); 
-  			}
-  			return rBean;
-  		}
+public interface ResourceDAO {
+	/*자료 등록*/
+	
+	/*자료 수정*/
+	
+	/*자료 삭제*/
+	
+	/*자료 목록*/
+	public List<ResourceBean> resourceList();
+	/*자료 내용*/
+	public ResourceBean resourceView(int res_no);
+	/*자료 검색*/
+	public List<ResourceBean> resourceSelect(String select_subject,String select_content);
 }

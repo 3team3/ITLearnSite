@@ -74,6 +74,4 @@ public class QuestionBean {
 	public void setQues_readcount(int ques_readcount) {
 		this.ques_readcount = ques_readcount;
 	} 
-	
-	
 }

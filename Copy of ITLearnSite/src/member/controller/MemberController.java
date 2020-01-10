@@ -52,23 +52,63 @@ public class MemberController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
+		String paging = null;
 		
 		try {
 			// 인덱스 페이지 요청
 			if (path == null) 
 			{
-				nextPage = "/index.jsp";
+				nextPage = "/main.jsp";
 			} 
 			else if (path.equals("/index.do")) 
 			{
 				nextPage = "/main.jsp";
-				System.out.println("asdf");
+				paging = "/pages/main/center/default.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/lectures.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/lectures.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/books.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/books.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/resource.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/resource.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/customer.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/customerService.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/mypage.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/mypage.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/admin.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/admin.jsp";
+				request.setAttribute("paging", paging);
 			}
 			// ##########회원가입########## Start
 			else if (path.equals("/joinMember.do")) 
 			{
 				// 회원가입 페이지이동
-				nextPage = "/member/join.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/join.jsp";
+				request.setAttribute("paging", paging);
 			}
 			// 회원가입 페이지에서 중복체크해주는 ajax부분
 			else if (path.equals("/emailDupChk.do")) 
@@ -102,7 +142,7 @@ public class MemberController extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				nextPage = "/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+				nextPage = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
 			}
 			//이메일 인증
 			else if(path.equals("/emailAuth.do"))
@@ -112,7 +152,7 @@ public class MemberController extends HttpServlet {
 				System.out.println(email);
 				serv.emailAuth(email);
 				
-				nextPage = "/member/emailAuthSuccess.jsp";
+				nextPage = "/pages/main/center/member/emailAuthSuccess.jsp";
 			}
 			// ##########회원가입########## End
 
@@ -121,7 +161,7 @@ public class MemberController extends HttpServlet {
 			{
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/member/memberlist.jsp";
+				nextPage = "/pages/main/center/member/memberlist.jsp";
 
 			}
 			// ##########회원리스트########## End
@@ -135,7 +175,7 @@ public class MemberController extends HttpServlet {
 				}
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/member/memberlist.jsp";
+				nextPage = "/pages/main/center/member/memberlist.jsp";
 				
 			}
 			// ##########관리자권한 회원삭제########## End
@@ -144,7 +184,9 @@ public class MemberController extends HttpServlet {
 			// 로그인 버튼 누를시
 			else if (path.equals("/login.do"))
 			{
-				nextPage = "/member/login.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/login.jsp";
+				request.setAttribute("paging", paging);
 			} 
 			else if (path.equals("/login1.do")) 
 			{
@@ -189,7 +231,7 @@ public class MemberController extends HttpServlet {
 			// ##########회원탈퇴 ############## Start
 			else if (path.equals("/MemberDeleteAction.do")) 
 			{
-				nextPage = "/member/memberDelete.jsp";
+				nextPage = "/pages/main/center/member/memberDelete.jsp";
 			} 
 			else if (path.equals("/MemberDeleteAction1.do")) 
 			{
@@ -225,7 +267,7 @@ public class MemberController extends HttpServlet {
 				// ##########회원수정 ############## Start
 				}
 			else if(path.equals("/relogin.do")){
-				nextPage="/member/relogin.jsp";
+				nextPage="/pages/main/center/member/relogin.jsp";
 			}
 			else if (path.equals("/relogin1.do")) 
 			{
@@ -256,7 +298,7 @@ public class MemberController extends HttpServlet {
 				String email = (String)request.getSession().getAttribute("email"); 
 				MemberBean mBean = serv.callMember(email);
 				request.setAttribute("mBean", mBean);
-				nextPage="/member/modify.jsp";
+				nextPage="/pages/main/center/member/modify.jsp";
 			}
 			else if(path.equals("/UpdateMember.do")){
 				
