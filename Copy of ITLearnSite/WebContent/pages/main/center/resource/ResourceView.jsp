@@ -15,7 +15,7 @@
 %>
 </head>
 	<body>
-	<h1>자료실</h1>
+	 <h1>자료실</h1>
 	<form>
 		<table>
 			<tr>
@@ -37,6 +37,10 @@
 				<td><input type="button" value="삭제"></td>
 			</tr>				
 		</table>
-	</form>	
+		
+	</form> 
+	<div>
+			<jsp:include page="${path}/comments/comments.jsp" name="" value="">
+	</div>
 	</body>
 </html> 
