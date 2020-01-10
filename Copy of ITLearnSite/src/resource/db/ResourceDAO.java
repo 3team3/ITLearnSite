@@ -65,4 +65,21 @@ public class ResourceDAO implements ResourceDAOImpl{
   			}
   			return rBean;
   		}
+    
+    //자료실 내용 삭제
+    public void resourceDelete(int res_no){		
+		try {
+			//커넥션풀로부터 커넥션 얻기
+			con = getConnection();
+			String query="Delete From resource_table where res_no = ?";	
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, res_no);
+			pstmt.executeUpdate();			
+		}catch(Exception e){
+			System.out.println("resourceDelete메소드에서 오류 :"+e);
+		}finally{
+			closeConnection(); 
+		}
+		
+	}
 }

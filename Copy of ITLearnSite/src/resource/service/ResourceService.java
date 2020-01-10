@@ -14,5 +14,11 @@ public class ResourceService implements ResourceServiceImpl{
 		ResourceBean rBean = rDao.resourceView(res_no);
 		return rBean;
 	}
+	
+	@Override
+	public void resourceDelete(int res_no){
+		rDao.resourceDelete(res_no);	
+		
+	}
 
 }

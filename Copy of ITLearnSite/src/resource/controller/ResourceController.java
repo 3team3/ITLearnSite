@@ -1,6 +1,8 @@
 package resource.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
@@ -75,6 +77,26 @@ public class ResourceController extends HttpServlet {
 				System.out.println("resourceModify.bo");
 				nextPage = "/resource/ResourceModfiy.jsp";
 			}
+			//자료실게시판- 글 삭제
+			else if(path.equals("resourceDelete.bo"))
+			{
+				System.out.println("resourceDelete.bo");
+				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				serv.resourceDelete(res_no);
+				//파일 삭제시 필요
+			/*	File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _res_no);
+				if(imgDir.exists()){
+					FileUtils.deleteDirectory(imgDir);
+				}*/
+				
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
+				         + " location.href='" + request.getContextPath()
+				         + "/resource/resourceList.bo';" + "</script>");
+				return;
+				
+			}
+		
 			
 			System.out.println("nextPAge" + nextPage);
 			if (nextPage != null) {
