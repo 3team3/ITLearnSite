@@ -1,43 +1,3 @@
-/*add css*/
-.pagemargin {
-	margin-top: 100px;
-}
-
-.boardoutline {
-	align-content: center;
-	justify-content: center;
-	display: flex;
-	width: 1200px;
-	height: inherit;
-}
-
-.content {
-	text-align: center;
-	display: block;
-	width: 1000px;
-}
-
-thead{
-	color: black;/*컬럼 이름 색*/
-	border-top: 3px solid #3C4790;
-	border-spacing: auto 10px;
-}
-.tb_head>td{
-	border-bottom: 2px solid #3C4790;
-}
-.tb_head>td:nth-child(1){
-	width:150px;
-}
-.tb_head>td:nth-child(2){
-	width:500px;
-}
-.tb_head>td:nth-child(3){
-	width:200px;
-}
-.tb_head>td:nth-child(4){
-	width:150px;
-}
-
 /* Base */
 body {
 	line-height: 1.7;
@@ -92,7 +52,6 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .site-wrap:before {
-<<<<<<< HEAD
 	display: none;
 	-webkit-transition: .3s all ease-in-out;
 	-o-transition: .3s all ease-in-out;
@@ -109,25 +68,6 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	visibility: hidden;
 }
 
-=======
-  display: none;
-  -webkit-transition: .3s all ease-in-out;
-  -o-transition: .3s all ease-in-out;
-  transition: .3s all ease-in-out;
-  background: rgba(0, 0, 0, 0.6);
-  content: "";
-  position: absolute;
-  z-index: 2000;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  visibility: hidden; }
-.center{
-	margin-top: 100px;
-}
->>>>>>> refs/remotes/origin/ran
 .offcanvas-menu .site-wrap {
 	height: 100%;
 	width: 100%;
@@ -1559,7 +1499,6 @@ keyframes loader-rotate { 100% {
 	stroke-dashoffset: 0;
 }
 
-<<<<<<< HEAD
 50%
 {
 stroke-dasharray
@@ -1627,69 +1566,3 @@ px
  
 }
 }
-=======
-@keyframes loader-dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0; }
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px; }
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -136px; } }
-    
-
-.payment{
-    position: absolute;
-    top:0;
-    left: 10%;
-    line-height:40px;
-	font-family: serif;
-
-}
-
-
-.payment_left{
-	display: inline-table;
-	padding: 50px;
-	float: left;
-	text-align: left;
-	height: 100px;
-	min-width: 500px;
-
-}
-.payment_right{
-	display: inline-table;
-	padding: 50px;
-	margin-left:70px;
-	text-align: left;
-	max-height: 100%;
-	min-height: 100%;
-	min-width: 1000px;
-	
-	
-}
- 
-.btn{
-	background-color: white;
-	border-color: olive;
-	border-top-left-radius: 5px; 
-	border-bottom-left-radius: 5px; 
-	margin-right:-4px;
-	border-top-right-radius: 5px; 
-	border-bottom-right-radius: 5px; 
-	margin-left:-3px;
-}
-
-.btn:HOVER {
-	background-color: olive;
-	border-color: olive;
-	border-top-left-radius: 5px; 
-	border-bottom-left-radius: 5px; 
-	margin-right:-4px;
-	border-top-right-radius: 5px; 
-	border-bottom-right-radius: 5px; 
-	margin-left:-3px;
-}
->>>>>>> refs/remotes/origin/ran

@@ -12,20 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import comments.db.CommentsBean;
 import comments.db.CommentsDAOImpl;
-<<<<<<< HEAD
 import comments.service.CommentsServiceImpl;
-=======
 import comments.service.CommentsService;
->>>>>>> refs/remotes/origin/ran
 
 public class CommentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-<<<<<<< HEAD
 	CommentsServiceImpl cServ = null;
-=======
-	CommentsService cServ = null;
->>>>>>> refs/remotes/origin/ran
 	CommentsDAOImpl cDao = null;
 	CommentsBean cBean = null;
 
@@ -33,11 +26,7 @@ public class CommentsController extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-<<<<<<< HEAD
 		cServ = new CommentsServiceImpl();
-=======
-		cServ = new CommentsService();
->>>>>>> refs/remotes/origin/ran
 		cDao = new CommentsDAOImpl();
 		cBean = new CommentsBean();
 	}
