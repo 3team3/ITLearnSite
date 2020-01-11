@@ -91,23 +91,43 @@ public class ResourceController extends HttpServlet {
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);			
-				nextPage = "/resource/ResourceView.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceView.jsp";
+				request.setAttribute("paging", paging);	
 			}
 			//자료실게시판 - 글 쓰기 페이지
-			else if(path.equals("resourceWrite.bo"))
+			else if(path.equals("/resourceWrite.bo"))
 			{
 				System.out.println("resourceWrite.bo");
-				nextPage = "/resource/ResourceView.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceWrite.jsp";
+				request.setAttribute("paging", paging);
 			}
 			//자료실게시판 - 글 글 수정 페이지
-			else if(path.equals("resourceModify.bo"))
+			else if(path.equals("/resourceModify.bo"))
 			{
 				System.out.println("resourceModify.bo");
-				nextPage = "/resource/ResourceModfiy.jsp";
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceModify.jsp";
+				request.setAttribute("paging", paging);	
 			}
-			//자료실게시판- 글 삭제
-			else if(path.equals("resourceDelete.bo"))
+			//자료실게시판 - 글 검색
+			else if(path.equals("/resourceSelect.bo"))
 			{
+				System.out.println("resourceSelect.bo");
+				String select_subject = request.getParameter("select_subject");
+				String select_content = request.getParameter("select_content");
+				System.out.println(select_subject);
+				System.out.println(select_content);
+				
+				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/resource/ResourceSelect.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//자료실게시판 - 글 삭제
+			else if(path.equals("/resourceDelete.bo"))
+			{ 
 				System.out.println("resourceDelete.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
 				serv.resourceDelete(res_no);

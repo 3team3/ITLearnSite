@@ -38,9 +38,15 @@ public class LectureController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
+		String paging = null;
 
 		try {
-
+			if(path.equals("/lectures.lec"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/lecture/lectures.jsp";
+				request.setAttribute("paging", paging);
+			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) {

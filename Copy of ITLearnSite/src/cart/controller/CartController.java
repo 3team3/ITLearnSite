@@ -38,28 +38,25 @@ public class CartController extends HttpServlet{
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-
+		String paging = null;
 		
 		try {
-			if (path == null) 
+			if(path.equals("/cart.cart"))
 			{
 				nextPage = "/main.jsp";
-			} 
-			
-			else if(path.equals("/cart.cart")){
-				nextPage ="/pages/main/center/member/memberCart.jsp";
+				paging = "/pages/main/center/cart/cart.jsp";
+				request.setAttribute("paging", paging);
 			}
-			
-			
-			System.out.println("nextPage = " + nextPage);
+			System.out.println("nextpage" + nextPage);
 			// null PointException
 			if (nextPage != null) 
 			{
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 			}
-			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}

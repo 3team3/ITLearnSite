@@ -232,7 +232,9 @@ public class MemberController extends HttpServlet {
 			{
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/pages/main/center/member/memberlist.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/memberlist.jsp";
+				request.setAttribute("paging", paging);
 
 			}
 			// ##########회원리스트########## End
