@@ -19,7 +19,6 @@ public class CommentsDAOImpl implements CommentsDAO {
     Statement stmt = null;
     
     private Connection getConnection() throws Exception {
-<<<<<<< HEAD
   	  Context ctx = new InitialContext();
       Context envContext =(Context)ctx.lookup("java:/comp/env");
       ds = (DataSource)envContext.lookup("jdbc/oracle");
@@ -38,24 +37,3 @@ public class CommentsDAOImpl implements CommentsDAO {
         }
     }
 }
-=======
-        Context ctx = new InitialContext();
-        Context envContext =(Context)ctx.lookup("java:/comp/env");
-        ds = (DataSource)envContext.lookup("jdbc/oracle");
-        return ds.getConnection();
-     }
-    
-    private void closeConnection(){
-        try {
-            if(rs != null) rs.close();
-            if(pstmt != null) pstmt.close();
-            if(con != null) con.close();
-            if(stmt != null) stmt.close();
-          
-        } catch (SQLException e) {
-            System.out.println("closeConnection()메소드에서 오류  : " +e);
-        }
-    }
-}
-
->>>>>>> refs/remotes/origin/ran

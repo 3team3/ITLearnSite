@@ -15,7 +15,6 @@
 %>
 
 <script>
-    
     // Perform an asynchronous HTTP (Ajax) request.
     // 비동기 통신 Ajax를 Setting한다.
     $.ajaxSetup({
@@ -99,10 +98,6 @@
         })
     }
 </script>
-
-
-출처: https://bigfat.tistory.com/86 [Bigfat]
-
 </head>
 	<body>
 	 <h1>자료실</h1>
@@ -136,7 +131,7 @@
 			<h5>아이디</h5>
 			<input type="text" value="<%=email%>" readonly> <br>
 			<h5>패스워드</h5>
-			<input type="password"  "> <br>
+			<input type="password"> <br>
 			<h5>내용</h5>
 			<input type="text" id="commentContent"><br>
 			<input type="button" id="commentWrite" value="댓글 작성">

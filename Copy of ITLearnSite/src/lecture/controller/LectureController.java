@@ -2,8 +2,6 @@ package lecture.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

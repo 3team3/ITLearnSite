@@ -27,7 +27,6 @@
 			<div class="container">
 				<div class="row align-items-end justify-content-center text-center">
 					<div class="col-lg-7">
-<<<<<<< HEAD
 						<h2 class="mb-0">로그인</h2>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
 					</div>
@@ -42,18 +41,6 @@
 			</div>
 		</div>
 
-=======
-						<h2 class="mb-0">로그인</h2>	
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="custom-breadcrumns border-bottom">
-			<div class="container">
-				<a href="index.jsp">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">로그인</span>
-			</div>
-		</div>
->>>>>>> refs/remotes/origin/ran
 		<div class="site-section">
 			<div class="container">
 

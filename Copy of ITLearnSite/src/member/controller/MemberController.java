@@ -209,7 +209,6 @@ public class MemberController extends HttpServlet {
 				try {
 					mail.sendMail();//메일 전송
 				} catch (UnsupportedEncodingException | MessagingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				nextPage = "/main.jsp";

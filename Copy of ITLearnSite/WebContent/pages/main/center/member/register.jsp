@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-<jsp:include page="/pages/main/css.jsp" />
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -57,8 +56,6 @@
 	<!-- .site-wrap -->
 
 	<!-- loader -->
-	<jsp:include page="/pages/main/js.jsp" />
-
 </body>
 
 </html>

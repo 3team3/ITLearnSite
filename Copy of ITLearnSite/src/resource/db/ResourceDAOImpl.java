@@ -14,8 +14,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import member.db.MemberBean;
-
 public class ResourceDAOImpl implements ResourceDAO {
 	Connection con = null;
 	PreparedStatement pstmt = null;

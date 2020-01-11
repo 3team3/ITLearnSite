@@ -39,7 +39,7 @@ public class ResourceController extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=utf=8");
+		response.setContentType("text/html; charset=utf-8");
 		/* ##test code## */
 		System.out.println("service()");
 

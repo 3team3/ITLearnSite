@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import comments.db.CommentsBean;
 import comments.db.CommentsDAOImpl;
 import comments.service.CommentsServiceImpl;
-import comments.service.CommentsService;
-
 public class CommentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
