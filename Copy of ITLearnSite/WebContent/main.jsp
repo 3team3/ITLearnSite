@@ -11,6 +11,7 @@
 <%-- <jsp:include page="/pages/main/js.jsp"/> --%>
 <link rel="stylesheet" href="${path}/fonts/icomoon/style.css">
 <link rel="stylesheet" href="${path}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${path}/css/bootstrap.css">
 <link rel="stylesheet" href="${path}/css/jquery-ui.css">
 <link rel="stylesheet" href="${path}/css/owl.carousel.min.css">
 <link rel="stylesheet" href="${path}/css/owl.theme.default.min.css">
@@ -21,6 +22,7 @@
 <link rel="stylesheet" href="${path}/css/aos.css">
 <link href="${path}/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${path}/css/style.css">
+<link rel="stylesheet" href="${path}/css/board.css">
 </head>
 <c:set var="pages" value="${paging}" />
 <c:if test="${pages} == null">

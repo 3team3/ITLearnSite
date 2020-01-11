@@ -17,54 +17,28 @@
 <c:set var="pageNum" value="${resourcesMap.pageNum}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-<style type="text/css">
-.no-uline {
-	text-decoration: none;
-}
-
-/*선택된 페이지 번호를 빨간색으로 표시*/
-.sel-page {
-	text-decoration: none;
-	color: red;
-}
-
-.cls1 {
-	text-decoration: none;
-}
-
-.cls2 {
-	text-align: center;
-	font-size: 30px;
-}
-</style>
-
 </head>
 <body>
 	<div class="pagemargin">
-		<h1>ResourceList.jsp</h1>
-		<a href="resourceList.bo">
-			<button>
-				<span>글 리스트 페이지</span>
-			</button>
-		</a> <a href="resourceView.bo">
-			<button>
-				<span>글 내용 페이지</span>
-			</button>
-		</a> <a href="resourceWrite.bo">
-			<button>
-				<span>글 쓰기 페이지</span>
-			</button>
-		</a> <a href="resourceModify.bo">
-			<button>
-				<span>글 수정 페이지</span>
-			</button>
-		</a>
-		<!-- 	int res_no = 0; -->
-		<!-- 		String res_title = null; -->
-		<!-- 		String res_email = null; -->
-		<!-- 		String rest_content = null; -->
-		<!-- 		String res_filename = null; -->
-		<!-- 		Timestamp res_writedate = new Timestamp(System.currentTimeMillis()); -->
+		<div class="wrapboard">
+			<div class="row">
+				<div class="col-lg-12" style="display: inline-block; text-align: center;">
+					<div class="btn-wrap">
+						<div class="header-btn float-l">
+							<a href="resourceList.bo">
+								<button class="btn btn-color1">
+									<span>전체글</span>
+								</button>
+							</a>
+						</div>
+
+						<div class="header-btn float-r">
+							<a href=""> <span class="glyphicon glyphicon-pencil gi-2x"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="boardoutline">
 				<div class="content">
 					<table class="table">
@@ -81,20 +55,20 @@
 				BoaqrdController.java 서블릿으로부터 전달 받은 request 영역에 저장되어 
 				articlesList 속성으로 바인딩된 ArrayList 객체가 저장되어 있지 않다면				
 			 --%>
-								<c:when test="${resourcesList == null }">
-									<tr height="10">
-										<td colspan="4"><p>
-												<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
-											</p></td>
-									</tr>
-								</c:when>
-								<c:when test="${resourcesList != null }">
-									<%--
+							<c:when test="${resourcesList == null }">
+								<tr height="10">
+									<td colspan="4"><p>
+											<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+										</p></td>
+								</tr>
+							</c:when>
+							<c:when test="${resourcesList != null }">
+								<%--
 					BoardController.java 서블릿으로부터 전달받은 request 영역에
 					articlesList 속성으로 바인된 ArrrayList 객체의 크기(검색한 글의 개수)만큼 반복, 
 					검색한 글정보(ArticleVO)들을 ArrayList 객체 내부의 인덱스 위치로부터 글목록 표시 
 				 --%>
-									<c:forEach var="resource" items="${resourcesList }" varStatus="resourceNum">
+								<c:forEach var="resource" items="${resourcesList }" varStatus="resourceNum">
 									<tbody>
 										<tr align="center">
 											<%-- varStatus의 count 속성을 이용 글번호를 1부터 자동으로 표시 --%>
@@ -124,15 +98,32 @@
 											</td>
 											<td width="10%">${resource.res_email }</td>
 											<td width="10%"><fmt:formatDate value="${resource.res_writedate }" /></td>
-											</tbody>
 										</tr>
-									</c:forEach>
-								</c:when>
+									</tbody>
+								</c:forEach>
+							</c:when>
 						</c:choose>
 					</table>
 				</div>
 			</div>
-			<div class="cls2">
+			<div class="btn-wrap">
+				<div class="header-btn float-l">
+					<a href="resourceList.bo">
+						<button class="btn btn-color1">
+							<span>전체글</span>
+						</button>
+					</a>
+				</div>
+
+				<div class="header-btn float-r">
+					<a href="resourceWrite.bo">
+						<button class="btn btn-color1">
+							<span>글쓰기</span>
+						</button>
+					</a>
+				</div>
+			</div>
+			<div class="btn-wrap text-align">
 				<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
 				<c:if test="${totResources != null }">
 					<c:choose>
@@ -184,14 +175,34 @@
 									<c:otherwise>
 										<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}">${page } </a>
 									</c:otherwise>
-
 								</c:choose>
 							</c:forEach>
-
 						</c:when>
 					</c:choose>
 				</c:if>
 			</div>
+			<div class="btn-wrap text-align">
+				<div class="selector-wrap">
+					<select class="box selectbox">
+						<optgroup label="검색 옵션">
+							<option>전체</option>
+							<option>제목</option>
+							<option>내용</option>
+							<option>글쓴이</option>
+							<option>제목+내용</option>
+						</optgroup>
+					</select>
+				</div>
+				<div class="search-wrap">
+					<input class="box inputbox" type="text"> 
+					<span class="lookimg"> 
+						<a href="#"> 
+							<img src="${path}/images/look.png" width="30px" height="35px">
+						</a>
+					</span>
+				</div>
+			</div>
 		</div>
+	</div>
 </body>
 </html>
