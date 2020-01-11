@@ -28,7 +28,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 	//자료실 검색
 	@Override
-	public Map resourceSelect() {
+	public List<ResourceBean> resourceSelect(String select_subject, String select_content) {
 		// TODO Auto-generated method stub
 		return null;
 	}
