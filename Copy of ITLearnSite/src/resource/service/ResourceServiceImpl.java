@@ -20,13 +20,19 @@ public class ResourceServiceImpl implements ResourceService {
 		ResourceBean rBean = rDao.resourceView(res_no);
 		return rBean;
 	}
-
+	// 자료실  내용 삭제
 	@Override
 	public void resourceDelete(int res_no) {
 		rDao.resourceDelete(res_no);
 
 	}
-
+	//자료실 검색
+	@Override
+	public Map resourceSelect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	//자료실 리스트
 	@Override
 	public Map listResource(Map<String, Integer> pagingMap) {
 
