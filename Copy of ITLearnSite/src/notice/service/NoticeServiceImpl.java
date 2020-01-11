@@ -1,5 +1,5 @@
 package notice.service;
 
-public interface NoticeServiceImpl {
+public class NoticeServiceImpl implements NoticeService {
 
 }

@@ -1,5 +1,5 @@
 package payment.service;
 
-public interface PaymentServiceImpl {
+public class PaymentServiceImpl implements PaymentService{
 
 }

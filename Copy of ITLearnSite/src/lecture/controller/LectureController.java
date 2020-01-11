@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lecture.db.LectureBean;
-import lecture.db.LectureDAO;
-import lecture.service.LectureService;
+import lecture.db.LectureDAOImpl;
+import lecture.service.LectureServiceImpl;
 
 public class LectureController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	LectureDAO lDao = null;
+	LectureDAOImpl lDao = null;
 	LectureBean lBean = null;
-	LectureService lServ = null;
+	LectureServiceImpl lServ = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		lDao = new LectureDAO();
+		lDao = new LectureDAOImpl();
 		lBean = new LectureBean();
-		lServ = new LectureService();
+		lServ = new LectureServiceImpl();
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package resource.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -16,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import resource.db.ResourceBean;
-import resource.db.ResourceDAO;
-import resource.service.ResourceService;
+import resource.db.ResourceDAOImpl;
+import resource.service.ResourceServiceImpl;
 
 public class ResourceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	ResourceService serv = null;
-	ResourceDAO rDao = null;
+	ResourceServiceImpl serv = null;
+	ResourceDAOImpl rDao = null;
 	ResourceBean rBean = null;
 
 	int result = 0; // 상태를 나타낼 변수
@@ -31,7 +30,7 @@ public class ResourceController extends HttpServlet {
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		System.out.println("init()");
-		serv = new ResourceService();
+		serv = new ResourceServiceImpl();
 		System.out.println("ResourceService() 객체 생성");
 		rBean = new ResourceBean();
 		System.out.println("ResourceBean() 객체 생성");

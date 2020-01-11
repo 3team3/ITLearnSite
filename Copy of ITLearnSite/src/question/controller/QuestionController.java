@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import question.db.QuestionBean;
-import question.db.QuestionDAO;
-import question.service.QuestionService;
+import question.db.QuestionDAOImpl;
+import question.service.QuestionServiceImpl;
 
 public class QuestionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	QuestionBean qBean = null;
-	QuestionDAO qDao = null;
-	QuestionService qServ = null;
+	QuestionDAOImpl qDao = null;
+	QuestionServiceImpl qServ = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		qBean = new QuestionBean();
-		qDao = new QuestionDAO();
-		qServ = new QuestionService();
+		qDao = new QuestionDAOImpl();
+		qServ = new QuestionServiceImpl();
 	}
 
 	@Override

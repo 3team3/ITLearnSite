@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import notice.db.NoticeBean;
-import notice.db.NoticeDAO;
-import notice.service.NoticeService;
+import notice.db.NoticeDAOImpl;
+import notice.service.NoticeServiceImpl;
 
 public class NoticeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	NoticeBean nBean = null;
-	NoticeDAO nDao = null;
-	NoticeService nServ = null;
+	NoticeDAOImpl nDao = null;
+	NoticeServiceImpl nServ = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		nBean = new NoticeBean();
-		nDao = new NoticeDAO();
-		nServ = new NoticeService();
+		nDao = new NoticeDAOImpl();
+		nServ = new NoticeServiceImpl();
 	}
 
 	@Override

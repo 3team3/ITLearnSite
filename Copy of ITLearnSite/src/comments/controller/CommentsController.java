@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import comments.db.CommentsBean;
-import comments.db.CommentsDAO;
-import comments.service.CommentsService;
+import comments.db.CommentsDAOImpl;
+import comments.service.CommentsServiceImpl;
 
 public class CommentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	CommentsService cServ = null;
-	CommentsDAO cDao = null;
+	CommentsServiceImpl cServ = null;
+	CommentsDAOImpl cDao = null;
 	CommentsBean cBean = null;
 
 	int result = 0; // 상태를 나타낼 변수
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		cServ = new CommentsService();
-		cDao = new CommentsDAO();
+		cServ = new CommentsServiceImpl();
+		cDao = new CommentsDAOImpl();
 		cBean = new CommentsBean();
 	}
 

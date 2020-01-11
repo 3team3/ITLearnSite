@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import textbook.db.TextbookBean;
-import textbook.db.TextbookDAO;
-import textbook.service.TextbookService;
+import textbook.db.TextbookDAOImpl;
+import textbook.service.TextbookServiceImpl;
 
 public class TextbookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	TextbookDAO tDao = null;
-	TextbookService tSerc = null;
+	TextbookDAOImpl tDao = null;
+	TextbookServiceImpl tSerc = null;
 	TextbookBean tBean = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		tDao = new TextbookDAO();
-		tSerc = new TextbookService();
+		tDao = new TextbookDAOImpl();
+		tSerc = new TextbookServiceImpl();
 		tBean = new TextbookBean();
 	}
 

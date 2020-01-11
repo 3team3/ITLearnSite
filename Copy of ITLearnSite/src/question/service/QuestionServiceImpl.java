@@ -1,5 +1,5 @@
 package question.service;
 
-public interface QuestionServiceImpl {
+public class QuestionServiceImpl implements QuestionService {
 
 }

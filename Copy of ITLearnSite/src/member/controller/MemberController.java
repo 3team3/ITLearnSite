@@ -16,16 +16,16 @@ import javax.servlet.http.HttpSession;
 
 
 import member.db.MemberBean;
-import member.db.MemberDAO;
+import member.db.MemberDAOImpl;
 import member.email.JoinMail;
-import member.service.MemberService;
+import member.service.MemberServiceImpl;
 
 public class MemberController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	MemberService serv = null;
-	MemberDAO dao = null;
+	MemberServiceImpl serv = null;
+	MemberDAOImpl dao = null;
 	MemberBean mBean = null;
 
 	int result = 0; // 상태를 나타낼 변수
@@ -33,7 +33,7 @@ public class MemberController extends HttpServlet {
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		System.out.println("init()");
-		serv = new MemberService();
+		serv = new MemberServiceImpl();
 		System.out.println("MemberService() 객체 생성");
 		mBean = new MemberBean();
 		System.out.println("MemberBean() 객체 생성");
@@ -229,7 +229,7 @@ public class MemberController extends HttpServlet {
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
 
-				MemberDAO mDao = MemberDAO.getInstance();
+				MemberDAOImpl mDao = MemberDAOImpl.getInstance();
 				int loginResult = mDao.login(email, pw);
 				
 				//로그인 성공시
@@ -316,7 +316,7 @@ public class MemberController extends HttpServlet {
 				System.out.println(email);
 				System.out.println(pw);
 
-				MemberDAO mDao = MemberDAO.getInstance();
+				MemberDAOImpl mDao = MemberDAOImpl.getInstance();
 				int loginResult = mDao.login(email, pw);
 				System.out.println(loginResult);
 				//로그인 성공시

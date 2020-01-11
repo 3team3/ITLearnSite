@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cart.db.CartBean;
-import cart.db.CartDAO;
-import cart.service.CartService;
+import cart.db.CartDAOImpl;
+import cart.service.CartServiceImpl;
 
 
 public class CartController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	CartDAO caDao = null;
-	CartService caServ = null;
+	CartDAOImpl caDao = null;
+	CartServiceImpl caServ = null;
 	CartBean caBean = null;
 	
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		caDao = new CartDAO();
-		caServ = new CartService();
+		caDao = new CartDAOImpl();
+		caServ = new CartServiceImpl();
 		caBean = new CartBean();
 	}
 
