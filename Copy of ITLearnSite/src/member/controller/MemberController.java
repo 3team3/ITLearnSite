@@ -67,6 +67,45 @@ public class MemberController extends HttpServlet {
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/default.jsp";
 				request.setAttribute("paging", paging);
+<<<<<<< HEAD
+=======
+			}
+			else if(path.equals("/lectures.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/lectures.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/books.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/books.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/resource.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/resource.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/customer.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/customerService.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/mypage.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/mypage.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/admin.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/admin.jsp";
+				request.setAttribute("paging", paging);
+>>>>>>> refs/remotes/origin/ran
 			}
 			// 메뉴 - 강의
 			else if(path.equals("/lectures.do"))
@@ -176,9 +215,13 @@ public class MemberController extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+<<<<<<< HEAD
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
 				request.setAttribute("paging", paging);
+=======
+				nextPage = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+>>>>>>> refs/remotes/origin/ran
 			}
 			//이메일 인증
 			else if(path.equals("/emailAuth.do"))
@@ -211,7 +254,7 @@ public class MemberController extends HttpServlet {
 				}
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/member/memberlist.jsp";
+				nextPage = "/pages/main/center/member/memberlist.jsp";
 				
 			}
 			// ##########관리자권한 회원삭제########## End
@@ -304,9 +347,13 @@ public class MemberController extends HttpServlet {
 				// ##########회원수정 ############## Start
 				}
 			else if(path.equals("/relogin.do")){
+<<<<<<< HEAD
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/member/relogin.jsp";
 				request.setAttribute("paging", paging);
+=======
+				nextPage="/pages/main/center/member/relogin.jsp";
+>>>>>>> refs/remotes/origin/ran
 			}
 			else if (path.equals("/relogin1.do")) 
 			{
@@ -339,7 +386,7 @@ public class MemberController extends HttpServlet {
 				String email = (String)request.getSession().getAttribute("email"); 
 				MemberBean mBean = serv.callMember(email);
 				request.setAttribute("mBean", mBean);
-				nextPage="/member/modify.jsp";
+				nextPage="/pages/main/center/member/modify.jsp";
 			}
 			else if(path.equals("/UpdateMember.do")){
 				
@@ -364,7 +411,7 @@ public class MemberController extends HttpServlet {
 				
 				
 				
-			System.out.println("nextPAge" + nextPage);
+			System.out.println("nextPage = " + nextPage);
 			// null PointException
 			if (nextPage != null) 
 			{

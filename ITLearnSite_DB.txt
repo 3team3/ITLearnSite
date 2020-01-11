@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*È¸¿ø Å×ÀÌºí*/
 create table member(
 email varchar2(40) primary key,
@@ -220,3 +221,183 @@ insert into member values
 ('test@test.com','1234','È¸¿ø1',1,'2000','12','12','010-1234-5678','47246','ºÎ»ê±¤¿ª½Ã ºÎ»êÁø±¸ µ¿Ãµ·Î 109 (ºÎÀüµ¿, »ïÇÑ°ñµç°ÔÀÌÆ®)','¾ÆÀÌÆ¼Àª',1,'y');
 insert into member values
 ('test1@test.com','1234','È¸¿ø2',1,'1995','1','11','010-1234-5678','47246','ºÎ»ê±¤¿ª½Ã ºÎ»êÁø±¸ µ¿Ãµ·Î 109 (ºÎÀüµ¿, »ïÇÑ°ñµç°ÔÀÌÆ®)','¾ÆÀÌÆ¼Àª',1,'y');
+=======
+/*íšŒì› í…Œì´ë¸”*/
+create table member(
+email varchar2(40) primary key,
+pw varchar2(20) not null,
+name varchar2(10) not null,
+gender number(2) ,
+birth_year varchar2(10),
+birth_month varchar2(10),
+birth_day varchar2(10),
+phonenumber varchar2(20),
+address varchar2(10),
+address1 varchar2(100),
+address2 varchar2(100),
+sms number(2),
+auth varchar2(2) default 'N'
+);
+
+select * from member;
+
+/*ìžë£Œì‹¤ í…Œì´ë¸”*/
+create table resource_table(
+res_no number(38) primary key,
+res_parentno number(38) default 0,
+res_title varchar2(50),
+res_email varchar2(40),
+res_content varchar2(1000),
+res_filename varchar2(50),
+res_writedate date default sysdate,
+constraint res_email_fk foreign key(res_email) references member(email)
+);
+
+select * from resource_table;
+
+/*ìžë£Œì‹¤ ëŒ“ê¸€ í…Œì´ë¸”*/
+create table resource_comments(
+co_no number(38) primary key,
+res_no number(38),
+co_email varchar2(100),
+co_pw varchar2(100),
+co_date date default sysdate,
+co_content varchar2(1000),
+constraint res_no_fk foreign key(res_no) references resource_table(res_no) on delete cascade
+);
+
+select * from resource_comments;
+
+/*ì´ìš©ë¬¸ì˜ê²Œì‹œíŒ*/
+create table question_table(
+ques_no number(38) primary key,
+ques_parentno number(38) default 0,
+ques_title varchar2(50),
+ques_email varchar2(40),
+ques_pw varchar2(20),
+ques_content varchar2(4000),
+ques_writedate date default sysdate,
+ques_readcount number(38),
+constraint ques_email_fk foreign key(ques_email) references member(email)
+);
+
+select * from question_table;
+
+/*ê³µì§€ì‚¬í•­*/
+create table  notice_table(
+noti_no number(38) primary key,
+noti_parentno number(38) default 0,
+noti_title varchar2(50),
+noti_email varchar2(40),
+noti_pw varchar2(20),
+noti_content varchar2(4000),
+noti_writedate date default sysdate,
+noti_readcount number(38),
+constraint noti_email_fk foreign key(noti_email) references member(email)
+);
+
+select * from notice_table;
+
+/*ê°•ì˜ê²Œì‹œíŒ*/
+create table lecture_table(
+lec_no number(38) primary key,
+lec_parentno number(38) default 0,
+lec_title varchar2(50),
+lec_email varchar2(40),
+lec_pw varchar2(10),
+lec_content varchar2(4000),
+lec_filename varchar2(50),
+lec_uploaddate date default sysdate,
+constraint fk_lec_email foreign key(lec_email) references member(email)
+);
+
+select * from lecture_table;
+
+/*êµìž¬ê²Œì‹œíŒ*/
+create table textbook_table(
+book_no number(38) primary key,
+book_title varchar2(50),
+book_email varchar2(40),
+book_pw varchar2(20),
+book_content varchar2(4000),
+book_filename varchar2(50),
+book_uploaddate date default sysdate,
+constraint book_email_fk foreign key(book_email) references member(email)
+);
+
+
+/*ìž¥ë°”êµ¬ë‹ˆ*/
+create table cart_table(
+cart_no number(38) primary key,
+cart_email varchar2(40),
+cart_book1 number(38),
+cart_book1_num number(38),
+cart_book2 number(38),
+cart_book2_num number(38),
+cart_book3 number(38),
+cart_book3_num number(38),
+cart_book4 number(38),
+cart_book4_num number(38),
+cart_book5 number(38),
+cart_book5_num number(38),
+cart_lecture1 number(38),
+cart_lecture1_num number(38),
+cart_lecture2 number(38),
+cart_lecture2_num number(38),
+cart_lecture3 number(38),
+cart_lecture3_num number(38),
+cart_lecture4 number(38),
+cart_lecture4_num number(38),
+cart_lecture5 number(38),
+cart_lecture5_num number(38),
+constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade
+);
+
+select * from cart_table;
+
+/*ê²°ì œ*/
+create table payment_table(
+pay_no number(38) primary key,
+pay_cart_no number(38),
+pay_email varchar2(40),
+pay_name varchar2(50),
+pay_address varchar2(50),
+pay_address1 varchar2(50),
+pay_address2 varchar2(50),
+pay_option varchar2(50),
+pay_total varchar2(4000),
+pay_book1 number(38),
+pay_book1_num number(38),
+pay_book2 number(38),
+pay_book2_num number(38),
+pay_book3 number(38),
+pay_book3_num number(38),
+pay_book4 number(38),
+pay_book4_num number(38),
+pay_book5 number(38),
+pay_book5_num number(38),
+pay_lecture1 number(38),
+pay_lecture1_num number(38),
+pay_lecture2 number(38),
+pay_lecture2_num number(38),
+pay_lecture3 number(38),
+pay_lecture3_num number(38),
+pay_lecture4 number(38),
+pay_lecture4_num number(38),
+pay_lecture5 number(38),
+pay_lecture5_num number(38),
+constraint pay_email_fk foreign key(pay_email) references member(email)
+);
+
+select * from payment_table;
+
+/*íšŒì› ì‚­ì œì‹œ íšŒì›ì˜ ìž¥ë°”êµ¬ë‹ˆë„ í•¨ê»˜ ì‚­ì œ*/
+/*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
+
+/*íšŒì›*/
+insert into member(email,pw,name,auth) values('admin@admin.com','1234','ê´€ë¦¬ìž','y');
+insert into member values
+('test@test.com','1234','íšŒì›1',1,'2000','12','12','010-1234-5678','47246','ë¶€ì‚°ê´‘ì—­ì‹œ ë¶€ì‚°ì§„êµ¬ ë™ì²œë¡œ 109 (ë¶€ì „ë™, ì‚¼í•œê³¨ë“ ê²Œì´íŠ¸)','ì•„ì´í‹°ìœŒ',1,'y');
+insert into member values
+('test1@test.com','1234','íšŒì›2',1,'1995','1','11','010-1234-5678','47246','ë¶€ì‚°ê´‘ì—­ì‹œ ë¶€ì‚°ì§„êµ¬ ë™ì²œë¡œ 109 (ë¶€ì „ë™, ì‚¼í•œê³¨ë“ ê²Œì´íŠ¸)','ì•„ì´í‹°ìœŒ',1,'y');
+>>>>>>> refs/remotes/origin/ran

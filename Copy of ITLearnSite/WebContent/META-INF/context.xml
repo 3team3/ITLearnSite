@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <Context>
+<<<<<<< HEAD
 	<!-- 톰캣 실행시 커넥션풀로  연결할 DB정보를 설정 하는 소스 -->
 	<Resource     
 	 name="jdbc/oracle"
@@ -13,4 +14,18 @@
 	 maxActive="50"
 	 maxWait="-1"
 	/>
+=======
+   <!-- 톰캣 실행시 커넥션풀로  연결할 DB정보를 설정 하는 소스 -->
+   <Resource     
+    name="jdbc/oracle"
+    auth="Container"
+    type="javax.sql.DataSource"
+    driverClassName="oracle.jdbc.OracleDriver"
+    url="jdbc:oracle:thin:@localhost:1521:XE"
+    username="scott"
+    password="tiger"
+    maxActive="50"
+    maxWait="-1"
+   />
+>>>>>>> refs/remotes/origin/ran
 </Context>

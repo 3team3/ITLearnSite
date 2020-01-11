@@ -7,6 +7,7 @@
 
 <head>
 <!-- All page css loading -->
+<<<<<<< HEAD
 <%-- <jsp:include page="/pages/main/css.jsp" /> --%>
 <%-- <jsp:include page="/pages/main/js.jsp"/> --%>
 <link rel="stylesheet" href="${path}/fonts/icomoon/style.css">
@@ -23,6 +24,10 @@
 <link href="${path}/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${path}/css/style.css">
 <link rel="stylesheet" href="${path}/css/board.css">
+=======
+<jsp:include page="/pages/main/css.jsp" />
+<jsp:include page="/pages/main/js.jsp"></jsp:include>
+>>>>>>> refs/remotes/origin/ran
 </head>
 <c:set var="pages" value="${paging}" />
 <c:if test="${pages} == null">
@@ -31,6 +36,7 @@
 
 <c:out value="${pages}"></c:out>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<<<<<<< HEAD
 	<div>
 		<div class="site-wrap" style="height: 100px; width:100%">
 			<jsp:include page="/pages/main/top/top.jsp" flush="false" />
@@ -61,5 +67,21 @@
 	<script src="${path}/js/main.js"></script>
 	<script src="${path}/js/makejs/commons.js"></script>
 	<script src="${path}/js/makejs/DaumPostAPI.js"></script>
+=======
+	<header>
+		<div class="site-wrap">
+			<jsp:include page="/pages/main/top/top.jsp" />
+		</div>
+	</header>
+	<div class="center">
+		<jsp:include page="${pages}" />
+	</div>
+	<footer>
+		<div>
+			<jsp:include page="/pages/main/footer/footer.jsp" />
+		</div>
+	</footer>
+	<!-- All page javaScript loading -->
+>>>>>>> refs/remotes/origin/ran
 </body>
 </html>
