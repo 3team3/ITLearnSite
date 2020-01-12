@@ -20,6 +20,10 @@
 <link href="${path}/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${path}/css/style.css">
 <link rel="stylesheet" href="${path}/css/board.css">
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+
 </head>
 <c:set var="pages" value="${paging}" />
 <c:if test="${pages} == null">
@@ -29,10 +33,10 @@
 <c:out value="${pages}"></c:out>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<div>
-		<div class="site-wrap" style="height: 100px; width:100%">
+		<div class="site-wrap" style="height: 100px; width: 100%">
 			<jsp:include page="/pages/main/top/top.jsp" flush="false" />
 		</div>
-		<div class="center" style="width:100%; min-height: 700px; margin-top:100px">
+		<div class="center" style="width: 100%; min-height: 700px; margin-top: 100px">
 			<jsp:include page="${pages}" />
 		</div>
 		<div>
@@ -58,5 +62,8 @@
 	<script src="${path}/js/main.js"></script>
 	<script src="${path}/js/makejs/commons.js"></script>
 	<script src="${path}/js/makejs/DaumPostAPI.js"></script>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+	<script src="${path}/js/makejs/summerNote.js"></script>
 </body>
 </html>

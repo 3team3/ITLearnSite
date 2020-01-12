@@ -33,7 +33,8 @@
 						</div>
 
 						<div class="header-btn float-r">
-							<a href=""> <span class="glyphicon glyphicon-pencil gi-2x"></span>
+							<a href=""> <!--  -->
+								<span class="glyphicon glyphicon-pencil gi-2x"></span>
 							</a>
 						</div>
 					</div>
@@ -88,16 +89,16 @@
 								 	공백 다음 자식들 표시
 								  --%>
 														<span style="font-size: 12px;">[답변]</span>
-														<a class="cls1" href="${path }/경로.bo?res_no=${resource.res_no}">${resource.res_title }</a>
+														<a class="cls1" href="resourceView.bo?res_no=${resource.res_no}">${resource.res_title}</a>
 													</c:when>
 													<%-- level값이 1보다 크지 않으면 부모글이므로 공백 없이 표시 --%>
 													<c:otherwise>
-														<a class="cls1" href="${path }/경로.bo?res_no=${resource.res_no}">${resource.res_title }</a>
+														<a class="cls1" href="resourceView.bo?res_no=${resource.res_no}">${resource.res_title}</a>
 													</c:otherwise>
 												</c:choose>
 											</td>
 											<td width="10%">${resource.res_email }</td>
-											<td width="10%"><fmt:formatDate value="${resource.res_writedate }" /></td>
+											<td width="10%"><fmt:formatDate value="${resource.res_writedate}" /></td>
 										</tr>
 									</tbody>
 								</c:forEach>
@@ -123,7 +124,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="btn-wrap text-align">
+			<div class="btn-wrap text-align" style="margin-top:20px; margin-bottom: 20px">
 				<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
 				<c:if test="${totResources != null }">
 					<c:choose>
@@ -173,7 +174,7 @@
 
 									<%--페이지 번호를 클릭하면 section값과 pageNum값을 컨트롤러로 전송 합니다. --%>
 									<c:otherwise>
-										<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}">${page } </a>
+										<a class="no-uline" href="${path}/resourceList.bo?section=${section}&pageNum=${page}">${page } </a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>

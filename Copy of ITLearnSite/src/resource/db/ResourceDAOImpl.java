@@ -90,6 +90,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	// 자료실 목록
+	@Override
 	public List selectAllResources(Map pagingMap) {
 		List resoursesList = new ArrayList();
 

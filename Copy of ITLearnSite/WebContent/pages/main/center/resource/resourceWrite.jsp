@@ -13,8 +13,29 @@
 	request.setCharacterEncoding("UTF-8");
 	String email = (String)session.getAttribute("email"); 
 %>
+
 </head>
 <body>
+	<%-- <!-- bootstrap -->
+	<div class="pagemargin">
+		<div class="wrapboard">
+			<table class="table">
+				<tr>
+					<td>제목</td>
+					<td><input type="text" value="${rBean.res_title}"></td>
+				</tr>
+				<tr>
+					<td>등록일</td>
+					<td><input type="text" value="${rBean.res_writedate}"></td>
+				</tr>
+				<tr>
+					<td colspan="2">파일다운위치지렁</td>
+				</tr>
+			</table>
+		</div>
+		<textarea name="content" id="summernote">${rBean.res_content}</textarea>
+	</div> --%>
+	
 	<!-- 자료실 출력 -->
 		<table>
 			<tr>
@@ -29,8 +50,10 @@
 				<td colspan="2">파일다운위치지렁</td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea readonly="readonly">${rBean.res_content}</textarea></td>
-			</tr>				
+				<td colspan="2"><textarea name="content" id="summernote" value="">${rBean.res_content}</textarea></td>
+			</tr>	
 		</table>
+		<!-- include libraries(jQuery, bootstrap) -->
+
 </body>
 </html>
