@@ -35,7 +35,7 @@
 
 		<div class="custom-breadcrumns border-bottom">
 			<div class="container">
-				<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">마이페이지</span>
+				<a href="index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">마이페이지</span>
 			</div>
 		</div>
 
@@ -51,13 +51,12 @@
 				<div class="row justify-content-center">
 					<div class="col-md-5">
 						<div class="row">
-							<form class="form" onsubmit="return submitter();" action="UpdateMember.do" method="post">
+							<form class="form" onsubmit="return modifySubmitter();" action="UpdateMember.do" method="post">
 								<div class="col-md-12 form-group">
 									<div class="form-group">
 										<h4>기본 정보</h4>
 									</div>
-									<label for="email">아이디</label> <input type="email" name="email" id="email" readonly value="${mBean.email}"
-										class="form-control form-control-lg">
+									<label for="email">아이디</label> <input type="email" name="email" id="email" readonly value="${mBean.email}" class="form-control form-control-lg">
 								</div>
 								<div class="col-md-12 form-group">
 									<label for="pw1">패스워드</label> <input type="password" name="pw1" id="pw1" class="form-control form-control-lg" onkeyup="pwdRegChk();"
@@ -68,8 +67,7 @@
 										required="required">
 								</div>
 								<div class="col-md-12 form-group">
-									<label for="name">이름</label> <input type="text" name="name" id="name" value="${mBean.name}" readonly="readonly"
-										class="form-control form-control-lg">
+									<label for="name">이름</label> <input type="text" name="name" id="name" value="${mBean.name}" readonly="readonly" class="form-control form-control-lg">
 								</div>
 								<div class="col-md-12 form-group">
 									<label for="gender">성별</label><br>
@@ -83,10 +81,10 @@
 									</c:if>
 								</div>
 								<div class="col-md-12 form-group mb-3">
-									<label for="birth">생년월일</label><br> <label for="birth_year">년</label> <input type="text" name="birth_year" value="${mBean.birth_year}"
-										readonly class="form-control form-control-lg"> <label for="birth_month">월</label> <input type="text" name="birth_month"
-										value="${mBean.birth_month}" readonly class="form-control form-control-lg"> <label for="birth_day">일</label> <input type="text"
-										name="birth_day" value="${mBean.birth_day}" readonly class="form-control form-control-lg">
+									<label for="birth">생년월일</label><br> <label for="birth_year">년</label> <input type="text" name="birth_year" value="${mBean.birth_year}" readonly
+										class="form-control form-control-lg"> <label for="birth_month">월</label> <input type="text" name="birth_month" value="${mBean.birth_month}"
+										readonly class="form-control form-control-lg"> <label for="birth_day">일</label> <input type="text" name="birth_day" value="${mBean.birth_day}"
+										readonly class="form-control form-control-lg">
 								</div>
 
 								<div class="form-group mt-5">
@@ -97,12 +95,11 @@
 										class="form-control form-control-lg">
 								</div>
 								<div class="col-md-12 form-group">
-									<label for="address">주소</label> <input type="text" name="address" id="address" placeholder="우편번호" value="${mBean.address}"
-										readonly="readonly" class="form-control form-control-lg"> <br> <input type="button" onclick="DaumPostcode();"
-										class="btn btn-primary btn-lg" value="우편번호 찾기"><br> <input type="text" name="address1" id="address1" placeholder="주소"
-										value="${mBean.address1}" readonly="readonly" required="required" class="mt-5 form-control form-control-lg"> <br> <input
-										type="text" name="address2" id="address2" placeholder="상세주소" value="${mBean.address2}" required="required"
-										class="form-control form-control-lg"> <br>
+									<label for="address">주소</label> <input type="text" name="address" id="address" placeholder="우편번호" value="${mBean.address}" readonly="readonly"
+										class="form-control form-control-lg"> <br> <input type="button" onclick="DaumPostcode();" class="btn btn-primary btn-lg" value="우편번호 찾기"><br>
+									<input type="text" name="address1" id="address1" placeholder="주소" value="${mBean.address1}" readonly="readonly" required="required"
+										class="mt-5 form-control form-control-lg"> <br> <input type="text" name="address2" id="address2" placeholder="상세주소"
+										value="${mBean.address2}" required="required" class="form-control form-control-lg"> <br>
 								</div>
 								<div class="col-md-12 form-group">
 									<label for="address">sms수신동의</label><br> <input type="checkbox" class="mb-5" name="sms" id="sms" value="1"><br>

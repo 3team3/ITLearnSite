@@ -19,6 +19,8 @@ import member.db.MemberBean;
 import member.db.MemberDAOImpl;
 import member.email.JoinMail;
 import member.service.MemberServiceImpl;
+import sun.security.action.GetIntegerAction;
+import sun.security.jca.GetInstance;
 
 public class MemberController extends HttpServlet {
 
@@ -360,9 +362,11 @@ public class MemberController extends HttpServlet {
 				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
-					nextPage = "main.jsp";
+					nextPage = "/main.jsp";
 					paging = "/pages/main/center/member/modify.jsp";
 					request.setAttribute("paging", paging);
+					mBean = serv.callMember(email);
+					request.setAttribute("mBean", mBean);
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
@@ -371,22 +375,15 @@ public class MemberController extends HttpServlet {
 					nextPage = "/relogin.do";
 				}
 			} 
-			else if(path.equals("/MemberUpdateAction.do"))
-			{
-				String email = (String)request.getSession().getAttribute("email"); 
-				MemberBean mBean = serv.callMember(email);
-				request.setAttribute("mBean", mBean);
-				nextPage="/pages/main/center/member/modify.jsp";
-			}
 			else if(path.equals("/UpdateMember.do")){
 				
-				getMemberBeanProperty(request, response);
+					mBean=getMemberBeanProperty(request, response);
 					int check = serv.updateMember(mBean);
 					if(check == 1){
 						System.out.println("수정성공");
 						response.setContentType("text/html; charset=utf-8");
 						PrintWriter out = response.getWriter();
-						out.println("<script type='text/javascript'>");
+						out.println("<script>");
 						out.println("alert('수정되었습니다.');");
 						out.println("</script>");
 					}else{
@@ -394,12 +391,14 @@ public class MemberController extends HttpServlet {
 						System.out.println("수정실패");
 					}
 					nextPage="/main.jsp";
+					paging = "/pages/main/center/default.jsp";
+					request.setAttribute("paging", paging);
+					HttpSession session = request.getSession();
+					session.invalidate();
 				}
 				// ##########회원수정 ############## End
 				
-				
-				
-				
+			
 				
 			System.out.println("nextPage = " + nextPage);
 			// null PointException
