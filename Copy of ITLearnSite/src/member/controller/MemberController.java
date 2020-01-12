@@ -360,9 +360,7 @@ public class MemberController extends HttpServlet {
 				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
-					nextPage = "main.jsp";
-					paging = "/pages/main/center/member/modify.jsp";
-					request.setAttribute("paging", paging);
+					nextPage = "/MemberUpdateAction.do";
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
@@ -376,7 +374,10 @@ public class MemberController extends HttpServlet {
 				String email = (String)request.getSession().getAttribute("email"); 
 				MemberBean mBean = serv.callMember(email);
 				request.setAttribute("mBean", mBean);
-				nextPage="/pages/main/center/member/modify.jsp";
+				nextPage = "main.jsp";
+				paging = "/pages/main/center/member/modify.jsp";
+				request.setAttribute("paging", paging);
+				
 			}
 			else if(path.equals("/UpdateMember.do")){
 				

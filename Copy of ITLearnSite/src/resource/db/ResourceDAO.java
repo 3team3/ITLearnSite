@@ -5,12 +5,13 @@ import java.util.Map;
 
 public interface ResourceDAO {
 	/*자료 등록*/
+	public int insertResource(ResourceBean rBean);
 	
 	/*자료 수정*/
+	public void updateResource(ResourceBean rBean);
 	
 	/*자료 삭제*/
 	public void resourceDelete(int res_no);
-
 	
 	/*자료 목록*/
 	public List selectAllResources(Map pagingMap);

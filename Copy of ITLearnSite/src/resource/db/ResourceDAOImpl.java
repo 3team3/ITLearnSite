@@ -45,6 +45,93 @@ public class ResourceDAOImpl implements ResourceDAO {
 		}
 	}
 
+	
+
+	//새 글번호 검색
+	private int getNewNo(){
+		try {
+			con = getConnection();
+			String query = "SELECT  max(res_no) from resource_table ";
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery(query);
+			if (rs.next())
+				return (rs.getInt(1) + 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			closeConnection();
+		}
+		return 0;
+	}
+	
+	//자료실 글쓰기
+	public int insertResource(ResourceBean rBean){
+		int res_no = getNewNo();
+		try {
+			con = getConnection();
+			int res_parentno = rBean.getRes_parentno();
+			String res_title = rBean.getRes_title();
+			String res_email = rBean.getRes_email();
+			String res_content = rBean.getRes_content();
+			String res_filename = rBean.getRes_filename();
+			
+			String query = "INSERT INTO resource_table (RES_NO, RES_PARENTNO, RES_TITLE, RES_EMAIL, RES_CONTENT, RES_FILENAME)"
+					+ " VALUES (?, ? ,?, ?, ?, ?)";
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, res_no);
+			pstmt.setInt(2, res_parentno);
+			pstmt.setString(3, res_title);
+			pstmt.setString(4, res_email);
+			pstmt.setString(5, res_content);
+			pstmt.setString(6, res_filename);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("insertResource메소드에서 오류 :" + e);
+		} finally{
+			closeConnection();
+		}
+		return res_no;
+	}
+	
+	
+	//자료실 글수정
+	public void updateResource(ResourceBean rBean){
+		
+		int res_no = rBean.getRes_no();
+		String res_title = rBean.getRes_title();
+		String res_content = rBean.getRes_content();
+		String res_filename = rBean.getRes_filename();
+		
+		try {
+			con = getConnection();
+			String query = "update resource_table set res_title=?,res_content=?";
+			if (res_filename != null && res_filename.length() != 0) {
+				query += ",res_filename=?";
+			}
+			query += " where res_no=?";
+
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, res_title);
+			pstmt.setString(2, res_content);
+			if (res_filename != null && res_filename.length() != 0) {
+				pstmt.setString(3, res_filename);
+				pstmt.setInt(4, res_no);
+			} else {
+				pstmt.setInt(3, res_no);
+			}
+		} catch (Exception e) {
+			System.out.println("updateResource메소드에서 오류 :" + e);
+		} finally{
+			closeConnection();
+		}
+	}
+	
+	
+	
+	
 	// 자료실 내용
 	@Override
 	public ResourceBean resourceView(int res_no) {
@@ -65,7 +152,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 			}
 
 		} catch (Exception e) {
-			System.out.println("callMember()메소드에서 오류 :" + e);
+			System.out.println("resourceView()메소드에서 오류 :" + e);
 		} finally {
 			closeConnection();
 		}

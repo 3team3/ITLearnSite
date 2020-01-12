@@ -13,7 +13,19 @@ public class ResourceServiceImpl implements ResourceService {
 	public ResourceServiceImpl() {
 		rDao = new ResourceDAOImpl();
 	}
-
+	
+	// 자료실 글쓰기
+		@Override
+		public int addResource(ResourceBean rBean) {
+			return rDao.insertResource(rBean);
+		}
+		
+	// 자료실 글수정
+		@Override
+		public void modResource(ResourceBean rBean) {
+			rDao.updateResource(rBean);
+		}
+		
 	// 자료실 내용
 	@Override
 	public ResourceBean resourceView(int res_no) {

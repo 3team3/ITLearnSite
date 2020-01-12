@@ -1,5 +1,6 @@
 package resource.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -15,12 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
+
 import resource.db.ResourceBean;
 import resource.db.ResourceDAOImpl;
+import resource.service.ResourceService;
 import resource.service.ResourceServiceImpl;
 
 public class ResourceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static String RESOURCE_REPO = "C:\\board\\resource_file";
 
 	ResourceServiceImpl serv = null;
 	ResourceDAOImpl rDao = null;
@@ -101,10 +109,42 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceWrite.bo");
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/ResourceWrite.jsp";
+				paging= "/pages/main/center/resource/resourceWrite.jsp";
 				request.setAttribute("paging", paging);
 			}
-			//자료실게시판 - 글 글 수정 페이지
+			//글쓰기
+			else if(path.equals("/addResource.bo"))
+			{
+				System.out.println("addResource.bo");
+				
+				String email = (String)request.getSession().getAttribute("email");
+				
+				int res_no = 0;
+				Map<String, String> resourceMap = upload(request, response);
+				String res_title = resourceMap.get("res_title");
+				String res_content = resourceMap.get("res_content");
+				String res_filename = resourceMap.get("res_filename");
+
+				rBean.setRes_parentno(0);
+				rBean.setRes_email(email);
+				rBean.setRes_title(res_title);
+				rBean.setRes_content(res_content);
+				rBean.setRes_filename(res_filename);
+				res_no = serv.addResource(rBean);
+				
+				if (res_filename != null && res_filename.length() != 0) {
+					File srcFile = new File(RESOURCE_REPO + "\\" + "temp" + "\\" + res_filename);
+					File destDir = new File(RESOURCE_REPO + "\\" + res_no);
+					destDir.mkdirs();
+					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				}
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('글쓰기를 완료했습니다.');" + " location.href='" + 
+				"resourceList.bo';" + "</script>");
+				return;
+			}	
+			
+			//자료실게시판 - 글  수정 페이지
 			else if(path.equals("/resourceModify.bo"))
 			{
 				System.out.println("resourceModify.bo");
@@ -156,6 +196,55 @@ public class ResourceController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	
+
+	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Map<String, String> resourceMap = new HashMap<String, String>();
+		String encoding = "utf-8";
+		File currentDirPath = new File(RESOURCE_REPO);
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		factory.setRepository(currentDirPath);
+		factory.setSizeThreshold(1024 * 1024);
+		ServletFileUpload upload = new ServletFileUpload(factory);
+		try {
+			List items = upload.parseRequest(request);
+			for (int i = 0; i < items.size(); i++) {
+				FileItem fileItem = (FileItem) items.get(i);
+				if (fileItem.isFormField()) {
+					System.out.println(fileItem.getFieldName() + "=" + fileItem.getString(encoding));
+					resourceMap.put(fileItem.getFieldName(), fileItem.getString(encoding));
+				} else {
+					System.out.println("파일크기 :" + fileItem.getSize() + "bytes");
+					if (fileItem.getSize() > 0) {
+						int idx = fileItem.getName().lastIndexOf("\\");
+						if (idx == -1) {
+							idx = fileItem.getName().lastIndexOf("/");
+						}
+
+						String fileName = fileItem.getName().substring(idx + 1);
+						System.out.println("파일이름 :" + fileName);
+							resourceMap.put(fileItem.getFieldName(), fileName);
+						File uploadFile = new File(currentDirPath + "\\temp\\" + fileName);
+						fileItem.write(uploadFile);
+
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resourceMap;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	private ResourceBean getResourceBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		int res_no = 0;
