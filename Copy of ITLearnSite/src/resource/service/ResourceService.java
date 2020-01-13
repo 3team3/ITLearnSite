@@ -20,8 +20,13 @@ public interface ResourceService {
 	//페이징 기능에 필요한 글목록과 전체 글 개를 각각 조회할 수 있도록 구성
 	public Map listResource(Map<String, Integer> pagingMap);
 	
+<<<<<<< HEAD
 	//<----자료실 검색 부분
 	public List<ResourceBean> resourceSelect(String select_subject, String select_content);
+=======
+	/*자료실 검색*/
+	public List<ResourceBean> resourceSelect(String select_subject,String select_content);
+>>>>>>> refs/remotes/origin/ran
 }
 
 

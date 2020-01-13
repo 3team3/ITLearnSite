@@ -3,6 +3,7 @@ package resource.db;
 import java.util.List;
 import java.util.Map;
 
+
 public interface ResourceDAO {
 	/*자료 등록*/
 	public int insertResource(ResourceBean rBean);
@@ -21,4 +22,7 @@ public interface ResourceDAO {
 	
 	/*자료 내용*/
 	public ResourceBean resourceView(int res_no);
+	
+	/*자료 검색*/
+	public List<ResourceBean> resourceSelect(String select_subject,String select_content);
 }

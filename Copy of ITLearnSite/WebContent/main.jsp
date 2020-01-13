@@ -37,7 +37,11 @@
 			<jsp:include page="/pages/main/top/top.jsp" flush="false" />
 		</div>
 		<div class="center" style="width: 100%; min-height: 700px; margin-top: 100px">
+<<<<<<< HEAD
 			<jsp:include page="${pages}"/>
+=======
+			<jsp:include page="${pages}" />
+>>>>>>> refs/remotes/origin/ran
 		</div>
 		<div>
 			<jsp:include page="/pages/main/footer/footer.jsp" flush="false" />

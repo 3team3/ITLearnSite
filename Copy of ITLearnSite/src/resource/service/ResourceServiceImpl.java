@@ -38,12 +38,7 @@ public class ResourceServiceImpl implements ResourceService {
 		rDao.resourceDelete(res_no);
 
 	}
-	//자료실 검색
-	@Override
-	public List<ResourceBean> resourceSelect(String select_subject, String select_content) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	//자료실 리스트
 	@Override
 	public Map listResource(Map<String, Integer> pagingMap) {
@@ -68,6 +63,13 @@ public class ResourceServiceImpl implements ResourceService {
 
 		return resourcesMap;
 
+	}
+	
+	//자료실 검색
+	@Override
+	public List<ResourceBean> resourceSelect(String select_subject,String select_content){
+		List<ResourceBean> ResourceList = rDao.resourceSelect(select_subject,select_content);
+		return ResourceList;
 	}
 
 }

@@ -1,8 +1,12 @@
 package comments.service;
 
+<<<<<<< HEAD
 import comments.db.CommentsBean;
 import comments.db.CommentsDAO;
 import comments.db.CommentsDAOImpl;
+=======
+public class CommentsServiceImpl implements CommentsService {
+>>>>>>> refs/remotes/origin/ran
 
 public class CommentsServiceImpl implements CommentsService {
 	CommentsDAOImpl cDao;

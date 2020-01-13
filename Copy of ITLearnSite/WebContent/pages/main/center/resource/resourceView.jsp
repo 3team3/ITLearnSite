@@ -17,30 +17,31 @@
 
 </head>
 	<body>
+	<div class="container">
 	 <h1>자료실</h1>
 	<form>
-		<table>
+		<table  class="table table-striped" style="text-align: center;">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" value="${rBean.res_title}"></td>
+				<td><input type="text" class="form-control" value="${rBean.res_title}" readonly></td>
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" value="${rBean.res_email}"></td>
+				<td><input type="text" class="form-control" value="${rBean.res_email}" readonly></td>
 			</tr>
 			<tr>
 				<td>등록일</td>
-				<td><input type="text" value="${rBean.res_writedate}"></td>
+				<td><input type="text" class="form-control" value="${rBean.res_writedate}" readonly></td>
 			</tr>
 			<tr>
-				<td colspan="2">파일다운위치지렁</td>
+				<td colspan="2"><a href="filedown.bo?res_no=${rBean.res_no}">${rBean.res_filename}</a></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea readonly="readonly">${rBean.res_content}</textarea></td>
+				<td colspan="2"><textarea class="form-control" readonly>${rBean.res_content}</textarea></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="수정"></td>
-				<td><input type="button" value="삭제"></td>
+				<td><input type="submit"  class="btn btn-color1 pull-right" value="수정"></td>
+				<td><input type="button"  class="btn btn-color1 pull-right" value="삭제"></td>
 			</tr>				
 		</table>
 		

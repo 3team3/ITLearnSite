@@ -104,6 +104,19 @@ public class ResourceController extends HttpServlet {
 				paging= "/pages/main/center/resource/resourceView.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	
 			}
+			else if(path.equals("/filedown.bo"))
+			{
+				System.out.println("filedown.bo");
+				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				rBean = serv.resourceView(res_no);
+				
+				String res_filename = rBean.getRes_filename();
+				
+				FileDownloadController filedown = new FileDownloadController();
+				filedown.download(response, RESOURCE_REPO + "\\" + res_no + "\\" + res_filename);
+				request.setAttribute("rBean", rBean);
+					
+			}
 			//자료실게시판 - 글 쓰기 페이지
 			else if(path.equals("/resourceWrite.bo"))
 			{

@@ -4,7 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
-
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <head>
 <meta charset="UTF-8">
 <title>자료실 글쓰기</title>

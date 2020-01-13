@@ -268,6 +268,45 @@ public class ResourceDAOImpl implements ResourceDAO {
 		}
 		return 0;	
 	}
+<<<<<<< HEAD
+=======
+	
+	//자료실 검색
+    @Override
+    public List<ResourceBean> resourceSelect(String select_subject,String select_content){
+    	 List<ResourceBean> ResourceList = new ArrayList<ResourceBean>();
+         try{
+             con = getConnection();
+             Statement st = null;
+             
+             if(select_subject.equals("title")){
+            	 select_subject = "res_title";
+             }
+             else{
+            	 select_subject = "res_content";
+             }
+             
+             sql = "select * from resource_table where "+select_subject+" like '%"+select_content +"%'";
+             st = con.createStatement();
+             rs = st.executeQuery(sql);
+                 
+             while(rs.next()){
+            	 ResourceBean rBean = new ResourceBean();
+                 rBean.setRes_no(rs.getInt("res_no"));
+                 rBean.setRes_title(rs.getString("res_title"));
+                 rBean.setRes_email(rs.getString("res_email"));
+                 rBean.setRes_content(rs.getString("res_content"));
+                 rBean.setRes_filename(rs.getString("res_filename"));
+                 ResourceList.add(rBean);
+                 }
+             }catch(Exception e){
+                 System.out.println("resourceSelect()에서 오류 : " +e);
+             }finally{
+                 closeConnection();
+             }
+             return ResourceList;                       
+         }
+>>>>>>> refs/remotes/origin/ran
 }
 
 
