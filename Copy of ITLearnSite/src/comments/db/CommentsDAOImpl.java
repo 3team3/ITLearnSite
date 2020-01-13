@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -99,5 +100,42 @@ public class CommentsDAOImpl implements CommentsDAO {
     		closeConnection();
     	}
     	return check;
+    }
+    //코멘트 가져오기
+    @Override
+    public ArrayList<CommentsBean> selectCommentsList(CommentsBean cBean) {
+    	ArrayList<CommentsBean> list = new ArrayList<CommentsBean>();
+    	try 
+    	{
+			con = getConnection();
+			sql = "select * from resource_comments where res_no = ?";
+			
+			System.out.println(cBean.getRes_no());
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, cBean.getRes_no());
+			rs = pstmt.executeQuery();
+			System.out.println("insertComments");
+			
+			while(rs.next())
+			{
+				cBean.setCo_no(rs.getInt(1));
+				cBean.setRes_no(rs.getInt(2));
+				cBean.setCo_email(rs.getString(3));
+				cBean.setCo_date(rs.getDate(4));
+				cBean.setCo_content(rs.getString(5));
+				
+				list.add(cBean);
+			}
+		} 
+    	catch (Exception e) 
+    	{
+			e.printStackTrace();
+		}
+    	finally
+    	{
+    		//트랜젝션 반환
+    		closeConnection();
+    	}
+    	return list;
     }
 }

@@ -3,14 +3,15 @@
 <%--JSTL CORE라이브러리 태그들 사용을 위한 선언 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="email" value="${sessionScope.email}"></c:set>
+<c:set var="co_no" value="${sessionScope.co_no}"></c:set>
+<c:set var="res_no" value="${requestScope.res_no}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta charset="UTF-8">
 <title>자료실</title>
-<c:set var="email" value="${sessionScope.email}"></c:set>
-<c:set var="co_no" value="${sessionScope.co_no}"></c:set>
+
 <script>
     
 </script>
@@ -60,7 +61,7 @@
 				<form>
 					<!-- co_no ? autoincrements? 로직 생각해보기-->
 					<!-- 현재 글에 comments table을 조회해서 코멘트 순서 번호를 가져와야함 select  -->
-					<input type="hidden" id="res_no" name="res_no" value="${rBean.res_no}"> 
+					<input type="hidden" id="res_no" name="res_no" value="${res_no}"> 
 					<input type="hidden" id="co_email" name="co_email" value="${email}">
 					<textarea id="content" name="content" placeholder="바르고 고운말"></textarea>
 					<input type="button" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
@@ -68,7 +69,34 @@
 			</c:if>
 			<br>
 		</div>
+		
+		<hr>
+		<div>
+<!-- 			console.log(getData.list[i].co_no); -->
+<!-- 				console.log(getData.list[i].co_email); -->
+<!-- 				console.log(getData.list[i].co_content); -->
+<!-- 				console.log(getData.list[i].co_date); -->
+			<table class="table-condense">
+				<tbody>
+					<tr>
+						<div class="row">
+							<div class="col-lg-2">
+								<p>asdf</p>
+							</div>
+							<div class="col-lg-8">
+								<p>asdf</p>
+							</div>
+							<div class="col-lg-2 text-right">
+								<p>asdf</p>
+							</div>
+							
+						</div>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
+	<script src="${path}/js/jquery-3.3.1.min.js"></script>
 	<script src="${path}/js/makejs/resourceView.js"></script>
 </body>
 </html>

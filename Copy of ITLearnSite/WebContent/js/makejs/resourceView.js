@@ -1,3 +1,33 @@
+$(function(){
+	console.log("asdf");
+	var url = "commentsList.co";
+	var res_no = $("#res_no").val();
+	
+	alert(res_no);
+	
+	var form_data = {
+			res_no : res_no,
+	}
+	
+	$.ajax({
+		type : "post",
+		url : url,
+		data : form_data,
+		dataType : "json",
+		success : function(getData) {
+			for (var i = 0; i < getData.list.length; i++) {
+				console.log(getData.list[i].co_no);
+				console.log(getData.list[i].co_email);
+				console.log(getData.list[i].co_content);
+				console.log(getData.list[i].co_date);
+				
+				
+			}
+			
+		}
+	});
+	/* 페이지 요청시 댓글을 불러온다.*/
+});
 function comments(){
 	
 	var url = "commentsWrite.co";
@@ -19,7 +49,10 @@ function comments(){
 		data : form_data,
 		dataType : "text",
 		success : function(getData) {
-		
+			if(getData == 1)
+			{
+				alert("댓글이 등록되었습니다");
+			}
 		}
 	});
 	

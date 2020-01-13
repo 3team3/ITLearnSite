@@ -99,7 +99,8 @@ public class ResourceController extends HttpServlet {
 				System.out.println("resourceView.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
 				rBean = serv.resourceView(res_no);
-				request.setAttribute("rBean", rBean);			
+				request.setAttribute("rBean", rBean);	
+				request.setAttribute("res_no", res_no);
 				nextPage = "/main.jsp";
 				paging= "/pages/main/center/resource/resourceView.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	

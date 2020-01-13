@@ -202,20 +202,6 @@
 						</a>
 					</span>
 				</div>
-			<form action="resourceSelect.bo" method="post" >
-				<div class="selector-wrap">
-					<select class="box selectbox" name="select_subject">
-							<option value="title" selected="selected">제목</option>
-							<option value="content">내용</option>	
-					</select>			
-				</div>
-				<div class="search-wrap">
-					<input class="box inputbox" type="text" name="select_content"> 
-					<span class="lookimg"> 			
-						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
-					</span>
-				</div>
-			</form>
 			</div>
 		</div>
 	</div>

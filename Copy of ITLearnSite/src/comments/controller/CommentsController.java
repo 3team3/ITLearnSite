@@ -1,7 +1,9 @@
 package comments.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -9,6 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
 
 import comments.db.CommentsBean;
 import comments.db.CommentsDAOImpl;
@@ -59,12 +66,52 @@ public class CommentsController extends HttpServlet {
 				
 				check = cServ.insertComments(cBean);
 				
+				if(check == 1)
+				{
+					PrintWriter out = response.getWriter();
+					out.print(1);
+				}
 			}
-			System.out.println("nextPAge" + nextPage);
+			else if(path.equals("/commentsList.co"))
+			{
+				System.out.println("/commentsList.co");
+				//request.getParameter
+				cBean = getCommentsBeanProperty(request, response);
+				
+				 ArrayList<CommentsBean> list = cServ.selectCommentsList(cBean);
+
+				 JSONObject jsondata = new JSONObject();
+				 JSONArray arr = new JSONArray();
+				 String jsonString = null;
+				 
+				 for(int i = 0; i< list.size(); i++)
+				 {
+					System.out.println(list.get(i).getCo_email()); 
+					System.out.println(list.get(i).getCo_no());
+					System.out.println(list.get(i).getCo_content());
+					System.out.println(list.get(i).getCo_date());
+					jsondata.put("co_email", list.get(i).getCo_email());
+					jsondata.put("co_no", list.get(i).getCo_no());
+					jsondata.put("co_content", list.get(i).getCo_content());
+					jsondata.put("co_date", list.get(i).getCo_content());
+					
+					arr.add(jsondata);
+				 }
+				 JSONObject commentlist = new JSONObject();
+				 commentlist.put("list", arr);
+				 
+				 jsonString = commentlist.toJSONString();
+				 System.out.println(jsonString);
+				
+				 PrintWriter out = response.getWriter();
+				 out.print(jsonString);
+			}
+			
 			// null PointException
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
+				System.out.println("nextPAge" + nextPage);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
