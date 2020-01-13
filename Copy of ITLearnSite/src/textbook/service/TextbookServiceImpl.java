@@ -1,5 +1,5 @@
 package textbook.service;
 
-public interface TextbookServiceImpl {
+public class TextbookServiceImpl implements TextbookService {
 
 }

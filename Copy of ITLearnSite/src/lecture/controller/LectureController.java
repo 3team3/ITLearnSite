@@ -1,8 +1,7 @@
 package lecture.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lecture.db.LectureBean;
-import lecture.db.LectureDAO;
-import lecture.service.LectureService;
+import lecture.db.LectureDAOImpl;
+import lecture.service.LectureServiceImpl;
 
 public class LectureController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	LectureDAO lDao = null;
+	LectureDAOImpl lDao = null;
 	LectureBean lBean = null;
-	LectureService lServ = null;
+	LectureServiceImpl lServ = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		lDao = new LectureDAO();
+		lDao = new LectureDAOImpl();
 		lBean = new LectureBean();
-		lServ = new LectureService();
+		lServ = new LectureServiceImpl();
 	}
 
 	@Override
@@ -39,9 +38,15 @@ public class LectureController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
+		String paging = null;
 
 		try {
-
+			if(path.equals("/lectures.lec"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/lecture/lectures.jsp";
+				request.setAttribute("paging", paging);
+			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) {
@@ -60,7 +65,7 @@ public class LectureController extends HttpServlet {
 		String lec_pw = null;
 		String lec_content = null;
 		String lec_filename = null;
-		Timestamp lec_uploaddate = new Timestamp(System.currentTimeMillis());
+		Date lec_uploaddate = new Date(System.currentTimeMillis());
 
 		if (request.getParameter("lec_no") != null) {
 			lec_no = Integer.parseInt(request.getParameter("lec_no"));

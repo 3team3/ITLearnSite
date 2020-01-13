@@ -204,7 +204,8 @@ function submitter(){
 function modifySubmitter(){
 	alert(
 			 "\nchkPw1=" + chkPw1 
-			+ "\nchkPw2=" + chkPw2 );
+			+ "\nchkPw2=" + chkPw2 
+			);
 	
 	
 	if(chkPw1 != true || $("#pw1").val() == "" || chkPw1 != chkPw2)

@@ -1,5 +1,5 @@
 package comments.service;
 
-public class CommentsService implements CommentsServiceImpl {
+public interface CommentsService {
 
 }

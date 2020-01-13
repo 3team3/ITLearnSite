@@ -7,18 +7,21 @@
         <div class="row">
           <div class="col-lg-3">
             <p class="mb-4"><img src="${path }/images/logo.png" alt="Image" class="img-fluid"></p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae nemo minima qui dolor, iusto iure.</p>  
-            <p><a href="#">Learn More</a></p>
+            <p><b>부산 부산진구 동천로 109</b><br>
+           <b>삼한골든게이트 7층</b></p>
+            <p><b>아이티윌/아이티런</b><br>
+            TEL. 051-803-0909</p> 
+           
           </div>
           <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Our Campus</span></h3>
+            <h3 class="footer-heading"><span>Our Team</span></h3>
             <ul class="list-unstyled">
-                <li><a href="#">Acedemic</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Our Interns</a></li>
-                <li><a href="#">Our Leadership</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Human Resources</a></li>
+                <li>김태균</li>
+                <li>배재영</li>
+                <li>김하은</li>
+                <li>문정빈</li>
+                <li>김수진</li>
+                <li>김혜란</li>
             </ul>
           </div>
           <div class="col-lg-3">
@@ -33,13 +36,12 @@
               </ul>
           </div>
           <div class="col-lg-3">
-              <h3 class="footer-heading"><span>Contact</span></h3>
+              <h3 class="footer-heading"><span>자주 찾는 메뉴</span></h3>
               <ul class="list-unstyled">
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Support Community</a></li>
-                  <li><a href="#">Press</a></li>
-                  <li><a href="#">Share Your Story</a></li>
-                  <li><a href="#">Our Supporters</a></li>
+                  <li><a href="#">내 강의실</a></li>
+                  <li><a href="notice.noti">공지사항</a></li>
+                  <li><a href="qna.ques">이용 문의</a></li>
+                  <li><a href="resourceList.bo">자료실</a></li>                  
               </ul>
           </div>
         </div>

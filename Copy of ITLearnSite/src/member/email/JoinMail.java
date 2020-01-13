@@ -2,8 +2,6 @@ package member.email;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.MessagingException;
-import javax.naming.Context;
-import javax.servlet.http.HttpServletRequest;
 
 public class JoinMail 
 {

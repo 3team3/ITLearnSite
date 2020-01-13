@@ -1,5 +1,5 @@
 package cart.service;
 
-public interface CartServiceImpl {
+public class CartServiceImpl implements CartService{
 
 }

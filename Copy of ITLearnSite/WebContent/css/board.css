@@ -1,0 +1,135 @@
+/*add css*/
+/*페이지 가장 바깥 영역을 지정*/
+.gi-2x{
+	font-size: 2em;
+}
+.pagemargin {
+	margin-top: 100px;
+	margin-bottom : 100px;
+/* 	border: solid blue; */
+	width:auto;
+	align-content: center;
+	justify-content: center;
+	display: flex;
+}
+/*게시판을 4등분 했을 때 : 
+	1. 전체글 / glyphicon (글쓰기 버튼)
+	2. 게시판 리스트 부분
+	3. 전체글 / 글쓰기 버튼
+	4. 페이징 번호
+*/
+/*게시판 전체영역을 감싸는 부분*/
+.wrapboard {
+/* 	border: solid red; */
+	width: 1000px;
+}
+/*버튼을 감싸는 부분*/
+.btn-wrap {
+/* 	border: solid red; */
+	display: inline-block;
+	width: 1000px;
+}
+
+/*전체글/glyphicon을 감싸는 영역*/
+.header-btn {
+/* 	border: solid black; */
+}
+/*float left/ float right 쓸일이 많으므로 따로 설정*/
+.float-l {
+/* 	border: solid black; */
+	float: left;
+}
+
+.float-r {
+/* 	border: solid black; */
+	float: right;
+}
+.text-align{
+	text-align: center;
+}
+
+/*버튼 색상*/
+.btn-color1 {
+	color: #fff;
+  	background-color: #4A56A8;
+ 	border-color: #4A56A8;
+}
+
+.btn-color2 {
+	color: #fff;
+  	background-color: #666666;
+ 	border-color: #666666;
+}
+
+.boardoutline {
+	
+	width: 1000px;
+	height: inherit;
+/* 	border: solid black; */
+}
+
+.content {
+	text-align: center;
+	display: block;
+	width: auto;
+/* 	border: solid black; */
+}
+
+.tb_head {
+/* 	border: solid black; */
+}
+/*게시판 헤더 부분*/
+thead {
+	color: black; /*컬럼 이름 색*/
+	border-top: 3px solid #3C4790;
+	border-spacing: auto 10px;
+}
+/*게시판 간격 부분/ 테두리*/
+.tb_head>td {
+	border-bottom: 2px solid #3C4790;
+}
+
+.tb_head>td:nth-child(1) {
+	width: 150px;
+}
+
+.tb_head>td:nth-child(2) {
+	width: 500px;
+}
+
+.tb_head>td:nth-child(3) {
+	width: 200px;
+}
+
+.tb_head>td:nth-child(4) {
+	width: 150px;
+}
+
+/*select box*/
+.selectbox{
+	width: 130px;
+	height: 35px;
+	appearance:none;
+	-webkit-appearance:none;
+	background: url("../images/cursor.png") no-repeat right;
+	background-size: 30px 33px;
+}
+.selector-wrap{
+/* 	border:solid orange; */
+	display: inline-block;
+}
+.search-wrap{
+/* 	border:solid orange; */
+	display: inline-block;
+}
+.inputbox{
+	width: 300px;
+	height: 35px;
+}
+.box{
+	border: solid 4px #4A56A8;
+}
+.lookimg{
+	margin-right : 12px;
+	position: absolute;
+}

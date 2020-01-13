@@ -27,14 +27,14 @@
 			<div class="mr-auto">
 				<nav class="site-navigation position-relative text-right" role="navigation">
 					<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-						<li><a href="lectures.do" class="nav-link text-left">강의</a></li>
-						<li><a href="books.do" class="nav-link text-left">도서</a></li>
+						<li><a href="lectures.lec" class="nav-link text-left">강의</a></li>
+						<li><a href="book.text" class="nav-link text-left">도서</a></li>
 						<li><a href="resourceList.bo" class="nav-link text-left">자료실</a></li>
 
 						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>
 							<ul class="dropdown">
-								<li><a href="${path}/menu/teachers.jsp">공지사항</a></li>
-								<li><a href="${path}/menu/about.jsp">이용문의</a></li>
+								<li><a href="notice.noti">공지사항</a></li>
+								<li><a href="qna.ques">이용문의</a></li>
 							</ul></li>
 
 						<li class="has-children"><a href="mypage.do" class="nav-link text-left">마이페이지</a>

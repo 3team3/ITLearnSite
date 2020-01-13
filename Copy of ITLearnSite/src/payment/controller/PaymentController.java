@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import payment.db.PaymentBean;
-import payment.db.PaymentDAO;
-import payment.service.PaymentService;
+import payment.db.PaymentDAOImpl;
+import payment.service.PaymentServiceImpl;
 
 public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PaymentDAO pDao = null;
-	PaymentService pServ = null;
+	PaymentDAOImpl pDao = null;
+	PaymentServiceImpl pServ = null;
 	PaymentBean pBean = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		pDao = new PaymentDAO();
-		pServ = new PaymentService();
+		pDao = new PaymentDAOImpl();
+		pServ = new PaymentServiceImpl();
 		pBean = new PaymentBean();
 	}
 
@@ -38,9 +38,14 @@ public class PaymentController extends HttpServlet {
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-
+		String paging = null;
 		try {
-
+			if(path.equals("/payment.pay"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/payment/payment.jsp";
+				request.setAttribute("paging", paging);
+			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) {

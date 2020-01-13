@@ -16,16 +16,18 @@ import javax.servlet.http.HttpSession;
 
 
 import member.db.MemberBean;
-import member.db.MemberDAO;
+import member.db.MemberDAOImpl;
 import member.email.JoinMail;
-import member.service.MemberService;
+import member.service.MemberServiceImpl;
+import sun.security.action.GetIntegerAction;
+import sun.security.jca.GetInstance;
 
 public class MemberController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	MemberService serv = null;
-	MemberDAO dao = null;
+	MemberServiceImpl serv = null;
+	MemberDAOImpl dao = null;
 	MemberBean mBean = null;
 
 	int result = 0; // 상태를 나타낼 변수
@@ -33,7 +35,7 @@ public class MemberController extends HttpServlet {
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		System.out.println("init()");
-		serv = new MemberService();
+		serv = new MemberServiceImpl();
 		System.out.println("MemberService() 객체 생성");
 		mBean = new MemberBean();
 		System.out.println("MemberBean() 객체 생성");
@@ -56,10 +58,12 @@ public class MemberController extends HttpServlet {
 		
 		try {
 			// 인덱스 페이지 요청
+			//!-- V-C-V
 			if (path == null) 
 			{
 				nextPage = "/main.jsp";
 			} 
+			// 기본페이지
 			else if (path.equals("/index.do")) 
 			{
 				nextPage = "/main.jsp";
@@ -102,6 +106,74 @@ public class MemberController extends HttpServlet {
 				paging = "/pages/main/center/menu/admin.jsp";
 				request.setAttribute("paging", paging);
 			}
+			// 메뉴 - 강의
+			else if(path.equals("/lectures.do"))
+			{	
+				paging = "/pages/main/center/menu/lectures.jsp";
+				request.setAttribute("paging", paging);
+				nextPage="/main.jsp";
+			}
+			//메뉴 - 도서
+			else if(path.equals("/books.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/books.jsp";
+				request.setAttribute("paging", paging);
+			}
+			
+			//메뉴 - 고객센터
+			else if(path.equals("/customer.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/customerService.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/mypage.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/mypage.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//관리자
+			else if(path.equals("/admin.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/menu/admin.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//고객센터-공지 게시판
+			else if(path.equals("/noticelist.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/notice/NoticeList.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//고객센터-문의 게시판
+			else if(path.equals("/questionlist.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/question/QuestionList.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//마이 페이지 - 내 강의실
+			else if(path.equals("/mylecture.do"))
+			{
+				nextPage = "/main.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//마이페이지 - 내 주문
+			else if(path.equals("/myorder.do"))
+			{
+				nextPage = "/main.jsp";
+				request.setAttribute("paging", paging);
+			}
+			//고객센터- 주문 수정
+			else if(path.equals("/myorderchange.do"))
+			{
+				nextPage = "/main.jsp";
+				request.setAttribute("paging", paging);
+			}
+			
 			// ##########회원가입########## Start
 			else if (path.equals("/joinMember.do")) 
 			{
@@ -139,10 +211,11 @@ public class MemberController extends HttpServlet {
 				try {
 					mail.sendMail();//메일 전송
 				} catch (UnsupportedEncodingException | MessagingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				nextPage = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
+				request.setAttribute("paging", paging);
 			}
 			//이메일 인증
 			else if(path.equals("/emailAuth.do"))
@@ -161,7 +234,9 @@ public class MemberController extends HttpServlet {
 			{
 				List<MemberBean> memberlist = serv.getMemberlist();
 				request.setAttribute("memberlist", memberlist);
-				nextPage = "/pages/main/center/member/memberlist.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/memberlist.jsp";
+				request.setAttribute("paging", paging);
 
 			}
 			// ##########회원리스트########## End
@@ -193,7 +268,7 @@ public class MemberController extends HttpServlet {
 				String email = request.getParameter("email");
 				String pw = request.getParameter("pw");
 
-				MemberDAO mDao = MemberDAO.getInstance();
+				MemberDAOImpl mDao = MemberDAOImpl.getInstance();
 				int loginResult = mDao.login(email, pw);
 				
 				//로그인 성공시
@@ -203,7 +278,9 @@ public class MemberController extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
 					
-					nextPage = "/index.do";
+					nextPage = "/main.jsp";
+					paging = "/pages/main/center/default.jsp";
+					request.setAttribute("paging", paging);
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
@@ -221,7 +298,6 @@ public class MemberController extends HttpServlet {
 			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
-				PrintWriter out = response.getWriter();
 				System.out.println("로그아웃되었습니다.");
 				session.invalidate();
 				nextPage = "/index.jsp";
@@ -267,7 +343,9 @@ public class MemberController extends HttpServlet {
 				// ##########회원수정 ############## Start
 				}
 			else if(path.equals("/relogin.do")){
-				nextPage="/pages/main/center/member/relogin.jsp";
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/relogin.jsp";
+				request.setAttribute("paging", paging);
 			}
 			else if (path.equals("/relogin1.do")) 
 			{
@@ -277,14 +355,18 @@ public class MemberController extends HttpServlet {
 				System.out.println(email);
 				System.out.println(pw);
 
-				MemberDAO mDao = MemberDAO.getInstance();
+				MemberDAOImpl mDao = MemberDAOImpl.getInstance();
 				int loginResult = mDao.login(email, pw);
 				System.out.println(loginResult);
 				//로그인 성공시
 				if (loginResult == 1) 
 				{
 					request.setAttribute("loginResult", loginResult);
-					nextPage = "/MemberUpdateAction.do";
+					nextPage = "/main.jsp";
+					paging = "/pages/main/center/member/modify.jsp";
+					request.setAttribute("paging", paging);
+					mBean = serv.callMember(email);
+					request.setAttribute("mBean", mBean);
 				} 
 				//비번 틀렸을 시
 				else if(loginResult == 0)
@@ -293,22 +375,15 @@ public class MemberController extends HttpServlet {
 					nextPage = "/relogin.do";
 				}
 			} 
-			else if(path.equals("/MemberUpdateAction.do"))
-			{
-				String email = (String)request.getSession().getAttribute("email"); 
-				MemberBean mBean = serv.callMember(email);
-				request.setAttribute("mBean", mBean);
-				nextPage="/pages/main/center/member/modify.jsp";
-			}
 			else if(path.equals("/UpdateMember.do")){
 				
-				getMemberBeanProperty(request, response);
+					mBean=getMemberBeanProperty(request, response);
 					int check = serv.updateMember(mBean);
 					if(check == 1){
 						System.out.println("수정성공");
 						response.setContentType("text/html; charset=utf-8");
 						PrintWriter out = response.getWriter();
-						out.println("<script type='text/javascript'>");
+						out.println("<script>");
 						out.println("alert('수정되었습니다.');");
 						out.println("</script>");
 					}else{
@@ -316,12 +391,14 @@ public class MemberController extends HttpServlet {
 						System.out.println("수정실패");
 					}
 					nextPage="/main.jsp";
+					paging = "/pages/main/center/default.jsp";
+					request.setAttribute("paging", paging);
+					HttpSession session = request.getSession();
+					session.invalidate();
 				}
 				// ##########회원수정 ############## End
 				
-				
-				
-				
+			
 				
 			System.out.println("nextPage = " + nextPage);
 			// null PointException

@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cart.db.CartBean;
-import cart.db.CartDAO;
-import cart.service.CartService;
+import cart.db.CartDAOImpl;
+import cart.service.CartServiceImpl;
 
 
 public class CartController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	CartDAO caDao = null;
-	CartService caServ = null;
+	CartDAOImpl caDao = null;
+	CartServiceImpl caServ = null;
 	CartBean caBean = null;
 	
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
-		caDao = new CartDAO();
-		caServ = new CartService();
+		caDao = new CartDAOImpl();
+		caServ = new CartServiceImpl();
 		caBean = new CartBean();
 	}
 
@@ -38,28 +38,25 @@ public class CartController extends HttpServlet{
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
 		String nextPage = null;
-
+		String paging = null;
 		
 		try {
-			if (path == null) 
+			if(path.equals("/cart.cart"))
 			{
 				nextPage = "/main.jsp";
-			} 
-			
-			else if(path.equals("/cart.cart")){
-				nextPage ="/pages/main/center/member/memberCart.jsp";
+				paging = "/pages/main/center/cart/cart.jsp";
+				request.setAttribute("paging", paging);
 			}
-			
-			
-			System.out.println("nextPage = " + nextPage);
+			System.out.println("nextpage" + nextPage);
 			// null PointException
 			if (nextPage != null) 
 			{
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 			}
-			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 	}

@@ -3,7 +3,8 @@ package textbook.db;
 import java.sql.Timestamp;
 
 public class TextbookBean {
-	private int book_no; 
+	private int book_no;
+	private int book_parentno;
 	private String book_title;
 	private String book_email;
 	private String book_pw;
@@ -11,6 +12,12 @@ public class TextbookBean {
 	private String book_filename;
 	private Timestamp book_uploaddate;
 	
+	public int getBook_parentno() {
+		return book_parentno;
+	}
+	public void setBook_parentno(int book_parentno) {
+		this.book_parentno = book_parentno;
+	}
 	public int getBook_no() {
 		return book_no;
 	}

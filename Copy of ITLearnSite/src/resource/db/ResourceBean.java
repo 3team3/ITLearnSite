@@ -1,14 +1,31 @@
 package resource.db;
 
-import java.sql.Timestamp;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.sql.Date;
 
 public class ResourceBean {
-	private int res_no;
+	private int res_no, level;
+	private int res_parentno;
 	private String res_title;
 	private String res_email;
 	private String res_content;
 	private String res_filename;
-	private Timestamp res_writedate;
+	private Date res_writedate;
+	
+	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public int getRes_parentno() {
+		return res_parentno;
+	}
+	public void setRes_parentno(int res_parentno) {
+		this.res_parentno = res_parentno;
+	}
 	public int getRes_no() {
 		return res_no;
 	}
@@ -37,14 +54,20 @@ public class ResourceBean {
 		return res_filename;
 	}
 	public void setRes_filename(String res_filename) {
-		this.res_filename = res_filename;
+		try {
+			if(res_filename!=null && res_filename.length()!=0) {
+				this.res_filename = URLEncoder.encode(res_filename, "UTF-8");  //파일이름에 특수문자가 있을 경우 인코딩합니다.
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
-	public Timestamp getRes_writedate() {
+	public Date getRes_writedate() {
 		return res_writedate;
 	}
-	public void setRes_writedate(Timestamp res_writedate) {
+	public void setRes_writedate(Date res_writedate) {
 		this.res_writedate = res_writedate;
 	}
-	
+		
 	
 }

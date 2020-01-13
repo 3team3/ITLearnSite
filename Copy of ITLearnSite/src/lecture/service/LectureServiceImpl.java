@@ -1,5 +1,5 @@
 package lecture.service;
 
-public interface LectureServiceImpl {
+public class LectureServiceImpl implements LectureService {
 
 }
