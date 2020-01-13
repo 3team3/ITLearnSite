@@ -183,7 +183,6 @@
 				</c:if>
 			</div>
 			<div class="btn-wrap text-align">
-<<<<<<< HEAD
 				<div class="selector-wrap">
 					<select class="box selectbox">
 						<optgroup label="검색 옵션">
