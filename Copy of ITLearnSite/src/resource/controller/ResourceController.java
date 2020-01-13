@@ -101,7 +101,7 @@ public class ResourceController extends HttpServlet {
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);			
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/ResourceView.jsp";
+				paging= "/pages/main/center/resource/resourceView.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	
 			}
 			//자료실게시판 - 글 쓰기 페이지
@@ -149,7 +149,7 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceModify.bo");
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/ResourceModify.jsp";
+				paging= "/pages/main/center/resource/resourceModify.jsp";
 				request.setAttribute("paging", paging);	
 			}
 			//자료실게시판 - 글 검색
@@ -163,7 +163,7 @@ public class ResourceController extends HttpServlet {
 				
 				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/ResourceSelect.jsp";
+				paging= "/pages/main/center/resource/resourceSelect.jsp";
 				request.setAttribute("paging", paging);
 			}
 			//자료실게시판 - 글 삭제

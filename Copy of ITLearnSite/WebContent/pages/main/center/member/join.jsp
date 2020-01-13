@@ -3,7 +3,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
-
 <head>
  <style type="text/css">
   .form{

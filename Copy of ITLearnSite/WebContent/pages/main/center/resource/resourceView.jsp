@@ -97,7 +97,9 @@
             }
         })
     }
+    
 </script>
+
 </head>
 	<body>
 	 <h1>자료실</h1>
@@ -106,6 +108,10 @@
 			<tr>
 				<td>제목</td>
 				<td><input type="text" value="${rBean.res_title}"></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><input type="text" value="${rBean.res_email}"></td>
 			</tr>
 			<tr>
 				<td>등록일</td>

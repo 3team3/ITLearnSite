@@ -55,6 +55,12 @@
  	border-color: #4A56A8;
 }
 
+.btn-color2 {
+	color: #fff;
+  	background-color: #666666;
+ 	border-color: #666666;
+}
+
 .boardoutline {
 	
 	width: 1000px;

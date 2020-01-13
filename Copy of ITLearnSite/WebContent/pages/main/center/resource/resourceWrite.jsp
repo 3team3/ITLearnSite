@@ -3,10 +3,6 @@
     isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-  request.setCharacterEncoding("UTF-8");
-	String email = (String)session.getAttribute("email"); 
-%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
 
 <head>
@@ -17,7 +13,13 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
  
 </head>
-
+<c:set var="email" value="${sessionScope.email}"></c:set>
+<c:if test="${email eq null}">
+	<script type="text/javascript">
+		alert("로그인 후 글쓰기가 가능합니다.");
+		location.href="resourceList.bo";
+	</script>
+</c:if>
 <body>
 
 	<div class="container">
