@@ -9,94 +9,9 @@
 <head>
 <meta charset="UTF-8">	<meta charset="UTF-8">
 <title>자료실</title>
-<%
-	request.setCharacterEncoding("UTF-8");
-	String email = (String)session.getAttribute("email"); 
-%>
-
+<c:set var="email" value="${sessionScope.email}"></c:set>
+<c:set var="co_no" value="${sessionScope.co_no}"></c:set>
 <script>
-    // Perform an asynchronous HTTP (Ajax) request.
-    // 비동기 통신 Ajax를 Setting한다.
-    $.ajaxSetup({
-        type:"POST",
-        async:true,
-        dataType:"json",
-        error:function(xhr) {
-            console.log("댓글에서 오류 = " + xhr.statusText);
-        }
-    });
-    
-    $(function() {
-        $("#commentWrite").on("click", function() {
-            $.ajax({
-                url:"/bbs/commentWrite.bbs",
-                data:{
-                    commentContent:$("#commentContent").val(),
-                    articleNumber:"${article.articleNumber}"
-                },
-                beforeSend:function() {
-                    console.log("시작 전...");
-                },
-                complete:function() {
-                    console.log("완료 후...");
-                },
-                success:function(data) {            // 서버에 대한 정상응답이 오면 실행, callback
-                    if(data.result == 1) {            // 쿼리 정상 완료, executeUpdate 결과
-                        console.log("comment가 정상적으로 입력되었습니다.");
-                        $("#commentContent").val("");
-                        showHtml(data.comments, 1);
-                    }
-                }
-            })
-        });
-    });
- 
-    function showHtml(data, commPageNum) {
-        let html = "<table class='table table-striped table-bordered' style='margin-top: 10px;'><tbody>";
-        $.each(data, function(index, item) {
-            html += "<tr align='center'>";
-            html += "<td>" + (index+1) + "</td>";
-            html += "<td>" + item.id + "</td>";
-            html += "<td align='left'>" + item.commentContent + "</td>";
-            let presentDay = item.commentDate.substring(0, 10);
-            html += "<td>" + presentDay + "</td>";
-            html += "</tr>";
-        });
-        html += "</tbody></table>";
-        commPageNum = parseInt(commPageNum);        // 정수로 변경
-        // commentCount는 동기화되어 값을 받아오기 때문에, 댓글 insert에 즉각적으로 처리되지 못한다.
-        if("${article.commentCount}" > commPageNum * 10) {
-            nextPageNum = commPageNum + 1;
-            html +="<input type='button' class='btn btn-default' onclick='getComment(nextPageNum, event)' value='다음 comment 보기'>";
-        }
-        
-        $("#showComment").html(html);
-        $("#commentContent").val("");
-        $("#commentContent").focus();
-    }
-    
-    function getComment(commPageNum, event) {
-        $.ajax({
-            url:"/bbs/commentRead.bbs",
-            data:{
-                commPageNum:commPageNum*10,
-                articleNumber:"${article.articleNumber}"
-            },
-            beforeSend:function() {
-                console.log("읽어오기 시작 전...");
-            },
-            complete:function() {
-                console.log("읽어오기 완료 후...");
-            },
-            success:function(data) {
-                console.log("comment를 정상적으로 조회하였습니다.");
-                showHtml(data, commPageNum);
-                
-                let position = $("#showComment table tr:last").position();
-                $('html, body').animate({scrollTop : position.top}, 400);        // 두 번째 param은 스크롤 이동하는 시간
-            }
-        })
-    }
     
 </script>
 
@@ -130,18 +45,29 @@
 		</table>
 		
 	</form> 
-	
+	<hr>
 	<!-- 댓글자리 -->
 	<div>
-
-			<h5>아이디</h5>
-			<input type="text" value="<%=email%>" readonly> <br>
-			<h5>패스워드</h5>
-			<input type="password"> <br>
-			<h5>내용</h5>
-			<input type="text" id="commentContent"><br>
-			<input type="button" id="commentWrite" value="댓글 작성">
-	
+			<h5>전체 리플 0개</h5>
+			<hr>
+			<c:if test="${email == null}">
+				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" readonly="readonly"></textarea>
+				<br>
+				<input type="button" id="commentWrite" value="댓글 작성" disabled="disabled">
+			</c:if>
+			<c:if test="${email != null }">
+				<form onsubmit="comments();" action="commentsWrite.co">
+					<!-- co_no ? autoincrements? 로직 생각해보기-->
+					<!-- 현재 글에 comments table을 조회해서 코멘트 순서 번호를 가져와야함 select  -->
+					<input type="hidden" id="co_no" value="">
+					<input type="hidden" id="res_no" value="${requestScope.res_no}">
+					<input type="hidden" id="co_email" value="${email}">
+					<textarea id="commentContent" placeholder="바르고 고운말"></textarea>
+					<input type="submit" id="commentWrite" value="댓글 작성">
+				</form>
+			</c:if>
+			<br>
 	</div>
+	<script src="${path}/js/makejs/resourceView.js"></script>
 	</body>
 </html> 

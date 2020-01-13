@@ -43,7 +43,16 @@ public class CommentsController extends HttpServlet {
 		String nextPage = null;
 
 		try {
-
+			//댓글 쓰기를 눌렀을 때
+			if(path.equals("/commentsWrite.co"))
+			{
+				//print
+				System.out.println("/commentsWrite.co");
+				//현재글에 대한 정보를 얻어오기
+				cBean=getCommentsBeanProperty(request, response);
+				//댓글을 insert 시킬 서비스 호출
+				int check = cServ.insertComments(cBean);
+			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) {
@@ -56,12 +65,12 @@ public class CommentsController extends HttpServlet {
 	}
 
 	private CommentsBean getCommentsBeanProperty(HttpServletRequest request, HttpServletResponse response) {
-		int co_no = 0;
-		int res_no = 0;
-		String co_email = null;
-		String co_pw = null;
+		int co_no = 0;//댓글 번호
+		int res_no = 0;//부모글 번호
+		String co_email = null;//댓글 다는 사람
+		String co_pw = null;//댓글 다는 사람 비밀번호
 		Date co_date = new Date(System.currentTimeMillis());
-		String co_content = null;
+		String co_content = null;//댓글 내용
 		
 		cBean = new CommentsBean();
 		
