@@ -46,12 +46,19 @@ public class CommentsController extends HttpServlet {
 			//댓글 쓰기를 눌렀을 때
 			if(path.equals("/commentsWrite.co"))
 			{
+				int check = 0;
 				//print
 				System.out.println("/commentsWrite.co");
 				//현재글에 대한 정보를 얻어오기
 				cBean=getCommentsBeanProperty(request, response);
 				//댓글을 insert 시킬 서비스 호출
-				int check = cServ.insertComments(cBean);
+				System.out.println(cBean.getCo_email());
+				System.out.println(cBean.getCo_no());
+				System.out.println(cBean.getRes_no());
+				System.out.println(cBean.getCo_content());
+				
+				check = cServ.insertComments(cBean);
+				
 			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
@@ -68,8 +75,6 @@ public class CommentsController extends HttpServlet {
 		int co_no = 0;//댓글 번호
 		int res_no = 0;//부모글 번호
 		String co_email = null;//댓글 다는 사람
-		String co_pw = null;//댓글 다는 사람 비밀번호
-		Date co_date = new Date(System.currentTimeMillis());
 		String co_content = null;//댓글 내용
 
 		cBean = new CommentsBean();
@@ -89,19 +94,11 @@ public class CommentsController extends HttpServlet {
 			cBean.setCo_email(co_email);
 			System.out.println("co_email =" + co_email);
 		}
-		if (request.getParameter("co_pw") != null) {
-			co_pw = request.getParameter("co_pw");
-			cBean.setCo_email(co_pw);
-			System.out.println("co_pw =" + co_pw);
-		}
 		
-		cBean.setCo_date(co_date);
-		System.out.println("co_date =" + co_date);
-		
-		if (request.getParameter("co_content") != null) {
-			co_content = request.getParameter("co_content");
+		if (request.getParameter("content") != null) {
+			co_content = request.getParameter("content");
 			cBean.setCo_content(co_content);
-			System.out.println("co_content =" + co_content);
+			System.out.println("content =" + co_content);
 		}
 		return cBean;
 	}

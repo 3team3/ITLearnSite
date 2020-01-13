@@ -202,7 +202,6 @@
 						</a>
 					</span>
 				</div>
-=======
 			<form action="resourceSelect.bo" method="post" >
 				<div class="selector-wrap">
 					<select class="box selectbox" name="select_subject">
@@ -217,7 +216,6 @@
 					</span>
 				</div>
 			</form>
->>>>>>> refs/remotes/origin/ran
 			</div>
 		</div>
 	</div>

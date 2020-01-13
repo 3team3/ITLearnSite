@@ -57,13 +57,13 @@
 				<input type="button" id="commentWrite" value="댓글 작성" disabled="disabled">
 			</c:if>
 			<c:if test="${email != null }">
-				<form onsubmit="comments();" action="commentsWrite.co">
+				<form>
 					<!-- co_no ? autoincrements? 로직 생각해보기-->
 					<!-- 현재 글에 comments table을 조회해서 코멘트 순서 번호를 가져와야함 select  -->
-					<input type="hidden" id="co_no" value=""> <input type="hidden" id="res_no" value="${requestScope.res_no}"> <input type="hidden"
-						id="co_email" value="${email}">
-					<textarea id="commentContent" placeholder="바르고 고운말"></textarea>
-					<input type="submit" id="commentWrite" value="댓글 작성">
+					<input type="hidden" id="res_no" name="res_no" value="${rBean.res_no}"> 
+					<input type="hidden" id="co_email" name="co_email" value="${email}">
+					<textarea id="content" name="content" placeholder="바르고 고운말"></textarea>
+					<input type="button" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
 				</form>
 			</c:if>
 			<br>

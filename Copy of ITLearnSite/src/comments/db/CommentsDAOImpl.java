@@ -36,25 +36,22 @@ public class CommentsDAOImpl implements CommentsDAO {
             System.out.println("closeConnection()메소드에서 오류  : " +e);
         }
     }
+    @Override
     public int getCommentsNo() {
     	int check = 0;
     	try 
     	{
     		con = getConnection();
-    	 	sql = "select min(co_no) from resource_comments where res_no = ?";
+    	 	sql = "select max(co_no) from resource_comments";
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		
     		if(rs.next())
     		{
-    			//쿼리 조회해서 결과가 있을 때
-    			check = rs.getInt(1)+1;
+    			System.out.println(rs.getInt(1));
+        		check = rs.getInt(1);
     		}
-    		else
-    		{
-    			//쿼리 조회해서 결과가 없을 때 = 댓글이 없을 때
-    			check = 1;
-    		}
+    		
     	}
     	catch(Exception e)
     	{
@@ -72,18 +69,20 @@ public class CommentsDAOImpl implements CommentsDAO {
     	int check = 0;
     	try 
     	{
+			int co_no = getCommentsNo();
+			System.out.println(co_no);
 			con = getConnection();
 			//co_no, res_no, co_email, co_date, co_content
-			sql = "insert into resource values(?,?,?,sysdate,?)";
+			sql = "insert into resource_comments values(?,?,?,sysdate,?)";
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, cBean.getCo_no()+1);
+			pstmt.setInt(1, co_no+1);
 			pstmt.setInt(2, cBean.getRes_no());
 			pstmt.setString(3, cBean.getCo_email());
 			pstmt.setString(4, cBean.getCo_content());
 			
 			check = pstmt.executeUpdate();
-			
+			System.out.println("insertComments");
 			if(check == 1)
 			{
 				//executeUpdate 의 리턴값이 1일 때

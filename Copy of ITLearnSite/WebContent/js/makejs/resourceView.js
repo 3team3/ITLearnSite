@@ -1,22 +1,23 @@
 function comments(){
 	
+	var url = "commentsWrite.co";
 	var co_no = $("#co_no").val();
 	var res_no = $("#res_no").val();
 	var co_email = $("#co_email").val();
-	var comments = $("#comentsWrite").val();
+	var content = $("#content").val();
 	
 	var form_data = {
 			co_no : co_no,
 			res_no : res_no,
 			co_email : co_email,
-			comments : comments,
+			content : content,
 	}
 	
 	$.ajax({
 		type : "post",
 		url : url,
 		data : form_data,
-		dataType : "json",
+		dataType : "text",
 		success : function(getData) {
 		
 		}
