@@ -268,8 +268,6 @@ public class ResourceDAOImpl implements ResourceDAO {
 		}
 		return 0;	
 	}
-<<<<<<< HEAD
-=======
 	
 	//자료실 검색
     @Override
@@ -306,7 +304,6 @@ public class ResourceDAOImpl implements ResourceDAO {
              }
              return ResourceList;                       
          }
->>>>>>> refs/remotes/origin/ran
 }
 
 

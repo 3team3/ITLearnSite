@@ -65,22 +65,13 @@ public class CommentsController extends HttpServlet {
 	}
 
 	private CommentsBean getCommentsBeanProperty(HttpServletRequest request, HttpServletResponse response) {
-<<<<<<< HEAD
 		int co_no = 0;//댓글 번호
 		int res_no = 0;//부모글 번호
 		String co_email = null;//댓글 다는 사람
 		String co_pw = null;//댓글 다는 사람 비밀번호
 		Date co_date = new Date(System.currentTimeMillis());
 		String co_content = null;//댓글 내용
-=======
-		int co_no = 0;
-		int res_no = 0;
-		String co_email = null;
-		String co_pw = null;
-		Date co_date = new Date(System.currentTimeMillis());
-		String co_content = null;
->>>>>>> refs/remotes/origin/ran
-		
+
 		cBean = new CommentsBean();
 		
 		if (request.getParameter("co_no") != null) {
