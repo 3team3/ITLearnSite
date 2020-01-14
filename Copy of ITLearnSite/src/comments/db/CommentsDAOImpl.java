@@ -104,11 +104,12 @@ public class CommentsDAOImpl implements CommentsDAO {
     //코멘트 가져오기
     @Override
     public ArrayList<CommentsBean> selectCommentsList(CommentsBean cBean) {
-    	ArrayList<CommentsBean> list = new ArrayList<CommentsBean>();
+    	ArrayList<CommentsBean> list = new  ArrayList<CommentsBean>();
     	try 
     	{
+    		
 			con = getConnection();
-			sql = "select * from resource_comments where res_no = ?";
+			sql = "select * from resource_comments where res_no = ? order by co_date desc";
 			
 			System.out.println(cBean.getRes_no());
 			pstmt = con.prepareStatement(sql);
@@ -118,19 +119,15 @@ public class CommentsDAOImpl implements CommentsDAO {
 			
 			while(rs.next())
 			{
-				cBean.setCo_no(rs.getInt(1));
-				cBean.setRes_no(rs.getInt(2));
-				cBean.setCo_email(rs.getString(3));
-				cBean.setCo_date(rs.getDate(4));
-				cBean.setCo_content(rs.getString(5));
-				System.out.println("-------------------");
-				System.out.println(cBean.getCo_no());
-				System.out.println(cBean.getCo_email());
-				System.out.println(cBean.getCo_content());
-				System.out.println(cBean.getRes_no());
-				System.out.println(cBean.getCo_date());
+				CommentsBean bean = new CommentsBean();
 				
-				list.add(cBean);
+				bean.setCo_no(rs.getInt(1));
+				bean.setRes_no(rs.getInt(2));
+				bean.setCo_email(rs.getString(3));
+				bean.setCo_date(rs.getDate(4));
+				bean.setCo_content(rs.getString(5));
+				
+				list.add(bean);
 			}
 			
 		} 
@@ -142,6 +139,11 @@ public class CommentsDAOImpl implements CommentsDAO {
     	{
     		//트랜젝션 반환
     		closeConnection();
+    	}
+    	for(int i = 0; i < list.size(); i ++)
+    	{
+    		System.out.println("-------------------");
+			System.out.println(list.get(i).getCo_no());
     	}
     	return list;
     }

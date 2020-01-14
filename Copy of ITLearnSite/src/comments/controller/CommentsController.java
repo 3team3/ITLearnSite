@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.mysql.cj.xdevapi.JsonArray;
-
 import comments.db.CommentsBean;
 import comments.db.CommentsDAOImpl;
 import comments.service.CommentsServiceImpl;
@@ -39,7 +37,7 @@ public class CommentsController extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-
+		response.setContentType("text/html;charset=UTF-8");
 		String url = request.getRequestURI();
 		System.out.println(url);
 
@@ -95,6 +93,7 @@ public class CommentsController extends HttpServlet {
 					System.out.println(list.get(i).getCo_content());
 					System.out.println(list.get(i).getCo_date());
 					
+					jsondata = new JSONObject();
 					jsondata.put("co_email", list.get(i).getCo_email());
 					jsondata.put("co_no", list.get(i).getCo_no());
 					jsondata.put("co_content", list.get(i).getCo_content());

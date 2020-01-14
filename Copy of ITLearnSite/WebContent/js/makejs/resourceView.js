@@ -1,9 +1,20 @@
 $(function(){
-	console.log("asdf");
+	cmtlist();
+});
+function nologin()
+{
+	var results = confirm("로그인 하시겠습니까?");
+	if(results == true)
+	{
+		location.href = "login.do";
+	}
+}
+
+function cmtlist()
+{
 	var url = "commentsList.co";
 	var res_no = $("#res_no").val();
 	
-	alert(res_no);
 	
 	var form_data = {
 			res_no : res_no,
@@ -13,8 +24,8 @@ $(function(){
 		type : "post",
 		url : url,
 		data : form_data,
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		dataType : "json",
-		contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 		success : function(getData) {
 			for (var i = 0; i < getData.list.length; i++) {
 				console.log(getData.list[i].co_no);
@@ -22,10 +33,15 @@ $(function(){
 				console.log(getData.list[i].co_content);
 				console.log(getData.list[i].co_date);
 				
-				$(".co_email").html(getData.list[i].co_email);
-				$(".co_content").html(getData.list[i].co_content)
-				$(".co_date").html(getData.list[i].co_date)
+				var comments = 
+					 	"<tr>"
+					+ 		"<td width='10%'>"+getData.list[i].co_email+"</td>"
+					+		"<td width='70%'>"+getData.list[i].co_content+"</td>"
+					+ 		"<td width='10%'>"+getData.list[i].co_date+"</td>"
+					+ 	"</tr>";
+				$("#cmt").append(comments);
 			}
+			
 		},
 		error : function(request,status,error){
 			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
@@ -33,7 +49,7 @@ $(function(){
 		}
 	});
 	/* 페이지 요청시 댓글을 불러온다.*/
-});
+}
 function comments(){
 	
 	var url = "commentsWrite.co";
@@ -57,7 +73,7 @@ function comments(){
 		success : function(getData) {
 			if(getData == 1)
 			{
-				alert("댓글이 등록되었습니다");
+				cmtlist();
 			}
 		}
 	});

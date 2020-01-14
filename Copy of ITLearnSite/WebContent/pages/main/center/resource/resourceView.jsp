@@ -13,7 +13,7 @@
 <title>자료실</title>
 
 <script>
-    
+	
 </script>
 
 </head>
@@ -55,7 +55,8 @@
 			<c:if test="${email == null}">
 				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" readonly="readonly"></textarea>
 				<br>
-				<input type="button" id="commentWrite" value="댓글 작성" disabled="disabled">
+				<input type="hidden" id="res_no" name="res_no" value="${res_no}">
+				<input type="button" id="commentWrite" value="댓글 작성" onclick="nologin();">
 			</c:if>
 			<c:if test="${email != null }">
 				<form>
@@ -69,31 +70,18 @@
 			</c:if>
 			<br>
 		</div>
-		
 		<hr>
 		<div>
-<!-- 			console.log(getData.list[i].co_no); -->
-<!-- 				console.log(getData.list[i].co_email); -->
-<!-- 				console.log(getData.list[i].co_content); -->
-<!-- 				console.log(getData.list[i].co_date); -->
-			<table class="table-condense">
-				<tbody>
-					<tr>
-						<div class="row">
-							<div class="col-lg-2">
-								<p class="co_email"></p>
-							</div>
-							<div class="col-lg-8">
-								<p class="co_content"></p>
-							</div>
-							<div class="col-lg-2 text-right">
-								<p class="co_date"></p>
-							</div>
-							
-						</div>
-					</tr>
-				</tbody>
-			</table>
+			<span>
+				<h5>댓글</h5>
+			</span>
+			<div class='row'>
+				<table class="table">
+					<tbody id="cmt">
+
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<script src="${path}/js/jquery-3.3.1.min.js"></script>

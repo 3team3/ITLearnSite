@@ -3,7 +3,6 @@ package comments.service;
 import java.util.ArrayList;
 
 import comments.db.CommentsBean;
-import comments.db.CommentsDAO;
 import comments.db.CommentsDAOImpl;
 
 public class CommentsServiceImpl implements CommentsService {
@@ -24,9 +23,7 @@ public class CommentsServiceImpl implements CommentsService {
 	}
 	@Override
 	public ArrayList<CommentsBean> selectCommentsList(CommentsBean cBean) {
-		ArrayList<CommentsBean> list = new ArrayList<CommentsBean>();
-		System.out.println("selectCommentsList");
-		list = cDao.selectCommentsList(cBean);
-		return list;
+		
+		return cDao.selectCommentsList(cBean);
 	}
 }
