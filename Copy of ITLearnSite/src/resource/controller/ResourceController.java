@@ -188,12 +188,11 @@ public class ResourceController extends HttpServlet {
 			{ 
 				System.out.println("resourceDelete.bo");				
 				int res_no = Integer.parseInt(request.getParameter("res_no"));				
-				serv.resourceDelete(res_no);
-				//파일 삭제시 필요
-			/*	File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _res_no);
-				if(imgDir.exists()){
-					FileUtils.deleteDirectory(imgDir);
-				}*/
+				serv.resourceDelete(res_no);				
+				File resfile = new File(RESOURCE_REPO + "\\" + res_no);
+				if(resfile.exists()){
+					FileUtils.deleteDirectory(resfile);
+				}
 				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
