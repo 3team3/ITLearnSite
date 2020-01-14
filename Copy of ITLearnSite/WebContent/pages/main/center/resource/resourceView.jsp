@@ -87,7 +87,7 @@
 			</div>
 			<hr>
 			<c:if test="${email == null}">
-				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" readonly="readonly"></textarea>
+				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="130" rows="3" style="resize:none" readonly="readonly"></textarea>
 				<br>
 				<input type="hidden" id="res_no" name="res_no" value="${res_no}">
 				<input type="button" id="commentWrite" value="댓글 작성" onclick="nologin();">
@@ -96,7 +96,8 @@
 				<form>
 					<!-- co_no ? autoincrements? 로직 생각해보기-->
 					<!-- 현재 글에 comments table을 조회해서 코멘트 순서 번호를 가져와야함 select  -->
-					<input type="hidden" id="res_no" name="res_no" value="${res_no}"> <input type="hidden" id="co_email" name="co_email" value="${email}">
+					<input type="hidden" id="res_no" name="res_no" value="${res_no}"> 
+					<input type="hidden" id="co_email" name="co_email" value="${email}">
 					<textarea id="content" name="content" placeholder="바르고 고운말" cols="130" rows="3" style="resize:none"></textarea>
 					<input type="button" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
 				</form>
