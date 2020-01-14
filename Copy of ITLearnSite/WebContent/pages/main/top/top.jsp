@@ -37,12 +37,11 @@
 								<li><a href="qna.ques">이용문의</a></li>
 							</ul></li>
 
-						<li class="has-children"><a href="mypage.do" class="nav-link text-left">마이페이지</a>
+						<li class="has-children"><a href="#" class="nav-link text-left">마이페이지</a>
 							<ul class="dropdown">
 								<li><a href="relogin.do">회원정보 수정</a></li>
 								<li><a href="${path}/menu/teachers.jsp">내 강의실</a></li>
-								<li><a href="${path}/menu/teachers.jsp">주문 확인</a></li>
-								<li><a href="${path}/menu/teachers.jsp">주문 수정</a></li>
+								<li><a href="paymentCheck.pay">주문 확인</a></li>
 							</ul></li>
 						<c:if test="${email == 'admin@admin.com' }">
 						<li class="has-children"><a href="#" class="nav-link text-left">관리자</a>
