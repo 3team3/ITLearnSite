@@ -265,6 +265,11 @@ public class ResourceController extends HttpServlet {
 		return resourceMap;
 	}
 	
+	
+	
+	
+	
+
 	private ResourceBean getResourceBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		int res_no = 0;
 		String res_title = null;
