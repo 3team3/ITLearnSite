@@ -27,21 +27,18 @@ function cmtlist()
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		dataType : "json",
 		success : function(getData) {
+			var string ="";
 			for (var i = 0; i < getData.list.length; i++) {
-				console.log(getData.list[i].co_no);
-				console.log(getData.list[i].co_email);
-				console.log(getData.list[i].co_content);
-				console.log(getData.list[i].co_date);
-				
 				var comments = 
 					 	"<tr>"
 					+ 		"<td width='10%'>"+getData.list[i].co_email+"</td>"
 					+		"<td width='70%'>"+getData.list[i].co_content+"</td>"
 					+ 		"<td width='10%'>"+getData.list[i].co_date+"</td>"
 					+ 	"</tr>";
-				$("#cmt").append(comments);
+				
+				string = string + comments;
 			}
-			
+			$("#cmt").html(string);
 		},
 		error : function(request,status,error){
 			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
@@ -73,6 +70,7 @@ function comments(){
 		success : function(getData) {
 			if(getData == 1)
 			{
+				alert("댓글이 등록되었습니다.");
 				cmtlist();
 			}
 		}
