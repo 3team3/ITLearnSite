@@ -1,5 +1,5 @@
 /*add css*/
-/*íŽ˜ì´ì§€ ê°€ìž¥ ë°”ê¹¥ ì˜ì—­ì„ ì§€ì •*/
+/*ÆäÀÌÁö °¡Àå ¹Ù±ù ¿µ¿ªÀ» ÁöÁ¤*/
 .gi-2x{
 	font-size: 2em;
 }
@@ -12,29 +12,29 @@
 	justify-content: center;
 	display: flex;
 }
-/*ê²Œì‹œíŒì„ 4ë“±ë¶„ í–ˆì„ ë•Œ : 
-	1. ì „ì²´ê¸€ / glyphicon (ê¸€ì“°ê¸° ë²„íŠ¼)
-	2. ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ë¶€ë¶„
-	3. ì „ì²´ê¸€ / ê¸€ì“°ê¸° ë²„íŠ¼
-	4. íŽ˜ì´ì§• ë²ˆí˜¸
+/*°Ô½ÃÆÇÀ» 4µîºÐ ÇßÀ» ¶§ : 
+	1. ÀüÃ¼±Û / glyphicon (±Û¾²±â ¹öÆ°)
+	2. °Ô½ÃÆÇ ¸®½ºÆ® ºÎºÐ
+	3. ÀüÃ¼±Û / ±Û¾²±â ¹öÆ°
+	4. ÆäÀÌÂ¡ ¹øÈ£
 */
-/*ê²Œì‹œíŒ ì „ì²´ì˜ì—­ì„ ê°ì‹¸ëŠ” ë¶€ë¶„*/
+/*°Ô½ÃÆÇ ÀüÃ¼¿µ¿ªÀ» °¨½Î´Â ºÎºÐ*/
 .wrapboard {
 /* 	border: solid red; */
 	width: 1000px;
 }
-/*ë²„íŠ¼ì„ ê°ì‹¸ëŠ” ë¶€ë¶„*/
+/*¹öÆ°À» °¨½Î´Â ºÎºÐ*/
 .btn-wrap {
 /* 	border: solid red; */
 	display: inline-block;
 	width: 1000px;
 }
 
-/*ì „ì²´ê¸€/glyphiconì„ ê°ì‹¸ëŠ” ì˜ì—­*/
+/*ÀüÃ¼±Û/glyphiconÀ» °¨½Î´Â ¿µ¿ª*/
 .header-btn {
 /* 	border: solid black; */
 }
-/*float left/ float right ì“¸ì¼ì´ ë§Žìœ¼ë¯€ë¡œ ë”°ë¡œ ì„¤ì •*/
+/*float left/ float right ¾µÀÏÀÌ ¸¹À¸¹Ç·Î µû·Î ¼³Á¤*/
 .float-l {
 /* 	border: solid black; */
 	float: left;
@@ -48,17 +48,11 @@
 	text-align: center;
 }
 
-/*ë²„íŠ¼ ìƒ‰ìƒ*/
+/*¹öÆ° »ö»ó*/
 .btn-color1 {
 	color: #fff;
   	background-color: #4A56A8;
  	border-color: #4A56A8;
-}
-
-.btn-color2 {
-	color: #fff;
-  	background-color: #666666;
- 	border-color: #666666;
 }
 
 .boardoutline {
@@ -78,13 +72,13 @@
 .tb_head {
 /* 	border: solid black; */
 }
-/*ê²Œì‹œíŒ í—¤ë” ë¶€ë¶„*/
+/*°Ô½ÃÆÇ Çì´õ ºÎºÐ*/
 thead {
-	color: black; /*ì»¬ëŸ¼ ì´ë¦„ ìƒ‰*/
+	color: black; /*ÄÃ·³ ÀÌ¸§ »ö*/
 	border-top: 3px solid #3C4790;
 	border-spacing: auto 10px;
 }
-/*ê²Œì‹œíŒ ê°„ê²© ë¶€ë¶„/ í…Œë‘ë¦¬*/
+/*°Ô½ÃÆÇ °£°Ý ºÎºÐ/ Å×µÎ¸®*/
 .tb_head>td {
 	border-bottom: 2px solid #3C4790;
 }

@@ -37,20 +37,20 @@
 								<li><a href="qna.ques">이용문의</a></li>
 							</ul></li>
 
-						<li class="has-children"><a href="mypage.do" class="nav-link text-left">마이페이지</a>
+						<li class="has-children"><a href="#" class="nav-link text-left">마이페이지</a>
 							<ul class="dropdown">
 								<li><a href="relogin.do">회원정보 수정</a></li>
 								<li><a href="${path}/menu/teachers.jsp">내 강의실</a></li>
-								<li><a href="${path}/menu/teachers.jsp">주문 확인</a></li>
-								<li><a href="${path}/menu/teachers.jsp">주문 수정</a></li>
+								<li><a href="paymentCheck.pay">주문 확인</a></li>
 							</ul></li>
-
-						<li class="has-children"><a href="admin.do" class="nav-link text-left">관리자</a>
+						<c:if test="${email == 'admin@admin.com' }">
+						<li class="has-children"><a href="#" class="nav-link text-left">관리자</a>
 							<ul class="dropdown">
-								<li><a href="memberlist.do">회원 관리</a></li>
-								<li><a href="#">주문 관리</a></li>
+								<li><a href="memberlist.admin">회원 관리</a></li>
+								<li><a href="memberorderlist.admin">주문 관리</a></li>
 							</ul>
 						</li>
+						</c:if>
 					</ul>
 				</nav>
 			</div>
@@ -67,6 +67,7 @@
 						<a href="logout.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그아웃</a>
 						<!-- 장바구니 -->
 						<a href="cart.cart"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
+						<a href="payment.pay">결제(보기)</a>
 					</ul>
 					<%-- <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a> --%>
 				</c:if>

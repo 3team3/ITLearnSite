@@ -7,30 +7,12 @@
   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script type="text/javascript">
-	function origin_delivery(){
-		document.getElementById("pay_name").value ="${mBean.name}";
-		document.getElementById("pay_phonenumber").value = "${mBean.phonenumber}";
-		document.getElementById("address").value = "${mBean.address}";
-		document.getElementById("address1").value = "${mBean.address1}";
-		document.getElementById("address2").value = "${mBean.address2}";
-	}
-	
-	function new_delivery(){
-		document.getElementById("pay_name").value = "";
-		document.getElementById("pay_phonenumber").value = "";
-		document.getElementById("address").value = "";
-		document.getElementById("address1").value = "";
-		document.getElementById("address2").value = "";
-	
-	}
-</script>
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${path}/css/member.css" rel="stylesheet"> 
 <link href="${path}/css/style.css" rel="stylesheet"> 
-<title>결제 페이지</title>
+<title>주문 확인</title>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
@@ -38,8 +20,8 @@
         <div class="container">
           <div class="row align-items-end">
             <div class="col-lg-7">
-              <h2 class="mb-0">결제페이지</h2>
-              <p>Payment page</p>
+              <h2 class="mb-0">주문 확인</h2>
+              <p>Order confirmation</p>
             </div>
           </div>
         </div>
@@ -50,7 +32,7 @@
       <div class="container">
         <a href="index.jsp">메인화면</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">결제</span>
+        <span class="current">주문 확인</span>
       </div>
     </div>
 	
@@ -64,11 +46,6 @@
 		<!-- 회원&배송지 정보 시작 -->
 		<div>
 		<h3>배송지 정보</h3>
-			<div class="col-md-12 form-group">
-        	<label>아이디*</label>
-            <input type="text" id="pay_email" name="pay_email" value="${mBean.email}" readonly="readonly" class="form-control form-control-lg"><br>
-            </div>
-            
             <div class="col-md-12 form-group">
             <label>이름*</label>
            	<input type="text" id="pay_name" name="pay_name" required class="form-control form-control-lg"><br>

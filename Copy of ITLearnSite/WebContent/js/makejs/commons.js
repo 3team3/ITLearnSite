@@ -118,6 +118,7 @@ function selectGenderChk(){
 		chkGender = true;
 	}
 	else if(woman == 2)
+		
 	{
 		chkGender = true;
 	}

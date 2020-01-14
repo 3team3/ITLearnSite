@@ -113,8 +113,16 @@
          <url-pattern>*.pay</url-pattern>
       </servlet-mapping>
       
-      
-         
+    <!-- 관리자(admin@admin.com) -->  
+       <servlet>
+         <servlet-name>adminController</servlet-name>
+         <servlet-class>admin.controller.AdminController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>adminController</servlet-name>
+         <url-pattern>*.admin</url-pattern>
+      </servlet-mapping>  
    
    
    

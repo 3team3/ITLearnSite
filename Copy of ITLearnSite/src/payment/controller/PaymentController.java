@@ -8,7 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.db.MemberBean;
+import member.db.MemberDAOImpl;
 import payment.db.PaymentBean;
 import payment.db.PaymentDAOImpl;
 import payment.service.PaymentServiceImpl;
@@ -18,12 +21,14 @@ public class PaymentController extends HttpServlet {
 	PaymentDAOImpl pDao = null;
 	PaymentServiceImpl pServ = null;
 	PaymentBean pBean = null;
+	MemberBean mBean = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		pDao = new PaymentDAOImpl();
 		pServ = new PaymentServiceImpl();
 		pBean = new PaymentBean();
+		mBean = new MemberBean();
 	}
 
 	@Override
@@ -42,11 +47,27 @@ public class PaymentController extends HttpServlet {
 		try {
 			if(path.equals("/payment.pay"))
 			{
+				HttpSession session = request.getSession();
+				String email = (String)session.getAttribute("email");
+				MemberDAOImpl mDao = new MemberDAOImpl();
+				mBean = mDao.callMember(email);
+				request.setAttribute("mBean", mBean);
+				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/payment/payment.jsp";
 				request.setAttribute("paging", paging);
+			}else if(path.equals("/paymentCheck.pay"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/payment/paymentCheck.jsp";
+				request.setAttribute("paging", paging);
+			}else if(path.equals("/paymentModify.pay"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/payment/paymentModify.jsp";
+				request.setAttribute("paging", paging);
 			}
-			System.out.println("nextPAge" + nextPage);
+			System.out.println("nextPage = " + nextPage);
 			// null PointException
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
