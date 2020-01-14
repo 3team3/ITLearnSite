@@ -23,9 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 
 import resource.db.ResourceBean;
-import resource.db.ResourceDAO;
 import resource.db.ResourceDAOImpl;
-import resource.service.ResourceService;
 import resource.service.ResourceServiceImpl;
 
 public class ResourceController extends HttpServlet {
@@ -64,7 +62,6 @@ public class ResourceController extends HttpServlet {
 		System.out.println(path);
 		String nextPage = null;
 		String paging = null;
-		HttpSession session;
 
 		try {
 			
@@ -254,14 +251,6 @@ public class ResourceController extends HttpServlet {
 		return resourceMap;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 	private ResourceBean getResourceBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		int res_no = 0;
 		String res_title = null;
