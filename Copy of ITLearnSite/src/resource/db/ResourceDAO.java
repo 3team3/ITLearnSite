@@ -1,7 +1,10 @@
 package resource.db;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 public interface ResourceDAO {
@@ -24,5 +27,5 @@ public interface ResourceDAO {
 	public ResourceBean resourceView(int res_no);
 	
 	/*자료 검색*/
-	public List<ResourceBean> resourceSelect(String select_subject,String select_content);
+	public ArrayList<ResourceBean> resourceSelect(HashMap<String, Object> listOpt);
 }

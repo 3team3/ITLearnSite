@@ -1,5 +1,7 @@
 package resource.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +23,9 @@ public interface ResourceService {
 	public Map listResource(Map<String, Integer> pagingMap);
 	
 	/*자료실 검색*/
-	public List<ResourceBean> resourceSelect(String select_subject,String select_content);
+	public ArrayList<ResourceBean> resourceSelect(String opt,String condition);
+
+	
 }
 
 

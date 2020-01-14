@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 
 import resource.db.ResourceBean;
+import resource.db.ResourceDAO;
 import resource.db.ResourceDAOImpl;
 import resource.service.ResourceService;
 import resource.service.ResourceServiceImpl;
@@ -169,33 +171,33 @@ public class ResourceController extends HttpServlet {
 			//자료실게시판 - 글 검색
 			else if(path.equals("/resourceSelect.bo"))
 			{
-				System.out.println("resourceSelect.bo");
-				String select_subject = request.getParameter("select_subject");
-				String select_content = request.getParameter("select_content");
-				System.out.println(select_subject);
-				System.out.println(select_content);
+				System.out.println("resourceSelect.bo");	
+				String opt = request.getParameter("opt");
+				String condition = request.getParameter("condition");	
+								
+				ArrayList<ResourceBean> ResourceSelect = serv.resourceSelect(opt, condition);
+						
+				request.setAttribute("ResourceSelect", ResourceSelect);
 				
-				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/resourceSelect.jsp";
-				request.setAttribute("paging", paging);
+				paging = "/pages/main/center/resource/resourceSelect.jsp";
+				request.setAttribute("paging", paging);	
+				
 			}
 			//자료실게시판 - 글 삭제
 			else if(path.equals("/resourceDelete.bo"))
 			{ 
-				System.out.println("resourceDelete.bo");
-				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				serv.resourceDelete(res_no);
-				//파일 삭제시 필요
-			/*	File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _res_no);
-				if(imgDir.exists()){
-					FileUtils.deleteDirectory(imgDir);
-				}*/
+				System.out.println("resourceDelete.bo");				
+				int res_no = Integer.parseInt(request.getParameter("res_no"));				
+				serv.resourceDelete(res_no);				
+				File resfile = new File(RESOURCE_REPO + "\\" + res_no);
+				if(resfile.exists()){
+					FileUtils.deleteDirectory(resfile);
+				}
 				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
-				         + " location.href='" + request.getContextPath()
-				         + "/resource/resourceList.bo';" + "</script>");
+				         + " location.href='resourceList.bo'" + "</script>");
 				return;
 				
 			}
