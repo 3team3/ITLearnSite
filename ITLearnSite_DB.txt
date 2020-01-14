@@ -29,6 +29,47 @@ res_writedate date default sysdate,
 constraint res_email_fk foreign key(res_email) references member(email)
 );
 
+insert into resource_table(res_no, res_title, res_email)
+values(1, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(2, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(3, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(4, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(5, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(6, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(7, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(8, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(9, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(10, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(11, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(12, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(13, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(14, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(15, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(16, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(17, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(18, 'asdf', 'test@test.com');
+
+commit;
+
+select * from resource_table;
+
 select * from resource_table;
 
 /*자료실 댓글 테이블*/
@@ -81,6 +122,7 @@ lec_parentno number(38) default 0,
 lec_title varchar2(50),
 lec_email varchar2(40),
 lec_pw varchar2(10),
+lec_price number(38),
 lec_content varchar2(4000),
 lec_filename varchar2(50),
 lec_uploaddate date default sysdate,
@@ -88,11 +130,15 @@ constraint fk_lec_email foreign key(lec_email) references member(email)
 );
 
 select * from lecture_table;
+drop table lecture_table;
 
 /*교재게시판*/
 create table textbook_table(
 book_no number(38) primary key,
+book_parentno number(38) default 0,
 book_title varchar2(50),
+book_writer varchar(50),
+book_price number(20),
 book_email varchar2(40),
 book_pw varchar2(20),
 book_content varchar2(4000),
@@ -100,6 +146,8 @@ book_filename varchar2(50),
 book_uploaddate date default sysdate,
 constraint book_email_fk foreign key(book_email) references member(email)
 );
+
+drop table textbook_table;
 
 
 /*장바구니*/
@@ -117,18 +165,19 @@ cart_book4_num number(38),
 cart_book5 number(38),
 cart_book5_num number(38),
 cart_lecture1 number(38),
-cart_lecture1_num number(38),
+cart_lecture1_startDate date,
 cart_lecture2 number(38),
-cart_lecture2_num number(38),
+cart_lecture2_startDate date,
 cart_lecture3 number(38),
-cart_lecture3_num number(38),
+cart_lecture3_startDate date,
 cart_lecture4 number(38),
-cart_lecture4_num number(38),
+cart_lecture4_startDate date,
 cart_lecture5 number(38),
-cart_lecture5_num number(38),
+cart_lecture5_startDate date,
 constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade
 );
 
+drop table cart_table;
 select * from cart_table;
 
 /*결제*/
@@ -153,19 +202,33 @@ pay_book4_num number(38),
 pay_book5 number(38),
 pay_book5_num number(38),
 pay_lecture1 number(38),
-pay_lecture1_num number(38),
+pay_lecture1_startDate date,
 pay_lecture2 number(38),
-pay_lecture2_num number(38),
+pay_lecture2_startDate date,
 pay_lecture3 number(38),
-pay_lecture3_num number(38),
+pay_lecture3_startDate date,
 pay_lecture4 number(38),
-pay_lecture4_num number(38),
+pay_lecture4_startDate date,
 pay_lecture5 number(38),
-pay_lecture5_num number(38),
+pay_lecture5_startDate date,
+pay_verify varchar2(2) default 'N',
 constraint pay_email_fk foreign key(pay_email) references member(email)
 );
 
+drop table payment_table;
 select * from payment_table;
+
+/*
+강의 구매 결제 확인 시 insert될 계정별 강의 리스트
+create table set_pay_lec_table(
+set_no number(3),
+set_email varchar2(40),
+set_lec_no number(38),
+set_lec_title varchar2(50),
+set_endDate date,
+constraint set_email_fk foreign key(set_email) references member(email)
+);
+*/
 
 /*회원 삭제시 회원의 장바구니도 함께 삭제*/
 /*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
