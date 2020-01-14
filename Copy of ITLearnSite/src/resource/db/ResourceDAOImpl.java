@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -271,38 +272,52 @@ public class ResourceDAOImpl implements ResourceDAO {
 	
 	//자료실 검색
     @Override
-    public List<ResourceBean> resourceSelect(String select_subject,String select_content){
-    	 List<ResourceBean> ResourceList = new ArrayList<ResourceBean>();
-         try{
-             con = getConnection();
-             Statement st = null;
+    public ArrayList<ResourceBean> resourceSelect(HashMap<String, Object> listOpt){
+    	
+    	 ArrayList<ResourceBean> ResourceList = new ArrayList<ResourceBean>();
+    	 String opt=(String)listOpt.get("opt"); //검색옵션
+    	 String condition = (String)listOpt.get("condition"); //검색내용
+    	 /*int start = (Integer)listOpt.get("start"); //페이지번호
+    	 */
+    	 
+    	 try{
+             con = getConnection();  
              
-             if(select_subject.equals("title")){
-            	 select_subject = "res_title";
+             //0: 제목 //1:내용// 2:글쓴이
+             if(opt.equals("0")){
+            	 sql="select * from resource_table where res_title LIKE '%' || ? || '%'";
+            	 pstmt = con.prepareStatement(sql);
+            	 pstmt.setString(1, condition);            	 
+            	 rs=pstmt.executeQuery();            	 
              }
-             else{
-            	 select_subject = "res_content";
+             else if(opt.equals("1")){
+            	 sql="select * from resource_table where res_content LIKE '%' || ? || '%'";
+            	 pstmt = con.prepareStatement(sql);
+            	 pstmt.setString(1, condition); 
+            	 rs=pstmt.executeQuery(); 
+             }
+             else if(opt.equals("2")){
+            	 sql="select * from resource_table where res_email LIKE '%' || ? || '%'";
+            	 pstmt = con.prepareStatement(sql);
+            	 pstmt.setString(1, condition); 
+            	 rs=pstmt.executeQuery(); 
              }
              
-             sql = "select * from resource_table where "+select_subject+" like '%"+select_content +"%'";
-             st = con.createStatement();
-             rs = st.executeQuery(sql);
-                 
-             while(rs.next()){
-            	 ResourceBean rBean = new ResourceBean();
-                 rBean.setRes_no(rs.getInt("res_no"));
-                 rBean.setRes_title(rs.getString("res_title"));
-                 rBean.setRes_email(rs.getString("res_email"));
-                 rBean.setRes_content(rs.getString("res_content"));
-                 rBean.setRes_filename(rs.getString("res_filename"));
-                 ResourceList.add(rBean);
-                 }
+             while(rs.next())
+             {ResourceBean rBean= new ResourceBean();
+             rBean.setRes_no(rs.getInt("res_no"));
+             rBean.setRes_title(rs.getString("res_title"));
+             rBean.setRes_email(rs.getString("res_email"));
+             rBean.setRes_writedate(rs.getDate("res_writedate"));             
+             ResourceList.add(rBean);
+             }             
+            
              }catch(Exception e){
                  System.out.println("resourceSelect()에서 오류 : " +e);
              }finally{
                  closeConnection();
              }
-             return ResourceList;                       
+             return ResourceList;                    
          }
 }
 

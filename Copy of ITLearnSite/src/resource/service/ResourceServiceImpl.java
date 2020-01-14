@@ -1,9 +1,11 @@
 package resource.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import resource.db.ResourceBean;
 import resource.db.ResourceDAOImpl;
 
@@ -62,14 +64,16 @@ public class ResourceServiceImpl implements ResourceService {
 		// articlesMap.put("totArticles", 170);
 
 		return resourcesMap;
-
 	}
-	
 	//자료실 검색
 	@Override
-	public List<ResourceBean> resourceSelect(String select_subject,String select_content){
-		List<ResourceBean> ResourceList = rDao.resourceSelect(select_subject,select_content);
+	public ArrayList<ResourceBean> resourceSelect(String opt,String condition){
+		System.out.println("resource select service");
+		HashMap<String, Object> listOpt = new HashMap<String, Object>();
+		listOpt.put("opt", opt);
+		listOpt.put("condition", condition);
+		ArrayList<ResourceBean> ResourceList = rDao.resourceSelect(listOpt);
 		return ResourceList;
-	}
 
+	}
 }

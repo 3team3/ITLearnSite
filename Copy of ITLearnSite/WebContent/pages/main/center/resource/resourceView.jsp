@@ -40,8 +40,10 @@
 					<td colspan="2"><textarea class="form-control" readonly>${rBean.res_content}</textarea></td>
 				</tr>
 				<tr>
+					<c:if test="${email == rBean.res_email}">
 					<td><input type="submit" class="btn btn-color1 pull-right" value="수정"></td>
-					<td><input type="button" class="btn btn-color1 pull-right" value="삭제"></td>
+					<td><input type="button" class="btn btn-color1 pull-right" value="삭제" onclick="location.href='resourceDelete.bo?res_no=${rBean.res_no}'"></td>
+					</c:if>
 				</tr>
 			</table>
 

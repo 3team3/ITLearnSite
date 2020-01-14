@@ -181,43 +181,23 @@
 						</c:when>
 					</c:choose>
 				</c:if>
-			</div>
-			<div class="btn-wrap text-align">
-				<div class="selector-wrap">
-					<select class="box selectbox">
-						<optgroup label="검색 옵션">
-							<option>전체</option>
-							<option>제목</option>
-							<option>내용</option>
-							<option>글쓴이</option>
-							<option>제목+내용</option>
-						</optgroup>
-					</select>
-				</div>
-				<div class="search-wrap">
-					<input class="box inputbox" type="text"> 
-					<span class="lookimg"> 
-						<a href="#"> 
-							<img src="${path}/images/look.png" width="30px" height="35px">
-						</a>
-					</span>
-				</div>
-=======
+			</div>			
+				
 			<form action="resourceSelect.bo" method="post" >
 				<div class="selector-wrap">
-					<select class="box selectbox" name="select_subject">
-							<option value="title" selected="selected">제목</option>
-							<option value="content">내용</option>	
-					</select>			
+					<select class="box selectbox" name="opt">
+							<option value="0" selected="selected">제목</option>
+							<option value="1">내용</option>
+							<option value="2">글쓴이</option>							
+					</select>	
 				</div>
 				<div class="search-wrap">
-					<input class="box inputbox" type="text" name="select_content"> 
+					<input class="box inputbox" type="text" name="condition"> 
 					<span class="lookimg"> 			
 						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
 					</span>
 				</div>
 			</form>
->>>>>>> refs/remotes/origin/ran
 			</div>
 		</div>
 	</div>
