@@ -14,6 +14,7 @@ $(function(){
 		url : url,
 		data : form_data,
 		dataType : "json",
+		contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 		success : function(getData) {
 			for (var i = 0; i < getData.list.length; i++) {
 				console.log(getData.list[i].co_no);
@@ -21,9 +22,14 @@ $(function(){
 				console.log(getData.list[i].co_content);
 				console.log(getData.list[i].co_date);
 				
-				
+				$(".co_email").html(getData.list[i].co_email);
+				$(".co_content").html(getData.list[i].co_content)
+				$(".co_date").html(getData.list[i].co_date)
 			}
-			
+		},
+		error : function(request,status,error){
+			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			console.log(error);
 		}
 	});
 	/* 페이지 요청시 댓글을 불러온다.*/

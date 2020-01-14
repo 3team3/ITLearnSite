@@ -83,17 +83,24 @@ public class CommentsController extends HttpServlet {
 				 JSONObject jsondata = new JSONObject();
 				 JSONArray arr = new JSONArray();
 				 String jsonString = null;
+				 Date date = null;
+				 
 				 
 				 for(int i = 0; i< list.size(); i++)
 				 {
+					System.out.println("-------------------------");
+					System.out.println("list.get(i)" + i);
 					System.out.println(list.get(i).getCo_email()); 
 					System.out.println(list.get(i).getCo_no());
 					System.out.println(list.get(i).getCo_content());
 					System.out.println(list.get(i).getCo_date());
+					
 					jsondata.put("co_email", list.get(i).getCo_email());
 					jsondata.put("co_no", list.get(i).getCo_no());
 					jsondata.put("co_content", list.get(i).getCo_content());
-					jsondata.put("co_date", list.get(i).getCo_content());
+					
+					date = list.get(i).getCo_date();
+					jsondata.put("co_date", date.toString());
 					
 					arr.add(jsondata);
 				 }

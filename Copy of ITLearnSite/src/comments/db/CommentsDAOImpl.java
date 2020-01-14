@@ -123,9 +123,16 @@ public class CommentsDAOImpl implements CommentsDAO {
 				cBean.setCo_email(rs.getString(3));
 				cBean.setCo_date(rs.getDate(4));
 				cBean.setCo_content(rs.getString(5));
+				System.out.println("-------------------");
+				System.out.println(cBean.getCo_no());
+				System.out.println(cBean.getCo_email());
+				System.out.println(cBean.getCo_content());
+				System.out.println(cBean.getRes_no());
+				System.out.println(cBean.getCo_date());
 				
 				list.add(cBean);
 			}
+			
 		} 
     	catch (Exception e) 
     	{
