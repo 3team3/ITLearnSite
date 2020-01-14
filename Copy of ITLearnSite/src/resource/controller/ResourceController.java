@@ -98,7 +98,7 @@ public class ResourceController extends HttpServlet {
 				System.out.println("resourceView.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
 				rBean = serv.resourceView(res_no);
-				request.setAttribute("rBean", rBean);			
+				request.setAttribute("rBean", rBean);
 				nextPage = "/main.jsp";
 				paging= "/pages/main/center/resource/resourceView.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	
@@ -162,10 +162,24 @@ public class ResourceController extends HttpServlet {
 			else if(path.equals("/resourceModify.bo"))
 			{
 				System.out.println("resourceModify.bo");
+				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				rBean = serv.resourceView(res_no);
+				request.setAttribute("rBean", rBean);
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/resourceModify.jsp";
+				paging= "/pages/main/center/resource/resourceModify.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	
+				
 			}
+			//자료실게시판 - 글 수정
+			else if(path.equals("/updateResource.bo")){
+				rBean=getResourceBeanProperty(request, response);
+				serv.modResource(rBean);
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" + 
+				"resourceList.bo';" + "</script>");
+				return;
+			}
+			
 			//자료실게시판 - 글 검색
 			else if(path.equals("/resourceSelect.bo"))
 			{
@@ -251,13 +265,6 @@ public class ResourceController extends HttpServlet {
 		}
 		return resourceMap;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 
 	private ResourceBean getResourceBeanProperty(HttpServletRequest request, HttpServletResponse response) {

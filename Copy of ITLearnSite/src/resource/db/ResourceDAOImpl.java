@@ -107,10 +107,10 @@ public class ResourceDAOImpl implements ResourceDAO {
 		try {
 			con = getConnection();
 			String query = "update resource_table set res_title=?,res_content=?";
-			if (res_filename != null && res_filename.length() != 0) {
-				query += ",res_filename=?";
-			}
-			query += " where res_no=?";
+				if (res_filename != null && res_filename.length() != 0) {
+					query += ",res_filename=?";
+				}
+					query += ",res_writedate=sysdate where res_no=?";
 
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
@@ -122,6 +122,8 @@ public class ResourceDAOImpl implements ResourceDAO {
 			} else {
 				pstmt.setInt(3, res_no);
 			}
+			 pstmt.executeUpdate();
+			 
 		} catch (Exception e) {
 			System.out.println("updateResource메소드에서 오류 :" + e);
 		} finally{

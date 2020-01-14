@@ -19,6 +19,28 @@
 
 </head>
 <body>
+
+   <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+        <div class="container">
+          <div class="row align-items-end justify-content-center text-center">
+            <div class="col-lg-7">
+              <h2 class="mb-0">자료실</h2>
+              <p>Resource room</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    
+    <div class="custom-breadcrumns border-bottom">
+      <div class="container">
+        <a href="${path}/index.do">Home</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">자료실</span>
+      </div>
+    </div>
+
+
+
 	<div class="pagemargin">
 		<div class="wrapboard">
 			<div class="row">
