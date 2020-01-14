@@ -18,6 +18,28 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 </head>
+
+   <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+        <div class="container">
+          <div class="row align-items-end justify-content-center text-center">
+            <div class="col-lg-7">
+              <h2 class="mb-0">자료실</h2>
+              <p>Resource room</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    
+    <div class="custom-breadcrumns border-bottom">
+      <div class="container">
+        <a href="${path}/index.do">Home</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">자료실</span>
+      </div>
+    </div>
+    
+    
+    
 <body>
 	<div class="pagemargin">
 		<div class="wrapboard">
@@ -182,17 +204,16 @@
 					</c:choose>
 				</c:if>
 			</div>
-			
+			<div class="btn-wrap text-align">
 			<form action="resourceSelect.bo" method="post" >
 				<div class="selector-wrap">
-					<select class="box selectbox" name="opt">
-							<option value="0" selected="selected">제목</option>
-							<option value="1">내용</option>
-							<option value="2">글쓴이</option>							
-					</select>	
+					<select class="box selectbox" name="select_subject">
+							<option value="title" selected="selected">제목</option>
+							<option value="content">내용</option>	
+					</select>			
 				</div>
 				<div class="search-wrap">
-					<input class="box inputbox" type="text" name="condition"> 
+					<input class="box inputbox" type="text" name="select_content"> 
 					<span class="lookimg"> 			
 						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
 					</span>

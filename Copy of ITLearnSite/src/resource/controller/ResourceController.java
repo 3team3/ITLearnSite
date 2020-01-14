@@ -104,6 +104,7 @@ public class ResourceController extends HttpServlet {
 				paging= "/pages/main/center/resource/resourceView.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	
 			}
+			//자료실게시판 - 글 내용보기 페이지(파일다운로드)
 			else if(path.equals("/filedown.bo"))
 			{
 				System.out.println("filedown.bo");
@@ -161,40 +162,53 @@ public class ResourceController extends HttpServlet {
 			else if(path.equals("/resourceModify.bo"))
 			{
 				System.out.println("resourceModify.bo");
+				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				rBean = serv.resourceView(res_no);
+				request.setAttribute("rBean", rBean);
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/resourceModify.jsp";
+				paging= "/pages/main/center/resource/resourceModify.jsp?res_no="+res_no;
 				request.setAttribute("paging", paging);	
+				
+			}
+			//자료실게시판 - 글 수정
+			else if(path.equals("/updateResource.bo")){
+				rBean=getResourceBeanProperty(request, response);
+				serv.modResource(rBean);
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" + 
+				"resourceList.bo';" + "</script>");
+				return;
 			}
 			//자료실게시판 - 글 검색
 			else if(path.equals("/resourceSelect.bo"))
 			{
-				System.out.println("resourceSelect.bo");	
-				String opt = request.getParameter("opt");
-				String condition = request.getParameter("condition");	
-								
-				ArrayList<ResourceBean> ResourceSelect = serv.resourceSelect(opt, condition);
-						
-				request.setAttribute("ResourceSelect", ResourceSelect);
+				System.out.println("resourceSelect.bo");
 				
+				String select_subject = request.getParameter("select_subject");
+				String select_content = request.getParameter("select_content");
+				
+				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
+				request.setAttribute("ResourceList", ResourceList);
 				nextPage = "/main.jsp";
-				paging = "/pages/main/center/resource/resourceSelect.jsp";
-				request.setAttribute("paging", paging);	
-				
+				paging= "/pages/main/center/resource/resourceSelect.jsp";
+				request.setAttribute("paging", paging);
 			}
 			//자료실게시판 - 글 삭제
 			else if(path.equals("/resourceDelete.bo"))
 			{ 
-				System.out.println("resourceDelete.bo");				
-				int res_no = Integer.parseInt(request.getParameter("res_no"));				
-				serv.resourceDelete(res_no);				
-				File resfile = new File(RESOURCE_REPO + "\\" + res_no);
-				if(resfile.exists()){
-					FileUtils.deleteDirectory(resfile);
-				}
+				System.out.println("resourceDelete.bo");
+				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				serv.resourceDelete(res_no);
+				//파일 삭제시 필요
+			/*	File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _res_no);
+				if(imgDir.exists()){
+					FileUtils.deleteDirectory(imgDir);
+				}*/
 				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
-				         + " location.href='resourceList.bo'" + "</script>");
+				         + " location.href='" + request.getContextPath()
+				         + "/resource/resourceList.bo';" + "</script>");
 				return;
 				
 			}
