@@ -9,14 +9,15 @@ import resource.db.ResourceBean;
 
 public interface ResourceService {
 	/*자료실 글쓰기*/
-	public int addResource(ResourceBean rBean);
+	public int addResource(ResourceBean rBean, String res_filename);
 	
 	/*자료실 글수정*/
 	public void modResource(ResourceBean rBean);
 	
-	/*자료실 내용*/
+	/*자료실 글보기*/
 	public ResourceBean resourceView(int res_no);
 	
+	/*자료실 글삭제*/
 	public void resourceDelete(int res_no);
 	
 	//페이징 기능에 필요한 글목록과 전체 글 개를 각각 조회할 수 있도록 구성

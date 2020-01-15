@@ -18,8 +18,8 @@ public class ResourceServiceImpl implements ResourceService {
 	
 	// 자료실 글쓰기
 		@Override
-		public int addResource(ResourceBean rBean) {
-			return rDao.insertResource(rBean);
+		public int addResource(ResourceBean rBean, String res_filename) {
+			return rDao.insertResource(rBean, res_filename);
 		}
 		
 	// 자료실 글수정
