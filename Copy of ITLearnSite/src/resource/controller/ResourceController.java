@@ -144,7 +144,7 @@ public class ResourceController extends HttpServlet {
 				rBean.setRes_title(res_title);
 				rBean.setRes_content(res_content);
 				rBean.setRes_filename(res_filename);
-				res_no = serv.addResource(rBean);
+				res_no = serv.addResource(rBean, res_filename);
 				
 				if (res_filename != null && res_filename.length() != 0) {
 					File srcFile = new File(RESOURCE_REPO + "\\" + "temp" + "\\" + res_filename);
@@ -175,8 +175,8 @@ public class ResourceController extends HttpServlet {
 				rBean=getResourceBeanProperty(request, response);
 				serv.modResource(rBean);
 				PrintWriter pw = response.getWriter();
-				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" + 
-				"resourceList.bo';" + "</script>");
+				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" 
+				+"resourceView.bo?res_no="+rBean.getRes_no()+"';" + "</script>");
 				return;
 			}
 			//자료실게시판 - 글 검색
