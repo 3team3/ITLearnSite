@@ -147,4 +147,35 @@ public class CommentsDAOImpl implements CommentsDAO {
     	}
     	return list;
     }
+    @Override
+    public int commentsDelete(int co_no, String email) {
+    	int check = 0;
+    	try 
+    	{
+    		
+			con = getConnection();
+			sql = "delete from resource_comments where co_no = ? and co_email= ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, co_no);
+			pstmt.setString(2, email);
+			check = pstmt.executeUpdate();
+			System.out.println(check);
+			if(check != 0) {
+				check = 1;
+			}
+			else {
+				//다른사람글을 지우려할 때
+				check = 0;
+			}
+		} 
+    	catch (Exception e) 
+    	{
+			e.printStackTrace();
+		}
+    	finally
+    	{
+    		closeConnection();
+    	}
+    	return check;
+    }
 }
