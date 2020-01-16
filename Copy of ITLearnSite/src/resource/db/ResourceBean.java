@@ -54,13 +54,7 @@ public class ResourceBean {
 		return res_filename;
 	}
 	public void setRes_filename(String res_filename) {
-		try {
-			if(res_filename!=null && res_filename.length()!=0) {
-				this.res_filename = URLEncoder.encode(res_filename, "UTF-8");  //파일이름에 특수문자가 있을 경우 인코딩합니다.
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		this.res_filename = res_filename;
 	}
 	public Date getRes_writedate() {
 		return res_writedate;

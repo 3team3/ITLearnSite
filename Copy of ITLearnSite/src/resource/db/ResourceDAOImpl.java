@@ -67,7 +67,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 	
 	//자료실 글쓰기
-	public int insertResource(ResourceBean rBean, String res_filename){
+	public int insertResource(ResourceBean rBean){
 		int res_no = getNewNo();
 		try {
 			con = getConnection();
@@ -75,7 +75,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 			String res_title = rBean.getRes_title();
 			String res_email = rBean.getRes_email();
 			String res_content = rBean.getRes_content();
-			//String res_filename = rBean.getRes_filename();
+			String res_filename = rBean.getRes_filename();
 			
 			String query = "INSERT INTO resource_table (RES_NO, RES_PARENTNO, RES_TITLE, RES_EMAIL, RES_CONTENT, RES_FILENAME)"
 					+ " VALUES (?, ? ,?, ?, ?, ?)";
