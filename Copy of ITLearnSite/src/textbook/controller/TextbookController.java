@@ -1,7 +1,10 @@
 package textbook.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -10,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import textbook.db.TextbookBean;
 import textbook.db.TextbookDAOImpl;
 import textbook.service.TextbookServiceImpl;
@@ -17,20 +23,20 @@ import textbook.service.TextbookServiceImpl;
 public class TextbookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	TextbookDAOImpl tDao = null;
-	TextbookServiceImpl tSerc = null;
+	TextbookServiceImpl tServ = null;
 	TextbookBean tBean = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		tDao = new TextbookDAOImpl();
-		tSerc = new TextbookServiceImpl();
+		tServ = new TextbookServiceImpl();
 		tBean = new TextbookBean();
 	}
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-
+		response.setContentType("text/html;charset=UTF-8");
 		String url = request.getRequestURI();
 		System.out.println(url);
 
@@ -42,11 +48,49 @@ public class TextbookController extends HttpServlet {
 		String paging=null;
 
 		try {
-			if(path.equals("/book.text"))
+			if(path.equals("/bookList.text"))
 			{
 				nextPage = "/main.jsp";
-				paging = "/pages/main/center/books/book.jsp";
+				paging = "/pages/main/center/books/bookList.jsp";
 				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/bookselect.text"))
+			{
+				/*ajax*/
+				tBean = getTextbookBeanProperty(request, response);
+				ArrayList<TextbookBean> list = tServ.selectBookList(tBean);
+				
+				//jsondata로 파싱
+				JSONObject jsondata = new JSONObject();
+				Date date = null;
+				//jsonString
+				String jsonString = null;
+				JSONArray arr = new JSONArray();
+				//ArrayList에서 값을 꺼내옴
+				for(int i=0; i<list.size(); i++) {
+					System.out.println("-----------------------");
+					jsondata = new JSONObject();
+					jsondata.put("book_title", list.get(i).getBook_title());
+					jsondata.put("book_content", list.get(i).getBook_content());
+					jsondata.put("book_publisher", list.get(i).getBook_publisher());
+					jsondata.put("book_price", list.get(i).getBook_price());
+					jsondata.put("book_no", list.get(i).getBook_no());
+					jsondata.put("book_page", list.get(i).getBook_page());
+					jsondata.put("book_filename", list.get(i).getBook_filename());
+					
+					date = list.get(i).getBook_uploaddate();
+					jsondata.put("book_uploaddate", date.toString());
+					
+					arr.add(jsondata);
+				}
+				JSONObject booklist = new JSONObject();
+				booklist.put("list", arr);
+				
+				jsonString = booklist.toJSONString();
+				System.out.println(jsonString);
+				
+				PrintWriter out = response.getWriter();
+				out.print(jsonString);
 			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
@@ -62,11 +106,31 @@ public class TextbookController extends HttpServlet {
 	private TextbookBean getTextbookBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		int book_no = 0;
 		String book_title = null;
-		String book_email = null;
-		String book_pw = null;
 		String book_content = null;
 		String book_filename = null;
-		Timestamp book_uploaddate = new Timestamp(System.currentTimeMillis());;
+		String book_publisher = null;
+		int book_price = 0;
+		int book_page = 0;
+		Date book_uploaddate = new Date(System.currentTimeMillis());
+		
+		if(request.getParameter("book_publisher") != null)
+		{
+			book_publisher = request.getParameter("book_publisher");
+			tBean.setBook_publisher(book_publisher);
+			System.out.println("book_publisher =" +book_publisher);
+		}
+		if(request.getParameter("book_price") != null)
+		{
+			book_price = Integer.parseInt(request.getParameter("book_price"));
+			tBean.setBook_price(book_price);
+			System.out.println("book_price =" + book_price);
+		}
+		if(request.getParameter("book_page") != null)
+		{
+			book_page = Integer.parseInt(request.getParameter("book_page"));
+			tBean.setBook_page(book_page);
+			System.out.println("book_page =" + book_page);
+		}
 		
 		if(request.getParameter("book_no") != null)
 		{
@@ -79,18 +143,6 @@ public class TextbookController extends HttpServlet {
 			book_title = request.getParameter("book_title");
 			tBean.setBook_title(book_title);
 			System.out.println("book_title =" + book_title);
-		}
-		if(request.getParameter("book_email") != null)
-		{
-			book_email = request.getParameter("book_email");
-			tBean.setBook_email(book_email);
-			System.out.println("book_email =" + book_email);
-		}
-		if(request.getParameter("book_pw") != null)
-		{
-			book_pw = request.getParameter("book_pw");
-			tBean.setBook_pw(book_pw);
-			System.out.println("book_pw =" + book_pw);
 		}
 		if(request.getParameter("book_content") != null)
 		{

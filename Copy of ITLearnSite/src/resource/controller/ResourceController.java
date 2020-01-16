@@ -49,6 +49,7 @@ public class ResourceController extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		
 		/* ##test code## */
 		System.out.println("service()");
 
@@ -196,19 +197,17 @@ public class ResourceController extends HttpServlet {
 			//자료실게시판 - 글 삭제
 			else if(path.equals("/resourceDelete.bo"))
 			{ 
-				System.out.println("resourceDelete.bo");
-				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				serv.resourceDelete(res_no);
-				//파일 삭제시 필요
-			/*	File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _res_no);
-				if(imgDir.exists()){
-					FileUtils.deleteDirectory(imgDir);
-				}*/
+				System.out.println("resourceDelete.bo");				
+				int res_no = Integer.parseInt(request.getParameter("res_no"));				
+				serv.resourceDelete(res_no);				
+				File resfile = new File(RESOURCE_REPO + "\\" + res_no);
+				if(resfile.exists()){
+					FileUtils.deleteDirectory(resfile);
+				}
 				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
-				         + " location.href='" + request.getContextPath()
-				         + "/resource/resourceList.bo';" + "</script>");
+				         + " location.href='resourceList.bo'" + "</script>");
 				return;
 				
 			}
@@ -276,7 +275,7 @@ public class ResourceController extends HttpServlet {
 		String res_email = null;
 		String res_content = null;
 		String res_filename = null;
-		Date res_writedate = null;
+		Date res_writedate = new Date(System.currentTimeMillis());
 
 		if (request.getParameter("res_no") != null) {
 			res_no = Integer.parseInt(request.getParameter("res_no"));

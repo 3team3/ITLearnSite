@@ -1,5 +1,7 @@
 package textbook.db;
 
-public interface TextbookDAO{
+import java.util.ArrayList;
 
+public interface TextbookDAO{
+	public ArrayList<TextbookBean>selectBookList(TextbookBean tBean);
 }

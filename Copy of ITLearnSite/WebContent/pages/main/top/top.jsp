@@ -28,7 +28,7 @@
 				<nav class="site-navigation position-relative text-right" role="navigation">
 					<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
 						<li><a href="lectures.lec" class="nav-link text-left">강의</a></li>
-						<li><a href="book.text" class="nav-link text-left">도서</a></li>
+						<li><a href="bookList.text" class="nav-link text-left">도서</a></li>
 						<li><a href="resourceList.bo" class="nav-link text-left">자료실</a></li>
 
 						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>
@@ -43,7 +43,7 @@
 								<li><a href="${path}/menu/teachers.jsp">내 강의실</a></li>
 								<li><a href="paymentCheck.pay">주문 확인</a></li>
 							</ul></li>
-						<c:if test="${email == 'admin@admin.com' }">
+						<c:if test="${email == 'admin@admin.com'}">
 						<li class="has-children"><a href="#" class="nav-link text-left">관리자</a>
 							<ul class="dropdown">
 								<li><a href="memberlist.admin">회원 관리</a></li>

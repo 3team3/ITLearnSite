@@ -68,7 +68,7 @@
 			<div class="text-right">
 				<input type="button" value="목록으로" class="btn btn-color1" onclick="location.href='resourceList.bo'"> 
 				<input type="submit" class="btn btn-color1" value="수정"> 
-				<input type="button" class="btn btn-color1" value="삭제">
+				<input type="button" class="btn btn-color1" value="삭제" onclick="location.href='resourceDelete.bo?res_no=${rBean.res_no}'">
 			</div>
 		</form>
 		<hr>
