@@ -156,14 +156,14 @@
 
 								<%--섹션값 2부터는 앞 섹션으로 이동할수 있는 pre를 표시합니다. --%>
 								<c:if test="${section >1 && page==1 }">
-									<a class="no-uline" href="${path }/listArticles.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+									<a class="no-uline" href="${path }/resourceList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
 								</c:if>
 
 								<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
 
 								<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
 								<c:if test="${page ==10 }">
-									<a class="no-uline" href="${path }/board8/resourceList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+									<a class="no-uline" href="${path }/resourceList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
 								</c:if>
 							</c:forEach>
 						</c:when>
