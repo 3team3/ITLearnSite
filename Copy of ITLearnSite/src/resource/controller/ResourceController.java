@@ -97,7 +97,6 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceView.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				String res_filename = request.getParameter("res_filename");
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);	
 				request.setAttribute("res_no", res_no);
@@ -110,10 +109,11 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("filedown.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				String res_filename = request.getParameter("res_filename");
-				rBean = serv.resourceView(res_no);				
+				
+				rBean = serv.resourceView(res_no);	
+				String res_filename = rBean.getRes_filename();
 				FileDownloadController filedown = new FileDownloadController();
-				filedown.download(response, RESOURCE_REPO + "\\" + res_no + "\\" + res_filename);
+				filedown.download(response, RESOURCE_REPO + "\\" + res_no + "\\" + res_filename,res_filename);
 				request.setAttribute("rBean", rBean);
 					
 			}
