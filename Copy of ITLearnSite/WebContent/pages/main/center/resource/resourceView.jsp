@@ -88,7 +88,7 @@
 			</div>
 			<hr>
 			<c:if test="${email == null}">
-				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="130" rows="3" style="resize:none" readonly="readonly"></textarea>
+				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="130" rows="3" style="resize:none" readonly="readonly" onclick="nologin();"></textarea>
 				<br>
 				<input type="hidden" id="res_no" name="res_no" value="${res_no}">
 				<input type="button" id="commentWrite" value="댓글 작성" onclick="nologin();">

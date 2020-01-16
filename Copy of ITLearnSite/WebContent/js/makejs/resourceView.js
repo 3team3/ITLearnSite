@@ -100,6 +100,7 @@ function comments(){
 		success : function(getData) {
 			if(getData == 1)
 			{
+				$("#content").val("");
 				cmtlist();
 			}
 		}
