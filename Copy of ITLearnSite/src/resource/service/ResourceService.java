@@ -9,7 +9,7 @@ import resource.db.ResourceBean;
 
 public interface ResourceService {
 	/*자료실 글쓰기*/
-	public int addResource(ResourceBean rBean, String res_filename);
+	public int addResource(ResourceBean rBean);
 	
 	/*자료실 글수정*/
 	public void modResource(ResourceBean rBean);

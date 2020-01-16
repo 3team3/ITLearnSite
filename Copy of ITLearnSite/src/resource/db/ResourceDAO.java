@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface ResourceDAO {
 	/*자료 등록*/
-	public int insertResource(ResourceBean rBean, String res_filename);
+	public int insertResource(ResourceBean rBean);
 	
 	/*자료 수정*/
 	public void updateResource(ResourceBean rBean);

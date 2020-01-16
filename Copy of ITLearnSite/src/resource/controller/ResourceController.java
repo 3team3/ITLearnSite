@@ -97,6 +97,7 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceView.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				String res_filename = request.getParameter("res_filename");
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);	
 				request.setAttribute("res_no", res_no);
@@ -109,10 +110,8 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("filedown.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				rBean = serv.resourceView(res_no);
-				
-				String res_filename = rBean.getRes_filename();
-				
+				String res_filename = request.getParameter("res_filename");
+				rBean = serv.resourceView(res_no);				
 				FileDownloadController filedown = new FileDownloadController();
 				filedown.download(response, RESOURCE_REPO + "\\" + res_no + "\\" + res_filename);
 				request.setAttribute("rBean", rBean);
@@ -144,13 +143,13 @@ public class ResourceController extends HttpServlet {
 				rBean.setRes_title(res_title);
 				rBean.setRes_content(res_content);
 				rBean.setRes_filename(res_filename);
-				res_no = serv.addResource(rBean, res_filename);
+				res_no = serv.addResource(rBean);
 				
 				if (res_filename != null && res_filename.length() != 0) {
 					File srcFile = new File(RESOURCE_REPO + "\\" + "temp" + "\\" + res_filename);
 					File destDir = new File(RESOURCE_REPO + "\\" + res_no);
 					destDir.mkdirs();
-					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+					FileUtils.moveFileToDirectory(srcFile,destDir, true);
 				}
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + "  alert('글쓰기를 완료했습니다.');" + " location.href='" + 
@@ -163,6 +162,7 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceModify.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);
 				nextPage = "/main.jsp";
