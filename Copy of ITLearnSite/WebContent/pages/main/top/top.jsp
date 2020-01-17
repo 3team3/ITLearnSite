@@ -28,7 +28,7 @@
 				<nav class="site-navigation position-relative text-right" role="navigation">
 					<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
 						<li><a href="lectureList.lec" class="nav-link text-left">강의</a></li>
-						<li><a href="book.text" class="nav-link text-left">도서</a></li>
+						<li><a href="bookList.text" class="nav-link text-left">도서</a></li>
 						<li><a href="resourceList.bo" class="nav-link text-left">자료실</a></li>
 
 						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>

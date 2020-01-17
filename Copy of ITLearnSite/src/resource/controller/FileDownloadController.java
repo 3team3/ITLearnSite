@@ -9,7 +9,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 public class FileDownloadController {
-	public HttpServletResponse download(HttpServletResponse response, String filePath) throws Exception {
+	public HttpServletResponse download(HttpServletResponse response, String filePath,String fileName) throws Exception {
 		File downfile = new File(filePath);		
 		if(!downfile.exists()) {
 		        throw new FileNotFoundException();
@@ -22,8 +22,8 @@ public class FileDownloadController {
 				inputStream = new FileInputStream(downfile);               
 				//Setting Resqponse Header
 				response.setContentType("application/octet-stream");
-		        response.setHeader("Content-Disposition",                     
-		                           "attachment;filename=\""+downfile.getName()+"\"");
+		        response.setHeader("Content-Disposition", 
+		        					"attachment;filename=\""+new String(fileName.getBytes("euc-kr"),"8859_1")+"\"");
 
 		        //Writing InputStream to OutputStream
 		        byte[] outByte = new byte[4096];

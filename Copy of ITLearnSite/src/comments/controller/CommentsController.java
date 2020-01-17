@@ -11,9 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.mysql.cj.Session;
 
 import comments.db.CommentsBean;
 import comments.db.CommentsDAOImpl;
@@ -112,7 +115,24 @@ public class CommentsController extends HttpServlet {
 				 PrintWriter out = response.getWriter();
 				 out.print(jsonString);
 			}
-			
+			else if(path.equals("/commentsDelete.co"))
+			{
+				cBean = getCommentsBeanProperty(request, response);
+				HttpSession session= request.getSession();
+				String email = (String)session.getAttribute("email");
+				int check = cServ.commentsDelete(cBean.getCo_no(), email);
+				PrintWriter out = response.getWriter();
+				if(check == 1)
+				{
+					//지우기 성공
+					out.print(1);
+				}
+				else {
+					//지우기 실패 다른사람 글 지우려고 함
+					
+					out.print(0);
+				}
+			}
 			// null PointException
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);

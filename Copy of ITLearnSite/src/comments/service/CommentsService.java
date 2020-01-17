@@ -9,4 +9,6 @@ public interface CommentsService {
 	public int insertComments(CommentsBean cBean);
 	//코멘트 리스트를 가져오는 메서드
 	public ArrayList<CommentsBean> selectCommentsList(CommentsBean cBean);
+	//코멘트 삭제
+	public int commentsDelete(int co_no, String co_email);
 }

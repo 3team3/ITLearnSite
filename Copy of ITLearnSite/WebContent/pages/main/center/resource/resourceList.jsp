@@ -95,7 +95,7 @@
 									<tbody>
 										<tr align="center">
 											<%-- varStatus의 count 속성을 이용 글번호를 1부터 자동으로 표시 --%>
-											<td width="5%">${resourceNum.count }</td>
+											<td width="5%">${resource.res_no }</td>
 											<td align="left" width="35%">
 												<%--왼쪽으로 30px만큼 여백을 준 후 글제목을 표시할 목적으로 여백을 줌 --%> <span style="padding-right: 30px;"></span> <c:choose>
 													<%-- <forEach> 태그 반복 시 각 글의 level 값이 1보다 크다면 답변글(자식글) --%>

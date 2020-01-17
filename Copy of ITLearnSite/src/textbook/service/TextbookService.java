@@ -1,5 +1,9 @@
 package textbook.service;
 
-public interface TextbookService {
+import java.util.ArrayList;
 
+import textbook.db.TextbookBean;
+
+public interface TextbookService {
+	public ArrayList<TextbookBean> selectBookList(TextbookBean tBean);
 }

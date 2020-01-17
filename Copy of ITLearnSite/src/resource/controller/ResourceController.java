@@ -49,6 +49,7 @@ public class ResourceController extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		
 		/* ##test code## */
 		System.out.println("service()");
 
@@ -109,12 +110,11 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("filedown.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				rBean = serv.resourceView(res_no);
 				
+				rBean = serv.resourceView(res_no);	
 				String res_filename = rBean.getRes_filename();
-				
 				FileDownloadController filedown = new FileDownloadController();
-				filedown.download(response, RESOURCE_REPO + "\\" + res_no + "\\" + res_filename);
+				filedown.download(response, RESOURCE_REPO + "\\" + res_no + "\\" + res_filename,res_filename);
 				request.setAttribute("rBean", rBean);
 					
 			}
@@ -150,7 +150,7 @@ public class ResourceController extends HttpServlet {
 					File srcFile = new File(RESOURCE_REPO + "\\" + "temp" + "\\" + res_filename);
 					File destDir = new File(RESOURCE_REPO + "\\" + res_no);
 					destDir.mkdirs();
-					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+					FileUtils.moveFileToDirectory(srcFile,destDir, true);
 				}
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + "  alert('글쓰기를 완료했습니다.');" + " location.href='" + 
@@ -163,6 +163,7 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceModify.bo");
 				int res_no = Integer.parseInt(request.getParameter("res_no"));
+				
 				rBean = serv.resourceView(res_no);
 				request.setAttribute("rBean", rBean);
 				nextPage = "/main.jsp";
@@ -175,8 +176,8 @@ public class ResourceController extends HttpServlet {
 				rBean=getResourceBeanProperty(request, response);
 				serv.modResource(rBean);
 				PrintWriter pw = response.getWriter();
-				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" + 
-				"resourceList.bo';" + "</script>");
+				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" 
+				+"resourceView.bo?res_no="+rBean.getRes_no()+"';" + "</script>");
 				return;
 			}
 			//자료실게시판 - 글 검색
@@ -196,19 +197,17 @@ public class ResourceController extends HttpServlet {
 			//자료실게시판 - 글 삭제
 			else if(path.equals("/resourceDelete.bo"))
 			{ 
-				System.out.println("resourceDelete.bo");
-				int res_no = Integer.parseInt(request.getParameter("res_no"));
-				serv.resourceDelete(res_no);
-				//파일 삭제시 필요
-			/*	File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _res_no);
-				if(imgDir.exists()){
-					FileUtils.deleteDirectory(imgDir);
-				}*/
+				System.out.println("resourceDelete.bo");				
+				int res_no = Integer.parseInt(request.getParameter("res_no"));				
+				serv.resourceDelete(res_no);				
+				File resfile = new File(RESOURCE_REPO + "\\" + res_no);
+				if(resfile.exists()){
+					FileUtils.deleteDirectory(resfile);
+				}
 				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
-				         + " location.href='" + request.getContextPath()
-				         + "/resource/resourceList.bo';" + "</script>");
+				         + " location.href='resourceList.bo'" + "</script>");
 				return;
 				
 			}
@@ -276,7 +275,7 @@ public class ResourceController extends HttpServlet {
 		String res_email = null;
 		String res_content = null;
 		String res_filename = null;
-		Date res_writedate = null;
+		Date res_writedate = new Date(System.currentTimeMillis());
 
 		if (request.getParameter("res_no") != null) {
 			res_no = Integer.parseInt(request.getParameter("res_no"));

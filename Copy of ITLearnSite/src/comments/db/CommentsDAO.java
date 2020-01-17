@@ -9,5 +9,7 @@ public interface CommentsDAO{
 	public int getCommentsNo();
 	//코멘트 가져오기
 	public ArrayList<CommentsBean> selectCommentsList(CommentsBean cBean);
+	//코멘트 삭제
+	public int commentsDelete(int co_no, String co_email);
 }
 

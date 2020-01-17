@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="${path}/css/style.css">
 <link rel="stylesheet" href="${path}/css/board.css">
 
+
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 
@@ -62,8 +63,8 @@
 	<script src="${path}/js/main.js"></script>
 	<script src="${path}/js/makejs/commons.js"></script>
 	<script src="${path}/js/makejs/DaumPostAPI.js"></script>
-	
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 	<script src="${path}/js/makejs/summerNote.js"></script>
+
 </body>
 </html>

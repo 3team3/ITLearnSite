@@ -26,4 +26,9 @@ public class CommentsServiceImpl implements CommentsService {
 		
 		return cDao.selectCommentsList(cBean);
 	}
+	
+	@Override
+	public int commentsDelete(int co_no, String email) {
+		return cDao.commentsDelete(co_no, email);
+	}
 }

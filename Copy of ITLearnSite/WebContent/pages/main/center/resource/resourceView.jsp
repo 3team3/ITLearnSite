@@ -68,7 +68,7 @@
 			<div class="text-right">
 				<input type="button" value="목록으로" class="btn btn-color1" onclick="location.href='resourceList.bo'"> 
 				<input type="submit" class="btn btn-color1" value="수정"> 
-				<input type="button" class="btn btn-color1" value="삭제">
+				<input type="button" class="btn btn-color1" value="삭제" onclick="location.href='resourceDelete.bo?res_no=${rBean.res_no}'">
 			</div>
 		</form>
 		<hr>
@@ -88,7 +88,7 @@
 			</div>
 			<hr>
 			<c:if test="${email == null}">
-				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="130" rows="3" style="resize:none" readonly="readonly"></textarea>
+				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="130" rows="3" style="resize:none" readonly="readonly" onclick="nologin();"></textarea>
 				<br>
 				<input type="hidden" id="res_no" name="res_no" value="${res_no}">
 				<input type="button" id="commentWrite" value="댓글 작성" onclick="nologin();">

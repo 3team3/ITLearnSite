@@ -526,6 +526,7 @@ constraint set_email_fk foreign key(set_email) references member(email)
 /*ȸ�� ������ ȸ���� ��ٱ��ϵ� �Բ� ����*/
 /*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
 
+<<<<<<< HEAD
 /*ȸ��*/
 
 INSERT INTO member (
@@ -571,3 +572,31 @@ INSERT INTO member VALUES (
     1,
     'y'
 );
+=======
+/*회원*/
+insert into member(email,pw,name,auth) values('admin@admin.com','1234','관리자','y');
+insert into member values
+('test@test.com','1234','회원1',1,'2000','12','12','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
+insert into member values
+('test1@test.com','1234','회원2',1,'1995','1','11','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
+
+/*board테이블*/
+create table book(
+book_title varchar2(400) primary key,
+book_content varchar2(400),
+book_publisher varchar2(30),
+book_price number(30),
+book_no number(30),
+book_page number(30),
+book_filename varchar2(100),
+book_uploaddate Date
+);
+insert into book values('2020시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',31000,1,256,'gibon1.jpg',sysdate);
+insert into book values('2021시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
+insert into book values('2022시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',33000,3,256,'gibon3.jpg',sysdate);
+insert into book values('2023시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',34000,4,256,'gibon4.jpg',sysdate);
+insert into book values('2024시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',35000,5,256,'gibon5.jpg',sysdate);
+insert into book values('2025시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',36000,6,256,'gibon6.jpg',sysdate);
+
+commit;
+>>>>>>> refs/heads/merge1
