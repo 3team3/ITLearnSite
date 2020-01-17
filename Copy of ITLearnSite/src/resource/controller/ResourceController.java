@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,12 +174,33 @@ public class ResourceController extends HttpServlet {
 			}
 			//자료실게시판 - 글 수정
 			else if(path.equals("/updateResource.bo")){
-				rBean=getResourceBeanProperty(request, response);
+				
+				rBean = getResourceBeanProperty(request, response);
+				
+				int res_no = rBean.getRes_no();
+				Map<String, String> resourceMap = upload(request, response);
+				String res_title = resourceMap.get("res_title");
+				String res_content = resourceMap.get("res_content");
+				String res_filename = resourceMap.get("res_filename");
+
+				rBean.setRes_title(res_title);
+				rBean.setRes_content(res_content);
+				rBean.setRes_filename(res_filename);
+				
 				serv.modResource(rBean);
+				
+				if (res_filename != null && res_filename.length() != 0) {
+					File srcFile = new File(RESOURCE_REPO + "\\" + "temp" + "\\" + res_filename);
+					File destDir = new File(RESOURCE_REPO + "\\" + res_no);
+					destDir.mkdirs();
+					FileUtils.moveFileToDirectory(srcFile,destDir, true);
+				}
+				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" 
 				+"resourceView.bo?res_no="+rBean.getRes_no()+"';" + "</script>");
 				return;
+				
 			}
 			//자료실게시판 - 글 검색
 			else if(path.equals("/resourceSelect.bo"))

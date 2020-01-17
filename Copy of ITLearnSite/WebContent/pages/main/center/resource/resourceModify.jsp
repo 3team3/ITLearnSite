@@ -40,7 +40,7 @@
 	
 	<div class="container mt-5 mb-5">
 	 <h1>자료실</h1>
-	<form action="updateResource.bo" method="post">
+	<form action="updateResource.bo" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 		<table  class="table table-striped" style="text-align: center;">
 			<tr>
 				<td>번호</td>
@@ -62,11 +62,12 @@
 				<td colspan="2"><textarea name="res_content" class="form-control" rows="10" cols="120">${rBean.res_content}</textarea></td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
-				<td colspan="2">
-				<input type="hidden" name="res_filename" value="${rBean.res_filename}">
-				<a href="filedown.bo?res_no=${rBean.res_no}">${rBean.res_filename}</a>
-				</td>
+				<td>기존파일</td>
+				<td colspan="2">${rBean.res_filename}</a></td>
+			</tr>
+			<tr>
+			     <td>파일변경</td>
+				 <td colspan="2"><input type="file" name="res_filename"/></td>
 			</tr>
 			</table>
 			<div class="text-right">
