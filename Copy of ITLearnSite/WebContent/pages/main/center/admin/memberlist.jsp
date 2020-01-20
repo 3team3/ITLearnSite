@@ -74,7 +74,7 @@
 						<td>${memberlist.address1}</td>
 						<td>${memberlist.address2}</td>
 						<td>${memberlist.sms}</td>
-						<td><input type="button" class="btn btn-color1" value="회원주문정보" onclick="location.href='${path}/AdminMemberOrder.admin?email=${memberlist.email}'"></td>
+						<td><input type="button" class="btn btn-color1" value="회원주문정보" onclick="location.href='${path}/AdminMemberPayment.admin?email=${memberlist.email}'"></td>
 						<td><input type="button" class="btn btn-color1" value="회원삭제" onclick="location.href='${path}/AdminMemberDelete.admin?email=${memberlist.email}'"></td>						
 					</tr>
 

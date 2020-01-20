@@ -40,7 +40,7 @@
 		<div class="content">
 		<table class="table">
 			<tr class="tb_head">
-				<td colspan="14">주문 목록</td>
+				<td colspan="15">주문 목록</td>
 			</tr>
 			<%-- <c:set var="j" value="0"/> --%>
 			<!-- MemberListController에서 넘겨 받은 request영역 안에 있는 list사이즈 만큼 반복 -->
@@ -56,13 +56,29 @@
 						<td>우편번호</td>
 						<td>주소</td>
 						<td>상세주소</td>
-						<td>sms동의 여부</td>		
-						<td>주문정보</td>
+						<td>주문교재</td>
+						<td>주문강의</td>
+						<td>결제금액</td>			
+						<td>결제여부</td>
 						<td></td>
 					</tr>
-			<%-- <c:forEach  var="memberlist"   items="${requestScope.memberlist}">		
+			<%-- <c:forEach  var="paymentlist"   items="${requestScope.paymentlist}">		
 					<tr>
-										
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
+						<td>${paymentlist.}</td>
 					</tr>
 
 				<!-- j변수 값 1씩 증가 -->

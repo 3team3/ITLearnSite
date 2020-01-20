@@ -56,7 +56,7 @@
 	
 	<!-- 주문페이지 시작  -->
 
-	<form class="form" action="" method="post">
+	<form class="form" action="payment1.pay" method="post">
 	<div class="site-section">
 	<div class="row justify-content-center">
 	<div class="col-md-5">
