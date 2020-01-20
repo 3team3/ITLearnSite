@@ -43,7 +43,7 @@ public class CartDAOImpl implements CartDAO {
 		ArrayList<CartBean> cartlist=new ArrayList<CartBean>();
 		try{
 			con=getConnection();
-			sql="select * from cart where email=?";
+			sql="select * from cart_table where email=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs=pstmt.executeQuery();
@@ -66,6 +66,7 @@ public class CartDAOImpl implements CartDAO {
 		}		
 		return cartlist;
 	}
+
 
 }
 

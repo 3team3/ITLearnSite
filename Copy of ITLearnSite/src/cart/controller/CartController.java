@@ -60,7 +60,15 @@ public class CartController extends HttpServlet{
 				
 				
 			}else if(path.equals("/cartAdd.cart")){//장바구니 넣기
+				String email = (String)request.getSession().getAttribute("email");
+				int lec_no=Integer.parseInt(request.getParameter("lec_no"));
+				String pro_name=request.getParameter("lec_title");
+				int pro_price=Integer.parseInt(request.getParameter("lec_price"));				
 				System.out.println("장바구니에 넣기");
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/cart/cart.jsp";
+				request.setAttribute("paging", paging);
 				
 			}else if(path.equals("/cartEdit.cart")){//수량변경
 				System.out.println("수량변경");	
