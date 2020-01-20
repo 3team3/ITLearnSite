@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -91,6 +92,15 @@ public class TextbookController extends HttpServlet {
 				
 				PrintWriter out = response.getWriter();
 				out.print(jsonString);
+			}
+			if(path.equals("/bookView.text"))
+			{
+				tBean= getTextbookBeanProperty(request, response);
+				int book_no = tBean.getBook_no();
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/books/bookView.jsp?book_no="+book_no;
+				request.setAttribute("paging", paging);
 			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException

@@ -8,7 +8,6 @@
 <head>
 <link rel="stylesheet" href="${path}/fonts/icomoon/style.css">
 <link rel="stylesheet" href="${path}/css/bootstrap.min.css">
-<link rel="stylesheet" href="${path}/css/bootstrap.css">
 <link rel="stylesheet" href="${path}/css/jquery-ui.css">
 <link rel="stylesheet" href="${path}/css/owl.carousel.min.css">
 <link rel="stylesheet" href="${path}/css/owl.theme.default.min.css">

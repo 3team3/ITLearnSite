@@ -1,6 +1,15 @@
+.pagewrap{
+	width: 1200px;
+    height: auto;
+    margin:0 auto;
+    margin-top:30px; 
+    justify-content: center;
+    display: flex;
+    align-content: center;
+}
 .booklist{
-	width : 100%;
-	height: 300px;
+	width: 1000px;
+    height: 370px;
 /* 	border: solid red; */
 }
 .bookimg{
@@ -30,6 +39,6 @@
 	font-weight: bold;
 }
 
-.bookcontent{
-	
+button {
+	margin-left : 10px;
 }

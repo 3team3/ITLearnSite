@@ -36,7 +36,7 @@
 	</div>
 </div>
 <body>
-	<div class="pagemargin">
+	<div class="pagewrap">
 		<div class="wrapboard">
 			
 		</div>
