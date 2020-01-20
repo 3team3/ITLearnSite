@@ -1,305 +1,123 @@
-/*ȸ�� ���̺�*/
-CREATE TABLE member (
-    email         VARCHAR2(40) PRIMARY KEY,
-    pw            VARCHAR2(20) NOT NULL,
-    name          VARCHAR2(10) NOT NULL,
-    gender        NUMBER(2),
-    birth_year    VARCHAR2(10),
-    birth_month   VARCHAR2(10),
-    birth_day     VARCHAR2(10),
-    phonenumber   VARCHAR2(20),
-    address       VARCHAR2(10),
-    address1      VARCHAR2(100),
-    address2      VARCHAR2(100),
-    sms           NUMBER(2),
-    auth          VARCHAR2(2) DEFAULT 'N'
+
+/*회원 테이블*/
+create table member(
+email varchar2(40) primary key,
+pw varchar2(20) not null,
+name varchar2(10) not null,
+gender number(2) ,
+birth_year varchar2(10),
+birth_month varchar2(10),
+birth_day varchar2(10),
+phonenumber varchar2(20),
+address varchar2(10),
+address1 varchar2(100),
+address2 varchar2(100),
+sms number(2),
+auth varchar2(2) default 'N'
 );
 
-SELECT
-    *
-FROM
-    member;
+insert into member(email,pw,name,auth) values('admin@admin.com','1234','관리자','y');
+insert into member values
+('test@test.com','1234','회원1',1,'2000','12','12','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
+insert into member values
+('test1@test.com','1234','회원2',1,'1995','1','11','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
 
-/*�ڷ�� ���̺�*/
 
-CREATE TABLE resource_table (
-    res_no          NUMBER(38) PRIMARY KEY,
-    res_parentno    NUMBER(38) DEFAULT 0,
-    res_title       VARCHAR2(50),
-    res_email       VARCHAR2(40),
-    res_content     VARCHAR2(1000),
-    res_filename    VARCHAR2(50),
-    res_writedate   DATE DEFAULT SYSDATE,
-    CONSTRAINT res_email_fk FOREIGN KEY ( res_email )
-        REFERENCES member ( email )
+select * from member;
+
+/*자료실 테이블*/
+create table resource_table(
+res_no number(38) primary key,
+res_parentno number(38) default 0,
+res_title varchar2(50),
+res_email varchar2(40),
+res_content varchar2(1000),
+res_filename varchar2(50),
+res_writedate date default sysdate,
+constraint res_email_fk foreign key(res_email) references member(email)
 );
 
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    1,
-    'asdf',
-    'test@test.com'
+insert into resource_table(res_no, res_title, res_email)
+values(1, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(2, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(3, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(4, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(5, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(6, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(7, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(8, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(9, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(10, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(11, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(12, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(13, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(14, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(15, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(16, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(17, 'asdf', 'test@test.com');
+insert into resource_table(res_no, res_title, res_email)
+values(18, 'asdf', 'test@test.com');
+
+select * from resource_table;
+
+/*자료실 댓글 테이블*/
+create table resource_comments(
+co_no number(38) primary key,
+res_no number(38),
+co_email varchar2(100),
+co_pw varchar2(100),
+co_date date default sysdate,
+co_content varchar2(1000),
+constraint res_no_fk foreign key(res_no) references resource_table(res_no) on delete cascade
 );
 
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    2,
-    'asdf',
-    'test@test.com'
+select * from resource_comments;
+
+/*이용문의게시판*/
+create table question_table(
+ques_no number(38) primary key,
+ques_parentno number(38) default 0,
+ques_title varchar2(50),
+ques_email varchar2(40),
+ques_pw varchar2(20),
+ques_content varchar2(4000),
+ques_writedate date default sysdate,
+ques_readcount number(38),
+constraint ques_email_fk foreign key(ques_email) references member(email)
 );
 
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    3,
-    'asdf',
-    'test@test.com'
-);
+select * from question_table;
 
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    4,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    5,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    6,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    7,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    8,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    9,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    10,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    11,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    12,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    13,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    14,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    15,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    16,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    17,
-    'asdf',
-    'test@test.com'
-);
-
-INSERT INTO resource_table (
-    res_no,
-    res_title,
-    res_email
-) VALUES (
-    18,
-    'asdf',
-    'test@test.com'
-);
-
-COMMIT;
-
-SELECT
-    *
-FROM
-    resource_table;
-
-SELECT
-    *
-FROM
-    resource_table;
-
-/*�ڷ�� ��� ���̺�*/
-
-CREATE TABLE resource_comments (
-    co_no        NUMBER(38) PRIMARY KEY,
-    res_no       NUMBER(38),
-    co_email     VARCHAR2(100),
-    co_pw        VARCHAR2(100),
-    co_date      DATE DEFAULT SYSDATE,
-    co_content   VARCHAR2(1000),
-    CONSTRAINT res_no_fk FOREIGN KEY ( res_no )
-        REFERENCES resource_table ( res_no )
-            ON DELETE CASCADE
-);
-
-SELECT
-    *
-FROM
-    resource_comments;
-
-/*�̿빮�ǰԽ���*/
-
-CREATE TABLE question_table (
-    ques_no          NUMBER(38) PRIMARY KEY,
-    ques_parentno    NUMBER(38) DEFAULT 0,
-    ques_title       VARCHAR2(50),
-    ques_email       VARCHAR2(40),
-    ques_pw          VARCHAR2(20),
-    ques_content     VARCHAR2(4000),
-    ques_writedate   DATE DEFAULT SYSDATE,
-    ques_readcount   NUMBER(38),
-    CONSTRAINT ques_email_fk FOREIGN KEY ( ques_email )
-        REFERENCES member ( email )
-);
-
-SELECT
-    *
-FROM
-    question_table;
-
-/*��������*/
-
-CREATE TABLE notice_table (
-    noti_no          NUMBER(38) PRIMARY KEY,
-    noti_parentno    NUMBER(38) DEFAULT 0,
-    noti_title       VARCHAR2(50),
-    noti_email       VARCHAR2(40),
-    noti_pw          VARCHAR2(20),
-    noti_content     VARCHAR2(4000),
-    noti_writedate   DATE DEFAULT SYSDATE,
-    noti_readcount   NUMBER(38),
-    CONSTRAINT noti_email_fk FOREIGN KEY ( noti_email )
-        REFERENCES member ( email )
-);
-
-SELECT
-    *
-FROM
-    notice_table;
-
-/*���ǰԽ���*/
-
+/*강의게시판*/
 CREATE TABLE lecture_table (
-    lec_no           NUMBER(38) PRIMARY KEY,
-    lec_parentno     NUMBER(38) DEFAULT 0,
-    lec_title        VARCHAR2(50),
-    lec_price        NUMBER(38),
-    lec_content      VARCHAR2(4000),
-    lec_imgfile      VARCHAR2(50),
-    lec_spofile      VARCHAR2(50),
-    lec_uploaddate   DATE DEFAULT SYSDATE
+lec_no  number(38) primary key,
+lec_parentno number(38) default 0,
+lec_title varchar2(50),
+lec_price varchar2(50),
+lec_content varchar2(4000),
+lec_imgfile varchar2(50),
+lec_spofile varchar2(50),
+lec_uploaddate date default sysdate
 );
-
-SELECT
-    *
+/*
+SELECT * 
+FROM (
 FROM
     (
         SELECT
@@ -338,7 +156,7 @@ SELECT
     *
 FROM
     lecture_table;
-
+*/
 INSERT INTO lecture_table (
     lec_no,
     lec_title,
@@ -348,7 +166,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     1,
-    '�Ž� JSP',
+    '신쌤 JSP',
     60000,
     'aaaa',
     'alim01.png',
@@ -364,7 +182,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     2,
-    '���� JAVA',
+    '동빈나 JAVA',
     60000,
     'aaaa',
     'dongjava01.png',
@@ -380,7 +198,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     3,
-    '���̳� SQL',
+    '정미나 SQL',
     60000,
     'aaaa',
     'jeongsql01.png',
@@ -396,123 +214,78 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     4,
-    '�����Ͼ� CSS',
+    '리베하얀 CSS',
     60000,
     'aaaa',
     'ricss01.png',
     'ricss01.mp4'
 );
 
-SELECT
-    *
-FROM
-    lecture_table;
+select * from lecture_table;
 
-DROP TABLE lecture_table;
 
-/*����Խ���*/
 
-CREATE TABLE textbook_table (
-    book_no           NUMBER(38) PRIMARY KEY,
-    book_parentno     NUMBER(38) DEFAULT 0,
-    book_title        VARCHAR2(50),
-    book_writer       VARCHAR(50),
-    book_price        NUMBER(20),
-    book_email        VARCHAR2(40),
-    book_pw           VARCHAR2(20),
-    book_content      VARCHAR2(4000),
-    book_filename     VARCHAR2(50),
-    book_uploaddate   DATE DEFAULT SYSDATE,
-    CONSTRAINT book_email_fk FOREIGN KEY ( book_email )
-        REFERENCES member ( email )
+/*교재게시판*/
+create table book_table(
+book_title varchar2(400) primary key,
+book_content varchar2(400),
+book_publisher varchar2(30),
+book_price number(30),
+book_no number(30),
+book_page number(30),
+book_filename varchar2(100),
+book_uploaddate Date
 );
 
-DROP TABLE textbook_table;
+insert into book_table values('2020시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',31000,1,256,'gibon1.jpg',sysdate);
+insert into book_table values('2021시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
+insert into book_table values('2022시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',33000,3,256,'gibon3.jpg',sysdate);
+insert into book_table values('2023시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',34000,4,256,'gibon4.jpg',sysdate);
+insert into book_table values('2024시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',35000,5,256,'gibon5.jpg',sysdate);
+insert into book_table values('2025시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',36000,6,256,'gibon6.jpg',sysdate);
 
+select * from book;
 
-/*��ٱ���*/
-
-CREATE TABLE cart_table (
-    cart_no                   NUMBER(38) PRIMARY KEY,
-    cart_email                VARCHAR2(40),
-    cart_book1                NUMBER(38),
-    cart_book1_num            NUMBER(38),
-    cart_book2                NUMBER(38),
-    cart_book2_num            NUMBER(38),
-    cart_book3                NUMBER(38),
-    cart_book3_num            NUMBER(38),
-    cart_book4                NUMBER(38),
-    cart_book4_num            NUMBER(38),
-    cart_book5                NUMBER(38),
-    cart_book5_num            NUMBER(38),
-    cart_lecture1             NUMBER(38),
-    cart_lecture1_startdate   DATE,
-    cart_lecture2             NUMBER(38),
-    cart_lecture2_startdate   DATE,
-    cart_lecture3             NUMBER(38),
-    cart_lecture3_startdate   DATE,
-    cart_lecture4             NUMBER(38),
-    cart_lecture4_startdate   DATE,
-    cart_lecture5             NUMBER(38),
-    cart_lecture5_startdate   DATE,
-    CONSTRAINT cart_email_fk FOREIGN KEY ( cart_email )
-        REFERENCES member ( email )
-            ON DELETE CASCADE
+/*장바구니*/
+create table cart_table(
+cart_num int primary key,
+email varchar2(20),
+pro_name varchar2(400) not null,
+pro_cnt number not null,
+pro_price number not null,
+pro_sort varchar2(20) not null,
+pro_img varchar2(400)
 );
 
-DROP TABLE cart_table;
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(1,'test@test.com','2020시나공 정보처리 산업기사 실기[기본서]',1,31000,'교재');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(2,'test@test.com','2021시나공 정보처리 산업기사 실기[기본서]',1,32000,'교재');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(3,'test@test.com','2025시나공 정보처리 산업기사 실기[기본서]',1,36000,'교재');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(4,'test@test.com','리베하얀 CSS',1,50000,'강의');
 
-SELECT
-    *
-FROM
-    cart_table;
+select * from cart_table;
 
-/*����*/
-
-CREATE TABLE payment_table (
-    pay_no                   NUMBER(38) PRIMARY KEY,
-    pay_cart_no              NUMBER(38),
-    pay_email                VARCHAR2(40),
-    pay_name                 VARCHAR2(50),
-    pay_address              VARCHAR2(50),
-    pay_address1             VARCHAR2(50),
-    pay_address2             VARCHAR2(50),
-    pay_option               VARCHAR2(50),
-    pay_total                VARCHAR2(4000),
-    pay_book1                NUMBER(38),
-    pay_book1_num            NUMBER(38),
-    pay_book2                NUMBER(38),
-    pay_book2_num            NUMBER(38),
-    pay_book3                NUMBER(38),
-    pay_book3_num            NUMBER(38),
-    pay_book4                NUMBER(38),
-    pay_book4_num            NUMBER(38),
-    pay_book5                NUMBER(38),
-    pay_book5_num            NUMBER(38),
-    pay_lecture1             NUMBER(38),
-    pay_lecture1_startdate   DATE,
-    pay_lecture2             NUMBER(38),
-    pay_lecture2_startdate   DATE,
-    pay_lecture3             NUMBER(38),
-    pay_lecture3_startdate   DATE,
-    pay_lecture4             NUMBER(38),
-    pay_lecture4_startdate   DATE,
-    pay_lecture5             NUMBER(38),
-    pay_lecture5_startdate   DATE,
-    pay_verify               VARCHAR2(2) DEFAULT 'N',
-    CONSTRAINT pay_email_fk FOREIGN KEY ( pay_email )
-        REFERENCES member ( email )
+/*결제*/
+create table payment_table(
+pay_no number(38) primary key,
+pay_cart_no number(38),
+pay_email varchar2(40),
+pay_name varchar2(50),
+pay_phonenumber varchar2(50),
+pay_address varchar2(50),
+pay_address1 varchar2(50),
+pay_address2 varchar2(50),
+pay_pro_name varchar2(400),
+pay_pro_cnt number,
+pay_pro_price number,
+pay_pro_sort varchar2(20),
+pay_total varchar2(4000),
+pay_option number(2),
+constraint pay_email_fk foreign key(pay_email) references member(email)
 );
-
-DROP TABLE payment_table;
-
-SELECT
-    *
-FROM
-    payment_table;
+select * from payment_table;
 
 /*
-���� ���� ���� Ȯ�� �� insert�� ������ ���� ����Ʈ
+강의 구매 결제 확인 시 insert될 계정별 강의 리스트
 create table set_pay_lec_table(
 set_no number(3),
 set_email varchar2(40),
@@ -523,80 +296,16 @@ constraint set_email_fk foreign key(set_email) references member(email)
 );
 */
 
-/*ȸ�� ������ ȸ���� ��ٱ��ϵ� �Բ� ����*/
+/*회원 삭제시 회원의 장바구니도 함께 삭제*/
 /*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
 
-<<<<<<< HEAD
-/*ȸ��*/
-
-INSERT INTO member (
-    email,
-    pw,
-    name,
-    auth
-) VALUES (
-    'admin@admin.com',
-    '1234',
-    '������',
-    'y'
-);
-
-INSERT INTO member VALUES (
-    'test@test.com',
-    '1234',
-    'ȸ��1',
-    1,
-    '2000',
-    '12',
-    '12',
-    '010-1234-5678',
-    '47246',
-    '�λ걤���� �λ����� ��õ�� 109 (������, ���Ѱ�����Ʈ)',
-    '����Ƽ��',
-    1,
-    'y'
-);
-
-INSERT INTO member VALUES (
-    'test1@test.com',
-    '1234',
-    'ȸ��2',
-    1,
-    '1995',
-    '1',
-    '11',
-    '010-1234-5678',
-    '47246',
-    '�λ걤���� �λ����� ��õ�� 109 (������, ���Ѱ�����Ʈ)',
-    '����Ƽ��',
-    1,
-    'y'
-);
-=======
-/*회원*/
-insert into member(email,pw,name,auth) values('admin@admin.com','1234','관리자','y');
-insert into member values
-('test@test.com','1234','회원1',1,'2000','12','12','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
-insert into member values
-('test1@test.com','1234','회원2',1,'1995','1','11','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
-
-/*board테이블*/
-create table book(
-book_title varchar2(400) primary key,
-book_content varchar2(400),
-book_publisher varchar2(30),
-book_price number(30),
-book_no number(30),
-book_page number(30),
-book_filename varchar2(100),
-book_uploaddate Date
-);
-insert into book values('2020시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',31000,1,256,'gibon1.jpg',sysdate);
-insert into book values('2021시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
-insert into book values('2022시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',33000,3,256,'gibon3.jpg',sysdate);
-insert into book values('2023시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',34000,4,256,'gibon4.jpg',sysdate);
-insert into book values('2024시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',35000,5,256,'gibon5.jpg',sysdate);
-insert into book values('2025시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',36000,6,256,'gibon6.jpg',sysdate);
-
+/*테이블 모두 삭제
+drop table cart_table;
+drop table lecture_table;
+drop table member;
+drop table payment_table;
+drop table question_table;
+drop table resource_comments;
+drop table resource_table;
+drop table book_table;*/
 commit;
->>>>>>> refs/heads/merge1
