@@ -42,7 +42,7 @@ public class TextbookDAOImpl implements TextbookDAO {
     	ArrayList<TextbookBean> list = new ArrayList<TextbookBean>();
     	try {
     		con = getConnection();
-    		sql = "select * from book";
+    		sql = "select * from book_table";
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		System.out.println("??????????????????????");
