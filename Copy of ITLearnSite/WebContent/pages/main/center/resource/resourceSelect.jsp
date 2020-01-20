@@ -53,8 +53,8 @@
 						<c:set var="j" value="0"/>
 						<c:forEach  var="list"   items="${requestScope.ResourceSelect}">		
 					<tr>
-					<td>${list.res_no}</td>
-					<td>${list.res_title }</td>
+					<td><a class="cls1" href="resourceView.bo?res_no=${list.res_no}">${list.res_no}</a></td>
+					<td><a class="cls1" href="resourceView.bo?res_no=${list.res_no}">${list.res_title }</a></td>
 					<td>${list.res_email }</td>
 					<td>${list.res_writedate}</td>
 					</tr>

@@ -292,6 +292,7 @@ public class ResourceDAOImpl implements ResourceDAO {
             	 pstmt.setString(1, condition);            	 
             	 rs=pstmt.executeQuery();            	 
              }
+             
              else if(opt.equals("1")){
             	 sql="select * from resource_table where res_content LIKE '%' || ? || '%'";
             	 pstmt = con.prepareStatement(sql);

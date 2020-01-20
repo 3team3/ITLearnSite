@@ -156,14 +156,14 @@
 
 								<%--섹션값 2부터는 앞 섹션으로 이동할수 있는 pre를 표시합니다. --%>
 								<c:if test="${section >1 && page==1 }">
-									<a class="no-uline" href="${path }/resourceList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+									<a class="no-uline" href="${path }/listArticles.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
 								</c:if>
 
 								<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
 
 								<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
 								<c:if test="${page ==10 }">
-									<a class="no-uline" href="${path }/resourceList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+									<a class="no-uline" href="${path }/board8/resourceList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
 								</c:if>
 							</c:forEach>
 						</c:when>
@@ -204,16 +204,17 @@
 					</c:choose>
 				</c:if>
 			</div>
-			<div class="btn-wrap text-align">
+<div class="btn-wrap text-align">
 			<form action="resourceSelect.bo" method="post" >
 				<div class="selector-wrap">
-					<select class="box selectbox" name="select_subject">
-							<option value="title" selected="selected">제목</option>
-							<option value="content">내용</option>	
-					</select>			
+					<select class="box selectbox" name="opt">
+							<option value="0" selected="selected">제목</option>
+							<option value="1">내용</option>
+							<option value="2">글쓴이</option>							
+					</select>	
 				</div>
 				<div class="search-wrap">
-					<input class="box inputbox" type="text" name="select_content"> 
+					<input class="box inputbox" type="text" name="condition"> 
 					<span class="lookimg"> 			
 						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
 					</span>

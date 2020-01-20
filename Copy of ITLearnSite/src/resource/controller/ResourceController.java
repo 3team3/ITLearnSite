@@ -205,16 +205,18 @@ public class ResourceController extends HttpServlet {
 			//자료실게시판 - 글 검색
 			else if(path.equals("/resourceSelect.bo"))
 			{
-				System.out.println("resourceSelect.bo");
+				System.out.println("resourceSelect.bo");	
+				String opt = request.getParameter("opt");
+				String condition = request.getParameter("condition");	
+								
+				ArrayList<ResourceBean> ResourceSelect = serv.resourceSelect(opt, condition);
+						
+				request.setAttribute("ResourceSelect", ResourceSelect);
 				
-				String select_subject = request.getParameter("select_subject");
-				String select_content = request.getParameter("select_content");
-				
-				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
-				request.setAttribute("ResourceList", ResourceList);
 				nextPage = "/main.jsp";
-				paging= "/pages/main/center/resource/resourceSelect.jsp";
-				request.setAttribute("paging", paging);
+				paging = "/pages/main/center/resource/resourceSelect.jsp";
+				request.setAttribute("paging", paging);	
+				
 			}
 			//자료실게시판 - 글 삭제
 			else if(path.equals("/resourceDelete.bo"))
