@@ -47,7 +47,7 @@
 						<li class="has-children"><a href="#" class="nav-link text-left">관리자</a>
 							<ul class="dropdown">
 								<li><a href="memberlist.admin">회원 관리</a></li>
-								<li><a href="memberorderlist.admin">주문 관리</a></li>
+								<li><a href="memberpaymentlist.admin">주문 관리</a></li>
 							</ul>
 						</li>
 						</c:if>
