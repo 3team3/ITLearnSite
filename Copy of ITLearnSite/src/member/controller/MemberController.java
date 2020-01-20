@@ -3,6 +3,7 @@ package member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -203,6 +204,7 @@ public class MemberController extends HttpServlet {
 			// 이메일 발송
 			else if (path.equals("/insertMember.do")) 
 			{
+				
 				mBean = getMemberBeanProperty(request, response); // MemberBean에 값을 셋팅해주고 반환해주는 메소드
 				result = serv.InsertMember(mBean);// MemberService에 있는 메서드를 호출 // MemberService serv = new
 													// MemberService()

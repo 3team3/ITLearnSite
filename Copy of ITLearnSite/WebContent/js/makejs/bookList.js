@@ -31,15 +31,21 @@ function setBooklist(getData){
 	var string ="";
 	
 	for(var i = 0; i < getData.list.length; i++) {
+		var booktitle = getData.list[i].book_title;
+		
+		/*pasing 책이름*/
+		var title = booktitle.split('[');
+		title = title[0];
+//		title = title.substring(0, title.length-1);
 		var comments = 
 			"<div class='booklist'>"
 			+ 	"<div class='bookimg'>"
 			+		"<img src='./images/" + getData.list[i].book_filename+"'>"
 			+	"</div>"
 			+	"<div class='content_wrap'>"
-			+		"<a href='bookView.text?book_no=" + getData.list[i].book_no + "'>"
+			+		"<a href='bookView.text?book_no=" + getData.list[i].book_no +"&word=" + title + "'>"
 			+			"<p class='booktitle'>" + getData.list[i].book_title + "</p>"
-			+			"<p class='bookcontent'>가격 : " + getData.list[i].book_price +"원<br>페이지 수 : " + getData.list[i].book_page + "쪽<br>출판사 : " + getData.list[i].book_publisher + "<br>출판일 : "+ getData.list[i].book_uploaddate
+			+			"<p class='bookcontent'>가격 : " + getData.list[i].book_price +"원<br>페이지 수 : " + encodeURI(getData.list[i].book_page) + "쪽<br>출판사 : " + getData.list[i].book_publisher + "<br>출판일 : "+ getData.list[i].book_uploaddate
 			+			"</p>"
 			+		"</a>"
 			+		"<button class='btn btn-color1'> 담기 </button>"
@@ -57,13 +63,13 @@ function setBookDetail(getData){
 	var book_no = request.getParameter("book_no");
 	var string ="";
 	var i = book_no-1;
-
+	
 		var comments = 
 			"<div class='wrap'>"
 			+ 	"<div class='bookimg'>"
 			+		"<img src='./images/" + getData.list[i].book_filename+"'>"
 			+	"</div>"
-			+	"<div class='bookinfo'>"
+			+	"<div class='bookinfo'>"        
 			+		"<span class='booktitle'>"
 			+			getData.list[i].book_title
 			+		"</span>"
@@ -82,20 +88,25 @@ function setBookDetail(getData){
 			+			"</div>"
 			+			"<div class='detail-align'>"
 			+				"<p class='p1'>부&nbsp;&nbsp;&nbsp;록</p>"
-			+				"<p class='p2'>자료실</p>"
+			+				"<p class='p2'><a href='#'>자료실</a></p>"
 			+			"</div>"
 			+		"</span>"
 			+		"<span class='bookdetail2'>"
-            +        	"<div class='detail-align' >"
+            +        	"<div class='detail-align'>"
 	        +        		"<p class='p1'>분&nbsp;&nbsp;&nbsp;량</p>"
 	        +        		"<p class='p2'>"+getData.list[i].book_page+"쪽</p>"
             +        	"</div>"
+            +        	"<div class='detail-align'>"
+	        +        		"<p class='p1'>구매</p>"
+	        +        		"<p class='p2 buylink'>"
+	        +  				"</p>"
+            +        	"</div>"
             +    	"</span>"
-			+"</div>";
+			+"</div>"; 
 			
 		string = string + comments;
-
-	$(".pagewrap").html(string);
+	$(".list").html(string);
+	$(".link").insertAfter(".buylink");
 }
 function booklist(direction)
 {

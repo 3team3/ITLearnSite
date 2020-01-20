@@ -16,7 +16,12 @@
 <c:set var="section" value="${resourcesMap.section}" />
 <c:set var="pageNum" value="${resourcesMap.pageNum}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
+
+<c:set var="naverlink" value="${requestScope.result.items[0].link}"></c:set>
 <link rel="stylesheet" href="${path}/css/bookList.css">
+<script src="${path}/js/jquery-3.3.1.min.js"></script>
+<script src="${path}/js/makejs/bookList.js"></script>	
+
 </head>
 
 <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
@@ -42,7 +47,5 @@
 		</div>
 		<hr>
 	</div>
-	<script src="${path}/js/jquery-3.3.1.min.js"></script>
-	<script src="${path}/js/makejs/bookList.js"></script>	
 </body>
 </html>

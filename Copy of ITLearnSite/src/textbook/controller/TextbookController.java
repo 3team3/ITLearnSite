@@ -16,9 +16,11 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import textbook.db.TextbookBean;
 import textbook.db.TextbookDAOImpl;
+import textbook.naverAPI.NaverSearchAPI;
 import textbook.service.TextbookServiceImpl;
 
 public class TextbookController extends HttpServlet {
@@ -93,10 +95,24 @@ public class TextbookController extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.print(jsonString);
 			}
-			if(path.equals("/bookView.text"))
+			else if(path.equals("/bookView.text"))
 			{
 				tBean= getTextbookBeanProperty(request, response);
 				int book_no = tBean.getBook_no();
+				
+				//네이버 api
+				NaverSearchAPI search = new NaverSearchAPI(); 
+				String word = request.getParameter("word"); 
+				String result = search.Search(word); 
+				System.out.println(result); 
+
+				JSONParser paser = new JSONParser(); 
+				Object obj = paser.parse(result); 
+				JSONObject jsonObj = (JSONObject) obj; 
+				//bookView.text  jsp페이지에서 -> ${requestScope.result.items}
+				request.setAttribute("result", jsonObj);
+				
+				//네이버 api
 				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/books/bookView.jsp?book_no="+book_no;
