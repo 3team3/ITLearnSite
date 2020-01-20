@@ -104,21 +104,6 @@ constraint ques_email_fk foreign key(ques_email) references member(email)
 
 select * from question_table;
 
-/*공지사항*/
-create table  notice_table(
-noti_no number(38) primary key,
-noti_parentno number(38) default 0,
-noti_title varchar2(50),
-noti_email varchar2(40),
-noti_pw varchar2(20),
-noti_content varchar2(4000),
-noti_writedate date default sysdate,
-noti_readcount number(38),
-constraint noti_email_fk foreign key(noti_email) references member(email)
-);
-
-select * from notice_table;
-
 /*강의게시판*/
 CREATE TABLE lecture_table (
 lec_no  number(38) primary key,
@@ -241,7 +226,7 @@ select * from lecture_table;
 
 
 /*교재게시판*/
-create table book(
+create table book_table(
 book_title varchar2(400) primary key,
 book_content varchar2(400),
 book_publisher varchar2(30),
@@ -252,41 +237,30 @@ book_filename varchar2(100),
 book_uploaddate Date
 );
 
-insert into book values('2020시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',31000,1,256,'gibon1.jpg',sysdate);
-insert into book values('2021시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
-insert into book values('2022시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',33000,3,256,'gibon3.jpg',sysdate);
-insert into book values('2023시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',34000,4,256,'gibon4.jpg',sysdate);
-insert into book values('2024시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',35000,5,256,'gibon5.jpg',sysdate);
-insert into book values('2025시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',36000,6,256,'gibon6.jpg',sysdate);
+insert into book_table values('2020시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',31000,1,256,'gibon1.jpg',sysdate);
+insert into book_table values('2021시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
+insert into book_table values('2022시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',33000,3,256,'gibon3.jpg',sysdate);
+insert into book_table values('2023시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',34000,4,256,'gibon4.jpg',sysdate);
+insert into book_table values('2024시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',35000,5,256,'gibon5.jpg',sysdate);
+insert into book_table values('2025시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',36000,6,256,'gibon6.jpg',sysdate);
 
 select * from book;
 
 /*장바구니*/
 create table cart_table(
-cart_no number(38) primary key,
-cart_email varchar2(40),
-cart_book1 number(38),
-cart_book1_num number(38),
-cart_book2 number(38),
-cart_book2_num number(38),
-cart_book3 number(38),
-cart_book3_num number(38),
-cart_book4 number(38),
-cart_book4_num number(38),
-cart_book5 number(38),
-cart_book5_num number(38),
-cart_lecture1 number(38),
-cart_lecture1_startDate date,
-cart_lecture2 number(38),
-cart_lecture2_startDate date,
-cart_lecture3 number(38),
-cart_lecture3_startDate date,
-cart_lecture4 number(38),
-cart_lecture4_startDate date,
-cart_lecture5 number(38),
-cart_lecture5_startDate date,
-constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade
+cart_num int primary key,
+email varchar2(20),
+pro_name varchar2(400) not null,
+pro_cnt number not null,
+pro_price number not null,
+pro_sort varchar2(20) not null,
+pro_img varchar2(400)
 );
+
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(1,'test@test.com','2020시나공 정보처리 산업기사 실기[기본서]',1,31000,'교재');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(2,'test@test.com','2021시나공 정보처리 산업기사 실기[기본서]',1,32000,'교재');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(3,'test@test.com','2025시나공 정보처리 산업기사 실기[기본서]',1,36000,'교재');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(4,'test@test.com','리베하얀 CSS',1,50000,'강의');
 
 select * from cart_table;
 
@@ -300,10 +274,10 @@ pay_phonenumber varchar2(50),
 pay_address varchar2(50),
 pay_address1 varchar2(50),
 pay_address2 varchar2(50),
-pay_book number(38),
-pay_book_num number(38),
-pay_lecture number(38),
-pay_lecture_num number(38),
+pay_pro_name varchar2(400),
+pay_pro_cnt number,
+pay_pro_price number,
+pay_pro_sort varchar2(20),
 pay_total varchar2(4000),
 pay_option number(2),
 constraint pay_email_fk foreign key(pay_email) references member(email)
@@ -329,10 +303,9 @@ constraint set_email_fk foreign key(set_email) references member(email)
 drop table cart_table;
 drop table lecture_table;
 drop table member;
-drop table notice_table;
 drop table payment_table;
 drop table question_table;
 drop table resource_comments;
 drop table resource_table;
-drop table textbook_table;*/
+drop table book_table;*/
 commit;
