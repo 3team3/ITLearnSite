@@ -58,6 +58,7 @@
 				<span>요약</span>
 				<hr>
 				<span>${naver.items[0].description}</span>
+				<img class="bookimg1" src="${naver.items[0].image}">
 			</div>
 		</div>
 	</div>

@@ -238,7 +238,7 @@ book_uploaddate Date
 );
 
 insert into book_table values('2020시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',31000,1,256,'gibon1.jpg',sysdate);
-insert into book_table values('2021시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
+insert into book_table values('강아지똥','신기술용어JAVA코드','길벗알앤디',32000,2,256,'gibon2.jpg',sysdate);
 insert into book_table values('2022시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',33000,3,256,'gibon3.jpg',sysdate);
 insert into book_table values('2023시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',34000,4,256,'gibon4.jpg',sysdate);
 insert into book_table values('2024시나공 정보처리 산업기사 실기[기본서]','신기술용어JAVA코드','길벗알앤디',35000,5,256,'gibon5.jpg',sysdate);

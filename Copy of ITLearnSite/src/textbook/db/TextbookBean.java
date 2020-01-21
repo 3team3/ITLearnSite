@@ -3,20 +3,20 @@ package textbook.db;
 import java.sql.Date;
 
 public class TextbookBean {
-	private int book_no;
+	private int product_no;
 	private String book_title;
 	private String book_content;
 	private String book_publisher;
-	private int book_price;
+	private String book_writer;
 	private int book_page;
 	private String book_filename;
 	private Date book_uploaddate;
 	
-	public int getBook_no() {
-		return book_no;
+	public int getProduct_no() {
+		return product_no;
 	}
-	public void setBook_no(int book_no) {
-		this.book_no = book_no;
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
 	}
 	public String getBook_title() {
 		return book_title;
@@ -36,18 +36,12 @@ public class TextbookBean {
 	public void setBook_publisher(String book_publisher) {
 		this.book_publisher = book_publisher;
 	}
-	public int getBook_price() {
-		return book_price;
-	}
-	public void setBook_price(int book_price) {
-		this.book_price = book_price;
-	}
 	public int getBook_page() {
 		return book_page;
 	}
 	public void setBook_page(int book_page) {
 		this.book_page = book_page;
-	}
+	}  
 	public String getBook_filename() {
 		return book_filename;
 	}
@@ -60,4 +54,11 @@ public class TextbookBean {
 	public void setBook_uploaddate(Date book_uploaddate) {
 		this.book_uploaddate = book_uploaddate;
 	}
+	public String getBook_writer() {
+		return book_writer;
+	}
+	public void setBook_writer(String book_writer) {
+		this.book_writer = book_writer;
+	}
+	
 }

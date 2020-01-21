@@ -73,13 +73,13 @@ public class TextbookController extends HttpServlet {
 				for(int i=0; i<list.size(); i++) {
 					System.out.println("-----------------------");
 					jsondata = new JSONObject();
+					jsondata.put("product_no", list.get(i).getProduct_no());
 					jsondata.put("book_title", list.get(i).getBook_title());
 					jsondata.put("book_content", list.get(i).getBook_content());
 					jsondata.put("book_publisher", list.get(i).getBook_publisher());
-					jsondata.put("book_price", list.get(i).getBook_price());
-					jsondata.put("book_no", list.get(i).getBook_no());
 					jsondata.put("book_page", list.get(i).getBook_page());
 					jsondata.put("book_filename", list.get(i).getBook_filename());
+					jsondata.put("book_writer", list.get(i).getBook_writer());
 					
 					date = list.get(i).getBook_uploaddate();
 					jsondata.put("book_uploaddate", date.toString());
@@ -98,7 +98,7 @@ public class TextbookController extends HttpServlet {
 			else if(path.equals("/bookView.text"))
 			{
 				tBean= getTextbookBeanProperty(request, response);
-				int book_no = tBean.getBook_no();
+				int product_no = tBean.getProduct_no();
 				
 				//네이버 api
 				NaverSearchAPI search = new NaverSearchAPI(); 
@@ -115,7 +115,7 @@ public class TextbookController extends HttpServlet {
 				//네이버 api
 				
 				nextPage = "/main.jsp";
-				paging = "/pages/main/center/books/bookView.jsp?book_no="+book_no;
+				paging = "/pages/main/center/books/bookView.jsp?product_no="+product_no;
 				request.setAttribute("paging", paging);
 			}
 			System.out.println("nextPAge" + nextPage);
@@ -130,26 +130,31 @@ public class TextbookController extends HttpServlet {
 	}
 
 	private TextbookBean getTextbookBeanProperty(HttpServletRequest request, HttpServletResponse response) {
-		int book_no = 0;
+		int product_no = 0;
 		String book_title = null;
 		String book_content = null;
 		String book_filename = null;
 		String book_publisher = null;
-		int book_price = 0;
+		String book_writer =null;
 		int book_page = 0;
 		Date book_uploaddate = new Date(System.currentTimeMillis());
 		
+		if(request.getParameter("product_no") != null) {
+			product_no = Integer.parseInt(request.getParameter("product_no"));
+			tBean.setProduct_no(product_no);
+			System.out.println("product_no =" +product_no);
+		}
+		if(request.getParameter("book_writer") != null)
+		{
+			book_writer = request.getParameter("book_writer");
+			tBean.setBook_writer(book_writer);
+			System.out.println("book_writer =" +book_writer);
+		}
 		if(request.getParameter("book_publisher") != null)
 		{
 			book_publisher = request.getParameter("book_publisher");
 			tBean.setBook_publisher(book_publisher);
 			System.out.println("book_publisher =" +book_publisher);
-		}
-		if(request.getParameter("book_price") != null)
-		{
-			book_price = Integer.parseInt(request.getParameter("book_price"));
-			tBean.setBook_price(book_price);
-			System.out.println("book_price =" + book_price);
 		}
 		if(request.getParameter("book_page") != null)
 		{
@@ -158,12 +163,6 @@ public class TextbookController extends HttpServlet {
 			System.out.println("book_page =" + book_page);
 		}
 		
-		if(request.getParameter("book_no") != null)
-		{
-			book_no = Integer.parseInt(request.getParameter("book_no"));
-			tBean.setBook_no(book_no);
-			System.out.println("book_no =" + book_no);
-		}
 		if(request.getParameter("book_title") != null)
 		{
 			book_title = request.getParameter("book_title");

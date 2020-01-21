@@ -123,7 +123,17 @@
          <servlet-name>adminController</servlet-name>
          <url-pattern>*.admin</url-pattern>
       </servlet-mapping>  
-   
+      
+      <!-- 상품 등록(Product) -->
+   	  <servlet>
+         <servlet-name>productController</servlet-name>
+         <servlet-class>product.controller.ProductController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>productController</servlet-name>
+         <url-pattern>*.pd</url-pattern>
+      </servlet-mapping>  
    
    
    

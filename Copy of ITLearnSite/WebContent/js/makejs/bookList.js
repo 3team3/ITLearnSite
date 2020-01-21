@@ -43,9 +43,9 @@ function setBooklist(getData){
 			+		"<img src='./images/" + getData.list[i].book_filename+"'>"
 			+	"</div>"
 			+	"<div class='content_wrap'>"
-			+		"<a href='bookView.text?book_no=" + getData.list[i].book_no +"&word=" + title + "'>"
+			+		"<a href='bookView.text?product_no=" + getData.list[i].product_no +"&word=" + title + "'>"
 			+			"<p class='booktitle'>" + getData.list[i].book_title + "</p>"
-			+			"<p class='bookcontent'>가격 : " + getData.list[i].book_price +"원<br>페이지 수 : " + encodeURI(getData.list[i].book_page) + "쪽<br>출판사 : " + getData.list[i].book_publisher + "<br>출판일 : "+ getData.list[i].book_uploaddate
+			+			"<p class='bookcontent'>가격 : " + getData.list[i].book_price +"원<br>페이지 수 : " + encodeURI(getData.list[i].book_page) + "쪽<br>출판사 : " + getData.list[i].book_publisher + "<br>작가 : " + getData.list[i].book_writer + "<br>출판일 : "+ getData.list[i].book_uploaddate
 			+			"</p>"
 			+		"</a>"
 			+		"<button class='btn btn-color1'> 담기 </button>"
@@ -60,14 +60,13 @@ function setBooklist(getData){
 
 function setBookDetail(getData){
 	var request = new Request();
-	var book_no = request.getParameter("book_no");
+	var product_no = request.getParameter("product_no");
 	var string ="";
-	var i = book_no-1;
+	var i = product_no;
 	
 		var comments = 
 			"<div class='wrap'>"
 			+ 	"<div class='bookimg'>"
-			+		"<img src='./images/" + getData.list[i].book_filename+"'>"
 			+	"</div>"
 			+	"<div class='bookinfo'>"        
 			+		"<span class='booktitle'>"
@@ -106,6 +105,7 @@ function setBookDetail(getData){
 			
 		string = string + comments;
 	$(".list").html(string);
+	$(".bookimg1").insertAfter(".bookimg");
 	$(".link").insertAfter(".buylink");
 }
 function booklist(direction)

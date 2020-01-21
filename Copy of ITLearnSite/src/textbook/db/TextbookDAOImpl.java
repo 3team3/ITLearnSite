@@ -46,21 +46,28 @@ public class TextbookDAOImpl implements TextbookDAO {
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		System.out.println("??????????????????????");
+    		
     		while(rs.next())
     		{
-    			System.out.println("??????????????????????");
-    			TextbookBean textBean = new TextbookBean();
+    			System.out.println("asdf");
+    			System.out.println(rs.getInt(1)); 
+    			System.out.println(rs.getString(2));
+    			System.out.println(rs.getString(3));
+    			System.out.println(rs.getString(4));
+    			System.out.println(rs.getString(5));
+    			System.out.println(rs.getInt(6));
+    			System.out.println(rs.getString(7));
+    			System.out.println(rs.getDate(8));
     			
-    			textBean.setBook_title(rs.getString(1));
-    			textBean.setBook_content(rs.getString(2));
-    			textBean.setBook_publisher(rs.getString(3));
-    			textBean.setBook_price(rs.getInt(4));
-    			textBean.setBook_no(rs.getInt(5));
+    			TextbookBean textBean = new TextbookBean();
+    			textBean.setProduct_no(rs.getInt(1));
+    			textBean.setBook_title(rs.getString(2));
+    			textBean.setBook_content(rs.getString(3));
+    			textBean.setBook_publisher(rs.getString(4));
+    			textBean.setBook_writer(rs.getString(5));
     			textBean.setBook_page(rs.getInt(6));
     			textBean.setBook_filename(rs.getString(7));
-     			textBean.setBook_uploaddate(rs.getDate(8));
-     			
-     			System.out.println(rs.getString(1));
+    			textBean.setBook_uploaddate(rs.getDate(8));
      			
      			list.add(textBean);
     		}

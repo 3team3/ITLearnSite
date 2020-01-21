@@ -19,12 +19,13 @@
     margin-left: 10px;
    	margin-top : 7px;
     float :left;
-    width:270px;
-    height:350px;
+    width:auto;
+    height:auto;
 }
-.bookimg>img{
+.bookimg1{
     width:270px;
     height:350px;
+    float :left;
 /*     border: solid red; */
 }
 .bookinfo{
@@ -37,11 +38,12 @@
 }
 
 .booktitle{
-    width:auto;
-    height:100px;
+    width:100%;
+    height:auto;
 /*     border: solid red; */
     font-size: 2em;
     font-weight:bold;
+    display:block;
     color:black;
     float:left;
 }
@@ -49,7 +51,7 @@
 .bookdetail{
     margin-left: 5px;
     margin-top:20px;
-    width:48%;
+    width:40%;
     float:left;
 /*     border: solid red; */
 }
@@ -76,7 +78,7 @@
 .bookdetail2{
 	margin-top: 20px;
     margin-left: 5px;
-    width:48%;
+    width:40%;
     float:left;
 /*     border: solid red; */
 }
