@@ -103,20 +103,23 @@ public class TextbookController extends HttpServlet {
 				//네이버 api
 				NaverSearchAPI search = new NaverSearchAPI(); 
 				String word = request.getParameter("word"); 
-				String result = search.Search(word); 
-				System.out.println(result); 
+				String result = search.Search("강아지똥"); 
 
 				JSONParser paser = new JSONParser(); 
 				Object obj = paser.parse(result); 
 				JSONObject jsonObj = (JSONObject) obj; 
-				//bookView.text  jsp페이지에서 -> ${requestScope.result.items}
+//				bookView.text  jsp페이지에서 -> ${requestScope.result.items}
 				request.setAttribute("result", jsonObj);
 				
+				System.out.println("get" + result);
+				PrintWriter out = response.getWriter();
+				out.print(jsonObj);
 				//네이버 api
 				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/books/bookView.jsp?product_no="+product_no;
 				request.setAttribute("paging", paging);
+				return ;
 			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException

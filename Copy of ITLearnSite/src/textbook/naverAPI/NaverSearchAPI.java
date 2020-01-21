@@ -15,7 +15,7 @@ public class NaverSearchAPI {
         try {
             String text = URLEncoder.encode(word, "UTF-8");
             String apiURL = "https://openapi.naver.com/v1/search/book.json?query="+ text; // json 결과
-            //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
+//            String apiURL = "https://openapi.naver.com/v1/search/book.xml?query="+ text; // xml 결과
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
@@ -34,7 +34,6 @@ public class NaverSearchAPI {
                 response.append(inputLine);
             }
             br.close();
-            System.out.println(response.toString());
             
         } catch (Exception e) {
             System.out.println(e);
