@@ -1,0 +1,105 @@
+--상품 등록 
+create table product(
+product_no number,
+product_type varchar2(10),
+product_name varchar2(200),
+product_price number,
+
+constraint product_no_pk primary key(product_no)
+);
+
+insert into product (product_type,product_name, product_price) values('book', '강아지똥', 1111);
+insert into product (product_type,product_name, product_price) values('book', '구해줘', 22222);
+insert into product (product_type,product_name, product_price) values('book', '종이여자', 33333);
+commit;
+
+--재고 현황 등록
+--등록 상품 삭제시 CASCADE로 인해 재고도 같이 삭제
+create table stock(
+product_no number,
+email varchar2(40),
+product_stock number,
+
+constraint product_no_fk2 foreign key (product_no) references product (product_no) ON DELETE CASCADE,
+CONSTRAINT email_fk1 foreign key (email) references member (email)
+);
+
+insert into stock values(1, 'test@test.com', 100); 
+insert into stock values(2, 'test@test.com', 55);
+insert into stock values(3, 'test@test.com', 5);
+commit;
+
+-- 책 상세 정보 등록
+-- 등록 상품 삭제시 CASCADE로 인해 삭제
+create table book_table(
+product_no number,
+book_title varchar2(400),
+book_content varchar2(400),
+book_writer varchar2(400),
+book_publisher varchar2(30),
+book_page number(30),
+book_filename varchar2(100),
+book_uploaddate Date,
+
+constraint product_no_fk3 foreign key (product_no)
+references product (product_no)
+ON DELETE CASCADE
+);
+insert into book_table (product_no ,book_title, book_content, book_writer, book_publisher, book_page, book_filename, book_uploaddate) 
+values(1, '구해줘', '내용','기욤 뮈소' ,'옆집개', 500, 'mongmong1.jpg', sysdate);
+
+--미완성
+create table cart_table(
+cart_no number,
+email varchar2(40),
+product_no number UNIQUE,
+amount number,
+
+constraint cart_no_pk primary key (cart_no),
+constraint product_no_fk foreign key (product_no)
+references product (product_no)
+);
+-- 미완성
+create table order_table(
+order_no number,
+email varchar2(40),
+
+constraint order_no_pk primary key (order_no),
+constraint email_fk foreign key (email) 
+references member (email)
+);
+
+-- 미완성
+create table orderinfo(
+order_no number, 
+product_no number,
+product_amount number,
+price_sum number,
+
+constraint order_no_fk1 foreign key (order_no) references order_table (order_no),
+constraint product_no_fk1 foreign key (product_no) references product (product_no)
+);
+
+--미완성
+create table payment_table(
+pay_no number,
+cart_no number,
+email varchar2(40),
+product_no number,   
+total_price number,
+pay_option number,
+
+constraint pay_no_pk primary key(pay_no),
+constraint cart_no_fk1 foreign key (cart_no) 
+references cart_table(cart_no),
+constraint email_fk3 foreign key(email)
+references member (email),
+constraint product_no_fk4 foreign key (product_no) 
+references product (product_no)
+);
+
+select ct.email, ct.cart_no ,ct.product_no, ct.amount, bk.book_title, bk.book_publisher, bk.book_page, bk.book_filename
+from cart_table ct join book_table bk
+on ct.product_no = bk.product_no;
+
+commit;
