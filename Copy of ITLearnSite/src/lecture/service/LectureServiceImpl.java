@@ -37,6 +37,13 @@ public class LectureServiceImpl implements LectureService {
 
 		return lecturesMap;
 	}
+	
+	@Override
+	public void lectureRegister(LectureBean lBean) {
+		lDao.lectureRegister(lBean);
+		
+	}
+	
 /*
 	// 자료실 글쓰기
 	@Override

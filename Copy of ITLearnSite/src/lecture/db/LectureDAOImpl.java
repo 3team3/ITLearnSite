@@ -13,6 +13,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.sun.javafx.fxml.BeanAdapter;
+
 public class LectureDAOImpl implements LectureDAO {
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -41,6 +43,164 @@ public class LectureDAOImpl implements LectureDAO {
 
 		} catch (SQLException e) {
 			System.out.println("closeConnection()메소드에서 오류  : " + e);
+		}
+	}
+
+	// 자료실 목록
+	@Override
+	public List selectAllLectures(Map pagingMap) {
+		List lecturesList = new ArrayList();
+
+		// 전달 받은 section 값과 pageNum 값을 가져옴
+		int section = (Integer) pagingMap.get("section");
+		int pageNum = (Integer) pagingMap.get("pageNum");
+		System.out.println("section : " + section);
+		System.out.println("pageNum : " + pageNum);
+
+		try {
+
+			con = getConnection();
+			sql = "select * from ( " + "select ROWNUM as recNum, lvl, "
+					+ "lec_no, lec_parentno, lec_title, lec_price, lec_imgfile, lec_spofile "
+					+ "from (select level as lvl, "
+					+ "lec_no, lec_parentno, lec_title, lec_price, lec_imgfile, lec_spofile " + "from lecture_table "
+					+ "start with lec_parentno=0 " + "connect by prior lec_no = lec_parentno "
+					+ "order siblings by lec_no desc))" + " where recNum between(?-1)*30+(?-1)*3+1 "
+					+ "and (?-1)*30+?*3";
+
+			// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
+			// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
+
+			System.out.println(sql);
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, section);
+			pstmt.setInt(2, pageNum);
+			pstmt.setInt(3, section);
+			pstmt.setInt(4, pageNum);
+			ResultSet rs = pstmt.executeQuery();
+			/*
+			 * System.out.println(rs.next());
+			 */
+			while (rs.next()) {
+				System.out.println("rs :" + rs);
+
+				int level = rs.getInt("lvl");
+				int lec_no = rs.getInt("lec_no");
+				int lec_parentno = rs.getInt("lec_parentno");
+				String lec_title = rs.getString("lec_title");
+				int lec_price = rs.getInt("lec_price");
+				String lec_imgfile = rs.getString("lec_imgfile");
+				String lec_spofile = rs.getString("lec_spofile");
+				/*
+				 * System.out.println("level : " + level); System.out.println(
+				 * "lec_no : " + lec_no); System.out.println("lec_parentno : " +
+				 * lec_parentno); System.out.println("lec_title : " +
+				 * lec_title); System.out.println("lec_price : " + lec_price);
+				 * System.out.println("lec_imgfile : " + lec_imgfile);
+				 * System.out.println("lec_spofile : " + lec_spofile);
+				 */
+				LectureBean bean = new LectureBean();
+
+				bean.setLevel(level);
+				bean.setLec_no(lec_no);
+				bean.setLec_parentno(lec_parentno);
+				bean.setLec_title(lec_title);
+				bean.setLec_price(lec_price);
+				bean.setLec_imgfile(lec_imgfile);
+				bean.setLec_spofile(lec_spofile);
+
+				lecturesList.add(bean);
+				System.out.println("bean : " + bean);
+			}
+			/*
+			 * System.out.println("lecturesList : " + lecturesList);
+			 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+
+		return lecturesList;
+	}
+
+	// 전체 글 개수
+	@Override
+	public int selectTotLectures() {
+		try {
+			con = getConnection();
+
+			// 전체 글 수 조회
+			String query = "select count(lec_no) from lecture_table";
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				/* System.out.println(rs.getInt(1)); */
+				return (rs.getInt(1));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return 0;
+	}
+
+	@Override
+	public void lectureRegister(LectureBean lBean) {
+
+		try {
+			con = getConnection();
+			// 파일 이름 테이블에 데이터를 넣기 위한 변수
+			ArrayList<String> saveFiles = lBean.getSaveFiles();
+			ArrayList<String> originFiles = lBean.getOriginFiles();
+			ArrayList<String> list_title = lBean.getList_title();
+			 
+			sql = "select count(*) from lecture_table";
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int lec_no = rs.getInt(1) + 1;
+
+			String sql = "insert into lecture_table(lec_no, lec_title, lec_price, lec_content, lec_imgfile, lec_spofile) "
+					+ "values(?,?,?,?,?,?)";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, lec_no);
+			pstmt.setString(2, lBean.getLec_title());
+			pstmt.setInt(3, lBean.getLec_price());
+			pstmt.setString(4, lBean.getLec_content());
+			pstmt.setString(5, saveFiles.get(0));
+			pstmt.setString(6, saveFiles.get(1));
+			pstmt.executeUpdate();
+
+			
+			sql = "insert into lecture_list(lec_no, list_no, list_title, list_savefile, list_originalfile) values(?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+
+			for (int i = 1; i < saveFiles.size(); i++) {
+				
+				System.out.println(lec_no);
+				System.out.println(i);
+				System.out.println(list_title.get(i-1));
+				System.out.println(saveFiles.get(i));
+				System.out.println(originFiles.get(i));
+				
+				pstmt.setInt(1, lec_no);
+				pstmt.setInt(2, i);
+				pstmt.setString(3, list_title.get(i-1));
+				pstmt.setString(4, saveFiles.get(i));
+				pstmt.setString(5, originFiles.get(i));
+				pstmt.executeUpdate();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
 		}
 	}
 
@@ -119,109 +279,7 @@ public class LectureDAOImpl implements LectureDAO {
 	 * 
 	 * }
 	 */
-	// 자료실 목록
-	@Override
-	public List selectAllLectures(Map pagingMap) {
-		List lecturesList = new ArrayList();
 
-		// 전달 받은 section 값과 pageNum 값을 가져옴
-		int section = (Integer) pagingMap.get("section");
-		int pageNum = (Integer) pagingMap.get("pageNum");
-		System.out.println("section : " + section);
-		System.out.println("pageNum : " + pageNum);
-
-		try {
-
-			con = getConnection();
-			sql = "select * from ( " + "select ROWNUM as recNum, lvl, "
-					+ "lec_no, lec_parentno, lec_title, lec_price, lec_imgfile, lec_spofile "
-					+ "from (select level as lvl, "
-					+ "lec_no, lec_parentno, lec_title, lec_price, lec_imgfile, lec_spofile " + "from lecture_table "
-					+ "start with lec_parentno=0 " + "connect by prior lec_no = lec_parentno "
-					+ "order siblings by lec_no desc))" + " where recNum between(?-1)*100+(?-1)*10+1 "
-					+ "and (?-1)*100+?*10";
-
-			// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
-			// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
-
-			System.out.println(sql);
-
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, section);
-			pstmt.setInt(2, pageNum);
-			pstmt.setInt(3, section);
-			pstmt.setInt(4, pageNum);
-			ResultSet rs = pstmt.executeQuery();
-/*
-			System.out.println(rs.next());
-*/
-			while (rs.next()) {
-				System.out.println("rs :" + rs);
-
-				int level = rs.getInt("lvl");
-				int lec_no = rs.getInt("lec_no");
-				int lec_parentno = rs.getInt("lec_parentno");
-				String lec_title = rs.getString("lec_title");
-				int lec_price = rs.getInt("lec_price");
-				String lec_imgfile = rs.getString("lec_imgfile");
-				String lec_spofile = rs.getString("lec_spofile");
-/*
-				System.out.println("level : " + level);
-				System.out.println("lec_no : " + lec_no);
-				System.out.println("lec_parentno : " + lec_parentno);
-				System.out.println("lec_title : " + lec_title);
-				System.out.println("lec_price : " + lec_price);
-				System.out.println("lec_imgfile : " + lec_imgfile);
-				System.out.println("lec_spofile : " + lec_spofile);
-*/
-				LectureBean bean = new LectureBean();
-
-				bean.setLevel(level);
-				bean.setLec_no(lec_no);
-				bean.setLec_parentno(lec_parentno);
-				bean.setLec_title(lec_title);
-				bean.setLec_price(lec_price);
-				bean.setLec_imgfile(lec_imgfile);
-				bean.setLec_spofile(lec_spofile);
-
-				lecturesList.add(bean);
-				 System.out.println("bean : " + bean); 
-			}
-/*
-			System.out.println("lecturesList : " + lecturesList);
-*/
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeConnection();
-		}
-
-		return lecturesList;
-	}
-
-	// 전체 글 개수
-	@Override
-	public int selectTotLectures() {
-		try {
-			con = getConnection();
-
-			// 전체 글 수 조회
-			String query = "select count(lec_no) from lecture_table";
-			System.out.println(query);
-			pstmt = con.prepareStatement(query);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				/* System.out.println(rs.getInt(1)); */
-				return (rs.getInt(1));
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeConnection();
-		}
-		return 0;
-	}
 	/*
 	 * // 자료실 검색
 	 * 

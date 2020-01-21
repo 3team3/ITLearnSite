@@ -1,6 +1,7 @@
 package lecture.db;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class LectureBean {
 	private int lec_no, level;
@@ -11,6 +12,9 @@ public class LectureBean {
 	private String lec_imgfile;
 	private String lec_spofile;
 	private Date lec_uploaddate;
+	
+	private int list_no;
+	private ArrayList list_title, saveFiles, originFiles;
 	public int getLec_no() {
 		return lec_no;
 	}
@@ -65,6 +69,31 @@ public class LectureBean {
 	public void setLec_uploaddate(Date lec_uploaddate) {
 		this.lec_uploaddate = lec_uploaddate;
 	}
+	public int getList_no() {
+		return list_no;
+	}
+	public void setList_no(int list_no) {
+		this.list_no = list_no;
+	}
+	public ArrayList getList_title() {
+		return list_title;
+	}
+	public void setList_title(ArrayList list_title) {
+		this.list_title = list_title;
+	}
+	public ArrayList getSaveFiles() {
+		return saveFiles;
+	}
+	public void setSaveFiles(ArrayList saveFiles) {
+		this.saveFiles = saveFiles;
+	}
+	public ArrayList getOriginFiles() {
+		return originFiles;
+	}
+	public void setOriginFiles(ArrayList originFiles) {
+		this.originFiles = originFiles;
+	}
+	
 	
 	
 	
