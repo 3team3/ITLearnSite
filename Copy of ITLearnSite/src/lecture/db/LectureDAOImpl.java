@@ -83,7 +83,7 @@ public class LectureDAOImpl implements LectureDAO {
 			 * System.out.println(rs.next());
 			 */
 			while (rs.next()) {
-				System.out.println("rs :" + rs);
+				/*System.out.println("rs :" + rs);*/
 
 				int level = rs.getInt("lvl");
 				int lec_no = rs.getInt("lec_no");

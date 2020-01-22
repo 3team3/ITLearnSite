@@ -93,8 +93,8 @@
 								<div class="course-1-item">
 									<figure class="thumnail">
 										<a
-											href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
-											data-fancybox=""><img
+											href="${path }/lectureDetail.lec"
+											><img
 											src="${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }"
 											alt="Image" class="img-fluid"></a>
 										<div class="price">￦${lecture.lec_price }</div>
@@ -110,7 +110,8 @@
 										<p class="desc mb-4"></p>
 										<p>
 											<a href="맵핑주소?lec_no=${lecture.lec_no}&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&lec_imgfile=${lecture.lec_imgfile}" class="btn btn-primary rounded-0 px-4">장바구니</a> <a
-												href="#" class="btn btn-primary rounded-0 px-4">구매하기</a>
+												href="#" class="btn btn-primary rounded-0 px-4">구매하기</a><a style="margin: 5px;"
+												href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }" class="btn btn-primary rounded-0 px-4" data-fancybox="">잠깐보기</a>
 										</p>
 									</div>
 								</div>
