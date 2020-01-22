@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
 
 public class CartDAOImpl implements CartDAO {
 	Connection con = null;
@@ -66,7 +68,154 @@ public class CartDAOImpl implements CartDAO {
 		}		
 		return cartlist;
 	}
+	
+	//장바구니 중복 체크
+	@Override
+	public int cartDupChk(String pro_name, String email) {
+		int check = 0;
+		try 
+		{
+			con = getConnection();
+			sql = "SELECT COUNT(*) FROM cart_table WHERE pro_name=? and email=?";
+			pstmt = con.prepareStatement(sql);			
+			pstmt.setString(1, pro_name);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
 
+			if (rs.next()) {
+				if (rs.getInt(1) != 0) {
+					// 중복
+					check = 1;
+
+				} else {
+					// 중복 아님
+					check = 0;
+
+				}
+			}
+
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("cart중복메소드에서 오류" + e);
+		}
+		finally {
+			closeConnection();
+		}
+		
+		return check;
+		
+	}
+	
+	
+	public int addCart(CartBean caBean){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "";
+		int num = 0;
+		int result=0;
+		try {
+			
+			con = getConnection();			
+			sql = "select max(cart_num) from cart_table";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			result=1;
+			if (rs.next()) {
+				num = rs.getInt(1) + 1;
+
+			} else {
+				num = 1; 
+			}
+			
+			
+			sql = "insert into cart_table (cart_num, email, pro_name, pro_cnt, pro_price, pro_sort)"
+					+ "values(?,?,?,?,?,?)";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, caBean.getEmail());
+			pstmt.setString(3, caBean.getPro_name());
+			pstmt.setInt(4, caBean.getPro_cnt());
+			pstmt.setInt(5, caBean.getPro_price()*caBean.getPro_cnt());
+			pstmt.setString(6, caBean.getPro_sort());
+			/* 이미지 추가시  sql문도 수정 요함
+			 * pstmt.setString(7, cbean.getPro_img());
+			 * 
+			 * */			
+
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+
+		} return result;
+	}
+	
+	
+	public void editCart(int pro_cnt, int cart_num){
+			Connection con = null;
+	       PreparedStatement pstmt = null;	             
+	     int rs=0;
+	      	       try {	         
+		  		 con =getConnection();		  				  	 
+		  		pstmt = con.prepareStatement("update cart_table set pro_cnt=?, pro_price=(pro_price/pro_cnt)*? where cart_num=?");		     
+			     pstmt.setInt(1, pro_cnt);
+			     pstmt.setInt(2, pro_cnt);
+				 pstmt.setInt(3, cart_num);
+			     rs=pstmt.executeUpdate();    
+		       }catch(Exception e){
+		    	   System.out.println("Editcart메소드에서 오류 :"+e);
+		       }finally{
+		    	   closeConnection();  			
+		       }		      
+	}
+		
+		
+	
+
+	
+	//장바구니 선택 삭제
+	@Override
+	public int delCart(int cart_num){
+		   Connection con = null;
+	       PreparedStatement pstmt = null;
+	       int check=0;
+	       try {	         
+	  		 con =getConnection();
+			 pstmt = con.prepareStatement("delete from cart_table where cart_num = ?");		     
+		        pstmt.setInt(1, cart_num);
+		      check = pstmt.executeUpdate(); //쿼리실행으로 삭제된 레코드 수 반환    
+	       }catch(Exception e){
+	    	   System.out.println("Delcart메소드에서 오류 :"+e);
+	       }finally{
+	    	   closeConnection();  			
+	       }
+	       return check;
+	}
+	
+	//장바구니 전체 삭제
+	@Override
+	public int delAllCart(String email){
+		   Connection con = null;
+	       PreparedStatement pstmt = null;
+	       int check=0;
+	       try {	         
+	  		 con =getConnection();
+			 pstmt = con.prepareStatement("delete from cart_table where email = ?");		     
+		        pstmt.setString(1, email);
+		      check = pstmt.executeUpdate(); //쿼리실행으로 삭제된 레코드 수 반환    
+	       }catch(Exception e){
+	    	   System.out.println("DelAllcart메소드에서 오류 :"+e);
+	       }finally{
+	    	   closeConnection();  			
+	       }
+	       return check;
+	}
 
 }
 

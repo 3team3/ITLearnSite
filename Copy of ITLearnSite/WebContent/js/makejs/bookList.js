@@ -100,8 +100,10 @@ function setBookDetail(getData){
 function booklist(direction)
 {
 	var url = "bookselect.text";
+	
 	var form_data = {
 			/**/
+		
 	}
 	
 	$.ajax({
