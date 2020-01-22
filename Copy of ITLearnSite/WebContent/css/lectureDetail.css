@@ -10,7 +10,7 @@
 }
 .wrap{
     width: 1000px;
-    height: 370px;
+    height: 270px;
 /*     border: solid red; */
     background-color: #F0F0F0;
 
@@ -19,12 +19,12 @@
     margin-left: 10px;
    	margin-top : 7px;
     float :left;
-    width:350px;
-    height:350px;
+    width:250px;
+    height:250px;
 }
 .bookimg>img{
-    width:270px;
-    height:350px;
+    width:250px;
+    height:250px;
 /*     border: solid red; */
 }
 .bookinfo{
@@ -54,7 +54,7 @@
 /*     border: solid red; */
 }
 .detail-align{
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .p1 {
     display: inline;

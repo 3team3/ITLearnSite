@@ -162,6 +162,12 @@ public class LectureController extends HttpServlet {
 						+ "/lectureList.lec';" + "</script>");
 				return;
 
+			} else if (path.equals("/lectureDetail.lec")) {
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/lecture/lectureDetail.jsp";
+				request.setAttribute("paging", paging);
+
+				// 강의실
 			}
 
 			System.out.println("nextPAge :" + nextPage);

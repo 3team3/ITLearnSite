@@ -18,18 +18,23 @@
 		<div class="container">
 			<div class="row align-items-end justify-content-center text-center">
 				<div class="col-lg-7">
-					<h2 class="mb-0">해당 도서 정보</h2>
+					<h2 class="mb-0">강의 상세</h2>
+					<p>Lecture Register</p>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div class="custom-breadcrumns border-bottom">
 		<div class="container">
 			<a href="${path}/index.do">Home</a> <span
-				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">해당
-				도서 정보</span>
+				class="mx-3 icon-keyboard_arrow_right"></span> <a
+				href="${path}/lectureList.lec">강의실</a> <span
+				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의
+				상세</span>
 		</div>
 	</div>
+
 	<div class="pagewrap">
 		<div class="list">
 			<div class='wrap'>
@@ -37,7 +42,7 @@
 					<img src='${path }/pages/main/center/lecture/temp/alim01.png'>
 				</div>
 				<div class='bookinfo'>
-					<span class='booktitle'> </span> <span class='bookdetail'>
+					<span class='booktitle'> ㅁㄴㅇㄻㄴㅇㄹ</span><!-- <span class='bookdetail'>
 						<div class='detail-align'>
 							<p class='p1'>정&nbsp;&nbsp;&nbsp;가</p>
 							<p class='p2'>원</p>
@@ -56,7 +61,7 @@
 								<a href='#'>자료실</a>
 							</p>
 						</div>
-					</span> <span class='bookdetail2'><div class='detail-align'>
+					</span>  --><span class='bookdetail2'><div class='detail-align'>
 							<p class='p1'>분&nbsp;&nbsp;&nbsp;량</p>
 							<p class='p2'>쪽</p>
 						</div>
@@ -67,27 +72,32 @@
 				</div>
 			</div>
 		</div>
-		
+
+		<div class="pagewrap">
+			<div class="defaultimg">				
+				<hr>
+			</div>
+		</div>
+
 		<div class="pagebottom">
 			<div class="divide">
 				<span>목차</span>
 				<hr>
-				<br> <span>1권 – 기본기 다지기</span><br>  <
-				<br>
+				<br> <span>1권 – 기본기 다지기</span><br> <br>
 				<p>
 					시나공 홈페이지(sinagong.gilbut.co.kr)에 15년간 쌓인 50만 회원들의 질문과 답변 데이터를 철저하게
 					분석하여 1분 1초가 아까운 수험생들의 궁금증을 100% 반영하였습니다.<br> 무엇이든 물어보세요! <br>
 					<br>‘수험생 지원센터 운영’ 공부하다 답답하거나 궁금한 내용이 있으면, 시나공 카페 ‘묻고 답하기’ 게시판에
 					질문을 올리세요. 길벗알앤디의 전문가들이 빠짐없이 답변해드립니다. <br>이메일(qna@gilbut.co.kr)로
-					질문해도 빠른 시간 내에 답변을 보내드립니다.<br>
-					<br> ‘합격 보장’ 이메일 안내 서비스 제공
+					질문해도 빠른 시간 내에 답변을 보내드립니다.<br> <br> ‘합격 보장’ 이메일 안내 서비스 제공
 					<최신기출문제 3회분 및 해설> 최근에 출제된 기출문제<br>
 					3회분에 문제마다 자세한 설명이 달려있어서 마무리 공부로 활용하기에 좋습니다. <br>
 					최신기출문제로 현장 감각을 키우세요. 
 				</p>
-				
+
 			</div>
 		</div>
+		
 		<script src="${path}/js/jquery-3.3.1.min.js"></script>
 </body>
 </html>
