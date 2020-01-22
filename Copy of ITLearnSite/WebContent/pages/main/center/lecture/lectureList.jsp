@@ -63,7 +63,7 @@
 			<c:if test="${email eq 'admin@admin.com' }">
 				<div class="btn-wrap" style="margin-bottom: 40px;">
 					<div class="header-btn float-l">
-						<a href="${path }/lectureRegister.lec">
+						<a href="${path }/lectureForm.lec">
 							<button class="btn btn-color1">
 								<span>강의 등록 하기</span>
 							</button>
