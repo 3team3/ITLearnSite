@@ -103,7 +103,7 @@ public class TextbookController extends HttpServlet {
 				//네이버 api
 				NaverSearchAPI search = new NaverSearchAPI(); 
 				String word = request.getParameter("word"); 
-				String result = search.Search("강아지똥"); 
+				String result = search.Search(word); 
 
 				JSONParser paser = new JSONParser(); 
 				Object obj = paser.parse(result); 
