@@ -54,9 +54,10 @@ public class LectureDAOImpl implements LectureDAO {
 		// 전달 받은 section 값과 pageNum 값을 가져옴
 		int section = (Integer) pagingMap.get("section");
 		int pageNum = (Integer) pagingMap.get("pageNum");
+/*		
 		System.out.println("section : " + section);
 		System.out.println("pageNum : " + pageNum);
-
+*/
 		try {
 
 			con = getConnection();
@@ -92,6 +93,7 @@ public class LectureDAOImpl implements LectureDAO {
 				int lec_price = rs.getInt("lec_price");
 				String lec_imgfile = rs.getString("lec_imgfile");
 				String lec_spofile = rs.getString("lec_spofile");
+				
 				/*
 				 * System.out.println("level : " + level); System.out.println(
 				 * "lec_no : " + lec_no); System.out.println("lec_parentno : " +
@@ -203,7 +205,66 @@ public class LectureDAOImpl implements LectureDAO {
 			closeConnection();
 		}
 	}
+	
+	/* 강의 정보 */
+	@Override
+	public LectureBean lectureDetail(int lec_no) {
+		
+		LectureBean bean = new LectureBean();
+		
+		try {
+			con = getConnection();
 
+			// 전체 글 수 조회
+			String query = "select * from lecture_table  where lec_no = ?";
+			/*System.out.println(query);*/
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lec_no);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				bean.setLec_no(rs.getInt("lec_no"));
+				bean.setLec_title(rs.getString("lec_title"));
+				bean.setLec_price(rs.getInt("lec_price"));
+				bean.setLec_content(rs.getString("lec_content"));
+				bean.setLec_imgfile(rs.getString("lec_imgfile"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		
+		return bean;
+	}
+
+	/* 강의 상세 리스트(파일 저장 테이블)*/
+	@Override
+	public List lectureList(int lec_no) {
+		
+		List<LectureBean> lectureList = new ArrayList<LectureBean>();
+		
+		try {
+			con = getConnection();
+
+			// 전체 글 수 조회
+			String query = "select * from lecture_list where lec_no = ?";
+			/*System.out.println(query);*/
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, lec_no);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return lectureList;
+	}
+	
 	/*
 	 * // 새 글번호 검색 private int getNewNo() { try { con = getConnection(); String
 	 * query = "SELECT  max(res_no) from resource_table ";

@@ -14,7 +14,23 @@ public class LectureBean {
 	private Date lec_uploaddate;
 	
 	private int list_no;
-	private ArrayList list_title, saveFiles, originFiles;
+	private ArrayList list_title, saveFiles, originFiles;	
+	private String  list_savefile,  list_originalfile;
+	
+	
+	
+	public String getList_savefile() {
+		return list_savefile;
+	}
+	public void setList_savefile(String list_savefile) {
+		this.list_savefile = list_savefile;
+	}
+	public String getList_originalfile() {
+		return list_originalfile;
+	}
+	public void setList_originalfile(String list_originalfile) {
+		this.list_originalfile = list_originalfile;
+	}
 	public int getLec_no() {
 		return lec_no;
 	}

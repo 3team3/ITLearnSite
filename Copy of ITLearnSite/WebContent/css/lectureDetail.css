@@ -6,7 +6,13 @@
     justify-content: center;
     display: flex;
     align-content: center;
+    display: table;
+   /*  float: left; */
 /*     border: solid blue 1px; */
+}
+.list {
+	display: table-cell;
+	float :left;
 }
 .wrap{
     width: 1000px;
@@ -28,11 +34,12 @@
 /*     border: solid red; */
 }
 .bookinfo{
-    margin-left:50px;
+    margin-left:100px;
     margin-top : 30px;
     width: 640px;
     height: 300px;
-    float:left;
+    /* float:left; */
+    /* display: table; */
 /*     border: solid red; */
 }
 
@@ -41,9 +48,12 @@
     height:100px;
 /*     border: solid red; */
     font-size: 2em;
-    font-weight:bold;
+    font-weight:bold;    
     color:black;
     float:left;
+    margin-left: 20px; 
+    /* text-align: center;  */
+   /*  display: table-cell; */
 }
 
 .bookdetail{
@@ -51,9 +61,11 @@
     margin-top:20px;
     width:48%;
     float:left;
+    /* display: table-cell; */
 /*     border: solid red; */
 }
 .detail-align{
+	margin-left: 40px;
     margin-bottom: 5px;
 }
 .p1 {
@@ -94,18 +106,21 @@
 }
 
 .pagebottom{
-	width: 1200px;
+	width: 1000px;
 	min-height:300px;
     margin:0 auto;
     margin-top:30px; 
     justify-content: center;
     display: flex;
     align-content: center;
+    display: table-cell;
+    float :left; 
 /*     border: solid blue 1px; */
 }
 .divide{
-	width : 770px;
+	width : 1000px;
 	min-height : 300px;
+	
 }
 .divide>span, p{
 	font-weight: 700;

@@ -162,12 +162,22 @@ public class LectureController extends HttpServlet {
 						+ "/lectureList.lec';" + "</script>");
 				return;
 
+				//강의 상세보기
 			} else if (path.equals("/lectureDetail.lec")) {
+				
+				System.out.println("lectureDetail.lec");
+				request.setCharacterEncoding("UTF-8");
+				
+				int lec_no = Integer.parseInt(request.getParameter("lec_no"));
+				
+				Map lec_DetailMap = lServ.lectureDetail(lec_no);
+				
+				request.setAttribute("lec_DetailMap", lec_DetailMap);
+				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/lecture/lectureDetail.jsp";
 				request.setAttribute("paging", paging);
-
-				// 강의실
+				
 			}
 
 			System.out.println("nextPAge :" + nextPage);

@@ -13,6 +13,9 @@ public interface LectureService {
 	
 	//강의 등록
 	public void lectureRegister(LectureBean lBean);
+	
+	//강의 상세보기
+	public Map lectureDetail(int lec_no);
 /*	
 	자료실 검색
 	public ArrayList<LectureBean> lectureSelect(String opt,String condition);
