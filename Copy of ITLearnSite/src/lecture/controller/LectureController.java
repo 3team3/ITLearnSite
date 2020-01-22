@@ -123,7 +123,7 @@ public class LectureController extends HttpServlet {
 				System.out.println(cnt);
 
 				for (int i = 1; i <= cnt; i++) {
-					System.out.println(multi.getParameter("list_title" + i));
+					/*System.out.println(multi.getParameter("list_title" + i));*/
 					list_title.add(multi.getParameter("list_title" + i));
 				}
 
@@ -135,7 +135,7 @@ public class LectureController extends HttpServlet {
 					// 서버에 업로드한 실제 파일명 받아오기
 					String RealName = multi.getFilesystemName(InputName);
 
-					System.out.println(RealName);
+					/*System.out.println(RealName);*/
 
 					// 서버에 실제로 업로드된 파일의 이름을 하나 하나씩 어레이리스트에 추가!
 					saveFiles.add(RealName);

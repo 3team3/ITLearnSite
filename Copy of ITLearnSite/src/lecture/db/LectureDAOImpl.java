@@ -111,7 +111,7 @@ public class LectureDAOImpl implements LectureDAO {
 				bean.setLec_spofile(lec_spofile);
 
 				lecturesList.add(bean);
-				System.out.println("bean : " + bean);
+				/*System.out.println("bean : " + bean);*/
 			}
 			/*
 			 * System.out.println("lecturesList : " + lecturesList);
@@ -133,7 +133,7 @@ public class LectureDAOImpl implements LectureDAO {
 
 			// 전체 글 수 조회
 			String query = "select count(lec_no) from lecture_table";
-			System.out.println(query);
+			/*System.out.println(query);*/
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -182,13 +182,13 @@ public class LectureDAOImpl implements LectureDAO {
 			pstmt = con.prepareStatement(sql);
 
 			for (int i = 1; i < saveFiles.size(); i++) {
-				
+				/*
 				System.out.println(lec_no);
 				System.out.println(i);
 				System.out.println(list_title.get(i-1));
 				System.out.println(saveFiles.get(i));
 				System.out.println(originFiles.get(i));
-				
+				*/
 				pstmt.setInt(1, lec_no);
 				pstmt.setInt(2, i);
 				pstmt.setString(3, list_title.get(i-1));

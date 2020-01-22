@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="naver" value="${requestScope.result}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +34,7 @@
 		<div class="list">
 			<div class='wrap'>
 				<div class='bookimg'>
-					<img src='${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }'>
+					<img src='${path }/pages/main/center/lecture/temp/alim01.png'>
 				</div>
 				<div class='bookinfo'>
 					<span class='booktitle'> </span> <span class='bookdetail'>
@@ -67,8 +67,7 @@
 				</div>
 			</div>
 		</div>
-
-		<a class="link" href="${naver.items[0].link}">네이버 책</a>
+		
 		<div class="pagebottom">
 			<div class="divide">
 				<span>목차</span>
