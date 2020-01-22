@@ -38,32 +38,14 @@
 	function addInput() {
 		// input태그를 추가할 div태그 위치 주소 가져오기
 		var div = document.getElementById("inputDiv");
-		var msg1 = "<input type ='text' name='list_title" + inputCnt + "' id='list_title" + inputCnt + "' placeholder='list " + inputCnt + "'/>";
-		var msg2 = "<input type='file' name='upfile" + inputCnt + "' id='upfile" + inputCnt + "'/>";
-		/* var msg3 = "<input type='button' value='취소' onclick='deleteInput("
-				+ inputCnt + ")' " + " name='btnCancel" + inputCnt + "' "
-				+ " id='btnCancel" + inputCnt + "'/>"; */
-		var msg4 = "<br id='br" + inputCnt + "' />";
+		var msg1 = "<div class='col-md-6 form-group'><input type ='text' name='list_title" + inputCnt + "' id='list_title" + inputCnt + "' placeholder='list " + inputCnt + "' class='form-control form-control-lg'/></div>";
+		var msg2 = "<div class='col-md-6 form-group'><input type='file' name='upfile" + inputCnt + "' id='upfile" + inputCnt + "' class='form-control form-control-lg'/></div>";
+		/* var msg4 = "<br id='br" + inputCnt + "' />"; */
 		inputCnt++;
 
-		//div태그영역 안에  위의 input태그 누적		
 		div.innerHTML += msg1;
 		div.innerHTML += msg2;
-		/* div.innerHTML += msg3; */
-		div.innerHTML += msg4;
-	}
-
-	function deleteInput(num) {
-		var list_title = document.getElementById("list_title" + num);
-		var input = document.getElementById("upfile" + num);
-		/* var btn = document.getElementById("btnCancel" + num); */
-		var br = document.getElementById("br" + num);
-
-		list_title.outerHTML = "";
-		input.outerHTML = "";
-		/* btn.outerHTML = ""; */
-		br.outerHTML = "";
-
+		/* div.innerHTML += msg4; */
 	}
 
 	function complete() {
@@ -149,34 +131,70 @@
 </head>
 
 <body>
-
-	<form method="post" action="lectureRegister.lec"
-		enctype="multipart/form-data" name="writeForm">
-		<fieldset>
-			<legend>파일 업로드</legend>
-
-			<label for="txt_title">강의명</label> <input type="text" name="lec_title"
-				id="lec_title"><br>
-				<label for="lec_price">금액</label><input type="text" name="lec_price" id="lec_price"><br>
-				 <label for="txt_content">내용
-				: </label> <br>
-			<textarea name="lec_content" id="lec_content" rows="10" cols="50"></textarea>
-			<br> <label>이미지 파일 추가</label> <input type="file" name="lec_imgfile"
-				id="lec_imgfile" onchange="readURL(this);"><div id="tdImg"></div><br> <input type="button"
-				value="동영상파일추가" onclick="addInput()"> <input type="button"
-				value="업로드 영상 개수 확인" onclick="complete();" /> <br>
-			<div id="inputDiv"></div>
+	<div class="site-wrap">
+		<div class="site-section">
+			<div class="container">
+				<form method="post" action="lectureRegister.lec"
+					enctype="multipart/form-data" name="writeForm">
 
 
-		</fieldset>
+					<div class="row">
 
-		<div id="buttons">
-			<input type="button" value="등록" class="submit" onclick="fnWrite()">
-			<input type="reset" value="다시작성" class="cancel">
+						<div class="col-md-6 form-group">
+							<label for="lec_title">강의명</label> <input type="text"
+								name="lec_title" id="lec_title"
+								class="form-control form-control-lg">
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="lec_price">금액</label><input type="text"
+								name="lec_price" id="lec_price"
+								class="form-control form-control-lg">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 form-group">
+							<label for="lec_content">설명 </label>
+							<textarea name="lec_content" id="lec_content" rows="10" cols="50"
+								class="form-control"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-5 mr-auto align-self-center order-2 order-lg-1" style="padding: 10px;">
+							<h3 class="section-title-underline mb-5">
+                            <span>사용법</span>
+                        </h3>
+							<p>1. 이미지를 먼저 추가한다<br>
+							2. 업로드할 동영상 파일 수 만큼 추가 버튼을 눌러 추가한다<br>
+							3. 추가할 파일 수가 맞다면 확인 버튼을 누른다</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 form-group">
+							<label>이미지 파일 추가</label> <input type="file" name="lec_imgfile"
+								id="lec_imgfile" onchange="readURL(this);"
+								class="form-control form-control-lg">
+						</div>
+						<div id="tdImg" class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0"></div>
+					</div>
+					<div class="row" style="margin: 10px">
+						<input type="button" value="추가" onclick="addInput()"
+							class="btn btn-primary btn-lg px-5" style="margin: 10px;">
+						<input type="button" value="확인" onclick="complete();"
+							class="btn btn-primary btn-lg px-5" style="margin: 10px;" />
+					</div>
+					<div class="row">
+						<div id="inputDiv" class="row"></div>
+					</div>
+					<div class="row">
+						<input type="button" value="등록" onclick="fnWrite()"
+							class="btn btn-primary btn-lg px-5 submit" style="margin: 10px;" />
+						<input type="reset" value="다시작성"
+							class="btn btn-primary btn-lg px-5 cancel" style="margin: 10px;" />
+					</div>
+				</form>
+
+			</div>
 		</div>
-	</form>
-
-
-
+	</div>
 </body>
 </html>
