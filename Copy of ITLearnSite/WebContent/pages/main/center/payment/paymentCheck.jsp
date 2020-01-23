@@ -46,6 +46,7 @@
 		<div class="content">
 		<h3>결제 전</h3>
 		<table class="table">
+		
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
 			<c:if test="${paymentList.pay_option==0}">
@@ -219,18 +220,7 @@
 				<td colspan="3">결제 여부</td>			
 				<td>결제함</td>		
 			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td>주문취소</td>	
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay'"></td>	
-			</tr>
+			
 				<!-- j변수 값 1씩 증가 -->
 				<c:set var="j" value="${j+1}" />
 			</c:if>				
