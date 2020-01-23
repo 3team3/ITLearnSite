@@ -248,15 +248,39 @@ public class LectureDAOImpl implements LectureDAO {
 			con = getConnection();
 
 			// 전체 글 수 조회
-			String query = "select * from lecture_list where lec_no = ?";
+			String query = "select * from lecture_list where lec_no = ? order by list_no";
 			/*System.out.println(query);*/
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, lec_no);
 			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
+				
+				int list_no = rs.getInt("list_no");
+				String list_titleStr = rs.getString("list_title");
+				String list_savefile = rs.getString("list_savefile");
+				String list_originalfile = rs.getString("list_originalfile");
+				/*
+				System.out.println("dao : list" +list_no);
+				System.out.println("dao : list" +list_titleStr);
+				System.out.println("dao : list" +list_savefile);
+				System.out.println("dao : list" + list_originalfile);
+				*/
+				
+				LectureBean bean = new LectureBean();
+				
+				bean.setList_no(list_no);
+				bean.setList_titleStr(list_titleStr);
+				bean.setList_savefile(list_savefile);
+				bean.setList_originalfile(list_originalfile);
+				
+				
+				
+				lectureList.add(bean);
 				
 			}
-
+			/*
+			System.out.println("dao : list" +lectureList);
+*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

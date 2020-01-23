@@ -185,10 +185,13 @@ public class ResourceController extends HttpServlet {
 			{
 				System.out.println("resourceSelect.bo");
 				
-				String select_subject = request.getParameter("select_subject");
-				String select_content = request.getParameter("select_content");
+				String opt = request.getParameter("opt");
+				String condition = request.getParameter("condition");
 				
-				List<ResourceBean> ResourceList = serv.resourceSelect(select_subject,select_content);
+				System.out.println("con opt" + opt);
+				System.out.println("con condition" + condition);
+				
+				List<ResourceBean> ResourceList = serv.resourceSelect(opt,condition);
 				request.setAttribute("ResourceList", ResourceList);
 				nextPage = "/main.jsp";
 				paging= "/pages/main/center/resource/resourceSelect.jsp";

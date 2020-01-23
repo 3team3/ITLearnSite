@@ -144,9 +144,10 @@ public class LectureController extends HttpServlet {
 					originFiles.add(multi.getOriginalFileName(InputName));
 				}
 				
-				//역순으로 정렬
-				Collections.reverse(saveFiles);
-				Collections.reverse(originFiles);
+				Collections.sort(saveFiles);
+				Collections.sort(originFiles);
+				
+				System.out.println(); 
 
 				lBean.setList_title(list_title);
 				lBean.setOriginFiles(originFiles);
@@ -157,6 +158,7 @@ public class LectureController extends HttpServlet {
 
 				lServ.lectureRegister(lBean);
 
+				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('강의를 등록했습니다.');" + " location.href='" + request.getContextPath()
 						+ "/lectureList.lec';" + "</script>");
