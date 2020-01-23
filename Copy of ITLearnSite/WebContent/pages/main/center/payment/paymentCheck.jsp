@@ -10,8 +10,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${path}/css/member.css" rel="stylesheet"> 
-<title>회원관리</title>
+<title>주문관리</title>
 </head>
+<c:set var="email" value="${sessionScope.email}"></c:set>
+<c:if test="${email eq null}">
+	<script type="text/javascript">
+		alert("로그인 후 조회가능합니다.");
+		location.href="${path}/index.do";
+	</script>
+</c:if>
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
@@ -33,51 +40,203 @@
         <span class="current">주문확인</span>
       </div>
     </div>
-	
-	<!-- 전체 회원에 대한 정보 출력 -->
+
 	<center>	
 		<div class="pagemargin">
 		<div class="content">
+		<h3>결제 전</h3>
 		<table class="table">
+			<c:set var="j" value="0"/>
+			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
+			<c:if test="${paymentList.pay_option==0}">
 			<tr class="tb_head">
-				<td colspan="12">주문 목록</td>
+				<td colspan="4">주문</td>
 			</tr>
-			<%-- <c:set var="j" value="0"/> --%>
-			<!-- MemberListController에서 넘겨 받은 request영역 안에 있는 list사이즈 만큼 반복 -->
-					<tr align="center">
-						<td>이름</td>
-						<td>전화번호</td>
-						<td>우편번호</td>
-						<td>주소</td>
-						<td>상세주소</td>
-						<td>강의</td>
-						<td>교재</td>
-						<td>교재 개수</td>
-						<td>금액</td>
-						<td>결제여부</td>
-						<td>주문취소</td>
-						<td>주문수정</td>		
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay'"></td>
-						<td><input type="button" class="btn btn-color1" value="주문수정" onclick="location.href='${path}/paymentModify.pay'"></td>		
-					</tr>
-			<%-- <c:forEach  var="memberlist"   items="${requestScope.memberlist}">		
-					
-
+			
+			<tr>
+				<td>이름</td>
+				<td>${paymentList.pay_name}</td>
+				<td>전화번호</td>
+				<td>${paymentList.pay_phonenumber}</td>
+			</tr>
+			<tr>			
+				<td>우편번호</td>
+				<td colspan="3">${paymentList.pay_address}</td>
+			</tr>
+			<tr>	
+				<td colspan="4">${paymentList.pay_address1}</td>
+			</tr>
+			<tr>
+				<td colspan="4">${paymentList.pay_address2}</td>		
+			</tr>			
+			<tr>			
+				<td>분류</td>
+				<td>주문상품</td>
+				<td>개수</td>					
+				<td>가격</td>
+			</tr>
+			<tr>
+				<td>${paymentList.pay_pro1_sort}</td>
+				<td>${paymentList.pay_pro1_name}</td>
+				<td>${paymentList.pay_pro1_cnt}</td>
+				<td>${paymentList.pay_pro1_price}</td>					
+			</tr>
+			<c:if test="${paymentList.pay_pro2_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro2_sort}</td>
+				<td>${paymentList.pay_pro2_name}</td>
+				<td>${paymentList.pay_pro2_cnt}</td>
+				<td>${paymentList.pay_pro2_price}</td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_pro3_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro3_sort}</td>
+				<td>${paymentList.pay_pro3_name}</td>
+				<td>${paymentList.pay_pro3_cnt}</td>
+				<td>${paymentList.pay_pro3_price}</td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_pro4_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro4_sort}</td>
+				<td>${paymentList.pay_pro4_name}</td>
+				<td>${paymentList.pay_pro4_cnt}</td>
+				<td>${paymentList.pay_pro4_price}</td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_pro5_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro5_sort}</td>
+				<td>${paymentList.pay_pro5_name}</td>
+				<td>${paymentList.pay_pro5_cnt}</td>
+				<td>${paymentList.pay_pro5_price}</td>
+			</tr>
+			</c:if>
+		
+			<tr>
+				<td colspan="3">결제 금액</td>
+				<td>${paymentList.pay_total}</td>
+			</tr>
+			<tr>
+				<td colspan="3">결제 여부</td>			
+				<td>결제안함</td>		
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>주문취소</td>	
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay'"></td>	
+			</tr>
 				<!-- j변수 값 1씩 증가 -->
 				<c:set var="j" value="${j+1}" />
-			</c:forEach> --%>	
+			</c:if>				
+			</c:forEach> 
+			
+
+		</table>
+		<h3>결제 후</h3>
+		<table class="table">
+			<c:set var="j" value="0"/>
+			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
+			<c:if test="${paymentList.pay_option==1}">
+			<tr class="tb_head">
+				<td colspan="4">주문</td>
+			</tr>
+			
+			<tr>
+				<td>이름</td>
+				<td>${paymentList.pay_name}</td>
+				<td>전화번호</td>
+				<td>${paymentList.pay_phonenumber}</td>
+			</tr>
+			<tr>			
+				<td>우편번호</td>
+				<td colspan="3">${paymentList.pay_address}</td>
+			</tr>
+			<tr>	
+				<td colspan="4">${paymentList.pay_address1}</td>
+			</tr>
+			<tr>
+				<td colspan="4">${paymentList.pay_address2}</td>		
+			</tr>			
+			<tr>			
+				<td>분류</td>
+				<td>주문상품</td>
+				<td>개수</td>					
+				<td>가격</td>
+			</tr>
+			<tr>
+				<td>${paymentList.pay_pro1_sort}</td>
+				<td>${paymentList.pay_pro1_name}</td>
+				<td>${paymentList.pay_pro1_cnt}</td>
+				<td>${paymentList.pay_pro1_price}</td>					
+			</tr>
+			<c:if test="${paymentList.pay_pro2_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro2_sort}</td>
+				<td>${paymentList.pay_pro2_name}</td>
+				<td>${paymentList.pay_pro2_cnt}</td>
+				<td>${paymentList.pay_pro2_price}</td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_pro3_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro3_sort}</td>
+				<td>${paymentList.pay_pro3_name}</td>
+				<td>${paymentList.pay_pro3_cnt}</td>
+				<td>${paymentList.pay_pro3_price}</td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_pro4_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro4_sort}</td>
+				<td>${paymentList.pay_pro4_name}</td>
+				<td>${paymentList.pay_pro4_cnt}</td>
+				<td>${paymentList.pay_pro4_price}</td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_pro5_cnt!=0}">
+			<tr>
+				<td>${paymentList.pay_pro5_sort}</td>
+				<td>${paymentList.pay_pro5_name}</td>
+				<td>${paymentList.pay_pro5_cnt}</td>
+				<td>${paymentList.pay_pro5_price}</td>
+			</tr>
+			</c:if>
+		
+			<tr>
+				<td colspan="3">결제 금액</td>
+				<td>${paymentList.pay_total}</td>
+			</tr>
+			<tr>
+				<td colspan="3">결제 여부</td>			
+				<td>결제함</td>		
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>주문취소</td>	
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay'"></td>	
+			</tr>
+				<!-- j변수 값 1씩 증가 -->
+				<c:set var="j" value="${j+1}" />
+			</c:if>				
+			</c:forEach> 
+			
+
 		</table>
 		</div>
 		</div>

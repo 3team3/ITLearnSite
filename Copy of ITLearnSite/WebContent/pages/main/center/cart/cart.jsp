@@ -1,200 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
+<%--JSTL CORE라이브러리 태그들 사용을 위한 선언 --%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>     
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set> 
+  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${path}/css/member.css" rel="stylesheet"> 
+<title>장바구니</title>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){ 
+	  $('.bt_up').click(function(){ 
+	    var n = $('.bt_up').index(this);
+	    var num = $(".num:eq("+n+")").val();
+	    num = $(".num:eq("+n+")").val(num*1+1); 
+	  });
+	  $('.bt_down').click(function(){ 
+	    var n = $('.bt_down').index(this);
+	    var num = $(".num:eq("+n+")").val();
+	    num = $(".num:eq("+n+")").val(num*1-1); 
+	  });
+	}) 
+</script>
+
 </head>
-
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
-		<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-			<div class="container">
-				<div class="row align-items-end">
-					<div class="col-lg-7">
-						<h2 class="mb-0">Courses</h2>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-					</div>
-				</div>
+    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+        <div class="container">
+          <div class="row align-items-end">
+            <div class="col-lg-7">
+              <h2 class="mb-0">장바구니</h2>
+              <p>Cart</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <div class="custom-breadcrumns border-bottom">
+      <div class="container">
+        <a href="index.jsp">메인화면</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">장바구니</span>
+      </div>
+    </div>
+	
+	<!-- 장바구니에 대한 정보 출력 -->
+	<center>	
+		<div class="pagemargin">
+		<div class="content">
+		<form action="payment.pay" method="post">		
+		<table class="table">			
+		<c:set var="j" value="0"/> 
+			<!-- MemberListController에서 넘겨 받은 request영역 안에 있는 list사이즈 만큼 반복 -->
+					<tr align="center">
+					
+						<tr>
+							<th colspan="3">상품정보</th>
+							<th colspan="2">수량</th>
+							<th>가격</th>
+							<th></th>
+						</tr>
+					
+				
+			 <c:forEach  var="cartlist"   items="${requestScope.cartlist}">	
+					<tr>
+						<td class="checkbox"><input type="checkbox" checked="checked"></td>
+						<td class="img">이미지</td>
+						<td class="name">${cartlist.pro_name }</td>
+							<td class="count">
+								<div class="quantity">
+									<a href="#" id="minusbtn"><img src="${path}/images/minus.png" alt="" width="20px" height="20px" class="bt_down"/></a> 
+									<input type="text" name="pro_cnt" value="${cartlist.pro_cnt }" class="num"> 
+									<a href="#" id="plusbtn"><img src="${path}/images/plus.png" alt="" width="20px" height="20px" class="bt_up"/></a> 
+									<input type="submit" class="btn btn-color1" value="변경">
+								</div>
+							</td>													
+						<td class="price"> ${cartlist.pro_price }</td>
+						<td class="sort"> ${cartlist.pro_sort }</td>					
+						<td class="delete"><input type="button" class="btn btn-color1" value="삭제" onclick="cartDelete.cart"></td>								
+					</tr>	
+	
+		<!-- j변수 값 1씩 증가 -->
+		<c:set var="j" value="${j+1}" />
+			</c:forEach> 		
+		</table>
+		
+			
+			<div class="btn">
+				<input type="button" class="btn btn-color1" value="선택상품주문">		
+				<input type="button" class="btn btn-color1" value="장바구니 비우기">
+				<input type="submit" class="btn btn-color1" value="전체상품주문">
 			</div>
+		</form>
+		
+		
 		</div>
+		</div>		
+	</center>
 
-
-		<div class="custom-breadcrumns border-bottom">
-			<div class="container">
-				<a href="index.jsp">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">Courses</span>
-			</div>
-		</div>
-
-		<div class="site-section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="../images/course_1.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="../images/course_2.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="../images/course_3.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="../images/course_4.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="../images/course_5.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="../images/course_6.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="section-bg style-1" style="background-image: url('../images/hero_1.jpg');">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-						<span class="icon flaticon-mortarboard"></span>
-						<h3>Our Philosphy</h3>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea? Dolore, amet
-							reprehenderit.</p>
-					</div>
-					<div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-						<span class="icon flaticon-school-material"></span>
-						<h3>Academics Principle</h3>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea? Dolore, amet
-							reprehenderit.</p>
-					</div>
-					<div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-						<span class="icon flaticon-library"></span>
-						<h3>Key of Success</h3>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis recusandae, iure repellat quis delectus ea? Dolore, amet
-							reprehenderit.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 </body>
 </html>

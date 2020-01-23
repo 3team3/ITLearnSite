@@ -1,5 +1,8 @@
 package cart.controller;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -7,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cart.db.CartBean;
 import cart.db.CartDAOImpl;
@@ -29,24 +33,59 @@ public class CartController extends HttpServlet{
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		
 		String url = request.getRequestURI();
 		System.out.println(url);
-
+		
 		String contextPath = request.getContextPath();
 		System.out.println(contextPath);
+		
 		String path = url.substring(contextPath.length());
 		System.out.println(path);
+		
 		String nextPage = null;
 		String paging = null;
 		
 		try {
-			if(path.equals("/cart.cart"))
+			if(path.equals("/cart.cart"))//목록보기
 			{
+				String email = (String)request.getSession().getAttribute("email");
+				System.out.println(email);
+				ArrayList<CartBean> cartlist=caServ.getcartlist(email);
+				request.setAttribute("cartlist", cartlist);
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/cart/cart.jsp";
 				request.setAttribute("paging", paging);
-			}
+				
+				
+			}else if(path.equals("/cartAdd.cart")){//장바구니 넣기
+				String email = (String)request.getSession().getAttribute("email");
+				int lec_no=Integer.parseInt(request.getParameter("lec_no"));
+				String pro_name=request.getParameter("lec_title");
+				int pro_price=Integer.parseInt(request.getParameter("lec_price"));				
+				System.out.println("장바구니에 넣기");
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/cart/cart.jsp";
+				request.setAttribute("paging", paging);
+				
+			}else if(path.equals("/cartEdit.cart")){//수량변경
+				System.out.println("수량변경");	
+				
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('수정되었습니다.');" 
+				+ " location.href='cart.cart'" + "</script>");
+				return;
+				
+			}else if(path.equals("/cartDelete.cart")){//삭제
+				System.out.println("상품삭제");
+				
+			}else if(path.equals("/cartAllDelete.cart")){//모두삭제
+				System.out.println("장바구니비우기");
+				
+				
+			}		
 			System.out.println("nextpage" + nextPage);
 			// null PointException
 			if (nextPage != null) 
@@ -61,148 +100,5 @@ public class CartController extends HttpServlet{
 		}
 	}
 	
-	private CartBean getCartBeanProperty(HttpServletRequest request, HttpServletResponse response) {
-		 int cart_no = 0;
-		 String cart_email = null; 
-		 int cart_book1 = 0;
-		 int cart_book1_num = 0;
-		 int cart_book2 = 0;
-		 int cart_book2_num = 0;
-		 int cart_book3 = 0; 
-		 int cart_book3_num = 0;
-		 int cart_book4 = 0;
-		 int cart_book4_num = 0; 
-		 int cart_book5 = 0; 
-		 int cart_book5_num = 0; 
-		 int cart_lecture1 = 0; 
-		 int cart_lecture1_num = 0; 
-		 int cart_lecture2 = 0; 
-		 int cart_lecture2_num = 0; 
-		 int cart_lecture3 = 0; 
-		 int cart_lecture3_num = 0;
-		 int cart_lecture4 = 0;
-		 int cart_lecture4_num = 0;
-		 int cart_lecture5 = 0;
-		 int cart_lecture5_num = 0;
-		 
-		 caBean = new CartBean();
-		
-		if (request.getParameter("cart_no") != null) {
-			cart_no = Integer.parseInt(request.getParameter("cart_no"));
-			caBean.setCart_no(cart_no);
-			System.out.println("cart_no =" + cart_no);
-		}
-		if (request.getParameter("cart_email") != null) {
-			cart_email = request.getParameter("cart_email");
-			caBean.setCart_email(cart_email);
-			System.out.println("cart_email =" + cart_email );
-		}
-		if (request.getParameter("cart_book1") != null) {
-			cart_book1 = Integer.parseInt(request.getParameter("cart_book1"));
-			caBean.setCart_book1(cart_book1);
-			System.out.println("cart_book1 =" + cart_book1);
-		}
-		if (request.getParameter("cart_book1_num") != null) {
-			cart_book1_num = Integer.parseInt(request.getParameter("cart_book1_num"));
-			caBean.setCart_book1_num(cart_book1_num);
-			System.out.println("cart_book1_num =" + cart_book1_num);
-		}
-		if (request.getParameter("cart_book2") != null) {
-			cart_book2 = Integer.parseInt(request.getParameter("cart_book2"));
-			caBean.setCart_book2(cart_book2);
-			System.out.println("cart_book2 =" + cart_book2);
-		}
-		if (request.getParameter("cart_book2_num") != null) {
-			cart_book2_num = Integer.parseInt(request.getParameter("cart_book2_num"));
-			caBean.setCart_book2_num(cart_book2_num);
-			System.out.println("cart_book2_num =" + cart_book2_num);
-		}
-		if (request.getParameter("cart_book3") != null) {
-			cart_book3 = Integer.parseInt(request.getParameter("cart_book3"));
-			caBean.setCart_book3(cart_book3);
-			System.out.println("cart_book3 =" + cart_book3);
-		}
-		if (request.getParameter("cart_book3_num") != null) {
-			cart_book3_num = Integer.parseInt(request.getParameter("cart_book3_num"));
-			caBean.setCart_book3_num(cart_book3_num);
-			System.out.println("cart_book3_num =" + cart_book3_num);
-		}
-		if (request.getParameter("cart_book4") != null) {
-			cart_book4 = Integer.parseInt(request.getParameter("cart_book4"));
-			caBean.setCart_book4(cart_book4);
-			System.out.println("cart_book4 =" + cart_book4);
-		}
-		if (request.getParameter("cart_book4_num") != null) {
-			cart_book4_num = Integer.parseInt(request.getParameter("cart_book4_num"));
-			caBean.setCart_book4_num(cart_book4_num);
-			System.out.println("cart_book4_num =" + cart_book4_num);
-		}
-		if (request.getParameter("cart_book5") != null) {
-			cart_book5 = Integer.parseInt(request.getParameter("cart_book5"));
-			caBean.setCart_book5(cart_book5);
-			System.out.println("cart_book5 =" + cart_book5);
-		}
-		if (request.getParameter("cart_book5_num") != null) {
-			cart_book5_num = Integer.parseInt(request.getParameter("cart_book5_num"));
-			caBean.setCart_book5_num(cart_book5_num);
-			System.out.println("cart_book5_num =" + cart_book5_num);
-		}
-		
-		if (request.getParameter("cart_lecture1") != null) {
-			cart_lecture1 = Integer.parseInt(request.getParameter("cart_lecture1"));
-			caBean.setCart_lecture1(cart_lecture1);
-			System.out.println("cart_lecture1 =" + cart_lecture1);
-		}
-		if (request.getParameter("cart_lecture1_num") != null) {
-			cart_lecture1_num = Integer.parseInt(request.getParameter("cart_lecture1_num"));
-			caBean.setCart_lecture1_num(cart_lecture1_num);
-			System.out.println("cart_lecture1_num =" + cart_lecture1_num);
-		}
-		
-		if (request.getParameter("cart_lecture2") != null) {
-			cart_lecture2 = Integer.parseInt(request.getParameter("cart_lecture2"));
-			caBean.setCart_lecture2(cart_lecture2);
-			System.out.println("cart_lecture2 =" + cart_lecture2);
-		}
-		if (request.getParameter("cart_lecture2_num") != null) {
-			cart_lecture2_num = Integer.parseInt(request.getParameter("cart_lecture2_num"));
-			caBean.setCart_lecture2_num(cart_lecture2_num);
-			System.out.println("cart_lecture2_num =" + cart_lecture2_num);
-		}
-		
-		if (request.getParameter("cart_lecture3") != null) {
-			cart_lecture3 = Integer.parseInt(request.getParameter("cart_lecture3"));
-			caBean.setCart_lecture3(cart_lecture3);
-			System.out.println("cart_lecture3 =" + cart_lecture3);
-		}
-		if (request.getParameter("cart_lecture3_num") != null) {
-			cart_lecture3_num = Integer.parseInt(request.getParameter("cart_lecture3_num"));
-			caBean.setCart_lecture3_num(cart_lecture3_num);
-			System.out.println("cart_lecture3_num =" + cart_lecture3_num);
-		}
-		
-		if (request.getParameter("cart_lecture4") != null) {
-			cart_lecture4 = Integer.parseInt(request.getParameter("cart_lecture4"));
-			caBean.setCart_lecture4(cart_lecture4);
-			System.out.println("cart_lecture4 =" + cart_lecture4);
-		}
-		if (request.getParameter("cart_lecture4_num") != null) {
-			cart_lecture4_num = Integer.parseInt(request.getParameter("cart_lecture4_num"));
-			caBean.setCart_lecture4_num(cart_lecture4_num);
-			System.out.println("cart_lecture4_num =" + cart_lecture4_num);
-		}
-		
-		if (request.getParameter("cart_lecture5") != null) {
-			cart_lecture5 = Integer.parseInt(request.getParameter("cart_lecture5"));
-			caBean.setCart_lecture5(cart_lecture5);
-			System.out.println("cart_lecture5 =" + cart_lecture5);
-		}
-		if (request.getParameter("cart_lecture5_num") != null) {
-			cart_lecture5_num = Integer.parseInt(request.getParameter("cart_lecture5_num"));
-			caBean.setCart_lecture5_num(cart_lecture5_num);
-			System.out.println("cart_lecture5_num =" + cart_lecture5_num);
-		}
-		
-		return caBean;
-	}
+
 }

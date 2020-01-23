@@ -62,12 +62,11 @@
 				</c:if>
 
 				<c:if test="${email != null }">
+					<small>${email} 로그인 중</small>
 					<ul>
-						<small>${email} 로그인 중</small>
 						<a href="logout.do" class="small mr-3"><span class="icon-unlock-alt"></span> 로그아웃</a>
 						<!-- 장바구니 -->
 						<a href="cart.cart"><img src="${path}/images/cart.png" height="40px" width="40px"></a>
-						<a href="payment.pay">결제(보기)</a>
 					</ul>
 					<%-- <a href="${path}/member/register.jsp" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> 회원가입</a> --%>
 				</c:if>

@@ -2,6 +2,8 @@ package payment.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cart.db.CartBean;
+import cart.service.CartServiceImpl;
 import member.db.MemberBean;
 import member.db.MemberDAOImpl;
 import member.service.MemberServiceImpl;
@@ -24,6 +28,8 @@ public class PaymentController extends HttpServlet {
 	PaymentBean pBean = null;
 	MemberBean mBean = null;
 	MemberServiceImpl mServ = null;
+	ArrayList<CartBean> cartlist = null;
+	CartServiceImpl caServ = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {	
@@ -31,6 +37,7 @@ public class PaymentController extends HttpServlet {
 		pBean = new PaymentBean();
 		mBean = new MemberBean();
 		mServ = new MemberServiceImpl();
+		caServ = new CartServiceImpl();
 	}
 
 	@Override
@@ -44,13 +51,16 @@ public class PaymentController extends HttpServlet {
 		String paging = null;
 		HttpSession session = null;
 		try {
-			//주문페이지
+			//주문페이지 이동
 			if(path.equals("/payment.pay"))
 			{
 				session = request.getSession();
 				String email = (String)session.getAttribute("email");
 				mBean = mServ.callMember(email);
 				request.setAttribute("mBean", mBean);
+				
+				cartlist = caServ.getcartlist(email);
+				request.setAttribute("cartlist", cartlist);
 				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/payment/payment.jsp";
@@ -60,49 +70,43 @@ public class PaymentController extends HttpServlet {
 			else if(path.equals("/payment1.pay")){
 				pBean = getPaymentBeanProperty(request, response);
 				pServ.insertPayment(pBean);
-				
+
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('주문완료');");
-				out.println("history.back();");
+				out.println("window.location.href='/ITLearnSite/index.do'");
 				out.println("</script>");
 				out.close();
-				
-				nextPage = "/main.jsp";
-				paging = "/pages/main/center/default.jsp";
-				request.setAttribute("paging", paging);
 			}
 			//주문확인
 			else if(path.equals("/paymentCheck.pay"))
 			{
 				session = request.getSession();
 				String email = (String)session.getAttribute("email");
-				pBean = pServ.callPayment(email);
-				request.setAttribute("pBean", pBean);
+				List<PaymentBean> paymentList = pServ.callPayment(email);
 				
+				request.setAttribute("paymentList", paymentList);				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/payment/paymentCheck.jsp";
 				request.setAttribute("paging", paging);
 			}
-			//주문수정
-			else if(path.equals("/paymentModify.pay"))
+			//주문 취소
+			else if(path.equals("/paymentDelete.pay"))
 			{
-				pBean = getPaymentBeanProperty(request, response);
-				pServ.updatePayment(pBean);
+				session = request.getSession();
+				String email = (String)session.getAttribute("email");
+				pServ.deletePayment(email);
 				
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('주문수정');");
-				out.println("history.back();");
+				out.println("alert('주문취소');");
+				out.println("window.location.href='/ITLearnSite/paymentCheck.pay'");
 				out.println("</script>");
 				out.close();
-				
-				nextPage = "/main.jsp";
-				paging = "/pages/main/center/payment/paymentCheck.jsp";
-				request.setAttribute("paging", paging);
 			}
+
 			System.out.println("nextPage = " + nextPage);
 			// null PointException
 			if (nextPage != null) {
@@ -116,16 +120,37 @@ public class PaymentController extends HttpServlet {
 
 	private PaymentBean getPaymentBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		int pay_no = 0;
-		int pay_cart_no = 0;
 		String pay_email = null;
 		String pay_name = null;
+		String pay_phonenumber = null;
 		String pay_address = null;
 		String pay_address1 = null;
 		String pay_address2 = null;
-		int pay_book = 0;
-		int pay_book_num = 0;
-		int pay_lecture = 0;
-		int pay_lecture_num = 0;
+		String pay_pro1_name = " ";
+		int pay_pro1_cnt = 0;
+		int pay_pro1_price = 0;
+		String pay_pro1_sort = null;
+		
+		String pay_pro2_name = null;
+		int pay_pro2_cnt = 0;
+		int pay_pro2_price = 0;
+		String pay_pro2_sort = null;
+		
+		String pay_pro3_name = null;
+		int pay_pro3_cnt = 0;
+		int pay_pro3_price = 0;
+		String pay_pro3_sort = null;
+		
+		String pay_pro4_name = null;
+		int pay_pro4_cnt = 0;
+		int pay_pro4_price = 0;
+		String pay_pro4_sort = null;
+		
+		String pay_pro5_name = null;
+		int pay_pro5_cnt = 0;
+		int pay_pro5_price = 0;
+		String pay_pro5_sort = null;
+		
 		String pay_total = null;
 		int pay_option = 0;
 		
@@ -133,11 +158,6 @@ public class PaymentController extends HttpServlet {
 		{
 			pay_no = Integer.parseInt(request.getParameter("pay_no"));
 			pBean.setPay_no(pay_no);
-		}
-		if(request.getParameter("pay_cart_no") != null)
-		{
-			pay_cart_no = Integer.parseInt(request.getParameter("pay_cart_no"));
-			pBean.setPay_cart_no(pay_cart_no);
 		}
 		if(request.getParameter("pay_email") != null)
 		{
@@ -149,53 +169,141 @@ public class PaymentController extends HttpServlet {
 			pay_name = request.getParameter("pay_name");
 			pBean.setPay_name(pay_name);
 		}
-		if(request.getParameter("pay_address") != null)
+		if(request.getParameter("pay_phonenumber")!= null)
 		{
-			pay_address = request.getParameter("pay_address");
+			pay_phonenumber = request.getParameter("pay_phonenumber");
+			pBean.setPay_phonenumber(pay_phonenumber);
+		}
+		if(request.getParameter("address") != null)
+		{
+			pay_address = request.getParameter("address");
 			pBean.setPay_address(pay_address);
 		}
-		if(request.getParameter("pay_address1") != null)
+		if(request.getParameter("address1") != null)
 		{
-			pay_address1 = request.getParameter("pay_address1");
+			pay_address1 = request.getParameter("address1");
 			pBean.setPay_address1(pay_address1);
 		}
-		if(request.getParameter("pay_address2") != null)
+		if(request.getParameter("address2") != null)
 		{
-			pay_address2 = request.getParameter("pay_address2");
+			pay_address2 = request.getParameter("address2");
 			pBean.setPay_address2(pay_address2);
 		}		
-		if(request.getParameter("pay_book") != null)
+		if(request.getParameter("pay_pro1_name")!=null)
 		{
-			pay_book = Integer.parseInt(request.getParameter("pay_book"));
-			pBean.setPay_book(pay_book);
+			pay_pro1_name = request.getParameter("pay_pro1_name");
+			pBean.setPay_pro1_name(pay_pro1_name);
 		}
-		if(request.getParameter("pay_book_num") != null)
+		if(request.getParameter("pay_pro1_cnt")!=null)
 		{
-			pay_book_num = Integer.parseInt(request.getParameter("pay_book_num"));
-			pBean.setPay_book_num(pay_book_num);
+			pay_pro1_cnt =Integer.parseInt(request.getParameter("pay_pro1_cnt"));
+			pBean.setPay_pro1_cnt(pay_pro1_cnt);
 		}
-		if(request.getParameter("pay_lecture") != null)
+		if(request.getParameter("pay_pro1_price")!=null)
 		{
-			pay_lecture = Integer.parseInt(request.getParameter("pay_lecture"));
-			pBean.setPay_lecture(pay_lecture);
+			pay_pro1_price = Integer.parseInt(request.getParameter("pay_pro1_price"));
+			pBean.setPay_pro1_price(pay_pro1_price);
 		}
-		if(request.getParameter("pay_lecture_num") != null)
+		if(request.getParameter("pay_pro1_sort")!=null)
 		{
-			pay_lecture_num = Integer.parseInt(request.getParameter("pay_lecture_num"));
-			pBean.setPay_lecture_num(pay_lecture_num);
+			pay_pro1_sort = request.getParameter("pay_pro1_sort");
+			pBean.setPay_pro1_sort(pay_pro1_sort);
 		}
+		
+		if(request.getParameter("pay_pro2_name")!=null)
+		{
+			pay_pro2_name = request.getParameter("pay_pro2_name");
+			pBean.setPay_pro2_name(pay_pro2_name);
+		}
+		if(request.getParameter("pay_pro2_cnt")!=null)
+		{
+			pay_pro2_cnt =Integer.parseInt(request.getParameter("pay_pro2_cnt"));
+			pBean.setPay_pro2_cnt(pay_pro2_cnt);
+		}
+		if(request.getParameter("pay_pro2_price")!=null)
+		{
+			pay_pro2_price = Integer.parseInt(request.getParameter("pay_pro2_price"));
+			pBean.setPay_pro2_price(pay_pro2_price);
+		}
+		if(request.getParameter("pay_pro2_sort")!=null)
+		{
+			pay_pro2_sort = request.getParameter("pay_pro2_sort");
+			pBean.setPay_pro2_sort(pay_pro2_sort);
+		}
+		
+		if(request.getParameter("pay_pro3_name")!=null)
+		{
+			pay_pro3_name = request.getParameter("pay_pro3_name");
+			pBean.setPay_pro3_name(pay_pro3_name);
+		}
+		if(request.getParameter("pay_pro3_cnt")!=null)
+		{
+			pay_pro3_cnt =Integer.parseInt(request.getParameter("pay_pro3_cnt"));
+			pBean.setPay_pro3_cnt(pay_pro3_cnt);
+		}
+		if(request.getParameter("pay_pro3_price")!=null)
+		{
+			pay_pro3_price = Integer.parseInt(request.getParameter("pay_pro3_price"));
+			pBean.setPay_pro3_price(pay_pro3_price);
+		}
+		if(request.getParameter("pay_pro3_sort")!=null)
+		{
+			pay_pro3_sort = request.getParameter("pay_pro3_sort");
+			pBean.setPay_pro3_sort(pay_pro3_sort);
+		}
+		
+		if(request.getParameter("pay_pro4_name")!=null)
+		{
+			pay_pro4_name = request.getParameter("pay_pro4_name");
+			pBean.setPay_pro4_name(pay_pro4_name);
+		}
+		if(request.getParameter("pay_pro4_cnt")!=null)
+		{
+			pay_pro4_cnt =Integer.parseInt(request.getParameter("pay_pro4_cnt"));
+			pBean.setPay_pro4_cnt(pay_pro4_cnt);
+		}
+		if(request.getParameter("pay_pro4_price")!=null)
+		{
+			pay_pro4_price = Integer.parseInt(request.getParameter("pay_pro4_price"));
+			pBean.setPay_pro4_price(pay_pro4_price);
+		}
+		if(request.getParameter("pay_pro4_sort")!=null)
+		{
+			pay_pro4_sort = request.getParameter("pay_pro4_sort");
+			pBean.setPay_pro4_sort(pay_pro4_sort);
+		}
+		
+		if(request.getParameter("pay_pro5_name")!=null)
+		{
+			pay_pro5_name = request.getParameter("pay_pro5_name");
+			pBean.setPay_pro5_name(pay_pro5_name);
+		}
+		if(request.getParameter("pay_pro5_cnt")!=null)
+		{
+			pay_pro5_cnt =Integer.parseInt(request.getParameter("pay_pro5_cnt"));
+			pBean.setPay_pro5_cnt(pay_pro5_cnt);
+		}
+		if(request.getParameter("pay_pro5_price")!=null)
+		{
+			pay_pro5_price = Integer.parseInt(request.getParameter("pay_pro5_price"));
+			pBean.setPay_pro5_price(pay_pro5_price);
+		}
+		if(request.getParameter("pay_pro5_sort")!=null)
+		{
+			pay_pro5_sort = request.getParameter("pay_pro5_sort");
+			pBean.setPay_pro5_sort(pay_pro5_sort);
+		}
+		
 		if(request.getParameter("pay_total") != null)
 		{
 			pay_total = request.getParameter("pay_total");
 			pBean.setPay_total(pay_total);
-		}
-		
+		}		
 		if(request.getParameter("pay_option") != null)
 		{
 			pay_option = Integer.parseInt(request.getParameter("pay_option"));
 			pBean.setPay_option(pay_option);
-		}
-		
+		}		
 		return pBean;
 	}
 }

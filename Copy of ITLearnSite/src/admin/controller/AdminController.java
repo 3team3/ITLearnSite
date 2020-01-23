@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
+import lecture.db.PaylecBean;
 import member.db.MemberBean;
 import member.service.MemberServiceImpl;
 import payment.db.PaymentBean;
@@ -90,12 +90,16 @@ public class AdminController extends HttpServlet {
 			// ##########관리자권한 회원삭제########## End
 			
 			// ##########관리자권한 회원주문정보조회########## Start
-			else if(path.equals("/AdminMemberPayment.admin")){
+			else if(path.equals("/AdminMemberPayment.admin"))
+			{
 				
 				
 			}
-			// ##########회원주문리스트 조회########## End
-			else if(path.equals("/memberpaymentlist.admin")){
+			// ##########관리자권한 회원주문정보조회########## End
+			
+			// ##########관리자권한 전체회원주문리스트 조회########## Start
+			else if(path.equals("/memberpaymentlist.admin"))
+			{
 			
 				List<PaymentBean> paymentlist = pServ.getPaymentlist();
 				request.setAttribute("paymentlist", paymentlist);
@@ -104,6 +108,36 @@ public class AdminController extends HttpServlet {
 				paging = "/pages/main/center/admin/memberpaymentlist.jsp";
 				request.setAttribute("paging", paging);
 			}
+			// ##########관리자권한 전체회원주문리스트 조회########## End
+			
+			// ##########관리자권한 회원 결제여부 변경########## Start
+			else if(path.equals("/adminpaycheck.admin"))
+			{
+				PaylecBean plBean = null;
+				List<PaymentBean> paymentlist;
+				if(request.getParameter("pay_option")!=null){
+					int pay_option = Integer.parseInt(request.getParameter("pay_option"));
+					int pay_no = Integer.parseInt(request.getParameter("pay_no"));
+					pServ.updatePayment(pay_no,pay_option);
+					if(pay_option==1){
+						plBean = pServ.setPay_lec(pay_no);
+					}
+				}
+				
+				paymentlist = pServ.getPaymentlist();
+				request.setAttribute("paymentlist", paymentlist);
+				request.setAttribute("plBean", plBean);
+
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('결제 변경');");
+				out.println("window.location.href='/ITLearnSite/memberpaymentlist.admin'");
+				out.println("</script>");
+				out.close();
+			}
+			// ##########관리자권한 회원 결제여부 변경########## End
+			
 			
 			System.out.println("nextPage = " + nextPage);
 			// null PointException
