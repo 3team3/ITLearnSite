@@ -156,7 +156,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 				textBean.setBook_pubdate(String.valueOf(rs.getDate(9)));
 				textBean.setBook_isbn(rs.getString(10));
 				textBean.setBook_description(rs.getString(11));
-				textBean.setBook_stock(rs.getInt(11));
+				textBean.setBook_stock(rs.getInt(12));
 				list.add(textBean);
 			}
 		} catch (Exception e) {
