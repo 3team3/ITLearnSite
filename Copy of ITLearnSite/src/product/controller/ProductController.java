@@ -52,56 +52,38 @@ public class ProductController extends HttpServlet {
 			}
 			else if(path.equals("/addProduct.pd"))
 			{
-//				//Product Bean 객체 생성
-//				pBean =  new ProductBean();
-//				//request 객체에서 꺼냄
-//				//상품명
-//				String item = request.getParameter("item_content");
-//				//상품가격
-//				int price = Integer.parseInt(request.getParameter("item_price"));
-//				//상품 타입
-//				
-//				System.out.println(item);
-//				System.out.println(price);
-//				System.out.println(type);
-//				
-//				//객체에 담기
-//				pBean.setProduct_name(item);
-//				pBean.setProduct_price(price);
-//				pBean.setProduct_type(type);
-//				//Product table에 먼저 등록후
-//				int product_no = pServ.addProduct(pBean);
-//				System.out.println("return product_no"+product_no);
-//				//Product_no 을 가져옴
-//				
-//				
-//				//TextbookBean 객체 생성
-//				if(product_no != 0) {
-//					tBean = new TextbookBean();
-//					//request 객체에서 꺼냄
-//					String book_title = request.getParameter("book_title");
-//					String book_content = request.getParameter("book_content");
-//					String book_writer = request.getParameter("book_writer");
-//					String book_publisher = request.getParameter("book_publisher");
-//					int book_page = Integer.parseInt(request.getParameter("book_page"));
-//					String book_filename = request.getParameter("book_filename");
-//					
-//					System.out.println(book_title);
-//					System.out.println(book_content);
-//					System.out.println(book_writer);
-//					System.out.println(book_publisher);
-//					System.out.println(book_page);
-//					System.out.println(book_filename);
-//					
-//					//TextbookBean  객체에 담기
-//					tBean.setProduct_no(product_no);
-//					tBean.setBook_title(book_title);
-//					tBean.setBook_content(book_content);
-//					tBean.setBook_writer(book_writer);
-//					tBean.setBook_publisher(book_publisher);
-//					tBean.setBook_page(book_page);
-//					tBean.setBook_filename(book_filename);
-//				}
+				String book_title = request.getParameter("book_title");
+				System.out.println(book_title);
+				
+				String book_link = request.getParameter("book_link");
+				System.out.println(book_link);
+				
+				String book_image = request.getParameter("book_image");
+				System.out.println(book_image);
+				
+				String book_author = request.getParameter("book_author");
+				System.out.println(book_author);
+				
+				int book_price = Integer.parseInt(request.getParameter("book_price"));
+				System.out.println(book_price);
+				
+				int book_discount = Integer.parseInt(request.getParameter("book_discount"));
+				System.out.println(book_discount);
+				
+				String book_publisher = request.getParameter("book_publisher");
+				System.out.println(book_publisher);
+				
+				String book_isbn = request.getParameter("book_isbn");
+				System.out.println(book_isbn); 
+				
+				String book_description = request.getParameter("book_description");
+				System.out.println(book_description);
+				
+//				tBean.
+//				pServ.addBook(tBean);
+				
+				
+				
 			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException

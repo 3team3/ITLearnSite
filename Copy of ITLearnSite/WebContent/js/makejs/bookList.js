@@ -37,21 +37,25 @@ function setBooklist(getData){
 		var title = booktitle.split('[');
 		title = title[0];
 //		title = title.substring(0, title.length-1);
+		var uri = decodeURIComponent(getData.list[i].book_image);
+		console.log(uri);
+		
 		var comments = 
 			"<div class='booklist'>"
 			+ 	"<div class='bookimg'>"
-			+		"<img src='./images/" + getData.list[i].book_filename+"'>"
+			+		"<img src='"+decodeURIComponent(getData.list[i].book_image)+"'>"
 			+	"</div>"
 			+	"<div class='content_wrap'>"
-			+		"<a href='bookView.text?product_no=" + getData.list[i].product_no +"&word=" + title + "'>"
+			+		"<a href='bookdetail.text?product_no=" + getData.list[i].product_no +"'>"
 			+			"<p class='booktitle'>" + getData.list[i].book_title + "</p>"
-			+			"<p class='bookcontent'>가격 : " + getData.list[i].book_price +"원<br>페이지 수 : " + encodeURI(getData.list[i].book_page) + "쪽<br>출판사 : " + getData.list[i].book_publisher + "<br>작가 : " + getData.list[i].book_writer + "<br>출판일 : "+ getData.list[i].book_uploaddate
-			+			"</p>"
 			+		"</a>"
-			+		"<button class='btn btn-color1'> 담기 </button>"
-			+		"<button class='btn btn-color1'> 맛보기 </button>"
-			+		"<button class='btn btn-danger float-r'> 삭제 </button>"
-			+	"</div>";
+			+		"<div class='buttons'>"
+			+			"<button class='btn btn-color1'> 담기 </button>"
+			+			"<button class='btn btn-color1'> 맛보기 </button>"
+			+			"<button class='btn btn-danger float-r'> 삭제 </button>"
+			+		"</div>"
+			+	"</div>"
+			+"</div>";
 			
 		string = string + comments;
 	}

@@ -1,44 +1,54 @@
+
 .pagewrap{
 	width: 1200px;
     height: auto;
-    margin:0 auto;
     margin-top:30px; 
+    margin-bottom: 30px;
+  	margin-left:25%;
     justify-content: center;
     display: flex;
     align-content: center;
+   
 }
 .booklist{
 	width: 1000px;
-    height: 370px;
-/* 	border: solid red; */
+    height: 230px;
+	margin-bottom: 15px;
+/* 	border: solid blue; */
+	border-top-style: groove;
 }
 .bookimg{
 	float:left;
 	margin-top : 12px;
 	margin-left : 12px;
-	width : 20%;
-	height : 270px;
+	width : 150px;
+	height : 200px;
 /* 	border: solid red; */
 }
 
 .bookimg>img{
-	width:99%;
-	height: 99%;
+	width: 130px;
+	height: 180px;
 }
 .content_wrap{
 	float:left;
 	margin-top : 12px;
 	margin-left : 12px;
 	width : 75%;
-	height : 270px;
-/* 	border: solid red; */
+	height : 200px;
+/* 	border: solid orange; */
 }
 
 .booktitle{
-	font-size: 2em;
+	font-size: 1.2em;
 	font-weight: bold;
+	height: 100px;
+/* 	border:solid yellow; */
 }
-
+.buttons{ 
+	margin-top:50px;
+/* 	border:solid cyan; */
+}
 button {
 	margin-left : 10px;
 }

@@ -1,34 +1,62 @@
 package textbook.db;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class TextbookBean {
 	private int product_no;
-	private String book_title;
-	private String book_content;
-	private String book_publisher;
-	private String book_writer;
-	private int book_page;
-	private String book_filename;
-	private Date book_uploaddate;
-	
 	public int getProduct_no() {
 		return product_no;
 	}
 	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
 	}
+	private String book_title;
+	private String book_link;
+	private String book_image;
+	private String book_author;
+	private int book_price;
+	private int book_discount;
+	private String book_publisher;
+	private String book_pubdate;
+	private String book_isbn;
+	private String book_description;
+	private int book_stock;
+	
 	public String getBook_title() {
 		return book_title;
 	}
 	public void setBook_title(String book_title) {
 		this.book_title = book_title;
 	}
-	public String getBook_content() {
-		return book_content;
+	public String getBook_link() {
+		return book_link;
 	}
-	public void setBook_content(String book_content) {
-		this.book_content = book_content;
+	public void setBook_link(String book_link) {
+		this.book_link = book_link;
+	}
+	public String getBook_image() {
+		return book_image;
+	}
+	public void setBook_image(String book_image) {
+		this.book_image = book_image;
+	}
+	public String getBook_author() {
+		return book_author;
+	}
+	public void setBook_author(String book_author) {
+		this.book_author = book_author;
+	}
+	public int getBook_price() {
+		return book_price;
+	}
+	public void setBook_price(int book_price) {
+		this.book_price = book_price;
+	}
+	public int getBook_discount() {
+		return book_discount;
+	}
+	public void setBook_discount(int book_discount) {
+		this.book_discount = book_discount;
 	}
 	public String getBook_publisher() {
 		return book_publisher;
@@ -36,29 +64,29 @@ public class TextbookBean {
 	public void setBook_publisher(String book_publisher) {
 		this.book_publisher = book_publisher;
 	}
-	public int getBook_page() {
-		return book_page;
+	public String getBook_pubdate() {
+		return book_pubdate;
 	}
-	public void setBook_page(int book_page) {
-		this.book_page = book_page;
-	}  
-	public String getBook_filename() {
-		return book_filename;
+	public void setBook_pubdate(String book_pubdate) {
+		this.book_pubdate = book_pubdate;
 	}
-	public void setBook_filename(String book_filename) {
-		this.book_filename = book_filename;
+	public String getBook_isbn() {
+		return book_isbn;
 	}
-	public Date getBook_uploaddate() {
-		return book_uploaddate;
+	public void setBook_isbn(String book_isbn) {
+		this.book_isbn = book_isbn;
 	}
-	public void setBook_uploaddate(Date book_uploaddate) {
-		this.book_uploaddate = book_uploaddate;
+	public String getBook_description() {
+		return book_description;
 	}
-	public String getBook_writer() {
-		return book_writer;
+	public void setBook_description(String book_description) {
+		this.book_description = book_description;
 	}
-	public void setBook_writer(String book_writer) {
-		this.book_writer = book_writer;
+	public int getBook_stock() {
+		return book_stock;
+	}
+	public void setBook_stock(int book_stock) {
+		this.book_stock = book_stock;
 	}
 	
 }

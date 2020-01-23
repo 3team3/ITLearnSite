@@ -3,36 +3,41 @@ function select() {
 	if ($("#type").val() == 'book') {
 		var string = "<legend>도서 정보</legend>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_title' placeholder='책제목'>";
+		string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "</div>"
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_link' placeholder='책링크'>";
+		string += "<input type='text' class='form-control' id='book_link' name ='book_link' placeholder='책링크'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_image' placeholder='책이미지'>";
+		string += "<input type='text' class='form-control' id='book_image' name ='book_image' placeholder='책이미지'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_author' placeholder='작가'>";
+		string += "<input type='text' class='form-control' id='book_author' name ='book_author' placeholder='작가'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_price' placeholder='책가격'>";
+		string += "<input type='text' class='form-control' id='book_price' name ='book_price' placeholder='책가격'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_discount' placeholder='할인금액'>";
+		string += "<input type='text' class='form-control' id='book_discount' name ='book_discount' placeholder='할인금액'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_publisher' placeholder='출판사'>";
+		string += "<input type='text' class='form-control' id='book_publisher' name ='book_publisher' placeholder='출판사'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_pubdate' placeholder='출판일'>";
+		string += "<input type='text' class='form-control' id='book_pubdate' name ='book_pubdate' placeholder='출판일'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_isbn' placeholder='isbn'>";
+		string += "<input type='text' class='form-control' id='book_isbn' name ='book_isbn' placeholder='isbn'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_description' placeholder='description'>";
-		string += "</div>";
-
+		string += "<input type='text' class='form-control' id='book_description' name ='book_description' placeholder='description'>";
+		string += "</div>"
+		string += "<div class='form-group'>";
+		string += "<input type='text' class='form-control' id='book_description' name ='book_stock' placeholder='stock'>";
+		string += "</div>"
+		string += "<br>";
+		string += "<button type='submit' class='btn btn-primary'>등록</button>";
+	
 		$(".addtag").html(string);
 	} else if ($("#type").val() == 'lecture') {
 		var string = "<h1>강의 정보</h1>";
@@ -45,7 +50,7 @@ function select() {
 };
 
 function bookSearch(page) {
-	var url = "bookView.text";
+	var url = "bookSearch.text";
 	var word = $("#word").val();/* 네이버 책 검색 */
 	var listArr = null;
 	var data = {
@@ -73,15 +78,22 @@ function bookSearch(page) {
 			var i = page-1;
 			$(".title ~ p").remove();
 			$(".title").after("<p>" + listArr[i].title + "</p>");
-			$("#book_title").val(listArr[i].title);
+			/*문자열 태그 제거필요*/
+			var title = listArr[i].title;
+			title = title.replace(/(<([^>]+)>)/ig,"");
+			$("#book_title").val(title);
+			
 			
 			$(".link ~ p").remove();
 			$(".link").after("<p>" + listArr[i].link + "</p>");
-			$("#book_link").val(listArr[i].link);
+			var linkEncode = encodeURIComponent(listArr[i].link);
+			$("#book_link").val(linkEncode);
+			
 			
 			$(".image ~ p").remove();
 			$(".image").after("<p>" + listArr[i].image + "</p>");
-			$("#book_image").val(listArr[i].image);
+			var imgEncode = encodeURIComponent(listArr[i].image);
+			$("#book_image").val(imgEncode);
 			
 			$(".author ~ p").remove();
 			$(".author").after("<p>" + listArr[i].author + "</p>");
@@ -109,7 +121,13 @@ function bookSearch(page) {
 			
 			$(".description ~ p").remove();
 			$(".description").after("<p>" + listArr[i].description + "</p>");
-			$("#book_description").val(listArr[i].description);
+			
+			var encode = encodeURIComponent(listArr[i].description);
+			var decode = decodeURIComponent(listArr[i].description);
+			console.log(encode);
+			console.log(decode);
+			$("#book_description").val(encode);
+			
 		},
 		error : function(request, status, error) {
 			alert("code = " + request.status + " message = "
@@ -119,6 +137,3 @@ function bookSearch(page) {
 	});
 };
 
-function add(){
-	
-}
