@@ -60,6 +60,18 @@
 
 	<div class="site-section">
 		<div class="container">
+			<c:if test="${email eq 'admin@admin.com' }">
+				<div class="btn-wrap" style="margin-bottom: 40px;">
+					<div class="header-btn float-l">
+						<a href="${path }/lectureForm.lec">
+							<button class="btn btn-color1">
+								<span>강의 등록 하기</span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</c:if>
+
 			<div class="row">
 				<c:choose>
 					<%--
@@ -80,7 +92,9 @@
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="course-1-item">
 									<figure class="thumnail">
-										<a href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }" data-fancybox=""><img
+									
+									<!-- 강의 상세 보기 -->
+										<a href="${path }/lectureDetail.lec?lec_no=${lecture.lec_no}"><img
 											src="${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }"
 											alt="Image" class="img-fluid"></a>
 										<div class="price">￦${lecture.lec_price }</div>
@@ -95,12 +109,13 @@
 										</div>
 										<p class="desc mb-4"></p>
 										<p>
-										
-										
-											<a href="cartAdd.cart?lec_no=${lecture.lec_no}&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&lec_imgfile=${lecture.lec_imgfile}"
-												class="btn btn-primary rounded-0 px-4">장바구니</a>
-												<a href="#"
-												class="btn btn-primary rounded-0 px-4">구매하기</a>
+											<a
+												href="cartAdd.cart?lec_no=${lecture.lec_no}&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&lec_imgfile=${lecture.lec_imgfile}"
+												class="btn btn-primary rounded-0 px-4">장바구니</a> <a href="#"
+												class="btn btn-primary rounded-0 px-4">구매하기</a><a
+												style="margin: 5px;"
+												href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
+												class="btn btn-primary rounded-0 px-4" data-fancybox="">잠깐보기</a>
 										</p>
 									</div>
 								</div>
@@ -110,80 +125,85 @@
 					</c:when>
 				</c:choose>
 			</div>
-		</div>
-	</div>
-	
-	<div class="btn-wrap text-align"
-		style="margin-top: 20px; margin-bottom: 20px">
-		<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
-		<c:if test="${totResources != null }">
-			<c:choose>
-				<c:when test="${totResources >100 }">
-					<!-- 전체 글수가 100보다 클때... -->
-					<c:forEach var="page" begin="1" end="10" step="1">
 
-						<%--섹션값 2부터는 앞 섹션으로 이동할수 있는 pre를 표시합니다. --%>
-						<c:if test="${section >1 && page==1 }">
-							<a class="no-uline"
-								href="${path }/lectureList.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp;
-								pre </a>
-						</c:if>
+			<div class="btn-wrap text-align"
+				style="margin: 20px auto; width: 100%;">
+				<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
+				<c:if test="${totLectures != null }">
+					<c:choose>
+						<c:when test="${totLectures >30}">
+							<!-- 전체 글수가 100보다 클때... -->
+							<c:forEach var="page" begin="1" end="10" step="1">
 
-						<a class="no-uline"
-							href="${path }/lectureList.bo?section=${section}&pageNum=${page}">${(section-1)*10 +page }
-						</a>
+								<%--섹션값 2부터는 앞 섹션으로 이동할수 있는 pre를 표시합니다. --%>
+								<c:if test="${section >1 && page==1 }">
+									<a class="no-uline"
+										href="${path }/lectureList.lec?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp;
+										pre </a>
+								</c:if>
 
-						<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
-						<c:if test="${page ==10 }">
-							<a class="no-uline"
-								href="${path }/lectureList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp;
-								next</a>
-						</c:if>
-					</c:forEach>
-				</c:when>
+								<a class="no-uline"
+									href="${path }/lectureList.lec?section=${section}&pageNum=${page}">${(section-1)*10 +page }
+								</a>
 
-				<%--전체글수가 100개일떄는 첫번째 섹션의 10개의 페이지만 표시하면 됩니다. --%>
-				<c:when test="${totResources ==100 }">
-					<!--등록된 글 개수가 100개인경우  -->
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<a class="no-uline" href="#">${page } </a>
-					</c:forEach>
-				</c:when>
+								<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
+								<c:if test="${page ==10 }">
+									<a class="no-uline"
+										href="${path }/lectureList.lec?section=${section+1}&pageNum=${section*10+1}">&nbsp;
+										next</a>
+								</c:if>
+							</c:forEach>
+						</c:when>
+
+						<%--전체글수가 100개일떄는 첫번째 섹션의 10개의 페이지만 표시하면 됩니다. --%>
+						<c:when test="${totLectures ==30 }">
+							<!--등록된 글 개수가 100개인경우  -->
+							<c:forEach var="page" begin="1" end="10" step="1">
+								<a class="no-uline" href="#">${page } </a>
+							</c:forEach>
+						</c:when>
 
 
-				<c:when test="${totResources< 100 }">
-					<!--등록된 글 개수가 100개 미만인 경우  -->
-					<%--
+						<c:when test="${totLectures< 30 }">
+							<!--등록된 글 개수가 100개 미만인 경우  -->
+							<%--
 						글수가 100개가 되지 않으므로 표시되는 페이지는
 	     				10개가 되지 않고, 전체 글수를 10으로 나누어
 	     				구한 몫에 1을 더한 페이지까지 표시합니다.
 	     			 --%>
-					<c:forEach var="page" begin="1" end="${totResources/10 +1}"
-						step="1">
-						<c:choose>
-							<%--
+							<c:forEach var="page" begin="1" end="${totLectures/3 +1}"
+								step="1">
+								<c:choose>
+									<%--
 						페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우
 	         			페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄
 	         	 	--%>
-							<c:when test="${page==pageNum }">
-								<a class="sel-page"
-									href="${path }/lectureList.bo?section=${section}&pageNum=${page}">${page }
-								</a>
-							</c:when>
+									<c:when test="${page==pageNum }">
+										<a class="sel-page"
+											href="${path }/lectureList.lec?section=${section}&pageNum=${page}">${page }
+										</a>
+									</c:when>
 
-							<%--페이지 번호를 클릭하면 section값과 pageNum값을 컨트롤러로 전송 합니다. --%>
-							<c:otherwise>
-								<a class="no-uline"
-									href="${path}/lectureList.bo?section=${section}&pageNum=${page}">${page }
-								</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</c:when>
-			</c:choose>
-		</c:if>
+									<%--페이지 번호를 클릭하면 section값과 pageNum값을 컨트롤러로 전송 합니다. --%>
+									<c:otherwise>
+										<a class="no-uline"
+											href="${path}/lectureList.lec?section=${section}&pageNum=${page}">${page }
+										</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+				</c:if>
+			</div>
+
+
+		</div>
+
+
+
 	</div>
-	
-	</div>
+
+
 </body>
 </html>

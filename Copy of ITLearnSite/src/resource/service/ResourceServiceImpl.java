@@ -70,9 +70,12 @@ public class ResourceServiceImpl implements ResourceService {
 	public ArrayList<ResourceBean> resourceSelect(String opt,String condition){
 		System.out.println("resource select service");
 		HashMap<String, Object> listOpt = new HashMap<String, Object>();
+		System.out.println("ser opt : " + opt); 
+		System.out.println("ser condition : " + condition);
 		listOpt.put("opt", opt);
 		listOpt.put("condition", condition);
 		ArrayList<ResourceBean> ResourceList = rDao.resourceSelect(listOpt);
+		System.out.println("ser list :" +  ResourceList);
 		return ResourceList;
 
 	}

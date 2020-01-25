@@ -37,6 +37,26 @@ public class LectureServiceImpl implements LectureService {
 
 		return lecturesMap;
 	}
+	
+	@Override
+	public void lectureRegister(LectureBean lBean) {
+		lDao.lectureRegister(lBean);
+		
+	}
+	
+	@Override
+	public Map lectureDetail(int lec_no) {
+		Map lec_DetailMap = new HashMap();
+		
+		LectureBean lec_Detail = lDao.lectureDetail(lec_no);
+		List<LectureBean> lec_list = lDao.lectureList(lec_no);
+		
+		lec_DetailMap.put("lec_Detail", lec_Detail);
+		lec_DetailMap.put("lec_list", lec_list);
+		
+		return lec_DetailMap;
+	}
+	
 /*
 	// 자료실 글쓰기
 	@Override

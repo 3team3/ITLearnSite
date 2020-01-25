@@ -14,6 +14,16 @@ public interface LectureDAO{
 	
 	/*전체 글 개수*/
 	public int selectTotLectures();
+	
+	/* 강의 등록 */
+	public void lectureRegister(LectureBean lBean);
+	
+	/* 강의 정보 */
+	public LectureBean lectureDetail(int lec_no);
+	
+	/* 강의 상세 리스트(파일 저장 테이블)*/
+	public List lectureList(int lec_no);
+	
 	/*
 	자료 내용
 	public ResourceBean lectureView(int res_no);

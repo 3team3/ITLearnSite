@@ -278,10 +278,13 @@ public class ResourceDAOImpl implements ResourceDAO {
     	
     	 ArrayList<ResourceBean> ResourceList = new ArrayList<ResourceBean>();
     	 String opt=(String)listOpt.get("opt"); //검색옵션
+    	 
     	 String condition = (String)listOpt.get("condition"); //검색내용
     	 /*int start = (Integer)listOpt.get("start"); //페이지번호
     	 */
     	 
+    	 System.out.println("dao opt : " +opt);
+    	 System.out.println("dao condition : " +condition);
     	 try{
              con = getConnection();  
              
@@ -312,11 +315,21 @@ public class ResourceDAOImpl implements ResourceDAO {
              rBean.setRes_title(rs.getString("res_title"));
              rBean.setRes_email(rs.getString("res_email"));
              rBean.setRes_writedate(rs.getDate("res_writedate"));             
+             
+             System.out.println(rs.getInt("res_no"));
+             System.out.println(rs.getString("res_title"));
+             System.out.println(rs.getString("res_email"));
+             System.out.println(rs.getDate("res_writedate"));
+             
+             
              ResourceList.add(rBean);
+             
+             
              }             
             
              }catch(Exception e){
                  System.out.println("resourceSelect()에서 오류 : " +e);
+                 e.printStackTrace();
              }finally{
                  closeConnection();
              }
