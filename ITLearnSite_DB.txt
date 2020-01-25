@@ -1,4 +1,3 @@
-
 /*회원 테이블*/
 create table member(
 email varchar2(40) primary key,
