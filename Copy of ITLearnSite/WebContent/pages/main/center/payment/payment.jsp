@@ -26,12 +26,20 @@
 	}
 </script>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${path}/css/member.css" rel="stylesheet"> 
 <link href="${path}/css/style.css" rel="stylesheet"> 
+<link href="${path}/css/create.css" rel="stylesheet"> 
 <title>결제 페이지</title>
 </head>
+<c:set var="email" value="${sessionScope.email}"></c:set>
+<c:if test="${email eq null}">
+	<script type="text/javascript">
+		alert("로그인 후 결제 가능합니다.");
+		location.href="${path}/index.do";
+	</script>
+</c:if>
+
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
@@ -56,35 +64,34 @@
 	
 	<!-- 주문페이지 시작  -->
 
-	<form class="form" action="payment1.pay" method="post">
+	<form class="form" action="payment1.pay" method="post" class="form">
 	<div class="site-section">
 	<div class="row justify-content-center">
-	<div class="col-md-5">
-	<div class="row"> 
+	
+	<div class="row row_line"> 
 		<!-- 회원&배송지 정보 시작 -->
-		<div>
-		<h3>배송지 정보</h3>
+		<div class="left">
+		<h5>배송지 정보</h5>
 			<div class="col-md-12 form-group">
         	<label>아이디*</label>
-            <input type="text" id="pay_email" name="pay_email" value="${mBean.email}" readonly="readonly" class="form-control form-control-lg"><br>
+            <input type="text" id="pay_email" name="pay_email" value="${mBean.email}" readonly="readonly" class="form-control form-control-lg form-text">
             </div>
             
             <div class="col-md-12 form-group">
             <label>이름*</label>
-           	<input type="text" id="pay_name" name="pay_name" required class="form-control form-control-lg"><br>
+           	<input type="text" id="pay_name" name="pay_name" class="form-control form-control-lg form-text" required>
             </div>
             
             <div class="col-md-12 form-group">
             <label>전화번호*</label>
-           	<input type="text" id="pay_phonenumber" name="pay_phonenumber"  required class="form-control form-control-lg"><br>
+           	<input type="text" id="pay_phonenumber" name="pay_phonenumber" class="form-control form-control-lg form-text" required>
             </div>
             
             <div class="col-md-12 form-group">
-	            <label for="address">주소</label>
-	            <input type="text" name="address" id="address" placeholder="우편번호" readonly="readonly" class="form-control form-control-lg" onblur="addressChk();"> <br> 
-				<input type="button" onclick="DaumPostcode();" class="btn btn-primary btn-lg" value="우편번호 찾기"><br>
-				<input type="text" name="address1" id="address1" placeholder="주소" readonly="readonly" class="mt-5 form-control form-control-lg" onblur="addressChk();"> <br> 
-				<input type="text" name="address2" id="address2" placeholder="상세주소" class="form-control form-control-lg" onblur="addressChk();"> <br>
+	            <label for="address">주소</label><input type="button" onclick="DaumPostcode();" class="btn btn-color1 post_position" value="우편번호 찾기">
+	            <input type="text" name="address" id="address" placeholder="우편번호" readonly="readonly" class="form-control form-control-lg form-text" onblur="addressChk();" required>
+				<input type="text" name="address1" id="address1" placeholder="주소" readonly="readonly" class="form-control form-control-lg form-text" onblur="addressChk();" required> 
+				<input type="text" name="address2" id="address2" placeholder="상세주소" class="form-control form-control-lg form-text" onblur="addressChk();" required><br>
 			</div>
 	
 			<hr>
@@ -96,47 +103,90 @@
             <input id="deliveryOption2" name="delivery-option" type="radio" value="새로운 배송지" onclick="new_delivery()"  required>
             <label for="deliveryOption2">새로 입력</label>
 
-                            
-            <hr>
-            <span>계좌이체</span>
-            <div>부산은행 아이티윌<br>
-            	123-45-678901-2
-            </div>
+            
        </div>
         <!-- 회원&배송지 정보 끝 -->
         
         <!-- 장바구니 정보--> 
-		<div>
-        <h3>장바구니</h3>    	
-        	<h3>교재</h3>
-      		<%--상품이름  --%>상품이름자리~~~
-                                 가격:<%--상품가격 --%>원 |개수:<%--상품개수 --%>개
-		
-			<h3>강의</h3>
-			<%--강의이름  --%>강의이름자리~~
-                                 가격:<%--강의가격 --%>원 
-       	
-       		<hr>
+		<div class="right">
+		<h5>계좌이체</h5>
+			
+            <div>
+            	<small>(입금 확인 후 주문 완료됩니다)</small><br>
+            	부산은행 아이티윌<br>
+            	123-45-678901-2
+            </div>
+        <hr>
+        <h5>장바구니</h5>    	
+        	<c:set var="j" value="0"/>
+        	<c:set var="total" value="0"/>
+        	<c:forEach  var="cartlist"   items="${requestScope.cartlist}">
+       		(${cartlist.pro_sort })
+       		${cartlist.pro_name }
+       		가격:${cartlist.pro_price }
+       		개수:${cartlist.pro_cnt }
+       		<br>
+       		<c:set var="pro_price" value="${cartlist.pro_price}"/>
+       		<c:set var="total" value="${total+pro_price}"/>
+       			<c:if test="${j==0}">
+				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro1_name">
+				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro1_cnt">
+				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro1_price">
+				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro1_sort">
+				</c:if>
+				<c:if test="${j==1}">
+				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro2_name">
+				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro2_cnt">
+				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro2_price">
+				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro2_sort">
+				</c:if>
+				
+				<c:if test="${j==2}">			
+				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro3_name">
+				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro3_cnt">
+				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro3_price">
+				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro3_sort">
+				</c:if>
+				
+				<c:if test="${j==3}">	
+				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro4_name">
+				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro4_cnt">
+				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro4_price">
+				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro4_sort">
+				</c:if>
+				
+				<c:if test="${j==4}">			
+				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro5_name">
+				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro5_cnt">
+				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro5_price">
+				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro5_sort">
+				</c:if>
+       		<c:set var="j" value="${j+1}" />
+       		</c:forEach>
+       		
        			
-           	<h2>주문하기</h2>
-
-            <h3>총금액</h3>
-            <div>원</div> 
+			<div class="pay_position">
+			<hr>
+            <h5>총금액</h5>
+            <div>${total}원</div> 
                                 
-            <h3>할인금액</h3>
-            <div>원</div>                       
+            <h5>할인금액</h5>
+            <div>${total*0.05}원</div>                       
             
             <hr>
                                
-            <h3>결제금액</h3>
-            <div>원</div>
-                  
-            <button type="submit" class="btn btn-primary btn-lg">주문하기</button>
+            <h5>결제금액</h5>
+            <div>${total - total*0.05}원</div>
+            <input type="hidden" name="pay_total" value="${total - total*0.05}">
+            <div class="btn_right">
+            <button type="submit" class="btn btn-color1">주문하기</button>
+            </div>
+            </div>
     	</div>
   	</div>
   	</div>
   	</div>
-  	</div>
+  
   	</form>
 
     <!-- 주문 페이지 끝 -->

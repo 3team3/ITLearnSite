@@ -12,6 +12,13 @@
 <link href="${path}/css/member.css" rel="stylesheet"> 
 <title>회원관리</title>
 </head>
+<c:set var="email" value="${sessionScope.email}"></c:set>
+<c:if test="${email!='admin@admin.com'}">
+	<script type="text/javascript">
+		alert("관리자만 조회 가능합니다.");
+		location.href="${path}/index.do";
+	</script>
+</c:if>
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">

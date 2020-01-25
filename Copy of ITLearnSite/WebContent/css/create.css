@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+  .form{
+	width: 1300px;
+	margin-left: 300px;
+	}
+ .left{
+ 	margin-top: 50px;
+ 	margin-left: 50px;
+ 	padding-right: 20px;
+ 	margin-right: 40px;
+ 	margin-bottom: 50px;
+ 	border-right: solid;
+ 	border-color: #4A56A8;
+ 	text-decoration: none;
+ }
+ .right{
+ 	margin-top: 50px;
+ 	margin-right: 50px;
+ 	width: 600px;
+ }
+ .btn_right{
+ 	margin-left: 500px;
+ 	margin-top: 20px;
+ 	margin-bottom: 20px;
+ }
+ .row_line{
+ 	border-style:solid;
+ 	border-color: #4A56A8;
+ }
+ .pay_position{
+ 	margin-top: 150px;
+ 	text-align: right;
+ }
+ 
+ .form-text{
+ 	height: 30px;
+ 	width: 400px;
+ 	background-color: B4B5B6;
+ }
+
+ hr{
+ 	border-color: #4A56A8;
+ }
+ 
+ h5{
+ 	color: 0CB280;
+ }
+ 
+ .post_position{
+ 	margin-left: 260px;
+ 	margin-bottom: 10px;
+ 	width: 100px;
+ 	font-size: small;
+ }

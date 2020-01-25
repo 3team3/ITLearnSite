@@ -299,7 +299,7 @@ public class MemberController extends HttpServlet {
 					PrintWriter out = response.getWriter();
 					out.println("<script>");
 					out.println("alert('탈퇴되었습니다');");
-					out.println("window.location.href='/ITLearnSite/main.jsp'");
+					out.println("window.location.href='/ITLearnSite/index.do'");
 					out.println("</script>");
 					out.close();
 				} 
