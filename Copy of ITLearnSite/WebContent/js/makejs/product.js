@@ -5,6 +5,7 @@ function select() {
 		string += "<div class='form-group'>";
 		string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "</div>"
+			string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "<div class='form-group'>";
 		string += "<input type='text' class='form-control' id='book_link' name ='book_link' placeholder='책링크'>";
 		string += "</div>";
@@ -79,9 +80,8 @@ function bookSearch(page) {
 			$(".title ~ p").remove();
 			$(".title").after("<p>" + listArr[i].title + "</p>");
 			/*문자열 태그 제거필요*/
-			var title = listArr[i].title;
-			title = title.replace(/(<([^>]+)>)/ig,"");
-			$("#book_title").val(title);
+			var titleEncode = encodeURIComponent(listArr[i].title);
+			$("#book_title").val(titleEncode);
 			
 			
 			$(".link ~ p").remove();

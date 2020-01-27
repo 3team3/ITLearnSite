@@ -156,11 +156,11 @@ public class TextbookController extends HttpServlet {
 
 	private TextbookBean getTextbookBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		String book_title = null;
-	    String book_link = null;
-	    String book_image = null;
-	    String book_author = null;
-	    int book_price = 0;
-	    int book_discount = 0 ;
+		String book_link = null;
+		String book_image = null;
+		String book_author = null;
+		int book_price = 0;
+		int book_discount = 0 ;
 		String book_publisher = null;
 		String book_pubdate = null;
 		String book_isbn = null;

@@ -6,7 +6,6 @@ public class CommentsBean {
 	private int co_no;
 	private int  res_no;
 	private String co_email;
-	private String co_pw;
 	private Date co_date;
 	private String co_content;
 	
@@ -28,13 +27,6 @@ public class CommentsBean {
 	public void setCo_email(String co_email) {
 		this.co_email = co_email;
 	}
-	public String getCo_pw() {
-		return co_pw;
-	}
-	public void setCo_pw(String co_pw) {
-		this.co_pw = co_pw;
-	}
-	
 	public Date getCo_date() {
 		return co_date;
 	}

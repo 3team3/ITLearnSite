@@ -31,7 +31,7 @@ function setBooklist(getData){
 	var string ="";
 	
 	for(var i = 0; i < getData.list.length; i++) {
-		var booktitle = getData.list[i].book_title;
+		var booktitle = decodeURIComponent(getData.list[i].book_title);
 		
 		/*pasing 책이름*/
 		var title = booktitle.split('[');
@@ -47,7 +47,7 @@ function setBooklist(getData){
 			+	"</div>"
 			+	"<div class='content_wrap'>"
 			+		"<a href='bookdetail.text?product_no=" + getData.list[i].product_no +"'>"
-			+			"<p class='booktitle'>" + getData.list[i].book_title + "</p>"
+			+			"<p class='booktitle'>" + booktitle + "</p>"
 			+		"</a>"
 			+		"<div class='buttons'>"
 			+			"<button class='btn btn-color1'> 담기 </button>"
