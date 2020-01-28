@@ -38,12 +38,14 @@ public class LectureServiceImpl implements LectureService {
 		return lecturesMap;
 	}
 	
+	//강의 등록
 	@Override
 	public void lectureRegister(LectureBean lBean) {
 		lDao.lectureRegister(lBean);
 		
 	}
 	
+	//강의 상세
 	@Override
 	public Map lectureDetail(int lec_no) {
 		Map lec_DetailMap = new HashMap();
@@ -57,43 +59,13 @@ public class LectureServiceImpl implements LectureService {
 		return lec_DetailMap;
 	}
 	
-/*
-	// 자료실 글쓰기
+	//강의 삭제
 	@Override
-	public int addResource(ResourceBean rBean) {
-		return rDao.insertResource(rBean);
+	public void deleteLecture(int lec_no) {
+		
+		lDao.deleteLecture(lec_no);
+		
 	}
+	
 
-	// 자료실 글수정
-	@Override
-	public void modResource(ResourceBean rBean) {
-		rDao.updateResource(rBean);
-	}
-
-	// 자료실 내용
-	@Override
-	public ResourceBean resourceView(int res_no) {
-		ResourceBean rBean = rDao.resourceView(res_no);
-		return rBean;
-	}
-
-	// 자료실 내용 삭제
-	@Override
-	public void resourceDelete(int res_no) {
-		rDao.resourceDelete(res_no);
-
-	}
-
-	// 자료실 검색
-	@Override
-	public ArrayList<ResourceBean> resourceSelect(String opt, String condition) {
-		System.out.println("resource select service");
-		HashMap<String, Object> listOpt = new HashMap<String, Object>();
-		listOpt.put("opt", opt);
-		listOpt.put("condition", condition);
-		ArrayList<ResourceBean> ResourceList = rDao.resourceSelect(listOpt);
-		return ResourceList;
-
-	}
-*/
 }
