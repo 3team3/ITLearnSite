@@ -54,12 +54,12 @@
 							<div class='detail-align'>
 								<p class='p1'>정&nbsp;&nbsp;&nbsp;가</p>
 								<p class='p2'>${lecBean.lec_price}&nbsp;원</p>
-							</div> <!-- 
+							</div> 
 							<div class='detail-align'>
 								<p class='p1'>지은이</p>
 								<p class='p2'></p>
 							</div>
-							 -->
+							
 							<div class='detail-align'>
 								<p class='p1'>삭제</p>
 								<p class='p2'>
@@ -67,12 +67,12 @@
 								</p>
 							</div>
 						</span>
-						<!-- 
+						
 					 <span class='bookdetail2'><div class='detail-align'>
 							<p class='p1'>분&nbsp;&nbsp;&nbsp;량</p>
 							<p class='p2'>쪽</p>
 						</div>
-					</span> -->
+					</span> 
 					</div>
 				</div>
 			</div>
