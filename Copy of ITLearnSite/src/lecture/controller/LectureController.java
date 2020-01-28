@@ -180,6 +180,20 @@ public class LectureController extends HttpServlet {
 				paging = "/pages/main/center/lecture/lectureDetail.jsp";
 				request.setAttribute("paging", paging);
 				
+			} else if (path.equals("/deleteLecture.lec")) {
+				
+				System.out.println("deleteLecture.lec");
+				
+				int lec_no = Integer.parseInt(request.getParameter("lec_no"));
+				
+				lServ.deleteLecture(lec_no);
+				
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + " alert('강의를 삭제했습니다.');" + " location.href='" + request.getContextPath()
+						+ "/lectureList.lec';" + "</script>");
+				return;
+				
+				
 			}
 
 			System.out.println("nextPAge :" + nextPage);

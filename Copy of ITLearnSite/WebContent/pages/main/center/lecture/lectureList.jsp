@@ -18,7 +18,18 @@
 <c:set var="pageNum" value="${lecturesMap.pageNum}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-
+<script type="text/javascript">
+	
+	function deleteNo(no, title) {
+		
+		var result = confirm( title + " 강의를 삭제 하겠습니까??");
+		if(result){
+			location.href = "${path }/deleteLecture.lec?lec_no=" + no;
+		}
+		
+	}
+	
+</script>
 
 </head>
 <!-- 
@@ -111,11 +122,12 @@
 										<p>
 											<a
 												href="cartAdd.cart?lec_no=${lecture.lec_no}&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&lec_imgfile=${lecture.lec_imgfile}"
-												class="btn btn-primary rounded-0 px-4">장바구니</a> <a href="#"
-												class="btn btn-primary rounded-0 px-4">구매하기</a><a
+												class="btn btn-primary rounded-0 px-4">장바구니</a> <a
 												style="margin: 5px;"
 												href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
 												class="btn btn-primary rounded-0 px-4" data-fancybox="">잠깐보기</a>
+												<c:if test="${email eq 'admin@admin.com' }">
+												<a class="btn btn-primary rounded-0 px-4" href="javascript:void(0);" onclick="deleteNo(${lecture.lec_no}, '${lecture.lec_title }');">삭제</a></c:if>
 										</p>
 									</div>
 								</div>

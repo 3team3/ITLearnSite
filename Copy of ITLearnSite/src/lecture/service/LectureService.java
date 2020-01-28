@@ -16,19 +16,8 @@ public interface LectureService {
 	
 	//강의 상세보기
 	public Map lectureDetail(int lec_no);
-/*	
-	자료실 검색
-	public ArrayList<LectureBean> lectureSelect(String opt,String condition);
+	
+	//강의 삭제
+	public void deleteLecture(int lec_no);
 
-	자료실 글쓰기
-	public int addLecture(LectureBean lBean);
-	
-	자료실 글수정
-	public void modLecture(LectureBean lBean);
-	
-	자료실 내용
-	public LectureBean lectureView(int lec_no);
-	
-	public void lectureDelete(int lect_no);
-*/
 }
