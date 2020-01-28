@@ -5,7 +5,7 @@ function select() {
 		string += "<div class='form-group'>";
 		string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "</div>"
-			string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
+//			string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "<div class='form-group'>";
 		string += "<input type='text' class='form-control' id='book_link' name ='book_link' placeholder='책링크'>";
 		string += "</div>";
