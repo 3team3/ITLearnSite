@@ -79,9 +79,7 @@
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="course-1-item">
 									<figure class="thumnail">
-										<a
-											href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
-											data-fancybox=""><img
+										<a href="${path }/lectureDetail.lec?lec_no=${lecture.lec_no}"><img
 											src="${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }"
 											alt="Image" class="img-fluid"></a>
 										<div class="price">￦${lecture.lec_price }</div>
@@ -100,8 +98,10 @@
 
 											<a
 												href="cartAdd.cart?&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&pro_img=${lecture.lec_imgfile}&pro_sort=강의&pro_cnt=1"
-												class="btn btn-primary rounded-0 px-4">장바구니</a> <a href="#"
-												class="btn btn-primary rounded-0 px-4">구매하기</a>
+												class="btn btn-primary rounded-0 px-4">장바구니</a><a
+												style="margin: 5px;"
+												href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
+												class="btn btn-primary rounded-0 px-4" data-fancybox="">잠깐보기</a>
 											<c:if test="${email eq 'admin@admin.com' }">
 												<a class="btn btn-primary rounded-0 px-4"
 													href="javascript:void(0);"
