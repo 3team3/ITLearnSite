@@ -117,8 +117,8 @@
 										<c:when test="${lec_list != null}">
 											<c:forEach var="listBean" items="${lec_list }">
 												<tr align="center">
-													<td width="5%">${listBean.list_no }</td>
-													<td width="95%">${listBean.list_titleStr }</td>
+													<td width="30%">${listBean.list_no }</td>
+													<td width="70%">${listBean.list_titleStr }</td>
 												<tr>
 											</c:forEach>
 										</c:when>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import lecture.db.LectureBean;
 import lecture.db.LectureDAOImpl;
+import lecture.db.PaylecBean;
 
 public class LectureServiceImpl implements LectureService {
 
@@ -26,44 +27,53 @@ public class LectureServiceImpl implements LectureService {
 
 		int totLectures = lDao.selectTotLectures();
 		/*
-		System.out.println("service : " + totLectures);
-		
-		System.out.println("service : " + lecturesList);
-		*/
+		 * System.out.println("service : " + totLectures);
+		 * 
+		 * System.out.println("service : " + lecturesList);
+		 */
 		lecturesMap.put("lecturesList", lecturesList);
 
-		
 		lecturesMap.put("totLectures", totLectures);
 
 		return lecturesMap;
 	}
-	
+
+	// 강의 등록
 	@Override
 	public void lectureRegister(LectureBean lBean) {
 		lDao.lectureRegister(lBean);
-		
+
 	}
-	
+
+	// 강의 상세
 	@Override
 	public Map lectureDetail(int lec_no) {
 		Map lec_DetailMap = new HashMap();
-		
+
 		LectureBean lec_Detail = lDao.lectureDetail(lec_no);
 		List<LectureBean> lec_list = lDao.lectureList(lec_no);
-		
+
 		lec_DetailMap.put("lec_Detail", lec_Detail);
 		lec_DetailMap.put("lec_list", lec_list);
-		
+
 		return lec_DetailMap;
 	}
-	
-	//강의 삭제
-		@Override
-		public void deleteLecture(int lec_no) {
-			
-			lDao.deleteLecture(lec_no);
-			
-		}
 
+	// 강의 삭제
+	@Override
+	public void deleteLecture(int lec_no) {
+
+		lDao.deleteLecture(lec_no);
+
+	}
+
+	// 나의 강의실
+	@Override
+	public List myLecture(String email) {
+		
+		List myList = lDao.myLecture(email);
+		
+		return myList;
+	}
 
 }

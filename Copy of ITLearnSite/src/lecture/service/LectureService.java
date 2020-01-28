@@ -1,9 +1,11 @@
 package lecture.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import lecture.db.LectureBean;
+import lecture.db.PaylecBean;
 import resource.db.ResourceBean;
 
 public interface LectureService {
@@ -19,5 +21,7 @@ public interface LectureService {
 	
 	//강의 삭제
 	public void deleteLecture(int lec_no);
-
+	
+	//나의 강의실
+	public List myLecture(String email);
 }

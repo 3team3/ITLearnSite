@@ -194,10 +194,26 @@ public class LectureController extends HttpServlet {
 						+ "/lectureList.lec';" + "</script>");
 				return;
 
+			} else if (path.equals("/myLecture.lec")) {
+
+				System.out.println("myLecture.lec");
+
+				String email = request.getParameter("email");
+
+				List myList = lServ.myLecture(email);
+				System.out.println(myList);
+				
+				request.setAttribute("myList", myList);
+
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/lecture/myLecture.jsp";
+				request.setAttribute("paging", paging);
+
 			}
 
 			System.out.println("nextPAge :" + nextPage);
-			// null PointException
+			
+			
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);

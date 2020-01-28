@@ -27,5 +27,8 @@ public interface LectureDAO{
 	/* 강의 삭제*/
 	public void deleteLecture(int lec_no);
 	
+	/* 나의 강의실 */
+	public List myLecture(String email);
+	
 	
 }

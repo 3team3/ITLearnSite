@@ -7,6 +7,14 @@ public class PaylecBean {
 	private String set_email;
 	private String set_lec_title;
 	private Date set_startDate;
+	private int between;
+	
+	public int getBetween() {
+		return between;
+	}
+	public void setBetween(int between) {
+		this.between = between;
+	}
 	public int getSet_no() {
 		return set_no;
 	}
