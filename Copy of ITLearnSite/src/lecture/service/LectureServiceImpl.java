@@ -64,44 +64,6 @@ public class LectureServiceImpl implements LectureService {
 			lDao.deleteLecture(lec_no);
 			
 		}
-	
-/*
-	// 자료실 글쓰기
-	@Override
-	public int addResource(ResourceBean rBean) {
-		return rDao.insertResource(rBean);
-	}
 
-	// 자료실 글수정
-	@Override
-	public void modResource(ResourceBean rBean) {
-		rDao.updateResource(rBean);
-	}
 
-	// 자료실 내용
-	@Override
-	public ResourceBean resourceView(int res_no) {
-		ResourceBean rBean = rDao.resourceView(res_no);
-		return rBean;
-	}
-
-	// 자료실 내용 삭제
-	@Override
-	public void resourceDelete(int res_no) {
-		rDao.resourceDelete(res_no);
-
-	}
-
-	// 자료실 검색
-	@Override
-	public ArrayList<ResourceBean> resourceSelect(String opt, String condition) {
-		System.out.println("resource select service");
-		HashMap<String, Object> listOpt = new HashMap<String, Object>();
-		listOpt.put("opt", opt);
-		listOpt.put("condition", condition);
-		ArrayList<ResourceBean> ResourceList = rDao.resourceSelect(listOpt);
-		return ResourceList;
-
-	}
-*/
 }

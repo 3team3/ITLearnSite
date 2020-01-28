@@ -1,6 +1,7 @@
 package payment.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -355,11 +356,11 @@ public class PaymentDAOImpl implements PaymentDAO {
             	}         	      	         	
             }  
             
-            sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title) values(?,?,?)";
+            sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,add_months(sysdate, 1))";
             pstmt = con.prepareStatement(sql);
 	        pstmt.setInt(1,plBean.getSet_no());
 	        pstmt.setString(2,plBean.getSet_email() );
-	        pstmt.setString(3,plBean.getSet_lec_title());
+	        pstmt.setString(3,plBean.getSet_lec_title());	        
 	        pstmt.executeUpdate();	
             
 		}catch(Exception e){
