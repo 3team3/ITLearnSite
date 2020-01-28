@@ -45,15 +45,17 @@
 		<div class="pagemargin">
 		<div class="content">
 		<h3>결제 전</h3>
-		<table class="table">
 		
-			<c:set var="j" value="0"/>
-			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
-			<c:if test="${paymentList.pay_option==0}">
+		<table class="table">
 			<tr class="tb_head">
 				<td colspan="4">주문</td>
 			</tr>
-			
+			<c:set var="j" value="0"/>
+			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
+			<c:if test="${paymentList.pay_option==0}">
+			<tr>
+				<td colspan="4">${j}</td>
+			</tr>
 			<tr>
 				<td>이름</td>
 				<td>${paymentList.pay_name}</td>
@@ -143,7 +145,7 @@
 
 		</table>
 		<h3>결제 후</h3>
-		<table class="table">
+		<table class="table after ">
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
 			<c:if test="${paymentList.pay_option==1}">
