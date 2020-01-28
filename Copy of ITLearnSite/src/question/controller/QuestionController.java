@@ -1,7 +1,11 @@
 package question.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -9,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import question.db.QuestionBean;
 import question.db.QuestionDAOImpl;
@@ -41,14 +46,162 @@ public class QuestionController extends HttpServlet {
 		String nextPage = null;
 		String paging = null;
 		try {
-			if(path.equals("/qna.ques"))
+			//리스트 페이지
+			if(path.equals("/questionList.ques"))
+			{
+				System.out.println("questionList.ques");
+				
+				String _section=request.getParameter("section");
+				String _pageNum=request.getParameter("pageNum");
+				String email = (String)request.getSession().getAttribute("email");
+				
+				int section = Integer.parseInt(((_section==null)? "1":_section) );
+				int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
+				
+				Map pagingMap=new HashMap();
+				
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				
+				Map questionsMap1=qServ.listQuestion1(pagingMap);
+				Map questionsMap2=qServ.listQuestion2(pagingMap);
+				
+				questionsMap1.put("section", section);
+				questionsMap1.put("pageNum", pageNum);
+				questionsMap2.put("section", section);
+				questionsMap2.put("pageNum", pageNum);
+				
+				request.setAttribute("questionsMap1", questionsMap1);
+				request.setAttribute("questionsMap2", questionsMap2);
+				request.setAttribute("email", email);
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/question/questionList.jsp";
+				request.setAttribute("paging", paging);
+				
+			}
+			//글 내용보기 페이지
+			else if(path.equals("/questionView.ques"))
+			{
+				System.out.println("questionView.ques");
+				int ques_no = Integer.parseInt(request.getParameter("ques_no"));
+				qServ.updateReadcount(ques_no);
+				qBean = qServ.questionView(ques_no);
+				request.setAttribute("qBean", qBean);	
+				request.setAttribute("ques_no", ques_no);
+				
+				
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/question/questionView.jsp?ques_no="+ques_no;
+				request.setAttribute("paging", paging);	
+			}
+			//글쓰기 페이지로
+			else if(path.equals("/questionWrite.ques"))
 			{
 				nextPage = "/main.jsp";
-				paging = "/pages/main/center/qna/qna.jsp";
+				paging = "/pages/main/center/question/questionWrite.jsp";
+				request.setAttribute("paging", paging);
+				
+			}
+			//글쓰기
+			else if(path.equals("/addQuestion.ques"))
+			{
+				System.out.println("addQuestion.ques");
+				
+				qBean = getQuestionBeanProperty(request, response);
+				int ques_no = 0;
+				ques_no = qServ.addQuestion(qBean);
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('글쓰기를 완료했습니다.');" + " location.href='" + 
+				"questionList.ques';" + "</script>");
+				return;
+			}	
+			
+			//글  수정 페이지
+			else if(path.equals("/questionModify.ques"))
+			{
+				System.out.println("questionModify.ques");
+				int ques_no = Integer.parseInt(request.getParameter("ques_no"));
+				
+				qBean = qServ.questionView(ques_no);
+				request.setAttribute("qBean", qBean);
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/question/questionModify.jsp?ques_no="+ques_no;
+				request.setAttribute("paging", paging);	
+				
+			}
+			//글 수정
+			else if(path.equals("/updateQuestion.ques")){
+				
+				qBean = getQuestionBeanProperty(request, response);
+				int ques_no = qBean.getQues_no();
+				qServ.modQuestion(qBean);
+				
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" 
+				+"questionView.ques?ques_no="+ques_no+"';" + "</script>");
+				return;
+				
+			}
+			
+			//자료실게시판 - 글 검색
+			else if(path.equals("/questionSelect.ques"))
+			{
+				System.out.println("questionSelect.ques");
+				
+				String select_subject = request.getParameter("select_subject");
+				String select_content = request.getParameter("select_content");
+				
+				List<QuestionBean> ResourceList = qServ.questionSelect(select_subject,select_content);
+				request.setAttribute("ResourceList", ResourceList);
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/quesiton/questionSelect.jsp";
 				request.setAttribute("paging", paging);
 			}
+			//자료실게시판 - 글 삭제
+			else if(path.equals("/questionDelete.ques"))
+			{ 
+				System.out.println("questionDelete.ques");				
+				int ques_no = Integer.parseInt(request.getParameter("ques_no"));				
+				qServ.questionDelete(ques_no);				
+				
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
+				         + " location.href='questionList.ques'" + "</script>");
+				return;
+				
+			}
+			//답글쓰기 페이지로
+			else if(path.equals("/questionReply.ques"))
+			{
+				qBean = getQuestionBeanProperty(request, response);
+				request.setAttribute("qBean", qBean);
+				
+				System.out.println("questionReply.ques");
+				nextPage = "/main.jsp";
+				paging= "/pages/main/center/question/questionReply.jsp";
+				request.setAttribute("paging", paging);
+				
+			}
+			//답글쓰기
+			else if(path.equals("/addReply.ques"))
+			{
+				System.out.println("addReply.ques");
+				
+				qBean = getQuestionBeanProperty(request, response);
+				int ques_no = qBean.getQues_no();
+				qBean.setQues_parentno(ques_no);
+				qBean.setQues_ref(ques_no);
+				
+				ques_no = qServ.addReply(qBean);
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + "  alert('답글쓰기를 완료했습니다.');" + " location.href='" + 
+				"questionList.ques';" + "</script>");
+				return;
+			}	
+		
+			
 			System.out.println("nextPAge" + nextPage);
-			// null PointException
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
@@ -57,24 +210,32 @@ public class QuestionController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+			
 
 	private QuestionBean getQuestionBeanProperty(HttpServletRequest request, HttpServletResponse response) {
 		int ques_no = 0;
+		int ques_parentno = 0;
 		String ques_title = null;
 		String ques_email = null;
-		String ques_pw = null;
 		String ques_content = null;
-		Timestamp ques_writedate = new Timestamp(System.currentTimeMillis());
-		int ques_main_seq = 0;
-		int ques_main_tab = 0;
-		int ques_sub_seq = 0;
+		Date ques_writedate = null;
 		int ques_readcount = 0;
+		String isSecret = "n";
+		String isNotice = "n";
+		int ques_ref = 0;
 		
 		if(request.getParameter("ques_no") != null)
 		{
 			ques_no = Integer.parseInt(request.getParameter("ques_no"));
 			qBean.setQues_no(ques_no);
 			System.out.println("ques_no =" + ques_no);
+		}
+		if(request.getParameter("ques_parentno") != null)
+		{
+			ques_parentno = Integer.parseInt(request.getParameter("ques_no"));
+			qBean.setQues_parentno(ques_parentno);
+			System.out.println("ques_parentno =" + ques_parentno);
 		}
 		if(request.getParameter("ques_title") != null)
 		{
@@ -88,39 +249,17 @@ public class QuestionController extends HttpServlet {
 			qBean.setQues_email(ques_email);
 			System.out.println("ques_email =" + ques_email);
 		}
-		if(request.getParameter("ques_pw") != null)
-		{
-			ques_pw = request.getParameter("ques_pw");
-			qBean.setQues_pw(ques_pw);
-			System.out.println("ques_pw =" + ques_pw);
-		}
 		if(request.getParameter("ques_content") != null)
 		{
 			ques_content = request.getParameter("ques_content");
 			qBean.setQues_content(ques_content);
 			System.out.println("ques_content =" + ques_content);
 		}
-		
-		qBean.setQues_writedate(ques_writedate);
-		System.out.println("ques_writedate =" + ques_writedate);
-		
-		if(request.getParameter("ques_main_seq") != null)
+		if(request.getParameter("ques_content") != null)
 		{
-			ques_main_seq = Integer.parseInt(request.getParameter("ques_main_seq"));
-			qBean.setQues_main_seq(ques_main_seq);
-			System.out.println("ques_main_seq =" + ques_main_seq);
-		}
-		if(request.getParameter("ques_main_tab") != null)
-		{
-			ques_main_tab = Integer.parseInt(request.getParameter("ques_main_tab"));
-			qBean.setQues_main_tab(ques_main_tab);
-			System.out.println("ques_main_tab =" + ques_main_tab);
-		}
-		if(request.getParameter("ques_sub_seq") != null)
-		{
-			ques_sub_seq = Integer.parseInt(request.getParameter("ques_sub_seq"));
-			qBean.setQues_sub_seq(ques_sub_seq);
-			System.out.println("ques_sub_seq =" + ques_sub_seq);
+			ques_content = request.getParameter("ques_content");
+			qBean.setQues_writedate(ques_writedate);
+			System.out.println("ques_writedate =" + ques_writedate);
 		}
 		if(request.getParameter("ques_readcount") != null)
 		{
@@ -128,6 +267,37 @@ public class QuestionController extends HttpServlet {
 			qBean.setQues_readcount(ques_readcount);
 			System.out.println("ques_readcount =" + ques_readcount);
 		}
+		if(request.getParameter("isSecret") != null)
+		{
+			isSecret = request.getParameter("isSecret");
+			qBean.setIsSecret("y");
+			System.out.println("isSecret =" + isSecret);
+		}
+		if(request.getParameter("isSecret") == null)
+		{
+			isSecret = request.getParameter("isSecret");
+			qBean.setIsSecret("n");
+			System.out.println("isSecret =" + isSecret);
+		}
+		if(request.getParameter("isNotice") != null)
+		{
+			isNotice = request.getParameter("isNotice");
+			qBean.setIsNotice("y");
+			System.out.println("isNotice =" + isNotice);
+		}
+		if(request.getParameter("isNotice") == null)
+		{
+			isNotice = request.getParameter("isNotice");
+			qBean.setIsNotice("n");
+			System.out.println("isNotice =" + isNotice);
+		}
+		if(request.getParameter("ques_ref") != null)
+		{
+			ques_ref = Integer.parseInt(request.getParameter("ques_ref"));
+			qBean.setQues_ref(ques_ref);
+			System.out.println("ques_ref =" + ques_ref);
+		}
 		return qBean;
 	}
 }
+

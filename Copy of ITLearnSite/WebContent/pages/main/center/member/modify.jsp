@@ -73,11 +73,11 @@
 									<label for="gender">성별</label><br>
 									<c:if test="${mBean.gender eq '1'}">
 										<input type="radio" name="gender" id="gender1" value="1" required="required" checked="checked">남 &nbsp; 
-									<input type="radio" name="gender" id="gender2" value="2" required="required" disabled="disabled">여<br>
+										<input type="radio" name="gender" id="gender2" value="2" required="required" disabled="disabled">여<br>
 									</c:if>
 									<c:if test="${mBean.gender eq '2'}">
 										<input type="radio" name="gender" id="gender1" value="1" required="required" disabled="disabled">남 &nbsp; 
-									<input type="radio" name="gender" id="gender2" value="2" required="required" checked="checked">여<br>
+										<input type="radio" name="gender" id="gender2" value="2" required="required" checked="checked">여<br>
 									</c:if>
 								</div>
 								<div class="col-md-12 form-group mb-3">
