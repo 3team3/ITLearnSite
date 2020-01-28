@@ -123,7 +123,9 @@ public class LectureController extends HttpServlet {
 				System.out.println(cnt);
 
 				for (int i = 1; i <= cnt; i++) {
-					/*System.out.println(multi.getParameter("list_title" + i));*/
+					/*
+					 * System.out.println(multi.getParameter("list_title" + i));
+					 */
 					list_title.add(multi.getParameter("list_title" + i));
 				}
 
@@ -135,7 +137,7 @@ public class LectureController extends HttpServlet {
 					// 서버에 업로드한 실제 파일명 받아오기
 					String RealName = multi.getFilesystemName(InputName);
 
-					/*System.out.println(RealName);*/
+					/* System.out.println(RealName); */
 
 					// 서버에 실제로 업로드된 파일의 이름을 하나 하나씩 어레이리스트에 추가!
 					saveFiles.add(RealName);
@@ -143,11 +145,11 @@ public class LectureController extends HttpServlet {
 					// 클라이언트가 업로드한 파일의 원본이름을 얻어서.. 하나씩 ArrayList에 추가!
 					originFiles.add(multi.getOriginalFileName(InputName));
 				}
-				
+
 				Collections.sort(saveFiles);
 				Collections.sort(originFiles);
-				
-				System.out.println(); 
+
+				System.out.println();
 
 				lBean.setList_title(list_title);
 				lBean.setOriginFiles(originFiles);
@@ -158,28 +160,40 @@ public class LectureController extends HttpServlet {
 
 				lServ.lectureRegister(lBean);
 
-				
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" + " alert('강의를 등록했습니다.');" + " location.href='" + request.getContextPath()
 						+ "/lectureList.lec';" + "</script>");
 				return;
 
-				//강의 상세보기
+				// 강의 상세보기
 			} else if (path.equals("/lectureDetail.lec")) {
-				
+
 				System.out.println("lectureDetail.lec");
 				request.setCharacterEncoding("UTF-8");
-				
+
 				int lec_no = Integer.parseInt(request.getParameter("lec_no"));
-				
+
 				Map lec_DetailMap = lServ.lectureDetail(lec_no);
-				
+
 				request.setAttribute("lec_DetailMap", lec_DetailMap);
-				
+
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/lecture/lectureDetail.jsp";
 				request.setAttribute("paging", paging);
-				
+
+			} else if (path.equals("/deleteLecture.lec")) {
+
+				System.out.println("deleteLecture.lec");
+
+				int lec_no = Integer.parseInt(request.getParameter("lec_no"));
+
+				lServ.deleteLecture(lec_no);
+
+				PrintWriter pw = response.getWriter();
+				pw.print("<script>" + " alert('강의를 삭제했습니다.');" + " location.href='" + request.getContextPath()
+						+ "/lectureList.lec';" + "</script>");
+				return;
+
 			}
 
 			System.out.println("nextPAge :" + nextPage);

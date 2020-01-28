@@ -54,10 +54,10 @@ public class LectureDAOImpl implements LectureDAO {
 		// 전달 받은 section 값과 pageNum 값을 가져옴
 		int section = (Integer) pagingMap.get("section");
 		int pageNum = (Integer) pagingMap.get("pageNum");
-/*		
-		System.out.println("section : " + section);
-		System.out.println("pageNum : " + pageNum);
-*/
+		/*
+		 * System.out.println("section : " + section); System.out.println(
+		 * "pageNum : " + pageNum);
+		 */
 		try {
 
 			con = getConnection();
@@ -84,7 +84,7 @@ public class LectureDAOImpl implements LectureDAO {
 			 * System.out.println(rs.next());
 			 */
 			while (rs.next()) {
-				/*System.out.println("rs :" + rs);*/
+				/* System.out.println("rs :" + rs); */
 
 				int level = rs.getInt("lvl");
 				int lec_no = rs.getInt("lec_no");
@@ -93,7 +93,7 @@ public class LectureDAOImpl implements LectureDAO {
 				int lec_price = rs.getInt("lec_price");
 				String lec_imgfile = rs.getString("lec_imgfile");
 				String lec_spofile = rs.getString("lec_spofile");
-				
+
 				/*
 				 * System.out.println("level : " + level); System.out.println(
 				 * "lec_no : " + lec_no); System.out.println("lec_parentno : " +
@@ -113,7 +113,7 @@ public class LectureDAOImpl implements LectureDAO {
 				bean.setLec_spofile(lec_spofile);
 
 				lecturesList.add(bean);
-				/*System.out.println("bean : " + bean);*/
+				/* System.out.println("bean : " + bean); */
 			}
 			/*
 			 * System.out.println("lecturesList : " + lecturesList);
@@ -135,7 +135,7 @@ public class LectureDAOImpl implements LectureDAO {
 
 			// 전체 글 수 조회
 			String query = "select count(lec_no) from lecture_table";
-			/*System.out.println(query);*/
+			/* System.out.println(query); */
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -160,7 +160,7 @@ public class LectureDAOImpl implements LectureDAO {
 			ArrayList<String> saveFiles = lBean.getSaveFiles();
 			ArrayList<String> originFiles = lBean.getOriginFiles();
 			ArrayList<String> list_title = lBean.getList_title();
-			 
+
 			sql = "select count(*) from lecture_table";
 			pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
@@ -179,21 +179,19 @@ public class LectureDAOImpl implements LectureDAO {
 			pstmt.setString(6, saveFiles.get(1));
 			pstmt.executeUpdate();
 
-			
 			sql = "insert into lecture_list(lec_no, list_no, list_title, list_savefile, list_originalfile) values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 
 			for (int i = 1; i < saveFiles.size(); i++) {
 				/*
-				System.out.println(lec_no);
-				System.out.println(i);
-				System.out.println(list_title.get(i-1));
-				System.out.println(saveFiles.get(i));
-				System.out.println(originFiles.get(i));
-				*/
+				 * System.out.println(lec_no); System.out.println(i);
+				 * System.out.println(list_title.get(i-1));
+				 * System.out.println(saveFiles.get(i));
+				 * System.out.println(originFiles.get(i));
+				 */
 				pstmt.setInt(1, lec_no);
 				pstmt.setInt(2, i);
-				pstmt.setString(3, list_title.get(i-1));
+				pstmt.setString(3, list_title.get(i - 1));
 				pstmt.setString(4, saveFiles.get(i));
 				pstmt.setString(5, originFiles.get(i));
 				pstmt.executeUpdate();
@@ -205,19 +203,19 @@ public class LectureDAOImpl implements LectureDAO {
 			closeConnection();
 		}
 	}
-	
+
 	/* 강의 정보 */
 	@Override
 	public LectureBean lectureDetail(int lec_no) {
-		
+
 		LectureBean bean = new LectureBean();
-		
+
 		try {
 			con = getConnection();
 
 			// 전체 글 수 조회
 			String query = "select * from lecture_table  where lec_no = ?";
-			/*System.out.println(query);*/
+			/* System.out.println(query); */
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, lec_no);
 			ResultSet rs = pstmt.executeQuery();
@@ -234,53 +232,51 @@ public class LectureDAOImpl implements LectureDAO {
 		} finally {
 			closeConnection();
 		}
-		
+
 		return bean;
 	}
 
-	/* 강의 상세 리스트(파일 저장 테이블)*/
+	/* 강의 상세 리스트(파일 저장 테이블) */
 	@Override
 	public List lectureList(int lec_no) {
-		
+
 		List<LectureBean> lectureList = new ArrayList<LectureBean>();
-		
+
 		try {
 			con = getConnection();
 
 			// 전체 글 수 조회
 			String query = "select * from lecture_list where lec_no = ? order by list_no";
-			/*System.out.println(query);*/
+			/* System.out.println(query); */
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, lec_no);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				
+
 				int list_no = rs.getInt("list_no");
 				String list_titleStr = rs.getString("list_title");
 				String list_savefile = rs.getString("list_savefile");
 				String list_originalfile = rs.getString("list_originalfile");
 				/*
-				System.out.println("dao : list" +list_no);
-				System.out.println("dao : list" +list_titleStr);
-				System.out.println("dao : list" +list_savefile);
-				System.out.println("dao : list" + list_originalfile);
-				*/
-				
+				 * System.out.println("dao : list" +list_no);
+				 * System.out.println("dao : list" +list_titleStr);
+				 * System.out.println("dao : list" +list_savefile);
+				 * System.out.println("dao : list" + list_originalfile);
+				 */
+
 				LectureBean bean = new LectureBean();
-				
+
 				bean.setList_no(list_no);
 				bean.setList_titleStr(list_titleStr);
 				bean.setList_savefile(list_savefile);
 				bean.setList_originalfile(list_originalfile);
-				
-				
-				
+
 				lectureList.add(bean);
-				
+
 			}
 			/*
-			System.out.println("dao : list" +lectureList);
-*/
+			 * System.out.println("dao : list" +lectureList);
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -288,117 +284,23 @@ public class LectureDAOImpl implements LectureDAO {
 		}
 		return lectureList;
 	}
-	
-	/*
-	 * // 새 글번호 검색 private int getNewNo() { try { con = getConnection(); String
-	 * query = "SELECT  max(res_no) from resource_table ";
-	 * System.out.println(query); pstmt = con.prepareStatement(query); ResultSet
-	 * rs = pstmt.executeQuery(query); if (rs.next()) return (rs.getInt(1) + 1);
-	 * } catch (Exception e) { e.printStackTrace(); } finally {
-	 * closeConnection(); } return 0; }
-	 * 
-	 * // 자료실 글쓰기
-	 * 
-	 * @Override public int insertLecture(ResourceBean rBean) { int res_no =
-	 * getNewNo(); try { con = getConnection(); int res_parentno =
-	 * rBean.getRes_parentno(); String res_title = rBean.getRes_title(); String
-	 * res_email = rBean.getRes_email(); String res_content =
-	 * rBean.getRes_content(); String res_filename = rBean.getRes_filename();
-	 * 
-	 * String query =
-	 * "INSERT INTO resource_table (RES_NO, RES_PARENTNO, RES_TITLE, RES_EMAIL, RES_CONTENT, RES_FILENAME)"
-	 * + " VALUES (?, ? ,?, ?, ?, ?)"; System.out.println(query); pstmt =
-	 * con.prepareStatement(query); pstmt.setInt(1, res_no); pstmt.setInt(2,
-	 * res_parentno); pstmt.setString(3, res_title); pstmt.setString(4,
-	 * res_email); pstmt.setString(5, res_content); pstmt.setString(6,
-	 * res_filename); pstmt.executeUpdate(); } catch (Exception e) {
-	 * System.out.println("insertResource메소드에서 오류 :" + e); } finally {
-	 * closeConnection(); } return res_no; }
-	 * 
-	 * // 자료실 글수정
-	 * 
-	 * @Override public void updateLecture(ResourceBean rBean) {
-	 * 
-	 * int res_no = rBean.getRes_no(); String res_title = rBean.getRes_title();
-	 * String res_content = rBean.getRes_content(); String res_filename =
-	 * rBean.getRes_filename();
-	 * 
-	 * try { con = getConnection(); String query =
-	 * "update resource_table set res_title=?,res_content=?"; if (res_filename
-	 * != null && res_filename.length() != 0) { query += ",res_filename=?"; }
-	 * query += ",res_writedate=sysdate where res_no=?";
-	 * 
-	 * System.out.println(query); pstmt = con.prepareStatement(query);
-	 * pstmt.setString(1, res_title); pstmt.setString(2, res_content); if
-	 * (res_filename != null && res_filename.length() != 0) { pstmt.setString(3,
-	 * res_filename); pstmt.setInt(4, res_no); } else { pstmt.setInt(3, res_no);
-	 * } pstmt.executeUpdate();
-	 * 
-	 * } catch (Exception e) { System.out.println("updateResource메소드에서 오류 :" +
-	 * e); } finally { closeConnection(); } }
-	 * 
-	 * // 자료실 내용
-	 * 
-	 * @Override public ResourceBean lectureView(int res_no) { ResourceBean
-	 * rBean = new ResourceBean(); try { con = getConnection(); String sql =
-	 * "select * from resource_table where res_no=?"; pstmt =
-	 * con.prepareStatement(sql); pstmt.setInt(1, res_no); rs =
-	 * pstmt.executeQuery(); if (rs.next()) { rBean.setRes_no(res_no);
-	 * rBean.setRes_title(rs.getString("res_title"));
-	 * rBean.setRes_email(rs.getString("res_email"));
-	 * rBean.setRes_content(rs.getString("res_content"));
-	 * rBean.setRes_filename(rs.getString("res_filename"));
-	 * rBean.setRes_writedate(rs.getDate("res_writedate")); }
-	 * 
-	 * } catch (Exception e) { System.out.println("resourceView()메소드에서 오류 :" +
-	 * e); } finally { closeConnection(); } return rBean; }
-	 * 
-	 * // 자료실 내용 삭제
-	 * 
-	 * @Override public void lectureDelete(int res_no) { try { // 커넥션풀로부터 커넥션 얻기
-	 * con = getConnection(); String query =
-	 * "Delete From resource_table where res_no = ?"; pstmt =
-	 * con.prepareStatement(query); pstmt.setInt(1, res_no);
-	 * pstmt.executeUpdate(); } catch (Exception e) { System.out.println(
-	 * "resourceDelete메소드에서 오류 :" + e); } finally { closeConnection(); }
-	 * 
-	 * }
-	 */
 
-	/*
-	 * // 자료실 검색
-	 * 
-	 * @Override public ArrayList<ResourceBean> lectureSelect(HashMap<String,
-	 * Object> listOpt) {
-	 * 
-	 * ArrayList<ResourceBean> ResourceList = new ArrayList<ResourceBean>();
-	 * String opt = (String) listOpt.get("opt"); // 검색옵션 String condition =
-	 * (String) listOpt.get("condition"); // 검색내용
-	 * 
-	 * int start = (Integer)listOpt.get("start"); //페이지번호
-	 * 
-	 * 
-	 * try { con = getConnection();
-	 * 
-	 * // 0: 제목 //1:내용// 2:글쓴이 if (opt.equals("0")) { sql =
-	 * "select * from resource_table where res_title LIKE '%' || ? || '%'";
-	 * pstmt = con.prepareStatement(sql); pstmt.setString(1, condition); rs =
-	 * pstmt.executeQuery(); } else if (opt.equals("1")) { sql =
-	 * "select * from resource_table where res_content LIKE '%' || ? || '%'";
-	 * pstmt = con.prepareStatement(sql); pstmt.setString(1, condition); rs =
-	 * pstmt.executeQuery(); } else if (opt.equals("2")) { sql =
-	 * "select * from resource_table where res_email LIKE '%' || ? || '%'";
-	 * pstmt = con.prepareStatement(sql); pstmt.setString(1, condition); rs =
-	 * pstmt.executeQuery(); }
-	 * 
-	 * while (rs.next()) { ResourceBean rBean = new ResourceBean();
-	 * rBean.setRes_no(rs.getInt("res_no"));
-	 * rBean.setRes_title(rs.getString("res_title"));
-	 * rBean.setRes_email(rs.getString("res_email"));
-	 * rBean.setRes_writedate(rs.getDate("res_writedate"));
-	 * ResourceList.add(rBean); }
-	 * 
-	 * } catch (Exception e) { System.out.println("resourceSelect()에서 오류 : " +
-	 * e); } finally { closeConnection(); } return ResourceList; }
-	 */
+	@Override
+	public void deleteLecture(int lec_no) {
+
+		try {
+
+			con = getConnection();
+
+			sql = "delete from lecture_table where lec_no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, lec_no);
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+
+		}
+
+	}
+
 }

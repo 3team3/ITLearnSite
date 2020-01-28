@@ -57,6 +57,14 @@ public class LectureServiceImpl implements LectureService {
 		return lec_DetailMap;
 	}
 	
+	//강의 삭제
+		@Override
+		public void deleteLecture(int lec_no) {
+			
+			lDao.deleteLecture(lec_no);
+			
+		}
+	
 /*
 	// 자료실 글쓰기
 	@Override
