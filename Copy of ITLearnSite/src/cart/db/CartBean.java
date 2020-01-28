@@ -7,7 +7,14 @@ public class CartBean {
 	private int pro_cnt;
 	private int pro_price;
 	private String pro_sort;
+	private String pro_img;
 	
+	public String getPro_img() {
+		return pro_img;
+	}
+	public void setPro_img(String pro_img) {
+		this.pro_img = pro_img;
+	}
 	public String getPro_sort() {
 		return pro_sort;
 	}

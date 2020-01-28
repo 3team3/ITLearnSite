@@ -8,4 +8,12 @@ public interface CartService {
 	//장바구니리스트
 	public List<CartBean> getcartlist(String email);
 	
+	//장바구니에 상품 넣기
+	public int addCart(CartBean cbean);
+	
+	public int cartDupChk(String pro_name, String email);
+	
+	public int Delcart(int cart_num);
+	public void cartEdit(int pro_cnt, int cart_num);
+	public int DelAllcart(String email);
 }
