@@ -34,16 +34,11 @@
 }
 
 .info_left{
-    width:500px;
+    width:800px;
     float:left;
     border: solid green 1px;
 }
 
-.info_right{
-    width:400px;
-    float:left;
-    border: solid green 1px;
-}
 
 .label{
     border: solid skyblue 1px; 
@@ -52,10 +47,14 @@
 	width:300px;
 }
 .col-margin{
-	width: 400px;
-	height:auto;
+	width: 100% !important;
     margin-bottom: 10px;
     border:solid gray 1px;
+}
+
+.col-margin > p{
+	width : 800px;
+	height: 20px;
 }
 
 .bookcontent{

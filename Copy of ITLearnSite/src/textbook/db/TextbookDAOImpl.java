@@ -83,6 +83,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 				String decodeDescription = URLDecoder.decode(rs.getString(11),"utf-8");
 				System.out.println("description="+decodeDescription);//description
 				
+				System.out.println("stock="+rs.getInt(12));//isbn
 				
 				textBean.setProduct_no(rs.getInt(1));
 				textBean.setBook_title(decodeTitle);
@@ -95,6 +96,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 				textBean.setBook_pubdate(String.valueOf(rs.getDate(9)));
 				textBean.setBook_isbn(rs.getString(10));
 				textBean.setBook_description(decodeDescription);
+				textBean.setBook_stock(rs.getInt(12));
 				
 			}
 		} catch (Exception e) {
