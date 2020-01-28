@@ -57,6 +57,7 @@ public class CartDAOImpl implements CartDAO {
 				cbean.setPro_cnt(rs.getInt("pro_cnt"));
 				cbean.setPro_price(rs.getInt("pro_price"));
 				cbean.setPro_sort(rs.getString("pro_sort"));
+				cbean.setPro_img(rs.getString("pro_img"));
 				cartlist.add(cbean);
 			}
 			
@@ -131,8 +132,8 @@ public class CartDAOImpl implements CartDAO {
 			}
 			
 			
-			sql = "insert into cart_table (cart_num, email, pro_name, pro_cnt, pro_price, pro_sort)"
-					+ "values(?,?,?,?,?,?)";
+			sql = "insert into cart_table (cart_num, email, pro_name, pro_cnt, pro_price, pro_sort, pro_img)"
+					+ "values(?,?,?,?,?,?,?)";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -140,11 +141,9 @@ public class CartDAOImpl implements CartDAO {
 			pstmt.setString(3, caBean.getPro_name());
 			pstmt.setInt(4, caBean.getPro_cnt());
 			pstmt.setInt(5, caBean.getPro_price()*caBean.getPro_cnt());
-			pstmt.setString(6, caBean.getPro_sort());
-			/* 이미지 추가시  sql문도 수정 요함
-			 * pstmt.setString(7, cbean.getPro_img());
-			 * 
-			 * */			
+			pstmt.setString(6, caBean.getPro_sort());			
+			pstmt.setString(7, caBean.getPro_img());
+					
 
 			pstmt.executeUpdate();
 

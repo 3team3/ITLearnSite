@@ -77,11 +77,12 @@ public class CartController extends HttpServlet{
 					out.println("history.back();");
 					out.println("</script>");
 					out.close();
-				}else{
+				}else{				
 				
-				int lec_no=Integer.parseInt(request.getParameter("lec_no"));
 				String pro_name=request.getParameter("lec_title");
 				String pro_sort=request.getParameter("pro_sort");
+				String pro_img=request.getParameter("pro_img");
+				System.out.println(pro_img);
 				int pro_price=Integer.parseInt(request.getParameter("lec_price"));				
 				int pro_cnt=Integer.parseInt(request.getParameter("pro_cnt"));				
 				int result = caServ.cartDupChk(pro_name, email);
@@ -96,7 +97,7 @@ public class CartController extends HttpServlet{
 					out.println("</script>");
 					out.close();
 				} 
-				else if (result == 0) 
+				else
 				{
 					if(pro_sort.equals("강의")){
 					
@@ -104,7 +105,8 @@ public class CartController extends HttpServlet{
 					caBean.setPro_name(pro_name);
 					caBean.setPro_price(pro_price);
 					caBean.setPro_sort(pro_sort);
-					caBean.setPro_cnt(pro_cnt);			
+					caBean.setPro_cnt(pro_cnt);
+					caBean.setPro_img(pro_img);
 					
 					 int rs=0;
 					

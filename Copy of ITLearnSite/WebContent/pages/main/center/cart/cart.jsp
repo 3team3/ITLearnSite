@@ -41,7 +41,11 @@ function num(num1){
 
 <style>
 .num{
-width: 10%
+width: 10%;
+}
+.pro_img{
+width: 100px;
+height: 100px;
 }
 
 </style>
@@ -92,7 +96,8 @@ width: 10%
 			  			 
 					<tr>
 						<td class="checkbox"><input type="checkbox"></td>
-						<td class="img">이미지</td>
+						<td class="img"><img
+											src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img"></td>
 						<td class="name">${cartlist.pro_name }</td>
 							<td class="count">
 								<div class="quantity">																			

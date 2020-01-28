@@ -67,7 +67,7 @@
 				articlesList 속성으로 바인딩된 ArrayList 객체가 저장되어 있지 않다면				
 			 --%>
 					<c:when test="${lecturesList == null }">
-						<b><span style="font-size: 9pt;">등록된 강의이 없습니다.</span></b>
+						<b><span style="font-size: 9pt;">등록된 강의가 없습니다.</span></b>
 					</c:when>
 					<c:when test="${lecturesList != null }">
 						<%--
@@ -97,7 +97,7 @@
 										<p>
 										
 										
-											<a href="cartAdd.cart?lec_no=${lecture.lec_no}&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&lec_imgfile=${lecture.lec_imgfile}&pro_sort=강의&pro_cnt=1"
+											<a href="cartAdd.cart?&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&pro_img=${lecture.lec_imgfile}&pro_sort=강의&pro_cnt=1"
 												class="btn btn-primary rounded-0 px-4">장바구니</a>
 												<a href="#"
 												class="btn btn-primary rounded-0 px-4">구매하기</a>
