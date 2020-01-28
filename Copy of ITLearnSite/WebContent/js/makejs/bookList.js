@@ -65,52 +65,25 @@ function setBooklist(getData){
 function setBookDetail(getData){
 	var request = new Request();
 	var product_no = request.getParameter("product_no");
-	var string ="";
-	var i = product_no;
+	var url = "detailload.text";
 	
-		var comments = 
-			"<div class='wrap'>"
-			+ 	"<div class='bookimg'>"
-			+	"</div>"
-			+	"<div class='bookinfo'>"        
-			+		"<span class='booktitle'>"
-			+			getData.list[i].book_title
-			+		"</span>"
-			+		"<span class='bookdetail'>"
-			+			"<div class='detail-align'>"
-			+				"<p class='p1'>"+" 정&nbsp;&nbsp;&nbsp;가"+"</p>"
-			+				"<p class='p2'>"+getData.list[i].book_price+"원</p>"
-			+			"</div>"
-			+			"<div class='detail-align'>"
-			+				"<p class='p1'>출&nbsp;&nbsp;&nbsp;간</p>"
-			+				"<p class='p2'>"+getData.list[i].book_publisher+"</p>"
-			+			"</div>"
-			+			"<div class='detail-align'>"
-			+				"<p class='p1'>지은이</p>"    
-			+				"<p class='p2'>"+getData.list[i].book_writer+"</p>"
-			+			"</div>"
-			+			"<div class='detail-align'>"
-			+				"<p class='p1'>부&nbsp;&nbsp;&nbsp;록</p>"
-			+				"<p class='p2'><a href='#'>자료실</a></p>"
-			+			"</div>"
-			+		"</span>"
-			+		"<span class='bookdetail2'>"
-            +        	"<div class='detail-align'>"
-	        +        		"<p class='p1'>분&nbsp;&nbsp;&nbsp;량</p>"
-	        +        		"<p class='p2'>"+getData.list[i].book_page+"쪽</p>"
-            +        	"</div>"
-            +        	"<div class='detail-align'>"
-	        +        		"<p class='p1'>구매</p>"
-	        +        		"<p class='p2 buylink'>"
-	        +  				"</p>"
-            +        	"</div>"
-            +    	"</span>"
-			+"</div>"; 
+	var form_data = {
+		product_no : product_no
+	}
+	$.ajax({
+		type : "post",
+		url : url,
+		data : form_data,
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		success : function(getData) {
 			
-		string = string + comments;
-	$(".list").html(string);
-	$(".bookimg1").insertAfter(".bookimg");
-	$(".link").insertAfter(".buylink");
+		},
+		error : function(request,status,error){
+			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+			console.log(error);
+		}
+	});
+	
 }
 function booklist(direction)
 {
@@ -133,7 +106,7 @@ function booklist(direction)
 			{
 				setBooklist(getData);
 			}
-			else if(direction == "bookView.text")
+			else if(direction == "bookdetail.text")
 			{
 				setBookDetail(getData);
 			}

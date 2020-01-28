@@ -29,7 +29,7 @@ public class TextbookServiceImpl implements TextbookService {
 	@Override
 	public TextbookBean bookdetail(int product_no) {
 		tBean = tbDAO.bookdetail(product_no);
-		return null;
+		return tBean;
 	}
 	
 }

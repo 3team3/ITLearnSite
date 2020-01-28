@@ -2,34 +2,102 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="bookdetail" value="${requestScope.bookdetail}"></c:set>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${path}/css/bookView.css" rel="stylesheet">
+<link rel="stylesheet" href="${path}/css/bookdetail.css">
 </head>
-
-<body>
-	<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-		<div class="container">
-			<div class="row align-items-end justify-content-center text-center">
-				<div class="col-lg-7">
-					<h2 class="mb-0">해당 도서 정보</h2>
-				</div>
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+	<div class="container">
+		<div class="row align-items-end justify-content-center text-center">
+			<div class="col-lg-7">
+				<h2 class="mb-0">도서 보기</h2>
+				<p>Resource room</p>
 			</div>
 		</div>
 	</div>
-	<div class="custom-breadcrumns border-bottom">
-		<div class="container">
-			<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">해당 도서 정보</span>
+</div>
+
+<div class="custom-breadcrumns border-bottom">
+	<div class="container">
+		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
+	</div>
+</div>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="wrap">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="info">
+							<div class="imgwrap">
+								<c:if test="${1 == 1}">
+									<img class="img1" src="${detail.book_image}">
+								</c:if>
+							</div>
+							<div class="info_left">
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<p class="label label-1">상품번호 : ${detail.product_no}</p>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<p class="label label-1">책 제목 : ${detail.book_title}</p>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<p class="label label-1">저 자 : ${detail.book_author}</p>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<p class="label label-1">가 격 : ${detail.book_price}</p>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<p class="label label-1">출판사 : ${detail.book_publisher }</p>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<p class="label label-1">출판일 : ${detail.book_pubdate}</p>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<span class="label label-1">ISBN : ${detail.book_isbn }</span> <span class="label-a"></span>
+									</div>
+
+									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<span class="label label-1">재고 : </span> <span class="label-a">${detail.book_stock}</span>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="bookcontent">
+					<h3>내용</h3>
+					<hr>
+					<p>${detail.book_description }</p>
+				</div>
+
+				<div class="bookcontent">
+					<h3>사진</h3>
+					<hr>
+					<img src="">
+				</div>
+
+			</div>
+
 		</div>
 	</div>
-	<div>
-	
-	</div>
-	<script src="${path}/js/jquery-3.3.1.min.js"></script>
-	<script src="${path}/js/makejs/bookList.js"></script>
 </body>
+<script src="${path}/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${path}/js/makejs/bookdetail.js"></script>
+
 </html>

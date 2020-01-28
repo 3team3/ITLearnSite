@@ -119,8 +119,10 @@ public class TextbookController extends HttpServlet {
 			{
 				tBean= getTextbookBeanProperty(request, response);
 				int product_no = Integer.parseInt(request.getParameter("product_no"));
+				System.out.println("proudct_noasdf"+product_no);
 				tBean = tServ.bookdetail(product_no);
-				request.setAttribute("bookdetail", tBean);
+				
+				request.setAttribute("detail", tBean);
 				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/books/bookdetail.jsp?product_no="+product_no;

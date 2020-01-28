@@ -1,0 +1,67 @@
+.container{
+    border: solid purple 1px;
+}
+
+.wrap{
+    width:1200px;
+    min-height: 700px;
+    border: solid orange 1px;
+    margin-bottom: 100px;
+}
+.picture{
+	float:left;
+    width: 130px;
+    height: 180px;
+    border: solid red 1px;
+}
+.imgwrap{
+	margin-right:30px;
+}
+.img1{
+    float:left;
+    width: 130px;
+    height: 180px;
+    border: solid red 1px;
+}
+
+.info{
+    width:100%;
+    height:700px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: solid black 1px;
+}
+
+.info_left{
+    width:500px;
+    float:left;
+    border: solid green 1px;
+}
+
+.info_right{
+    width:400px;
+    float:left;
+    border: solid green 1px;
+}
+
+.label{
+    border: solid skyblue 1px; 
+}
+.label1{
+	width:300px;
+}
+.col-margin{
+	width: 400px;
+	height:auto;
+    margin-bottom: 10px;
+    border:solid gray 1px;
+}
+
+.bookcontent{
+    margin-left: 130px;
+    float:left;
+    width:850px;
+    height:auto;
+    border : solid yellow 1px;
+}
