@@ -53,7 +53,7 @@ function setBooklist(getData){
 			+		"<div class='buttons'>"
 			+			"<button class='btn btn-color1'> 담기 </button>"
 			+			"<button class='btn btn-color1'> 맛보기 </button>"
-//			+			"<input type='button' class='btn btn-danger float-r' value='삭제' onclick='"deleteQues(p_no);'" + ">"
+			+			"<input type='button' class='btn btn-danger float-r' value='삭제' onclick='deleteQues("+ p_no + ");'>"
 			+		"</div>"
 			+	"</div>"
 			+"</div>";
