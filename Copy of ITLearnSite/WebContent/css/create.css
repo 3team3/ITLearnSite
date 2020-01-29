@@ -52,3 +52,16 @@
  	width: 100px;
  	font-size: small;
  }
+
+.before{
+	min-height: 1000px;
+	width:800px;
+	border-style: solid;
+	border-color: #4A56A8;
+}
+.after{
+	min-height: 1000px;
+	width:800px;
+	border-style: solid;
+	border-color: #4A56A8;
+}

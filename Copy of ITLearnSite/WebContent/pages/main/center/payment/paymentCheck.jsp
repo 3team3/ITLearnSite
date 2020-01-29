@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${path}/css/member.css" rel="stylesheet"> 
+<link href="${path}/css/create.css" rel="stylesheet"> 
 <title>주문관리</title>
 </head>
 <c:set var="email" value="${sessionScope.email}"></c:set>
@@ -46,15 +47,20 @@
 		<div class="content">
 		<h3>결제 전</h3>
 		
-		<table class="table">
-			<tr class="tb_head">
-				<td colspan="4">주문</td>
-			</tr>
+		<table class="table before">
+			
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
-			<c:if test="${paymentList.pay_option==0}">
+			
+			
+			<c:if test="${paymentList.pay_option==1}">
 			<tr>
-				<td colspan="4">${j}</td>
+				<td colspan="4"></td>
+			</tr>
+			</c:if>
+			<c:if test="${paymentList.pay_option==0}">
+			<tr class="tb_head">
+				<td colspan="4">주문 : ${j+1}</td>
 			</tr>
 			<tr>
 				<td>이름</td>
@@ -141,18 +147,25 @@
 				<c:set var="j" value="${j+1}" />
 			</c:if>				
 			</c:forEach> 
-			
+			<tr>
+				<td colspan="4"></td>
+			</tr>
 
 		</table>
 		<h3>결제 후</h3>
-		<table class="table after ">
+		<table class="table after">
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
+		
+			<c:if test="${paymentList.pay_option==0}">
+			<tr>
+				<td colspan="4"></td>
+			</tr>
+			</c:if>
 			<c:if test="${paymentList.pay_option==1}">
 			<tr class="tb_head">
-				<td colspan="4">주문</td>
-			</tr>
-			
+				<td colspan="4">주문 : ${j+1}</td>
+			</tr>		
 			<tr>
 				<td>이름</td>
 				<td>${paymentList.pay_name}</td>
@@ -227,7 +240,9 @@
 				<c:set var="j" value="${j+1}" />
 			</c:if>				
 			</c:forEach> 
-			
+			<tr>
+				<td colspan="4"></td>
+			</tr>
 
 		</table>
 		</div>

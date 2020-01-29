@@ -84,6 +84,9 @@ public class PaymentController extends HttpServlet {
 			{
 				session = request.getSession();
 				String email = (String)session.getAttribute("email");
+				if(request.getParameter("email")!=null){
+					email = request.getParameter("email");
+				}
 				List<PaymentBean> paymentList = pServ.callPayment(email);
 				
 				request.setAttribute("paymentList", paymentList);				

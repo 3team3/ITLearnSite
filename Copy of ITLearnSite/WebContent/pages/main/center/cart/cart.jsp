@@ -120,7 +120,7 @@ height: 100px;
 			</c:forEach> 		
 		</table>
 		<div class="btn">
-		<input type="button" class="btn btn-color1" value="선택상품주문">		
+		<input type="button" class="btn btn-color1" value="선택상품주문" onclick="">		
 		<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'">
 		<input type="submit" class="btn btn-color1" value="전체상품주문">
 		</div>
