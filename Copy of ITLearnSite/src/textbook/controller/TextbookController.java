@@ -145,6 +145,16 @@ public class TextbookController extends HttpServlet {
 				out.print(jsonObj);
 				//네이버 api
 			}
+			else if(path.equals("/bookdelete.text"))
+			{
+				tBean= getTextbookBeanProperty(request, response);
+				int product_no = Integer.parseInt(request.getParameter("product_no"));
+				System.out.println("bookdelete.txt?product_no="+product_no);
+				int check = tServ.deletebook(product_no); 
+				System.out.println(check);
+				
+				response.sendRedirect("bookList.text");
+			}
 			System.out.println("nextPAge" + nextPage);
 			// null PointException
 			if (nextPage != null) {

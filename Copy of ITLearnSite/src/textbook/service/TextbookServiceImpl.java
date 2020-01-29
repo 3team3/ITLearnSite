@@ -32,4 +32,9 @@ public class TextbookServiceImpl implements TextbookService {
 		return tBean;
 	}
 	
+	@Override
+	public int deletebook(int product_no) {
+		int check = tbDAO.bookdelete(product_no);
+		return check;
+	}
 }

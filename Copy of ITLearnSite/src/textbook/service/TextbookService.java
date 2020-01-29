@@ -11,4 +11,6 @@ public interface TextbookService {
 	public int insertBook(TextbookBean  tBean);
 	//도서 자세히 보기
 	public TextbookBean bookdetail(int product_no);
+	//도서 삭제
+	public int deletebook (int product_no);
 }

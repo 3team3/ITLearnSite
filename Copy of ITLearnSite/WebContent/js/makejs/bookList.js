@@ -39,6 +39,7 @@ function setBooklist(getData){
 //		title = title.substring(0, title.length-1);
 		var uri = decodeURIComponent(getData.list[i].book_image);
 		console.log(uri);
+		var p_no =  getData.list[i].product_no;
 		
 		var comments = 
 			"<div class='booklist'>"
@@ -52,7 +53,7 @@ function setBooklist(getData){
 			+		"<div class='buttons'>"
 			+			"<button class='btn btn-color1'> 담기 </button>"
 			+			"<button class='btn btn-color1'> 맛보기 </button>"
-			+			"<button class='btn btn-danger float-r'> 삭제 </button>"
+//			+			"<input type='button' class='btn btn-danger float-r' value='삭제' onclick='"deleteQues(p_no);'" + ">"
 			+		"</div>"
 			+	"</div>"
 			+"</div>";
@@ -61,7 +62,17 @@ function setBooklist(getData){
 	}
 	$(".wrapboard").html(string);
 }
+function deleteQues(p_no){
 
+	var Ques = confirm("선택한 책을 지우시겠습니까?");
+	if(Ques == true){
+		location.href='bookdelete.text?product_no='+ p_no	
+	}
+	else if(Ques == false)
+	{
+		return false;
+	}
+}
 function setBookDetail(getData){
 	var request = new Request();
 	var product_no = request.getParameter("product_no");

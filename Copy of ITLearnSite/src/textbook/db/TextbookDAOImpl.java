@@ -184,4 +184,22 @@ public class TextbookDAOImpl implements TextbookDAO {
 		}
 		return list;
 	}
+	@Override
+	public int bookdelete(int product_no) {
+		int check = 0;
+		try {
+			con = getConnection();
+			sql = "delete from book_table where product_no=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, product_no);
+			check = pstmt.executeUpdate();
+			System.out.println("####################DELETE");
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			closeConnection();
+		}
+		return check;
+	}
 }

@@ -5,7 +5,6 @@ function select() {
 		string += "<div class='form-group'>";
 		string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "</div>"
-//			string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
 		string += "<div class='form-group'>";
 		string += "<input type='text' class='form-control' id='book_link' name ='book_link' placeholder='책링크'>";
 		string += "</div>";
@@ -31,10 +30,10 @@ function select() {
 		string += "<input type='text' class='form-control' id='book_isbn' name ='book_isbn' placeholder='isbn'>";
 		string += "</div>";
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_description' name ='book_description' placeholder='description'>";
+		string += "<input type='text' class='form-control' id='book_description' name ='book_description' placeholder='내용'>";
 		string += "</div>"
 		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_description' name ='book_stock' placeholder='stock'>";
+		string += "<input type='text' class='form-control' id='book_description' name ='book_stock' placeholder='재고'>";
 		string += "</div>"
 		string += "<br>";
 		string += "<button type='submit' class='btn btn-primary'>등록</button>";
@@ -49,6 +48,11 @@ function select() {
 		$(".addtag").html(string);
 	}
 };
+
+function mod(text){
+	var gettext = text;
+	
+}
 
 function bookSearch(page) {
 	var url = "bookSearch.text";
