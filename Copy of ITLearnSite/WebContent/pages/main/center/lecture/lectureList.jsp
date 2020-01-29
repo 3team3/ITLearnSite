@@ -101,7 +101,7 @@
 												class="btn btn-primary rounded-0 px-4">장바구니</a><a
 												style="margin: 5px;"
 												href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
-												class="btn btn-primary rounded-0 px-4" data-fancybox="">잠깐보기</a>
+												class="btn btn-primary rounded-0 px-4" data-fancybox="">맛보기</a>
 											<c:if test="${email eq 'admin@admin.com' }">
 												<a class="btn btn-primary rounded-0 px-4"
 													href="javascript:void(0);"
