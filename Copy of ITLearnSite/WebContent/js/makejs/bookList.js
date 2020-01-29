@@ -50,7 +50,7 @@ function setBooklist(getData){
 			+			"<p class='booktitle'>" + booktitle + "</p>"
 			+		"</a>"
 			+		"<div class='buttons'>"
-			+			"<button class='btn btn-color1'> 담기 </button>"
+			+			"<a href='cartAdd.cart?&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort=도서&pro_cnt=1' class='btn btn-primary rounded-0 px-4'> 담기 </a>"
 			+			"<button class='btn btn-color1'> 맛보기 </button>"
 			+			"<button class='btn btn-danger float-r'> 삭제 </button>"
 			+		"</div>"

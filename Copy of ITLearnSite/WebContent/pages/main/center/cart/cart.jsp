@@ -83,7 +83,7 @@ height: 100px;
 					<tr align="center">
 					
 						<tr>
-							<th colspan="3">상품정보</th>
+							<th colspan="2">상품정보</th>
 							<th>수량</th>
 							<th>가격</th>
 							<th>분류</th>
@@ -94,10 +94,16 @@ height: 100px;
 				
 			 <c:forEach  var="cartlist"   items="${requestScope.cartlist}">				 		
 			  			 
-					<tr>
-						<td class="checkbox"><input type="checkbox"></td>
-						<td class="img"><img
-											src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img"></td>
+					<tr>						
+						<td class="img">
+						<c:set var="sort" value="${cartlist.pro_sort }"/>						
+						<c:if test="${sort eq '도서'}">
+						<img src="${cartlist.pro_img }" class="pro_img"></c:if>						
+						<c:if test="${sort eq '강의'}">
+						<img src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img">									
+						</c:if>	
+						</td>
+						
 						<td class="name">${cartlist.pro_name }</td>
 							<td class="count">
 								<div class="quantity">																			
@@ -119,8 +125,7 @@ height: 100px;
 	
 			</c:forEach> 		
 		</table>
-		<div class="btn">
-		<input type="button" class="btn btn-color1" value="선택상품주문">		
+		<div class="btn">			
 		<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'">
 		<input type="submit" class="btn btn-color1" value="전체상품주문">
 		</div>
