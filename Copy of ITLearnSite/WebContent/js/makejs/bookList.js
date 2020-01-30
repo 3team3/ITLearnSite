@@ -50,6 +50,7 @@ function setBooklist(getData){
 			+		"<a href='bookdetail.text?product_no=" + getData.list[i].product_no +"'>"
 			+			"<p class='booktitle'>" + booktitle + "</p>"
 			+		"</a>"
+			+			"<p class='book_price'> 가격 : " + getData.list[i].book_price + "원</p>"
 			+		"<div class='buttons'>"
 			+			"<button class='btn btn-color1'> 담기 </button>"
 			+			"<button class='btn btn-color1'> 맛보기 </button>"

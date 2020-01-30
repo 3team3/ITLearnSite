@@ -48,7 +48,8 @@
 							<ul class="dropdown">
 								<li><a href="memberlist.admin">회원 관리</a></li>
 								<li><a href="memberpaymentlist.admin">주문 관리</a></li>
-								<li><a href="productWrite.pd">상품 등록</a></li>
+								<li><a href="bookaddpage.text">도서 등록</a></li>
+								<li><a href="bookstock.text">도서 재고 관리</a></li>
 							</ul>
 						</li>
 						</c:if>

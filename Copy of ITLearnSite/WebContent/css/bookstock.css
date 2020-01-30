@@ -1,0 +1,25 @@
+@charset "UTF-8";
+.pagewrap{
+	width: 1200px;
+    height: auto;
+    margin-top:30px; 
+    margin-bottom: 30px;
+    justify-content: center;
+    display: inline;
+    align-content: center;
+}
+
+.bookwrap{
+	border:solid red 1px;
+	margin-bottom: 20px;
+	margin-top : 20px;
+}
+
+.tborder{
+	border: solid orange 1px;
+	font-family: fantasy;
+	font-size: 20px;
+	color:black;
+	text-align: center;
+}
+

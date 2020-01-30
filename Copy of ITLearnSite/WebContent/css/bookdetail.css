@@ -1,7 +1,12 @@
 .container{
 /*     border: solid purple 1px; */
-}
 
+}
+p{
+	font-family: sans-serif;
+	font-size: 20px;
+	color:black;
+}
 .wrap{
     width:1200px;
     min-height: 700px;

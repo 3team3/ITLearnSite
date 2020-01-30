@@ -138,7 +138,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 	}
 
 	@Override
-	public ArrayList<TextbookBean> selectBookList(TextbookBean tBean) {
+	public ArrayList<TextbookBean> selectBookList() {
 		ArrayList<TextbookBean> list = new ArrayList<TextbookBean>();
 		try {
 			con = getConnection();
@@ -164,9 +164,9 @@ public class TextbookDAOImpl implements TextbookDAO {
 				
 				TextbookBean textBean = new TextbookBean();
 				textBean.setProduct_no(rs.getInt(1));
-				textBean.setBook_title(rs.getString(2));
-				textBean.setBook_link(rs.getString(3));
-				textBean.setBook_image(rs.getString(4));
+				textBean.setBook_title(URLDecoder.decode(rs.getString(2),"utf-8"));
+				textBean.setBook_link(URLDecoder.decode(rs.getString(3),"utf-8"));
+				textBean.setBook_image(URLDecoder.decode(rs.getString(4),"utf-8"));
 				textBean.setBook_author(rs.getString(5));
 				textBean.setBook_price(rs.getInt(6));
 				textBean.setBook_discount(rs.getInt(7));

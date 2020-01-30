@@ -4,9 +4,8 @@
     height: auto;
     margin-top:30px; 
     margin-bottom: 30px;
-  	margin-left:25%;
     justify-content: center;
-    display: flex;
+    display: inline;
     align-content: center;
    
 }
@@ -46,7 +45,7 @@
 /* 	border:solid yellow; */
 }
 .buttons{ 
-	margin-top:50px;
+	margin-top:0px;
 /* 	border:solid cyan; */
 }
 button {

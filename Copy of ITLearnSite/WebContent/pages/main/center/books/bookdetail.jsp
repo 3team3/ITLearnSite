@@ -67,11 +67,11 @@
 									</div>
 
 									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
-										<span class="label label-1">ISBN : ${detail.book_isbn }</span> <span class="label-a"></span>
+										<p class="label label-1">ISBN : ${detail.book_isbn }</p> 
 									</div>
 
 									<div class="col-margin col-xs-12 col-sm-12 col-md-12 col-lg-12">
-										<span class="label label-1">재고 : </span> <span class="label-a">${detail.book_stock}</span>
+										<p class="label label-1">남은 수량 : ${detail.book_stock}</p> 
 									</div>
 
 								</div>

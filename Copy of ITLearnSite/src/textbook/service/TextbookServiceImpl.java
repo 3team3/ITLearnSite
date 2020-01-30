@@ -15,8 +15,8 @@ public class TextbookServiceImpl implements TextbookService {
 	}
 	
 	@Override
-	public ArrayList<TextbookBean> selectBookList(TextbookBean tBean) {
-		return tbDAO.selectBookList(tBean);
+	public ArrayList<TextbookBean> selectBookList() {
+		return tbDAO.selectBookList();
 	}
 	
 	
