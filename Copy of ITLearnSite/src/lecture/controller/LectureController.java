@@ -209,6 +209,19 @@ public class LectureController extends HttpServlet {
 				paging = "/pages/main/center/lecture/myLecture.jsp";
 				request.setAttribute("paging", paging);
 
+			} else if (path.equals("/lecturePlay.lec")) {
+
+				System.out.println("lecturePlay.lec");
+
+				String lec_title = request.getParameter("lec_title");
+				System.out.println(lec_title);
+				
+				
+				Map lec_DetailMap = lServ.lectureDetail(lec_title);
+
+				request.setAttribute("lec_DetailMap", lec_DetailMap);
+				nextPage = "/pages/main/center/lecture/lecturePlay.jsp";						
+
 			}
 
 			System.out.println("nextPAge :" + nextPage);

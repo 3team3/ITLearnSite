@@ -110,7 +110,7 @@
 
 											<tr align="center">
 												<td colspan="4"><p>
-														<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+														<b><span style="font-size: 9pt;">등록된 강의가 없습니다.</span></b>
 													</p></td>
 											</tr>
 										</c:when>

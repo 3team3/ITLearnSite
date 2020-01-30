@@ -16,17 +16,22 @@
 <link href="${path}/css/lectureDetail.css" rel="stylesheet">
 
 <script type="text/javascript">
-	function passChange() {
-		var width = 450;
-		var height = 490;
-		var winL = (screen.width - width) / 2;
-		var winT = (screen.height - height) / 2;
+	function play(title) {
+		var width = 0;
+		var height = 0;
+		/* 
+		var winL = (screen.width - 10) / 2;
+		var winT = (screen.height - 200) / 2;
+		"left=" + winL + "," + "top=" + winT + 
+		 */
+		 width = screen.width - 10;
+		 height = screen.width - 220;
 		var property = "width=" + width + "," + "height=" + height + ","
-				+ "left=" + winL + "," + "top=" + winT + " menubar=no, scrollbars=no, status=no, location=no, toolbar=no, menubar=no";
+				+  " menubar=no, scrollbars=no, status=no, location=no, toolbar=no, menubar=no";
+		
+		var url = "lecturePlay.lec?lec_title="+title;
 
-		email_Check = false;
-
-		window.open("passChange.jsp", "인증 페이지", property);
+		window.open( url, "강의보기", property);
 
 	}
 </script>
@@ -89,7 +94,7 @@
 												<tr align="center">
 													<td width="10%">${num.count }</td>
 													<td width="40%"><a href="javascript:void(0);"
-													onclick="deleteNo(${lecture.lec_no}, '${lecture.lec_title }');">${bean.set_lec_title }</a></td>
+													onclick="play('${bean.set_lec_title }');">${bean.set_lec_title }</a></td>
 													<td width="20%">${bean.between }일남았습니다.</td>
 													<td></td>
 												<tr>

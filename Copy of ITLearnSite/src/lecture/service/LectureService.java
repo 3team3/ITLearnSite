@@ -24,4 +24,8 @@ public interface LectureService {
 	
 	//나의 강의실
 	public List myLecture(String email);
+	
+	//play
+	public Map lectureDetail(String lec_title);
+	
 }

@@ -236,6 +236,90 @@ public class LectureDAOImpl implements LectureDAO {
 
 		return bean;
 	}
+	
+	/* 강의 정보 */
+	@Override
+	public LectureBean lectureDetail(String lec_title) {
+
+		LectureBean bean = new LectureBean();
+
+		try {
+			con = getConnection();
+
+			// 전체 글 수 조회
+			sql = "select * from lecture_table  where lec_title = ?";
+			/* System.out.println(sql); */
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, lec_title);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				bean.setLec_no(rs.getInt("lec_no"));
+				bean.setLec_title(rs.getString("lec_title"));
+				bean.setLec_price(rs.getInt("lec_price"));
+				bean.setLec_content(rs.getString("lec_content"));
+				bean.setLec_imgfile(rs.getString("lec_imgfile"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+
+		return bean;
+	}
+	
+	/* 강의 상세 리스트(파일 저장 테이블) */
+	@Override
+	public List lectureList(String lec_title) {
+
+		List<LectureBean> lectureList = new ArrayList<LectureBean>();
+
+		try {
+			con = getConnection();
+
+			// 전체 글 수 조회
+			sql = "select * from lecture_list where lec_title = ? order by list_no";
+			/* System.out.println(sql); */
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, lec_title);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				int list_no = rs.getInt("list_no");
+				int lec_no = rs.getInt("lec_no");
+				lec_title = rs.getString("lec_title");
+				String list_titleStr = rs.getString("list_title");
+				String list_savefile = rs.getString("list_savefile");
+				String list_originalfile = rs.getString("list_originalfile");
+				/*
+				 * System.out.println("dao : list" +list_no);
+				 * System.out.println("dao : list" +list_titleStr);
+				 * System.out.println("dao : list" +list_savefile);
+				 * System.out.println("dao : list" + list_originalfile);
+				 */
+
+				LectureBean bean = new LectureBean();
+
+				bean.setList_no(list_no);
+				bean.setLec_title(lec_title);
+				bean.setList_titleStr(list_titleStr);
+				bean.setList_savefile(list_savefile);
+				bean.setList_originalfile(list_originalfile);
+
+				lectureList.add(bean);
+
+			}
+			/*
+			 * System.out.println("dao : list" +lectureList);
+			 */
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return lectureList;
+	}
 
 	/* 강의 상세 리스트(파일 저장 테이블) */
 	@Override

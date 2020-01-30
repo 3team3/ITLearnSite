@@ -20,15 +20,19 @@ public interface LectureDAO{
 	
 	/* 강의 정보 */
 	public LectureBean lectureDetail(int lec_no);
+	public LectureBean lectureDetail(String lec_title);
 	
 	/* 강의 상세 리스트(파일 저장 테이블)*/
 	public List lectureList(int lec_no);
+	public List lectureList(String lec_title);
 	
 	/* 강의 삭제*/
 	public void deleteLecture(int lec_no);
 	
 	/* 나의 강의실 */
 	public List myLecture(String email);
+	
+	
 	
 	
 }
