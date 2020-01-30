@@ -201,7 +201,7 @@ public class LectureController extends HttpServlet {
 				String email = request.getParameter("email");
 
 				List myList = lServ.myLecture(email);
-				System.out.println(myList);
+				/*System.out.println(myList);*/
 				
 				request.setAttribute("myList", myList);
 
@@ -214,7 +214,7 @@ public class LectureController extends HttpServlet {
 				System.out.println("lecturePlay.lec");
 
 				String lec_title = request.getParameter("lec_title");
-				System.out.println(lec_title);
+				/*System.out.println(lec_title);*/
 				
 				
 				Map lec_DetailMap = lServ.lectureDetail(lec_title);

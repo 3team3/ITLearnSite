@@ -258,6 +258,7 @@ public class LectureDAOImpl implements LectureDAO {
 				bean.setLec_price(rs.getInt("lec_price"));
 				bean.setLec_content(rs.getString("lec_content"));
 				bean.setLec_imgfile(rs.getString("lec_imgfile"));
+				bean.setLec_spofile(rs.getString("lec_spofile"));
 			}
 
 		} catch (Exception e) {
@@ -302,6 +303,7 @@ public class LectureDAOImpl implements LectureDAO {
 				LectureBean bean = new LectureBean();
 
 				bean.setList_no(list_no);
+				bean.setLec_no(lec_no);
 				bean.setLec_title(lec_title);
 				bean.setList_titleStr(list_titleStr);
 				bean.setList_savefile(list_savefile);

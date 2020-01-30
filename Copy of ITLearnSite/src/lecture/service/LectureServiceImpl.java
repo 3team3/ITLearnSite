@@ -70,23 +70,26 @@ public class LectureServiceImpl implements LectureService {
 	// 나의 강의실
 	@Override
 	public List myLecture(String email) {
-		
+
 		List myList = lDao.myLecture(email);
-		
+
 		return myList;
 	}
-	
-	//play
+
+	// play
 	@Override
 	public Map lectureDetail(String lec_title) {
-		
+
 		Map lec_DetailMap = new HashMap();
-		
+
 		LectureBean lec_Detail = lDao.lectureDetail(lec_title);
 		List<LectureBean> lec_list = lDao.lectureList(lec_title);
-		
+
+		lec_DetailMap.put("lec_Detail", lec_Detail);
+		lec_DetailMap.put("lec_list", lec_list);
+
 		return lec_DetailMap;
-		
+
 	}
 
 }
