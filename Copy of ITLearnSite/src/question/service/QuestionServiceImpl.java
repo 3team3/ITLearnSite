@@ -44,25 +44,16 @@ public class QuestionServiceImpl implements QuestionService {
 		// 리스트 - 공지글
 				@Override
 				public Map listQuestion1(Map<String, Integer> pagingMap) {
-
 					Map questionsMap1 = new HashMap();
-
 					// 전달된 pagingMap 사용, 글 목록 조회
 					//List<QuestionBean> questionsList = qDao.selectAllQuestions(pagingMap);
 					List<QuestionBean> questionsList1 = qDao.selectNotice();
-
 					// 테이블에 존재하는 전체 글 수 조회
-					int totQuestions = qDao.selectTotQuestions();
-
+					//int totQuestions = qDao.selectTotQuestions();
 					// 조회된 글 목록을 ArrayList에 저장, 다시 HashMap에 저장
 					questionsMap1.put("questionsList1", questionsList1);
-					
-
 					// 조회된 전체 글 수를 HashMap에 저장
-					questionsMap1.put("totQuestions", totQuestions);
-
-					// articlesMap.put("totArticles", 170);
-
+					//questionsMap1.put("totQuestions", totQuestions);
 					return questionsMap1;
 				}
 		
@@ -72,28 +63,21 @@ public class QuestionServiceImpl implements QuestionService {
 		public Map listQuestion2(Map<String, Integer> pagingMap) {
 
 			Map questionsMap2 = new HashMap();
-
 			// 전달된 pagingMap 사용, 글 목록 조회
 			//List<QuestionBean> questionsList = qDao.selectAllQuestions(pagingMap);
 			List<QuestionBean> questionsList2 = qDao.selectQuestions(pagingMap);
-
 			// 테이블에 존재하는 전체 글 수 조회
 			int totQuestions = qDao.selectTotQuestions();
-
 			// 조회된 글 목록을 ArrayList에 저장, 다시 HashMap에 저장
 			questionsMap2.put("questionsList2", questionsList2);
-			
-
 			// 조회된 전체 글 수를 HashMap에 저장
 			questionsMap2.put("totQuestions", totQuestions);
-
 			// articlesMap.put("totArticles", 170);
-
 			return questionsMap2;
 		}
 		
 		
-		//조회수 증가
+		// 조회수 증가
 		@Override
 		public void updateReadcount(int ques_no) {
 			qDao.updateReadcount(ques_no);
@@ -115,7 +99,7 @@ public class QuestionServiceImpl implements QuestionService {
 		// 답글쓰기
 		@Override
 		public int addReply(QuestionBean qBean) {
-			return qDao.addReply(qBean);
+			return qDao.insertQuestion(qBean);
 		}
 		
 }

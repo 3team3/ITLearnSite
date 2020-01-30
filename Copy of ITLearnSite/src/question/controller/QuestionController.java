@@ -35,6 +35,7 @@ public class QuestionController extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 
 		String url = request.getRequestURI();
 		System.out.println(url);
@@ -66,8 +67,6 @@ public class QuestionController extends HttpServlet {
 				Map questionsMap1=qServ.listQuestion1(pagingMap);
 				Map questionsMap2=qServ.listQuestion2(pagingMap);
 				
-				questionsMap1.put("section", section);
-				questionsMap1.put("pageNum", pageNum);
 				questionsMap2.put("section", section);
 				questionsMap2.put("pageNum", pageNum);
 				
@@ -144,7 +143,7 @@ public class QuestionController extends HttpServlet {
 				
 			}
 			
-			//자료실게시판 - 글 검색
+			// 글 검색
 			else if(path.equals("/questionSelect.ques"))
 			{
 				System.out.println("questionSelect.ques");
@@ -158,7 +157,7 @@ public class QuestionController extends HttpServlet {
 				paging= "/pages/main/center/quesiton/questionSelect.jsp";
 				request.setAttribute("paging", paging);
 			}
-			//자료실게시판 - 글 삭제
+			// 글 삭제
 			else if(path.equals("/questionDelete.ques"))
 			{ 
 				System.out.println("questionDelete.ques");				
@@ -174,7 +173,9 @@ public class QuestionController extends HttpServlet {
 			//답글쓰기 페이지로
 			else if(path.equals("/questionReply.ques"))
 			{
+				String ques_parentemail = request.getParameter("ques_parentemail");
 				qBean = getQuestionBeanProperty(request, response);
+				qBean.setQues_parentemail(ques_parentemail);
 				request.setAttribute("qBean", qBean);
 				
 				System.out.println("questionReply.ques");
@@ -219,7 +220,6 @@ public class QuestionController extends HttpServlet {
 		String ques_title = null;
 		String ques_email = null;
 		String ques_content = null;
-		Date ques_writedate = null;
 		int ques_readcount = 0;
 		String isSecret = "n";
 		String isNotice = "n";
@@ -254,12 +254,6 @@ public class QuestionController extends HttpServlet {
 			ques_content = request.getParameter("ques_content");
 			qBean.setQues_content(ques_content);
 			System.out.println("ques_content =" + ques_content);
-		}
-		if(request.getParameter("ques_content") != null)
-		{
-			ques_content = request.getParameter("ques_content");
-			qBean.setQues_writedate(ques_writedate);
-			System.out.println("ques_writedate =" + ques_writedate);
 		}
 		if(request.getParameter("ques_readcount") != null)
 		{

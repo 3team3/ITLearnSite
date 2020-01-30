@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td colspan="3"><textarea id="summernote" name="ques_content"></textarea></td>
+					<td colspan="3"><textarea class="form-control" id="ques_content" name="ques_content" placeholder="내용을 입력하세요." rows="10" cols="120"></textarea></td>
 				</tr>
 				<tr>
 					<td>비밀글</td>
@@ -82,9 +82,9 @@
   </div>
   </div>
   
-  <script src="${path }/js/makejs/summerNote.js">
+ <%--  <script src="${path }/js/makejs/summerNote.js">
   
-  </script>
+  </script> --%>
   
 </body>
 </html>

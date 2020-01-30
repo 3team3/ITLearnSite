@@ -13,9 +13,9 @@
 <title>Insert title here</title>
 <c:set var="questionsList1" value="${questionsMap1.questionsList1}" />
 <c:set var="questionsList2" value="${questionsMap2.questionsList2}" />
-<c:set var="totQuestions" value="${questionsMap1.totQuestions}" />
-<c:set var="section" value="${questionsMap1.section}" />
-<c:set var="pageNum" value="${questionsMap1.pageNum}" />
+<c:set var="totQuestions" value="${questionsMap2.totQuestions}" />
+<c:set var="section" value="${questionsMap2.section}" />
+<c:set var="pageNum" value="${questionsMap2.pageNum}" />
 <c:set var="email" value="${email}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -83,7 +83,6 @@
 											<td width="7%"><fmt:formatDate value="${question.ques_writedate}" /></td>
 											<td width="7%">${question.ques_readcount }</td>
 										</tr>
-										
 								</c:forEach>
 							</c:if>
 							
@@ -126,10 +125,12 @@
 														<%--공백 다음 자식들 표시  --%>
 														<span style="font-size: 12px;">[답변]</span>
 <%-- 														<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
- --%>													<!--추가부분 -->
+ --%>													
+ 
+ 													<!--추가부분 -->
 													<c:if test="${question.isSecret == 'y' }">
 														<c:choose>
-															<c:when test="${email == 'admin@admin.com' or email == question.ques_email}">
+															<c:when test="${email == 'admin@admin.com' or email == question.ques_parentemail}">
 															<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
 															</c:when>
 															<c:otherwise>
@@ -141,6 +142,9 @@
 															<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
 													</c:if>
 													<!--추가부분 -->
+													
+													
+													
 													</c:when>
 													<%-- level값이 1보다 크지 않으면 부모글이므로 공백 없이 표시 --%>
 													<c:otherwise>

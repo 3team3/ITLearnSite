@@ -11,7 +11,15 @@ public class QuestionBean {
 	private Date ques_writedate;
 	private int  ques_readcount;
 	private int ques_ref;
+	private String ques_parentemail;   
+		
 	
+	public String getQues_parentemail() {
+		return ques_parentemail;
+	}
+	public void setQues_parentemail(String ques_parentemail) {
+		this.ques_parentemail = ques_parentemail;
+	}
 	
 	public int getQues_ref() {
 		return ques_ref;

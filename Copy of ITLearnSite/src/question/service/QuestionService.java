@@ -33,5 +33,4 @@ public interface QuestionService {
 	/*답글 쓰기*/
 	public int addReply(QuestionBean qBean);
 
-	
 }
