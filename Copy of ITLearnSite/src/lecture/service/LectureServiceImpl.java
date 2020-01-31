@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lecture.db.CommentsBean;
 import lecture.db.LectureBean;
 import lecture.db.LectureDAOImpl;
 import lecture.db.PaylecBean;
@@ -92,4 +93,25 @@ public class LectureServiceImpl implements LectureService {
 
 	}
 
+	// 코멘트를 db에 insert해줄 메서드 구현하기
+	@Override
+	public int insertComments(CommentsBean cBean) {
+		System.out.println("ser insertComments");
+		System.err.println("ser list:" + cBean.getList_no());
+		System.out.println("ser lec:" + cBean.getLec_no());
+		int check = lDao.insertComments(cBean);
+
+		return check;
+	}
+
+	@Override
+	public ArrayList<CommentsBean> selectCommentsList(CommentsBean cBean) {
+
+		return lDao.selectCommentsList(cBean);
+	}
+
+	@Override
+	public int commentsDelete(int co_no, String email) {
+		return lDao.commentsDelete(co_no, email);
+	}
 }

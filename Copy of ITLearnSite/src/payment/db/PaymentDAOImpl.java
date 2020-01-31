@@ -356,7 +356,7 @@ public class PaymentDAOImpl implements PaymentDAO {
             	}         	      	         	
             }  
             
-            sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,add_months(sysdate, 1))";
+            sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
             pstmt = con.prepareStatement(sql);
 	        pstmt.setInt(1,plBean.getSet_no());
 	        pstmt.setString(2,plBean.getSet_email() );

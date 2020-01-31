@@ -7,6 +7,7 @@ public class LectureBean {
 	private int lec_no, level;
 	private int lec_parentno;
 	private String lec_title;
+	private String lec_teacher;
 	private int lec_price;
 	private String lec_content;
 	private String lec_imgfile;
@@ -19,6 +20,15 @@ public class LectureBean {
 
 	
 	
+
+	public String getLec_teacher() {
+		return lec_teacher;
+	}
+
+	public void setLec_teacher(String lec_teacher) {
+		this.lec_teacher = lec_teacher;
+	}
+
 	public String getList_titleStr() {
 		return list_titleStr;
 	}

@@ -1,11 +1,9 @@
 package lecture.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -15,16 +13,19 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import lecture.db.CommentsBean;
 import lecture.db.LectureBean;
 import lecture.db.LectureDAOImpl;
 import lecture.service.LectureServiceImpl;
@@ -34,12 +35,14 @@ public class LectureController extends HttpServlet {
 	LectureDAOImpl lDao = null;
 	LectureBean lBean = null;
 	LectureServiceImpl lServ = null;
+	CommentsBean cBean = null;
 
 	@Override
 	public void init(ServletConfig sc) throws ServletException {
 		lDao = new LectureDAOImpl();
 		lBean = new LectureBean();
 		lServ = new LectureServiceImpl();
+		cBean = new CommentsBean();
 
 		System.out.println("LectureService() 객체 생성");
 		System.out.println("LectureBean() 객체 생성");
@@ -156,6 +159,7 @@ public class LectureController extends HttpServlet {
 				lBean.setSaveFiles(saveFiles);
 				lBean.setLec_title(multi.getParameter("lec_title"));
 				lBean.setLec_price(Integer.parseInt(multi.getParameter("lec_price")));
+				lBean.setLec_teacher(multi.getParameter("lec_teacher"));
 				lBean.setLec_content(multi.getParameter("lec_content"));
 
 				lServ.lectureRegister(lBean);
@@ -201,8 +205,8 @@ public class LectureController extends HttpServlet {
 				String email = request.getParameter("email");
 
 				List myList = lServ.myLecture(email);
-				/*System.out.println(myList);*/
-				
+				/* System.out.println(myList); */
+
 				request.setAttribute("myList", myList);
 
 				nextPage = "/main.jsp";
@@ -214,19 +218,92 @@ public class LectureController extends HttpServlet {
 				System.out.println("lecturePlay.lec");
 
 				String lec_title = request.getParameter("lec_title");
-				/*System.out.println(lec_title);*/
-				
-				
+				/* System.out.println(lec_title); */
+
 				Map lec_DetailMap = lServ.lectureDetail(lec_title);
 
 				request.setAttribute("lec_DetailMap", lec_DetailMap);
-				nextPage = "/pages/main/center/lecture/lecturePlay.jsp";						
+				nextPage = "/pages/main/center/lecture/lecturePlay.jsp";
 
+			}
+			// 댓글 쓰기를 눌렀을 때
+			else if (path.equals("/commentsWrite.lec")) {
+				int check = 0;
+				// print
+				System.out.println("/commentsWrite.lec");
+				// 현재글에 대한 정보를 얻어오기
+				cBean = getCommentsBeanProperty(request, response);
+				
+				/*
+				// 댓글을 insert 시킬 서비스 호출
+				System.out.println(cBean.getCo_email());
+				System.out.println(cBean.getCo_no());
+				System.out.println(cBean.getList_no());
+				System.out.println(cBean.getLec_no());
+				System.out.println(cBean.getCo_content());
+*/
+				check = lServ.insertComments(cBean);
+
+				if (check == 1) {
+					PrintWriter out = response.getWriter();
+					out.print(1);
+				}
+			} else if (path.equals("/commentsList.lec")) {
+				System.out.println("/commentsList.lec");
+				// request.getParameter
+				cBean = getCommentsBeanProperty(request, response);
+
+				ArrayList<CommentsBean> list = lServ.selectCommentsList(cBean);
+
+				JSONObject jsondata = new JSONObject();
+				JSONArray arr = new JSONArray();
+				String jsonString = null;
+				Date date = null;
+
+				for (int i = 0; i < list.size(); i++) {
+					System.out.println("-------------------------");
+					System.out.println("list.get(i)" + i);
+					System.out.println(list.get(i).getCo_email());
+					System.out.println(list.get(i).getCo_no());
+					System.out.println(list.get(i).getCo_content());
+					System.out.println(list.get(i).getCo_date());
+
+					jsondata = new JSONObject();
+					jsondata.put("co_email", list.get(i).getCo_email());
+					jsondata.put("co_no", list.get(i).getCo_no());
+					jsondata.put("co_content", list.get(i).getCo_content());
+
+					date = list.get(i).getCo_date();
+					jsondata.put("co_date", date.toString());
+
+					arr.add(jsondata);
+				}
+				JSONObject commentlist = new JSONObject();
+				commentlist.put("list", arr);
+
+				jsonString = commentlist.toJSONString();
+				System.out.println(jsonString);
+
+				PrintWriter out = response.getWriter();
+				out.print(jsonString);
+			} else if (path.equals("/commentsDelete.lec")) {
+				cBean = getCommentsBeanProperty(request, response);
+				HttpSession session = request.getSession();
+				String email = (String) session.getAttribute("email");
+				int check = lServ.commentsDelete(cBean.getCo_no(), email);
+				PrintWriter out = response.getWriter();
+				if (check == 1) {
+					// 지우기 성공
+					out.print(1);
+				} else {
+					// 지우기 실패 다른사람 글 지우려고 함
+
+					out.print(0);
+				}
 			}
 
 			System.out.println("nextPAge :" + nextPage);
-			
-			
+
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
@@ -236,6 +313,44 @@ public class LectureController extends HttpServlet {
 		Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private CommentsBean getCommentsBeanProperty(HttpServletRequest request, HttpServletResponse response) {
+		int co_no = 0;// 댓글 번호
+		int list_no = 0;
+		int lec_no = 0;
+		String co_email = null;// 댓글 다는 사람
+		String co_content = null;// 댓글 내용
+
+		cBean = new CommentsBean();
+
+		if (request.getParameter("co_no") != null) {
+			co_no = Integer.parseInt(request.getParameter("co_no"));
+			cBean.setCo_no(co_no);
+			System.out.println("co_no =" + co_no);
+		}
+		if (request.getParameter("list_no") != null) {
+			list_no = Integer.parseInt(request.getParameter("list_no"));
+			cBean.setList_no(list_no);
+			System.out.println("list_no =" + list_no);
+		}
+		if (request.getParameter("lec_no") != null) {
+			lec_no = Integer.parseInt(request.getParameter("lec_no"));
+			cBean.setLec_no(lec_no);
+			System.out.println("lec_no =" + lec_no);
+		}
+		if (request.getParameter("co_email") != null) {
+			co_email = request.getParameter("co_email");
+			cBean.setCo_email(co_email);
+			System.out.println("co_email =" + co_email);
+		}
+
+		if (request.getParameter("content") != null) {
+			co_content = request.getParameter("content");
+			cBean.setCo_content(co_content);
+			System.out.println("content =" + co_content);
+		}
+		return cBean;
 	}
 
 }

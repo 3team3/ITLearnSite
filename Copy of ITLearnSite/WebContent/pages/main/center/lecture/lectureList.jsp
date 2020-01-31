@@ -88,10 +88,10 @@
 										</div>
 									</figure>
 									<div class="course-1-content pb-4">
-										<h2>How To Create Mobile Apps Using Ionic</h2>
-										<div class="rating text-center mb-3">
+										<h2>강사 :  ${lecture.lec_teacher }</h2>
+										<!-- <div class="rating text-center mb-3">
 											<span class="icon-star2 text-warning"></span>
-										</div>
+										</div> -->
 										<p class="desc mb-4"></p>
 										<p>
 

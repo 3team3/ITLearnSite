@@ -7,6 +7,7 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="email" value="${sessionScope.email}"/>
 
 <!DOCTYPE html>
 <html>
@@ -30,6 +31,7 @@
 				+  " menubar=no, scrollbars=no, status=no, location=no, toolbar=no, menubar=no";
 		
 		var url = "lecturePlay.lec?lec_title="+title;
+		/* var url = "resourceWrite.bo"; */
 
 		window.open( url, "강의보기", property);
 
