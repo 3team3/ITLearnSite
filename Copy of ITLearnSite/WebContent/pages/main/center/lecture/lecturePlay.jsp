@@ -9,7 +9,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="lecBean" value="${lec_DetailMap.lec_Detail }" />
 <c:set var="lec_list" value="${lec_DetailMap.lec_list }" />
-<c:set var="email" value="${sessionScope.email}"/>
+<c:set var="email" value="${sessionScope.email}" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,15 +18,74 @@
 <style>
 html, body {
 	height: 100%;
-	padding: 0;
+	padding : 0;
 	margin: 0;
+	padding: 0;
+	word-break: break-all;
 }
 
+ .wrap {
+	width: 910px;
+	height: 725px;
+} 
+
 .div {
-	width: 49.7%;
-	height: 49.7%;
+	background-color: #eee;
+	color: #5aa;
 	float: left;
-	border: 1px solid red;
+	border: 1px solid #5aa; 
+	color: #5aa;
+}
+
+/* .tb {
+	width: 100%;
+} */
+#d1 {
+	width: 70%;
+	height: 70%; 
+}
+
+#d2 {
+	width: 29.5%;
+	height: 70%;
+	overflow-y: scroll;
+}
+
+#d3 {
+	width: 70%;
+	height: 29.5%;
+	overflow-y: scroll;
+}
+
+#d4 {
+	width: 29.5%;
+	height: 29.5%;
+	overflow-y: scroll;
+}
+.tb th {
+	background-color: #5aa;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.tb tr {
+	background-color: #eee;
+	color: #5aa;
+}
+
+.tb tr:HOVER {
+	background-color: #24a;
+	color: #6af;
+	cursor: pointer;
+}
+
+.list{
+	width:100px;
+}
+
+a {
+	text-decoration: none;
 }
 </style>
 <%--${path }/pages/main/center/lecture/temp/${listBean.list_savefile} --%>
@@ -95,22 +154,22 @@ html, body {
 					</tbody>
 				</table>
 				 */
-				 string = "<table class='table'><tbody id='cmt'>"
+				 string = "<button onclick='cmtlist();'" +">새로고침</button><table class='table'><tbody id='cmt'>"
 				for (var i = 0; i < getData.list.length; i++) {
 					addr = "commentsDelete.lec?co_no="+getData.list[i].co_no;
 					var comments = 
 						"<tr>"
-						+ 	"<td width='10%'>"+getData.list[i].co_email+"</td>"
-						+		"<td width='60%'>"+getData.list[i].co_content+"</td>"
-						+ 		"<td width='10%'>"+getData.list[i].co_date+"</td>"
-						+		"<td width='17%'>" 
+						+ 	"<td width='20%'>"+getData.list[i].co_email+"</td>"
+						+		"<td width='50%'>"+getData.list[i].co_content+"</td>"
+						+ 		"<td width='20%'>"+getData.list[i].co_date+"</td>"
+						+		"<td width='10%'>" 
 						+			"<button onclick='deleteComment("+'"'+addr+'"'+");'" +">삭제</button>" 
 						+		"</td>"
 						+ 	"</tr>";
 					
 					string = string + comments;
 				}
-				string += "</tbody></table><button onclick='cmtlist();'" +">새로고침</button>"
+				string += "</tbody></table>"
 				$("#comments").html(string);
 			},
 			error : function(request,status,error){
@@ -156,21 +215,19 @@ html, body {
 </script>
 </head>
 <body>
-	<div id="d1" class="div">
-		<iframe frameborder="0" id="lecture" name="lecture"
-			<%-- src="${path }/pages/main/center/lecture/temp/${lecBean.lec_spofile }" --%>
+<!-- <body onresize="parent.resizeTo(1000,800)" onload="parent.resizeTo(1000,800)"> -->
+	<div class="wrap">
+		<div id="d1" class="div">
+			<iframe frameborder="0" id="lecture" name="lecture"
+				<%-- src="${path }/pages/main/center/lecture/temp/${lecBean.lec_spofile }" --%>
 			style="width: 100%; height: 100%; background-color: black;"></iframe>
-	</div>
-	<div id="d2" class="div">
-		<table class="table-striped">
-			<thead>
+		</div>
+		<div id="d2" class="div">
+			<table class="tb">
 				<tr class="tb_head">
-					<td>번호</td>
-					<td>목차</td>
-
+					<th>번호</th>
+					<th style="width:200px;">목차</th>
 				</tr>
-			</thead>
-			<tbody>
 				<c:choose>
 					<c:when test="${lec_list == null}">
 
@@ -187,43 +244,41 @@ html, body {
 								<%--${path }/pages/main/center/lecture/temp/${listBean.list_savefile} --%>
 								<td width="70%"><a href="javascript:void(0);"
 									onclick="play(${listBean.list_no }, ${listBean.lec_no }, '${listBean.list_savefile }');">${listBean.list_titleStr }</a></td>
-							<tr>
+							</tr>
 						</c:forEach>
 					</c:when>
 				</c:choose>
-				<tr class="tb_head" align="center">
-					<td colspan="4">&nbsp;&nbsp;&nbsp;</td>
+				<tr align="center">
+					<td colspan="2">&nbsp;&nbsp;&nbsp;</td>
 				</tr>
-			</tbody>
-		</table>
+				</tbody>
+			</table>
 
-	</div>
-	<div id="d3" class="div">
-		강의명 : ${lecBean.lec_title }</br> 강의 내용 : ${lecBean.lec_content }
-	</div>
-	<div id="d4" class="div">
-
-		<div>
+		</div>
+		<div id="d3" class="div">
 			<span>
 				<h5>댓글</h5>
 			</span>
-			<div class='row' id="comments">
-				
-			</div>
-		</div>
-		<hr>
-		<form>
+			<hr>
+
 			<!-- co_no ? autoincrements? 로직 생각해보기-->
 			<!-- 현재 글에 comments table을 조회해서 코멘트 순서 번호를 가져와야함 select  -->
-			<input type="hidden" id="list_no" name="list_no" value=""/> <input
-				type="hidden" id="lec_no" name="lec_no" value=""/> <input
-				type="hidden" id="co_email" name="co_email" value="${email}"/>
-			<textarea id="content" name="content" placeholder="바르고 고운말"
-				cols="130" rows="3" style="resize: none"></textarea>
+			<input type="hidden" id="list_no" name="list_no" value="" /> <input
+				type="hidden" id="lec_no" name="lec_no" value="" /> <input
+				type="hidden" id="co_email" name="co_email" value="${email}" />
+			<textarea id="content" name="content" placeholder="바르고 고운말" cols="80"
+				rows="3" style="resize: none"></textarea>
 			<input type="button" id="commentWrite" name="commentWrite"
 				value="댓글 작성" onclick="comments();">
-		</form>
-
+			<hr>
+			<div>
+				<div class='row' id="comments"></div>
+			</div>			
+		</div>
+		<div id="d4" class="div">
+			강의명 : ${lecBean.lec_title }</br>강사 명 : ${lecBean.lec_teacher}<br> 강의
+			내용 : <br> ${lecBean.lec_content }
+		</div>
 	</div>
 </body>
 </html>

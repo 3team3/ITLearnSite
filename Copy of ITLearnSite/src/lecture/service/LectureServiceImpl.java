@@ -96,9 +96,9 @@ public class LectureServiceImpl implements LectureService {
 	// 코멘트를 db에 insert해줄 메서드 구현하기
 	@Override
 	public int insertComments(CommentsBean cBean) {
-		System.out.println("ser insertComments");
+		/*System.out.println("ser insertComments");
 		System.err.println("ser list:" + cBean.getList_no());
-		System.out.println("ser lec:" + cBean.getLec_no());
+		System.out.println("ser lec:" + cBean.getLec_no());*/
 		int check = lDao.insertComments(cBean);
 
 		return check;

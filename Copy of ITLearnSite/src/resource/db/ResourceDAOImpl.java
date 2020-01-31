@@ -286,8 +286,15 @@ public class ResourceDAOImpl implements ResourceDAO {
     	 System.out.println("dao opt : " +opt);
     	 System.out.println("dao condition : " +condition);
     	 try{
-             con = getConnection();  
+             con = getConnection();
              
+             sql="select * from resource_table where " + opt + " LIKE '%' || ? || '%'";
+        	 pstmt = con.prepareStatement(sql);
+        	 pstmt.setString(1, condition);            	 
+        	 rs=pstmt.executeQuery();
+             
+             
+             /*
              //0: 제목 //1:내용// 2:글쓴이
              if(opt.equals("0")){
             	 sql="select * from resource_table where res_title LIKE '%' || ? || '%'";
@@ -308,7 +315,7 @@ public class ResourceDAOImpl implements ResourceDAO {
             	 pstmt.setString(1, condition); 
             	 rs=pstmt.executeQuery(); 
              }
-             
+             */
              while(rs.next())
              {ResourceBean rBean= new ResourceBean();
              rBean.setRes_no(rs.getInt("res_no"));

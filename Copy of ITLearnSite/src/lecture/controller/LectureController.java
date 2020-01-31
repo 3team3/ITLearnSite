@@ -152,8 +152,7 @@ public class LectureController extends HttpServlet {
 				Collections.sort(saveFiles);
 				Collections.sort(originFiles);
 
-				System.out.println();
-
+				
 				lBean.setList_title(list_title);
 				lBean.setOriginFiles(originFiles);
 				lBean.setSaveFiles(saveFiles);
@@ -261,12 +260,12 @@ public class LectureController extends HttpServlet {
 				Date date = null;
 
 				for (int i = 0; i < list.size(); i++) {
-					System.out.println("-------------------------");
+					/*System.out.println("-------------------------");
 					System.out.println("list.get(i)" + i);
 					System.out.println(list.get(i).getCo_email());
 					System.out.println(list.get(i).getCo_no());
 					System.out.println(list.get(i).getCo_content());
-					System.out.println(list.get(i).getCo_date());
+					System.out.println(list.get(i).getCo_date());*/
 
 					jsondata = new JSONObject();
 					jsondata.put("co_email", list.get(i).getCo_email());
@@ -282,7 +281,7 @@ public class LectureController extends HttpServlet {
 				commentlist.put("list", arr);
 
 				jsonString = commentlist.toJSONString();
-				System.out.println(jsonString);
+				/* System.out.println(jsonString); */
 
 				PrintWriter out = response.getWriter();
 				out.print(jsonString);
@@ -327,28 +326,28 @@ public class LectureController extends HttpServlet {
 		if (request.getParameter("co_no") != null) {
 			co_no = Integer.parseInt(request.getParameter("co_no"));
 			cBean.setCo_no(co_no);
-			System.out.println("co_no =" + co_no);
+			/*System.out.println("co_no =" + co_no);*/
 		}
 		if (request.getParameter("list_no") != null) {
 			list_no = Integer.parseInt(request.getParameter("list_no"));
 			cBean.setList_no(list_no);
-			System.out.println("list_no =" + list_no);
+			/*System.out.println("list_no =" + list_no);*/
 		}
 		if (request.getParameter("lec_no") != null) {
 			lec_no = Integer.parseInt(request.getParameter("lec_no"));
 			cBean.setLec_no(lec_no);
-			System.out.println("lec_no =" + lec_no);
+			/*System.out.println("lec_no =" + lec_no);*/
 		}
 		if (request.getParameter("co_email") != null) {
 			co_email = request.getParameter("co_email");
 			cBean.setCo_email(co_email);
-			System.out.println("co_email =" + co_email);
+			/*System.out.println("co_email =" + co_email);*/
 		}
 
 		if (request.getParameter("content") != null) {
 			co_content = request.getParameter("content");
 			cBean.setCo_content(co_content);
-			System.out.println("content =" + co_content);
+			/*System.out.println("content =" + co_content);*/
 		}
 		return cBean;
 	}
