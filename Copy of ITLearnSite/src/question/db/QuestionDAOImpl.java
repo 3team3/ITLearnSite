@@ -16,34 +16,34 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import question.db.QuestionBean;
-
-public class QuestionDAOImpl implements QuestionDAO {
-	Connection con = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    DataSource ds = null;
-    String sql = "";
-    Statement stmt = null;
-    
-    private Connection getConnection() throws Exception {
-  	  Context ctx = new InitialContext();
-      Context envContext =(Context)ctx.lookup("java:/comp/env");
-      ds = (DataSource)envContext.lookup("jdbc/oracle");
-      return ds.getConnection();
-    }
-    
-    private void closeConnection(){
-        try {
-            if(rs != null) rs.close();
-            if(pstmt != null) pstmt.close();
-            if(con != null) con.close();
-            if(stmt != null) stmt.close();
-          
-        } catch (SQLException e) {
-            System.out.println("closeConnection()메소드에서 오류  : " +e);
-        }
-    }
-    
+	
+	public class QuestionDAOImpl implements QuestionDAO {
+		Connection con = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    DataSource ds = null;
+	    String sql = "";
+	    Statement stmt = null;
+	    
+	    private Connection getConnection() throws Exception {
+	  	  Context ctx = new InitialContext();
+	      Context envContext =(Context)ctx.lookup("java:/comp/env");
+	      ds = (DataSource)envContext.lookup("jdbc/oracle");
+	      return ds.getConnection();
+	    }
+	    
+	    private void closeConnection(){
+	        try {
+	            if(rs != null) rs.close();
+	            if(pstmt != null) pstmt.close();
+	            if(con != null) con.close();
+	            if(stmt != null) stmt.close();
+	          
+	        } catch (SQLException e) {
+	            System.out.println("closeConnection()메소드에서 오류  : " +e);
+	        }
+	    }
+	    
 
 
 	//새 글번호 검색
@@ -89,7 +89,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 				ques_parentemail = ques_email;
 			}
 			
-			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, ques_no);
 			pstmt.setInt(2, ques_parentno);
@@ -111,8 +110,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 		return ques_no;
 	}
 	
-	
-	// 글수정
+	//글수정
 	public void updateQuestion(QuestionBean qBean){
 		
 		int ques_no = qBean.getQues_no();
@@ -140,10 +138,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 	}
 	
-	
-	
-	
-	// 글 내용 보기
+	//글 내용 보기
 	@Override
 	public QuestionBean questionView(int ques_no) {
 		QuestionBean qBean = new QuestionBean();
@@ -171,7 +166,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 		return qBean;
 	}
 
-	// 글 삭제
+	//글 삭제
 	public void questionDelete(int ques_no) {
 		try {
 			// 커넥션풀로부터 커넥션 얻기
@@ -185,10 +180,9 @@ public class QuestionDAOImpl implements QuestionDAO {
 		} finally {
 			closeConnection();
 		}
-
 	}
 	
-	// 공지글 가져오기
+	//공지글 가져오기
 		@Override
 		public List selectNotice() {
 			List questionsList1 = new ArrayList();
@@ -219,6 +213,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 					bean.setQues_readcount(ques_readcount);
 					bean.setIsNotice(isNotice);
 					bean.setIsSecret(isSecret);
+					
 					questionsList1.add(bean);
 				}
 				
@@ -232,7 +227,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 			return questionsList1;
 		}
 		
-		// 일반글 가져오기
+	//일반글 가져오기
 		@Override
 		public List selectQuestions(Map pagingMap) {
 			List questionsList2 = new ArrayList();
@@ -242,7 +237,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 			int pageNum = (Integer) pagingMap.get("pageNum");
 
 			try {
-
 				con = getConnection();
 				String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
 						+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
@@ -291,22 +285,18 @@ public class QuestionDAOImpl implements QuestionDAO {
 					bean.setIsSecret(isSecret);
 					bean.setQues_ref(ques_ref);
 					bean.setQues_parentemail(ques_parentemail);
+					
 					questionsList2.add(bean);
 				}
-				
 				System.out.println("QuestionsList : " + questionsList2);
-
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				closeConnection();
 			}
-
 			return questionsList2;
-
 		}
-		
-	
 	
 	//전체 글 개수
 	@Override
@@ -329,8 +319,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 		return 0;	
 	}
-	
-	
 	
 	//조회수 증가
 	@Override
@@ -355,7 +343,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 		
 	}
-
 	
 	//자료실 검색
     @Override

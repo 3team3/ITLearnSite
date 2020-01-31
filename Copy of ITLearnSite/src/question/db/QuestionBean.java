@@ -20,7 +20,6 @@ public class QuestionBean {
 	public void setQues_parentemail(String ques_parentemail) {
 		this.ques_parentemail = ques_parentemail;
 	}
-	
 	public int getQues_ref() {
 		return ques_ref;
 	}

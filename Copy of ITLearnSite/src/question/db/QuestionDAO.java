@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import resource.db.ResourceBean;
-
 public interface QuestionDAO{
 	
 	/*글 등록*/
@@ -18,9 +16,11 @@ public interface QuestionDAO{
 	/*글 삭제*/
 	public void questionDelete(int ques_no);
 	
-	/*글 목록- 공지글,일반글 */
-	public List selectQuestions(Map pagingMap);
+	/*글 목록- 공지글 */
 	public List selectNotice();
+	
+	/*글 목록- 일반글 */
+	public List selectQuestions(Map pagingMap);
 	
 	/*전체 글 개수*/
 	public int selectTotQuestions();

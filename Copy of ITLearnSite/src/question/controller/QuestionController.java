@@ -64,9 +64,9 @@ public class QuestionController extends HttpServlet {
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
 				
-				Map questionsMap1=qServ.listQuestion1(pagingMap);
-				Map questionsMap2=qServ.listQuestion2(pagingMap);
+				Map questionsMap1=qServ.listQuestion1();
 				
+				Map questionsMap2=qServ.listQuestion2(pagingMap);
 				questionsMap2.put("section", section);
 				questionsMap2.put("pageNum", pageNum);
 				
@@ -89,18 +89,16 @@ public class QuestionController extends HttpServlet {
 				request.setAttribute("qBean", qBean);	
 				request.setAttribute("ques_no", ques_no);
 				
-				
 				nextPage = "/main.jsp";
 				paging= "/pages/main/center/question/questionView.jsp?ques_no="+ques_no;
 				request.setAttribute("paging", paging);	
 			}
-			//글쓰기 페이지로
+			//글쓰기 페이지
 			else if(path.equals("/questionWrite.ques"))
 			{
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/question/questionWrite.jsp";
 				request.setAttribute("paging", paging);
-				
 			}
 			//글쓰기
 			else if(path.equals("/addQuestion.ques"))
@@ -115,7 +113,6 @@ public class QuestionController extends HttpServlet {
 				"questionList.ques';" + "</script>");
 				return;
 			}	
-			
 			//글  수정 페이지
 			else if(path.equals("/questionModify.ques"))
 			{
@@ -127,7 +124,6 @@ public class QuestionController extends HttpServlet {
 				nextPage = "/main.jsp";
 				paging= "/pages/main/center/question/questionModify.jsp?ques_no="+ques_no;
 				request.setAttribute("paging", paging);	
-				
 			}
 			//글 수정
 			else if(path.equals("/updateQuestion.ques")){
@@ -140,10 +136,8 @@ public class QuestionController extends HttpServlet {
 				pw.print("<script>" + "  alert('수정되었습니다.');" + " location.href='" 
 				+"questionView.ques?ques_no="+ques_no+"';" + "</script>");
 				return;
-				
 			}
-			
-			// 글 검색
+			//글 검색
 			else if(path.equals("/questionSelect.ques"))
 			{
 				System.out.println("questionSelect.ques");
@@ -157,7 +151,7 @@ public class QuestionController extends HttpServlet {
 				paging= "/pages/main/center/quesiton/questionSelect.jsp";
 				request.setAttribute("paging", paging);
 			}
-			// 글 삭제
+			//글 삭제
 			else if(path.equals("/questionDelete.ques"))
 			{ 
 				System.out.println("questionDelete.ques");				
@@ -168,7 +162,6 @@ public class QuestionController extends HttpServlet {
 				pw.print("<script>" + " alert('글을 삭제했습니다.');" 
 				         + " location.href='questionList.ques'" + "</script>");
 				return;
-				
 			}
 			//답글쓰기 페이지로
 			else if(path.equals("/questionReply.ques"))
@@ -182,7 +175,6 @@ public class QuestionController extends HttpServlet {
 				nextPage = "/main.jsp";
 				paging= "/pages/main/center/question/questionReply.jsp";
 				request.setAttribute("paging", paging);
-				
 			}
 			//답글쓰기
 			else if(path.equals("/addReply.ques"))
@@ -200,13 +192,13 @@ public class QuestionController extends HttpServlet {
 				"questionList.ques';" + "</script>");
 				return;
 			}	
-		
-			
+
 			System.out.println("nextPAge" + nextPage);
 			if (nextPage != null) {
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

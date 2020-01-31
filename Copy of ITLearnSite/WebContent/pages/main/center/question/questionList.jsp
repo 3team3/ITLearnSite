@@ -67,14 +67,15 @@
 								<td>제목</td>
 								<td>글쓴이</td>
 								<td>작성일</td>
-								<td>조회수</td>
+								<td width="10%">조회수</td>
 							</tr>
 						</thead>
+						
+						<tbody>
+							<%-- 공지사항이 있으면 공지사항 표시 --%>
 							<c:if test="${questionsList1 != null }">
-								<tbody>
 								<c:forEach var="question" items="${questionsList1 }" varStatus="questionNum">
 										<tr align="center">
-											<%-- varStatus의 count 속성을 이용 글번호를 1부터 자동으로 표시 --%>
 											<td width="5%">공지</td>
 											<td align="left" width="30%">
 												<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
@@ -85,69 +86,55 @@
 										</tr>
 								</c:forEach>
 							</c:if>
-							
-							<%--
-				BoaqrdController.java 서블릿으로부터 전달 받은 request 영역에 저장되어 
-				articlesList 속성으로 바인딩된 ArrayList 객체가 저장되어 있지 않다면				
-			 --%>
+							<%-- 일반글이 없으면 --%>
 							<c:if test="${questionsList2 == null }">
 								<tr align="center">
-									<td colspan="5"><p>
-											<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
-										</p></td>
+									<td colspan="5">
+										<p><b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b></p>
+									</td>
 								</tr>
 							</c:if>
-							
-							
+							<%-- 일반글이 있으면 --%>
 							<c:if test="${questionsList2 != null }">
-								<%--
-					BoardController.java 서블릿으로부터 전달받은 request 영역에
-					articlesList 속성으로 바인된 ArrrayList 객체의 크기(검색한 글의 개수)만큼 반복, 
-					검색한 글정보(ArticleVO)들을 ArrayList 객체 내부의 인덱스 위치로부터 글목록 표시 
-				 --%>
+								<%--request 영역에 바인딩된 ArrrayList 객체의 크기(검색한 글의 개수)만큼 반복, 글목록 표시  --%>
 								<c:forEach var="question" items="${questionsList2 }" varStatus="questionNum">
 										<tr align="center">
-											<%-- varStatus의 count 속성을 이용 글번호를 1부터 자동으로 표시 --%>
 											<td width="5%">${question.ques_no }</td>
 											<td align="left" width="30%">
-												<%--왼쪽으로 30px만큼 여백을 준 후 글제목을 표시할 목적으로 여백을 줌 --%>
-												 <!-- <span style="padding-right: 30px;"></span>  -->
+												<%-- 비밀글이면 자물쇠 그림 표시 --%>
 												 <c:if test="${question.isSecret == 'y' }">
 														<span><i class='fas fa-lock'></i></span>
 												</c:if>
+												
 												 <c:choose>
-													<%-- <forEach> 태그 반복 시 각 글의 level 값이 1보다 크다면 답변글(자식글) --%>
-													<c:when test="${question.level > 1 }">
-														<%-- 다시 내부 <forEach 태그 이용, 1부터 level 값까지 반복 부모글 밑에 들여쓰기하여 답급(자식글)표시 --%>
+												 	<%-- 답변글(level값이 1보다 클 때) --%>
+													<c:when test="${question.level > 1 }"> 
+														<%-- 들여쓰기하여 답글표시 --%>
 														<c:forEach begin="1" end="${question.level }" step="1">
 															<span style="padding-left: 10px;"></span>
 														</c:forEach>
-														<%--공백 다음 자식들 표시  --%>
 														<span style="font-size: 12px;">[답변]</span>
-<%-- 														<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
- --%>													
- 
- 													<!--추가부분 -->
-													<c:if test="${question.isSecret == 'y' }">
-														<c:choose>
-															<c:when test="${email == 'admin@admin.com' or email == question.ques_parentemail}">
-															<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
-															</c:when>
-															<c:otherwise>
-															<a class="cls1">비밀글입니다.</a>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-													<c:if test="${question.isSecret == 'n' }">
-															<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
-													</c:if>
-													<!--추가부분 -->
-													
-													
-													
-													</c:when>
-													<%-- level값이 1보다 크지 않으면 부모글이므로 공백 없이 표시 --%>
-													<c:otherwise>
+														
+ 														<%-- 비밀글이면 관리자이거나 세션의 아이디가 부모글의 작성자와 같을 때만 타이틀 링크를 보여줌--%>
+														<c:if test="${question.isSecret == 'y' }">
+															<c:choose>
+																<c:when test="${email == 'admin@admin.com' or email == question.ques_parentemail}">
+																<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
+																</c:when>
+																<c:otherwise> 
+																<a class="cls1">비밀글입니다.</a>
+																</c:otherwise>
+															</c:choose>
+														</c:if>
+														<%-- 공개글이면  --%>
+														<c:if test="${question.isSecret == 'n' }">
+																<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
+														</c:if>
+													</c:when> 
+													<%-- 답변글 종료 --%>
+													<%-- 부모글 시작 --%>
+													<c:otherwise> 
+														<%-- 비밀글이면 세션의 아이디가 관리자이거나 글 작성자와 같을 때 타이틀 링크 출력  --%>
 														<c:if test="${question.isSecret == 'y' }">
 															<c:choose>
 																<c:when test="${email == 'admin@admin.com' or email == question.ques_email}">
@@ -158,10 +145,12 @@
 																</c:otherwise>
 															</c:choose>
 														</c:if>
+														<%-- 공개글이면  --%>
 														<c:if test="${question.isSecret == 'n' }">
 															<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
 														</c:if>
 													</c:otherwise>
+													<%-- 부모글 종료 --%>
 												</c:choose>
 											</td>
 											<td width="7%">${question.ques_email }</td>
@@ -170,10 +159,12 @@
 										</tr>
 								</c:forEach>
 							</c:if>
-							</tbody>
+						</tbody>
 					</table>
 				</div>
 			</div>
+			
+			
 			<div class="btn-wrap">
 				<div class="header-btn float-l">
 					<a href="questionList.ques">
