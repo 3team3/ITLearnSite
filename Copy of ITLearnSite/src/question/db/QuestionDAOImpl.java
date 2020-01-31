@@ -65,6 +65,7 @@ import question.db.QuestionBean;
 	}
 	
 	//글쓰기
+	@Override
 	public int insertQuestion(QuestionBean qBean){
 		int ques_no = getNewNo();
 		try {
@@ -111,6 +112,7 @@ import question.db.QuestionBean;
 	}
 	
 	//글수정
+	@Override
 	public void updateQuestion(QuestionBean qBean){
 		
 		int ques_no = qBean.getQues_no();
@@ -167,6 +169,7 @@ import question.db.QuestionBean;
 	}
 
 	//글 삭제
+	@Override
 	public void questionDelete(int ques_no) {
 		try {
 			// 커넥션풀로부터 커넥션 얻기
@@ -227,6 +230,25 @@ import question.db.QuestionBean;
 			return questionsList1;
 		}
 		
+		
+	//페이징 처리를 위해 공지사항 갯수 가져오기
+		private int countNotice(){
+			try {
+				con = getConnection();
+				String query = "select count(*) from question_table where isNotice='y' ";
+				System.out.println(query);
+				pstmt = con.prepareStatement(query);
+				ResultSet rs = pstmt.executeQuery(query);
+				if (rs.next())
+					return (rs.getInt(1));
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally{
+				closeConnection();
+			}
+			return 0;
+		}
+		
 	//일반글 가져오기
 		@Override
 		public List selectQuestions(Map pagingMap) {
@@ -235,6 +257,7 @@ import question.db.QuestionBean;
 			// 전달 받은 section 값과 pageNum 값을 가져옴
 			int section = (Integer) pagingMap.get("section");
 			int pageNum = (Integer) pagingMap.get("pageNum");
+			int countNotice = countNotice();
 
 			try {
 				con = getConnection();
@@ -243,7 +266,7 @@ import question.db.QuestionBean;
 						+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
 						+ "start with ques_parentno=0 "
 						+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
-						+ "where recNum between(?-1)*100+(?-1)*10+1 " + "and (?-1)*100+?*10"
+						+ "where recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)"
 						+ "AND isNotice = 'n'";
 
 				// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
@@ -254,8 +277,10 @@ import question.db.QuestionBean;
 				pstmt = con.prepareStatement(query);
 				pstmt.setInt(1, section);
 				pstmt.setInt(2, pageNum);
-				pstmt.setInt(3, section);
-				pstmt.setInt(4, pageNum);
+				pstmt.setInt(3, countNotice);
+				pstmt.setInt(4, section);
+				pstmt.setInt(5, pageNum);
+				pstmt.setInt(6, countNotice);
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
