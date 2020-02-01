@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${path}/css/member.css" rel="stylesheet"> 
+<link href="${path}/css/create.css" rel="stylesheet"> 
 <title>회원관리</title>
 </head>
 
@@ -39,43 +40,51 @@
 		<div class="pagemargin">
 		<div class="content">
 		<h3>결제 전</h3>
-		<table class="table">
+		<table class="table before">
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentlist}"	>
+			<c:if test="${paymentList.pay_option==1}">
+			<tr>
+				<td colspan="5"></td>
+			</tr>
+			</c:if>
 			<c:if test="${paymentList.pay_option==0}">
 			<tr class="tb_head">
-				<td colspan="4">주문</td>
+				<td colspan="5">주문번호 : ${paymentList.pay_no}</td>
 			</tr>
 			<tr>
-				<td colspan="4">${paymentList.pay_email}</td>
+				<td colspan="5">${paymentList.pay_email}</td>
 			</tr>
 			<tr>
 				<td>이름</td>
 				<td>${paymentList.pay_name}</td>
 				<td>전화번호</td>
 				<td>${paymentList.pay_phonenumber}</td>
+				<td></td>
 			</tr>
 			<tr>			
 				<td>우편번호</td>
-				<td colspan="3">${paymentList.pay_address}</td>
+				<td colspan="4">${paymentList.pay_address}</td>
 			</tr>
 			<tr>	
-				<td colspan="4">${paymentList.pay_address1}</td>
+				<td colspan="5">${paymentList.pay_address1}</td>
 			</tr>
 			<tr>
-				<td colspan="4">${paymentList.pay_address2}</td>		
+				<td colspan="5">${paymentList.pay_address2}</td>		
 			</tr>			
 			<tr>			
 				<td>분류</td>
 				<td>주문상품</td>
 				<td>개수</td>					
 				<td>가격</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>${paymentList.pay_pro1_sort}</td>
 				<td>${paymentList.pay_pro1_name}</td>
 				<td>${paymentList.pay_pro1_cnt}</td>
-				<td>${paymentList.pay_pro1_price}</td>					
+				<td>${paymentList.pay_pro1_price}</td>
+				<td></td>				
 			</tr>
 			<c:if test="${paymentList.pay_pro2_cnt!=0}">
 			<tr>
@@ -83,6 +92,7 @@
 				<td>${paymentList.pay_pro2_name}</td>
 				<td>${paymentList.pay_pro2_cnt}</td>
 				<td>${paymentList.pay_pro2_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 			<c:if test="${paymentList.pay_pro3_cnt!=0}">
@@ -91,6 +101,7 @@
 				<td>${paymentList.pay_pro3_name}</td>
 				<td>${paymentList.pay_pro3_cnt}</td>
 				<td>${paymentList.pay_pro3_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 			<c:if test="${paymentList.pay_pro4_cnt!=0}">
@@ -99,6 +110,7 @@
 				<td>${paymentList.pay_pro4_name}</td>
 				<td>${paymentList.pay_pro4_cnt}</td>
 				<td>${paymentList.pay_pro4_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 			<c:if test="${paymentList.pay_pro5_cnt!=0}">
@@ -107,15 +119,16 @@
 				<td>${paymentList.pay_pro5_name}</td>
 				<td>${paymentList.pay_pro5_cnt}</td>
 				<td>${paymentList.pay_pro5_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 		
 			<tr>
-				<td colspan="3">결제 금액</td>
+				<td colspan="4">결제 금액</td>
 				<td>${paymentList.pay_total}</td>
 			</tr>
 			<tr>	
-				<td colspan="4" id="${paymentList.pay_no}">결제안함</td>			
+				<td colspan="5" id="${paymentList.pay_no}">결제안함</td>			
 			</tr>
 		
 			<tr>
@@ -154,46 +167,57 @@ function check(){
 				<c:set var="j" value="${j+1}" />			
 			</c:if>
 			</c:forEach> 
+			<tr>
+				<td colspan="5"></td>
+			</tr>
 		</table>
 		
 		<h3>결제 후</h3>
-		<table class="table">
+		<table class="table after">
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentlist}"	>
+			<c:if test="${paymentList.pay_option==0}">
+			<tr>
+				<td colspan="5"></td>
+			</tr>
+			</c:if>			
 			<c:if test="${paymentList.pay_option==1}">
 			<tr class="tb_head">
-				<td colspan="4">주문</td>
+				<td colspan="5">주문번호 : ${paymentList.pay_no}</td>
 			</tr>
 			<tr>
-				<td colspan="4">${paymentList.pay_email}</td>
+				<td colspan="5">${paymentList.pay_email}</td>
 			</tr>
 			<tr>
 				<td>이름</td>
 				<td>${paymentList.pay_name}</td>
 				<td>전화번호</td>
 				<td>${paymentList.pay_phonenumber}</td>
+				<td></td>
 			</tr>
 			<tr>			
 				<td>우편번호</td>
-				<td colspan="3">${paymentList.pay_address}</td>
+				<td colspan="4">${paymentList.pay_address}</td>
 			</tr>
 			<tr>	
-				<td colspan="4">${paymentList.pay_address1}</td>
+				<td colspan="5">${paymentList.pay_address1}</td>
 			</tr>
 			<tr>
-				<td colspan="4">${paymentList.pay_address2}</td>		
+				<td colspan="5">${paymentList.pay_address2}</td>		
 			</tr>			
 			<tr>			
 				<td>분류</td>
 				<td>주문상품</td>
 				<td>개수</td>					
 				<td>가격</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>${paymentList.pay_pro1_sort}</td>
 				<td>${paymentList.pay_pro1_name}</td>
 				<td>${paymentList.pay_pro1_cnt}</td>
 				<td>${paymentList.pay_pro1_price}</td>					
+				<td></td>
 			</tr>
 			<c:if test="${paymentList.pay_pro2_cnt!=0}">
 			<tr>
@@ -201,6 +225,7 @@ function check(){
 				<td>${paymentList.pay_pro2_name}</td>
 				<td>${paymentList.pay_pro2_cnt}</td>
 				<td>${paymentList.pay_pro2_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 			<c:if test="${paymentList.pay_pro3_cnt!=0}">
@@ -209,6 +234,7 @@ function check(){
 				<td>${paymentList.pay_pro3_name}</td>
 				<td>${paymentList.pay_pro3_cnt}</td>
 				<td>${paymentList.pay_pro3_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 			<c:if test="${paymentList.pay_pro4_cnt!=0}">
@@ -217,6 +243,7 @@ function check(){
 				<td>${paymentList.pay_pro4_name}</td>
 				<td>${paymentList.pay_pro4_cnt}</td>
 				<td>${paymentList.pay_pro4_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 			<c:if test="${paymentList.pay_pro5_cnt!=0}">
@@ -225,15 +252,16 @@ function check(){
 				<td>${paymentList.pay_pro5_name}</td>
 				<td>${paymentList.pay_pro5_cnt}</td>
 				<td>${paymentList.pay_pro5_price}</td>
+				<td></td>
 			</tr>
 			</c:if>
 		
 			<tr>
-				<td colspan="3">결제 금액</td>
+				<td colspan="4">결제 금액</td>
 				<td>${paymentList.pay_total}</td>
 			</tr>
 			<tr>
-            	<td colspan="4">결제완료</td>               
+            	<td colspan="5">결제완료</td>               
           	</tr>
        	    
 				
@@ -241,6 +269,9 @@ function check(){
 				<c:set var="j" value="${j+1}" />			
 			</c:if>
 			</c:forEach> 
+			<tr>
+				<td colspan="5"></td>
+			</tr>
 		</table>
 		
 		</div>
