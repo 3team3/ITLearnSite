@@ -22,10 +22,9 @@
 			<div class="bookwrap">
 				<table class="tborder table-condensed table-bordered">
 					<tr>
-						<th width="100px" height="112px">이미지</th>
-						<th width="750px" height="112px">책 제목</th>
-						<th width="100px" height="112px">가격</th>
-						<th width="100px" height="112px">수량</th>
+						<th width="100px" height="112px">이미지</th>				<th width="700px" height="112px">책 제목</th>
+						<th width="150px" height="112px">가격</th>
+						<th width="150px" height="112px">수량</th>
 					</tr>
 					<!-- 	책 제목 / 수량 / -->
 					<c:forEach var="books" begin="0" items="${booklist}">
@@ -34,9 +33,11 @@
 							<td><img src="${books.book_image}"></td>
 							<td>${books.book_title}</td>
 							<td><input type="text" value="${books.book_price}"
-								style="width: 70px;"></td>
+								style="width: 70px;">
+								<button onclick="modify();">수정</button></td>
 							<td><input type="text" value="${books.book_stock}"
-								style="width: 70px;"></td>
+								style="width: 70px;">
+							<button onclick="modify();">수정</button></td>
 						</tr>
 
 					</c:forEach>
@@ -44,5 +45,6 @@
 			</div>
 		</div>
 	</div>
+	<script  type="text/javascript"></script>
 </body>
 </html>
