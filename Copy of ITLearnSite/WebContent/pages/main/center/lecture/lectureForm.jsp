@@ -146,6 +146,11 @@
 								class="form-control form-control-lg">
 						</div>
 						<div class="col-md-6 form-group">
+							<label for="lec_teacher">강사</label><input type="text"
+								name="lec_teacher" id="lec_teacher"
+								class="form-control form-control-lg">
+						</div>
+						<div class="col-md-6 form-group">
 							<label for="lec_price">금액</label><input type="text"
 								name="lec_price" id="lec_price"
 								class="form-control form-control-lg">

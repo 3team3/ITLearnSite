@@ -18,22 +18,21 @@
 <c:set var="pageNum" value="${lecturesMap.pageNum}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
-
+<script type="text/javascript">
+	
+	function deleteNo(no, title) {
+		
+		var result = confirm( title + " 강의를 삭제 하겠습니까??");
+		if(result){
+			location.href = "${path }/deleteLecture.lec?lec_no=" + no;
+		}
+		
+	}
+	
+</script>
 
 </head>
-<!-- 
-<div class="col-lg-3">
-					<div class="section-heading">
-						<h2 class="text-black">Campus Videos</h2>
-						<a href="#">View All Videos</a>
-					</div>
-					<a href="https://vimeo.com/45830194" class="video-1 mb-4" data-fancybox="" data-ratio="2"> <span class="play"> <span class="icon-play"></span>
-					</span> <img src="images/course_5.jpg" alt="Image" class="img-fluid">
-					</a> <a href="https://vimeo.com/45830194" class="video-1 mb-4" data-fancybox="" data-ratio="2"> <span class="play"> <span
-							class="icon-play"></span>
-					</span> <img src="images/course_5.jpg" alt="Image" class="img-fluid">
-					</a>
-				</div> -->
+
 
 <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
 	style="background-image: url('../images/bg_1.jpg')">
@@ -80,7 +79,7 @@
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="course-1-item">
 									<figure class="thumnail">
-										<a href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }" data-fancybox=""><img
+										<a href="${path }/lectureDetail.lec?lec_no=${lecture.lec_no}"><img
 											src="${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }"
 											alt="Image" class="img-fluid"></a>
 										<div class="price">￦${lecture.lec_price }</div>
@@ -89,18 +88,25 @@
 										</div>
 									</figure>
 									<div class="course-1-content pb-4">
-										<h2>How To Create Mobile Apps Using Ionic</h2>
-										<div class="rating text-center mb-3">
+										<h2>강사 :  ${lecture.lec_teacher }</h2>
+										<!-- <div class="rating text-center mb-3">
 											<span class="icon-star2 text-warning"></span>
-										</div>
+										</div> -->
 										<p class="desc mb-4"></p>
 										<p>
-										
-										
-											<a href="cartAdd.cart?&pro_name=${lecture.lec_title }&pro_price=${lecture.lec_price }&pro_img=${lecture.lec_imgfile}&pro_sort=강의&pro_cnt=1"
-												class="btn btn-primary rounded-0 px-4">장바구니</a>
-												<a href="#"
-												class="btn btn-primary rounded-0 px-4">구매하기</a>
+
+
+											<a
+												href="cartAdd.cart?&lec_title=${lecture.lec_title }&lec_price=${lecture.lec_price }&pro_img=${lecture.lec_imgfile}&pro_sort=강의&pro_cnt=1"
+												class="btn btn-primary rounded-0 px-4">장바구니</a><a
+												style="margin: 5px;"
+												href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }"
+												class="btn btn-primary rounded-0 px-4" data-fancybox="">맛보기</a>
+											<c:if test="${email eq 'admin@admin.com' }">
+												<a class="btn btn-primary rounded-0 px-4"
+													href="javascript:void(0);"
+													onclick="deleteNo(${lecture.lec_no}, '${lecture.lec_title }');">삭제</a>
+											</c:if>
 										</p>
 									</div>
 								</div>
@@ -112,7 +118,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="btn-wrap text-align"
 		style="margin-top: 20px; margin-bottom: 20px">
 		<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
@@ -183,7 +189,7 @@
 			</c:choose>
 		</c:if>
 	</div>
-	
+
 	</div>
 </body>
 </html>
