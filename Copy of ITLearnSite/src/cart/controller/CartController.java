@@ -79,11 +79,11 @@ public class CartController extends HttpServlet{
 					out.close();
 				}else{				
 				
-				String pro_name=request.getParameter("lec_title");
+				String pro_name=request.getParameter("pro_name");
 				String pro_sort=request.getParameter("pro_sort");
 				String pro_img=request.getParameter("pro_img");
 				System.out.println(pro_img);
-				int pro_price=Integer.parseInt(request.getParameter("lec_price"));				
+				int pro_price=Integer.parseInt(request.getParameter("pro_price"));				
 				int pro_cnt=Integer.parseInt(request.getParameter("pro_cnt"));				
 				int result = caServ.cartDupChk(pro_name, email);
 				
@@ -116,6 +116,19 @@ public class CartController extends HttpServlet{
 					pw.print("<script>" + " var result=confirm('장바구니로 이동하시겠습니까?');" 
 					         + " if(result){location.href='cart.cart'}else{history.back();}" + "</script>");
 					}else{
+						caBean.setEmail(email);
+						caBean.setPro_name(pro_name);
+						caBean.setPro_price(pro_price);
+						caBean.setPro_sort(pro_sort);
+						caBean.setPro_cnt(pro_cnt);
+						caBean.setPro_img(pro_img);
+						int rs=0;
+						rs=caServ.addCart(caBean);				
+						System.out.println("장바구니에 넣기");
+						PrintWriter pw = response.getWriter();
+						pw.print("<script>" + " var result=confirm('장바구니로 이동하시겠습니까?');" 
+						         + " if(result){location.href='cart.cart'}else{history.back();}" + "</script>");
+						
 						
 					}
 				}
