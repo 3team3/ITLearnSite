@@ -30,12 +30,7 @@
 						<li><a href="lectureList.lec" class="nav-link text-left">강의</a></li>
 						<li><a href="bookList.text" class="nav-link text-left">도서</a></li>
 						<li><a href="resourceList.bo" class="nav-link text-left">자료실</a></li>
-
-						<li class="has-children"><a href="customer.do" class="nav-link text-left">고객센터</a>
-							<ul class="dropdown">
-								<li><a href="notice.noti">공지사항</a></li>
-								<li><a href="qna.ques">이용문의</a></li>
-							</ul></li>
+						<li><a href="questionList.ques" class="nav-link text-left">고객센터</a></li>
 
 						<li class="has-children"><a href="#" class="nav-link text-left">마이페이지</a>
 							<ul class="dropdown">

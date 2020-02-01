@@ -67,6 +67,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 	
 	//자료실 글쓰기
+	@Override
 	public int insertResource(ResourceBean rBean){
 		int res_no = getNewNo();
 		try {
@@ -98,6 +99,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	
 	
 	//자료실 글수정
+	@Override
 	public void updateResource(ResourceBean rBean){
 		
 		int res_no = rBean.getRes_no();
@@ -163,6 +165,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 	}
 
 	// 자료실 내용 삭제
+	@Override
 	public void resourceDelete(int res_no) {
 		try {
 			// 커넥션풀로부터 커넥션 얻기

@@ -9,7 +9,7 @@
 %>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 글쓰기</title>
+<title>고객센터 답글쓰기</title>
 
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -17,12 +17,6 @@
 </head>
 <c:set var="email" value="${sessionScope.email}"></c:set>
 
-<c:if test="${email eq null}">
-	<script type="text/javascript">
-		alert("로그인 후 글쓰기가 가능합니다.");
-		location.href="questionList.ques";
-	</script>
-</c:if>
 <body>
 
 <div class="site-wrap">
@@ -47,8 +41,11 @@
     </div>
 
 	<div class="container mt-5 mb-5">
-	<h1>고객센터 글쓰기</h1>
-  	<form name="quesForm" method="post" action="addQuestion.ques">
+	<h1>고객센터 답글쓰기</h1>
+  	<form name="quesForm2" method="post" action="addReply.ques">
+     	<input type="hidden" name="ques_no" value="${qBean.ques_no }"/>
+    	<input type="hidden" name="ques_ref" value="${qBean.ques_ref }"/>
+    	
     <table class="table table-striped" style="text-align: center;">
 				<tr>
 					<td>글쓴이</td>  
@@ -66,23 +63,17 @@
 					<td>비밀글</td>
 					<td colspan="3"><input type="checkbox" name="isSecret" value="y"></td>
 				</tr>
-				<c:if test="${email == 'admin@admin.com'}">
-				<tr>
-					<td>공지글</td>
-					<td colspan="3"><input type="checkbox" name="isNotice" value="y"></td>
-				</tr>
-				</c:if>
 			</table>
 			<div class="text-right">
 				<input type="button" value="목록으로" class="btn btn-color1" onclick="location.href='questionList.ques'">
-				<input type="submit" value="글쓰기" class="btn btn-color1">
+				<input type="submit" value="답글쓰기" class="btn btn-color1">
 			</div>
   </form>
   
   </div>
   </div>
-  
- <%--  <script src="${path }/js/makejs/summerNote.js">
+  <%-- 
+  <script src="${path }/js/makejs/summerNote.js">
   
   </script> --%>
   
