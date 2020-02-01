@@ -104,15 +104,17 @@ constraint ques_email_fk foreign key(ques_email) references member(email) on del
 select * from question_table;
 
 /*강의게시판*/
-CREATE TABLE lecture_table (
-lec_no  number(38) primary key,
-lec_parentno number(38) default 0,
-lec_title varchar2(50),
-lec_price varchar2(50),
-lec_content varchar2(4000),
-lec_imgfile varchar2(50),
-lec_spofile varchar2(50),
-lec_uploaddate date default sysdate
+create table question_table(
+ques_no number(38) primary key,
+ques_parentno number(38) default 0,
+ques_title varchar2(50),
+ques_email varchar2(40),
+ques_content varchar2(4000),
+isSecret varchar2(10),
+isNotice varchar2(10),
+ques_writedate date default sysdate,
+ques_readcount number(38),
+ques_ref number(38)
 );
 /*
 SELECT * 
