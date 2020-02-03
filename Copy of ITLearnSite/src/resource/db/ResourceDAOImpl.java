@@ -196,7 +196,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 					+ "res_no, res_parentno, res_title, res_email, res_writedate " + "from resource_table " + "start with res_parentno=0 "
 					+ "connect by prior res_no = res_parentno " + "order siblings by res_no desc))"
 					+ "where recNum between(?-1)*100+(?-1)*10+1 " + "and (?-1)*100+?*10";
-
+			// where " + opt + " LIKE '%' || ? || '%'" and 가능
 			// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
 			// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
 
