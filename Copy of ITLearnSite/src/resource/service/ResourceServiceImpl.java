@@ -43,15 +43,15 @@ public class ResourceServiceImpl implements ResourceService {
 	
 	//자료실 리스트
 	@Override
-	public Map listResource(Map<String, Integer> pagingMap) {
+	public Map listResource(Map<String, Integer> pagingMap, String opt, String condition) {
 
 		Map resourcesMap = new HashMap();
 
 		// 전달된 pagingMap 사용, 글 목록 조회
-		List<ResourceBean> resourcesList = rDao.selectAllResources(pagingMap);
+		List<ResourceBean> resourcesList = rDao.selectAllResources(pagingMap, opt, condition);
 
 		// 테이블에 존재하는 전체 글 수 조회
-		int totResources = rDao.selectTotResources();
+		int totResources = rDao.selectTotResources(opt, condition);
 		/*System.out.println(resourcesList);
 		System.out.println(totResources);*/
 

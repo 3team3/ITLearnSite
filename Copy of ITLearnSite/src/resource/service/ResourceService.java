@@ -21,7 +21,7 @@ public interface ResourceService {
 	public void resourceDelete(int res_no);
 	
 	//페이징 기능에 필요한 글목록과 전체 글 개를 각각 조회할 수 있도록 구성
-	public Map listResource(Map<String, Integer> pagingMap);
+	public Map listResource(Map<String, Integer> pagingMap, String opt, String condition);
 	
 	/*자료실 검색*/
 	public ArrayList<ResourceBean> resourceSelect(String opt,String condition);

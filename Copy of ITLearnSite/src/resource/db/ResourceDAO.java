@@ -18,10 +18,10 @@ public interface ResourceDAO {
 	public void resourceDelete(int res_no);
 	
 	/*자료 목록*/
-	public List selectAllResources(Map pagingMap);
+	public List selectAllResources(Map pagingMap,String opt, String condition);
 	
 	/*전체 글 개수*/
-	public int selectTotResources();
+	public int selectTotResources(String opt, String condition);
 	
 	/*자료 내용*/
 	public ResourceBean resourceView(int res_no);

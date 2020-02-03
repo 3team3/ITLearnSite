@@ -16,6 +16,8 @@
 <c:set var="section" value="${resourcesMap.section}" />
 <c:set var="pageNum" value="${resourcesMap.pageNum}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="opt" value="${resourcesMap.opt}"/>
+<c:set var="condition" value="${resourcesMap.condition}"/>
 
 </head>
 
@@ -159,7 +161,7 @@
 									<a class="no-uline" href="${path }/listArticles.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
 								</c:if>
 
-								<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+								<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${(section-1)*10 +page } </a>
 
 								<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
 								<c:if test="${page ==10 }">
@@ -191,12 +193,12 @@
 	         			페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄
 	         	 	--%>
 									<c:when test="${page==pageNum }">
-										<a class="sel-page" href="${path }/resourceList.bo?section=${section}&pageNum=${page}">${page } </a>
+										<a class="sel-page" href="${path }/resourceList.bo?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>
 									</c:when>
 
 									<%--페이지 번호를 클릭하면 section값과 pageNum값을 컨트롤러로 전송 합니다. --%>
 									<c:otherwise>
-										<a class="no-uline" href="${path}/resourceList.bo?section=${section}&pageNum=${page}">${page } </a>
+										<a class="no-uline" href="${path}/resourceList.bo?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -205,12 +207,12 @@
 				</c:if>
 			</div>
 <div class="btn-wrap text-align">
-			<form action="resourceSelect.bo" method="post" >
+			<form action="resourceList.bo" method="post" >
 				<div class="selector-wrap">
 					<select class="box selectbox" name="opt">
-							<option value="0" selected="selected">제목</option>
-							<option value="1">내용</option>
-							<option value="2">글쓴이</option>							
+							<option value="res_title" selected="selected">제목</option>
+							<option value="res_content">내용</option>
+							<option value="res_email">글쓴이</option>							
 					</select>	
 				</div>
 				<div class="search-wrap">
