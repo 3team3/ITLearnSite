@@ -23,5 +23,7 @@ public interface PaymentDAO{
 	
     //결제 확인 시 강의리스트 insert
     public PaylecBean setPay_lec(int pay_no);
+    
+    
    
 }

@@ -16,4 +16,7 @@ public interface CartService {
 	public int Delcart(int cart_num);
 	public void cartEdit(int pro_cnt, int cart_num);
 	public int DelAllcart(String email);
+	
+	//장바구니 담긴 갯수 확인
+    public int cartMaxChk(String email);
 }

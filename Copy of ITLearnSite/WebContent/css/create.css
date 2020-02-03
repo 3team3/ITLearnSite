@@ -65,3 +65,16 @@
 	border-style: solid;
 	border-color: #4A56A8;
 }
+
+/*payment*/
+.num{
+	width: 10%;
+}
+.pro_img{
+	width: 100px;
+	height: 100px;
+}
+.tablesize{
+	min-height: 100px;
+	min-width: 800px;
+}

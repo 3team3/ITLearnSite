@@ -52,5 +52,10 @@ public CartServiceImpl(){
 		int dch=dao.delAllCart(email);
 		return dch;
 	}
+	
+    public int cartMaxChk(String email){
+    	int result1 = dao.cartMaxChk(email);
+    	return result1;
+    }
 
 }

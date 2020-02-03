@@ -99,7 +99,7 @@
 										
 											<a href="cartAdd.cart?&pro_name=${lecture.lec_title }&pro_price=${lecture.lec_price }&pro_img=${lecture.lec_imgfile}&pro_sort=강의&pro_cnt=1"
 												class="btn btn-primary rounded-0 px-4">장바구니</a>
-												<a href="#"
+												<a href="directPay.pay?pro_name=${lecture.lec_title }&pro_price=${lecture.lec_price}&pro_sort=강의&pro_cnt=1"
 												class="btn btn-primary rounded-0 px-4">구매하기</a>
 										</p>
 									</div>

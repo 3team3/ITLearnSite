@@ -10,4 +10,5 @@ public interface CartDAO{
 	public int delCart(int cart_num);
 	public void editCart(int pro_cnt, int cart_num);
 	public int delAllCart(String email);
+	public int cartMaxChk(String email);
 }

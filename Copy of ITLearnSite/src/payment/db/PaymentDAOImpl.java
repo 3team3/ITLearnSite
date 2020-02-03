@@ -393,5 +393,39 @@ public class PaymentDAOImpl implements PaymentDAO {
 		}
     	return plBean;
     }
+    
+   /* //주문 강의 중복 체크
+    @Override
+    public int payDupChk(String pro_name, String email) {
+       int check = 0;
+       try {
+          con = getConnection();
+          sql = "SELECT COUNT(*) FROM cart_table WHERE pro_name=? and email=?";
+          pstmt = con.prepareStatement(sql);
+          pstmt.setString(1, pro_name);
+          pstmt.setString(2, email);
+          rs = pstmt.executeQuery();
+
+          if (rs.next()) {
+             if (rs.getInt(1) != 0) {
+                // 중복
+                check = 1;
+
+             } else {
+                // 중복 아님
+                check = 0;
+
+             }
+          }
+
+       } catch (Exception e) {
+          System.out.println("cart중복메소드에서 오류" + e);
+       } finally {
+          closeConnection();
+       }
+
+       return check;
+
+    }*/
 }
 

@@ -38,17 +38,8 @@ function num(num1){
 	
 	
 </script>
+<link href="${path}/css/create.css" rel="stylesheet"> 
 
-<style>
-.num{
-width: 10%;
-}
-.pro_img{
-width: 100px;
-height: 100px;
-}
-
-</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
@@ -57,7 +48,7 @@ height: 100px;
           <div class="row align-items-end">
             <div class="col-lg-7">
               <h2 class="mb-0">장바구니</h2>
-              <p>장바구니->주문/결제->주문완료</p>
+              <p>Cart</p>
             </div>
           </div>
         </div>
@@ -77,7 +68,7 @@ height: 100px;
 		<div class="pagemargin">
 		<div class="content">
 		<form action="payment.pay" method="post" name="cfr"> 
-		<table class="table">			
+		<table class="table tablesize">			
 		<c:set var="j" value="0"/> 
 			<!-- MemberListController에서 넘겨 받은 request영역 안에 있는 list사이즈 만큼 반복 -->
 					<tr align="center">
@@ -120,7 +111,6 @@ height: 100px;
 			</c:forEach> 		
 		</table>
 		<div class="btn">
-		<input type="button" class="btn btn-color1" value="선택상품주문" onclick="">		
 		<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'">
 		<input type="submit" class="btn btn-color1" value="전체상품주문">
 		</div>

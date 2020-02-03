@@ -109,6 +109,27 @@ public class PaymentController extends HttpServlet {
 				out.println("</script>");
 				out.close();
 			}
+			//바로주문
+			else if(path.equals("/directPay.pay"))
+			{
+				session = request.getSession();
+				String email = (String)session.getAttribute("email");
+				mBean = mServ.callMember(email);
+				request.setAttribute("mBean", mBean);
+				
+				String pro_name = request.getParameter("pro_name");
+				int pro_price = Integer.parseInt(request.getParameter("pro_price"));
+				String pro_sort = request.getParameter("pro_sort");
+				int pro_cnt = Integer.parseInt(request.getParameter("pro_cnt"));
+				request.setAttribute("pro_name", pro_name);
+				request.setAttribute("pro_price", pro_price);
+				request.setAttribute("pro_sort", pro_sort);
+				request.setAttribute("pro_cnt", pro_cnt);
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/payment/directpayment.jsp";
+				request.setAttribute("paging", paging);
+			}
 
 			System.out.println("nextPage = " + nextPage);
 			// null PointException
