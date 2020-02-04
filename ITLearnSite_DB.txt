@@ -107,15 +107,17 @@ constraint ques_email_fk foreign key(ques_email) references member(email) on del
 select * from question_table;
 
 /*강의게시판*/
+
 CREATE TABLE lecture_table (
-lec_no  number(38) primary key,
-lec_parentno number(38) default 0,
-lec_title varchar2(50),
-lec_price varchar2(50),
-lec_content varchar2(4000),
-lec_imgfile varchar2(50),
-lec_spofile varchar2(50),
-lec_uploaddate date default sysdate
+    lec_no           NUMBER(38) PRIMARY KEY,
+    lec_parentno     NUMBER(38) DEFAULT 0,
+    lec_title        VARCHAR2(50),
+    lec_price        NUMBER(38),
+    lec_teacher    VARCHAR2(50),
+    lec_content      VARCHAR2(4000),
+    lec_imgfile      VARCHAR2(50),
+    lec_spofile      VARCHAR2(50),
+    lec_uploaddate   DATE DEFAULT SYSDATE
 );
 /*
 SELECT * 
@@ -225,6 +227,34 @@ INSERT INTO lecture_table (
 
 select * from lecture_table;
 
+/*강의 업로드*/
+
+CREATE TABLE lecture_list (
+    list_no             NUMBER(38),
+    lec_no              NUMBER(38),
+    lec_title           VARCHAR2(50),
+    list_title          VARCHAR2(50),
+    list_savefile       VARCHAR2(50),
+    list_originalfile   VARCHAR2(50),
+    CONSTRAINT lec_no_fk FOREIGN KEY ( lec_no )
+        REFERENCES lecture_table ( lec_no )
+            ON DELETE CASCADE,
+    constraint ll_no_pk PRIMARY key (list_no, lec_no)
+);
+/* 강의 코멘트 */
+create table lecture_comment (
+    co_no number(38),
+    list_no number(38),
+    lec_no  number(38),
+    co_email varchar2(40),    
+    co_date date default sysdate,
+    co_content varchar2(100),
+   CONSTRAINT lec_com_fk FOREIGN KEY ( list_no, lec_no )
+        REFERENCES lecture_list ( list_no, lec_no )
+            ON DELETE CASCADE,
+            CONSTRAINT co_email_fk FOREIGN KEY ( co_email )
+        REFERENCES member ( email )    
+);
 
 
 /*교재게시판*/
