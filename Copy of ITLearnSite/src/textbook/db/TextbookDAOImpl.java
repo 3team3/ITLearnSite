@@ -113,7 +113,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 
 		try {
 			con = getConnection();
-			sql = "insert into book_table values(BOOK_PRODUCT_SEQ.nextval,?,?,?,?,?,?,?,To_Date(?, 'yyyymmdd'),?,?,?)";
+			sql = "insert into book_table values(BOOK_PRODUCT_SEQ.nextval,?,?,?,?,?,?,?,To_Date(?, 'yyyymmdd'),?,?,?,'도서')";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, tBean.getBook_title());
 			pstmt.setString(2, tBean.getBook_link());
@@ -197,6 +197,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 				textBean.setBook_isbn(rs.getString(11));
 				textBean.setBook_description(rs.getString(12));
 				textBean.setBook_stock(rs.getInt(13));
+				textBean.setProduct_type(rs.getString(14));
 				list.add(textBean);
 			}
 		} catch (Exception e) {

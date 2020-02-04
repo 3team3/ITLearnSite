@@ -60,9 +60,9 @@ public class LectureDAOImpl implements LectureDAO {
 
 			con = getConnection();
 			sql = "select * from ( " + "select ROWNUM as recNum, lvl, "
-					+ "lec_no, lec_parentno, lec_title, lec_price, lec_teacher, lec_imgfile, lec_spofile "
+					+ "product_no, lec_no, lec_parentno, lec_title, lec_price, lec_teacher, lec_imgfile, lec_spofile, product_type "
 					+ "from (select level as lvl, "
-					+ "lec_no, lec_parentno, lec_title, lec_price, lec_teacher, lec_imgfile, lec_spofile " + "from lecture_table "
+					+ "product_no, lec_no, lec_parentno, lec_title, lec_price, lec_teacher, lec_imgfile, lec_spofile, product_type " + "from lecture_table "
 					+ "start with lec_parentno=0 " + "connect by prior lec_no = lec_parentno "
 					+ "order siblings by lec_no desc))" + " where recNum between(?-1)*30+(?-1)*3+1 "
 					+ "and (?-1)*30+?*3";
@@ -83,7 +83,7 @@ public class LectureDAOImpl implements LectureDAO {
 			 */
 			while (rs.next()) {
 				/* System.out.println("rs :" + rs); */
-
+				int product_no = rs.getInt("product_no");
 				int level = rs.getInt("lvl");
 				int lec_no = rs.getInt("lec_no");
 				int lec_parentno = rs.getInt("lec_parentno");
@@ -92,6 +92,7 @@ public class LectureDAOImpl implements LectureDAO {
 				String lec_teacher = rs.getString("lec_teacher");
 				String lec_imgfile = rs.getString("lec_imgfile");
 				String lec_spofile = rs.getString("lec_spofile");
+				String product_type = rs.getString("product_type");
 
 				/*
 				 * System.out.println("level : " + level); System.out.println(
@@ -105,7 +106,7 @@ public class LectureDAOImpl implements LectureDAO {
 					System.out.println(lec_teacher);
 					
 				LectureBean bean = new LectureBean();
-
+				bean.setProduct_no(product_no);
 				bean.setLevel(level);
 				bean.setLec_no(lec_no);
 				bean.setLec_parentno(lec_parentno);
@@ -114,6 +115,7 @@ public class LectureDAOImpl implements LectureDAO {
 				bean.setLec_teacher(lec_teacher);
 				bean.setLec_imgfile(lec_imgfile);
 				bean.setLec_spofile(lec_spofile);
+				bean.setProduct_type(product_type);
 
 				lecturesList.add(bean);
 				/* System.out.println("bean : " + bean); */
@@ -170,8 +172,8 @@ public class LectureDAOImpl implements LectureDAO {
 			rs.next();
 			int lec_no = rs.getInt(1) + 1;
 
-			sql = "insert into lecture_table(lec_no, lec_title, lec_price, lec_teacher, lec_content, lec_imgfile, lec_spofile) "
-					+ "values(?,?,?,?,?,?,?)";
+			sql = "insert into lecture_table(product_no, lec_no, lec_title, lec_price, lec_teacher, lec_content, lec_imgfile, lec_spofile, product_type) "
+					+ "values(BOOK_PRODUCT_SEQ.nextval,?,?,?,?,?,?,?,'강의')";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, lec_no);

@@ -53,6 +53,7 @@ public class CartDAOImpl implements CartDAO {
          rs = pstmt.executeQuery();
          while (rs.next()) {
             CartBean cbean = new CartBean();
+            cbean.setProduct_no(rs.getInt("product_no"));
             cbean.setCart_num(rs.getInt("cart_num"));
             cbean.setEmail(rs.getString("email"));
             cbean.setPro_name(rs.getString("pro_name"));
@@ -127,17 +128,18 @@ public class CartDAOImpl implements CartDAO {
             num = 1;
          }
 
-         sql = "insert into cart_table (cart_num, email, pro_name, pro_cnt, pro_price, pro_sort, pro_img)"
-               + "values(?,?,?,?,?,?,?)";
+         sql = "insert into cart_table (cart_num, email, product_no, pro_name, pro_cnt, pro_price, pro_sort, pro_img)"
+               + "values(?,?,?,?,?,?,?,?)";
 
          pstmt = con.prepareStatement(sql);
          pstmt.setInt(1, num);
          pstmt.setString(2, caBean.getEmail());
-         pstmt.setString(3, caBean.getPro_name());
-         pstmt.setInt(4, caBean.getPro_cnt());
-         pstmt.setInt(5, caBean.getPro_price() * caBean.getPro_cnt());
-         pstmt.setString(6, caBean.getPro_sort());
-         pstmt.setString(7, caBean.getPro_img());
+         pstmt.setInt(3, caBean.getProduct_no());
+         pstmt.setString(4, caBean.getPro_name());
+         pstmt.setInt(5, caBean.getPro_cnt());
+         pstmt.setInt(6, caBean.getPro_price() * caBean.getPro_cnt());
+         pstmt.setString(7, caBean.getPro_sort());
+         pstmt.setString(8, caBean.getPro_img());
 
          pstmt.executeUpdate();
 

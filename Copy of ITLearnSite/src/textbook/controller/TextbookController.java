@@ -103,6 +103,7 @@ public class TextbookController extends HttpServlet {
 					jsondata.put("book_isbn", list.get(i).getBook_isbn());
 					jsondata.put("book_description", list.get(i).getBook_description());
 					jsondata.put("book_stock", list.get(i).getBook_stock());
+					jsondata.put("product_type", list.get(i).getProduct_type());
 					arr.add(jsondata);
 				}
 				JSONObject booklist = new JSONObject();
@@ -168,6 +169,7 @@ public class TextbookController extends HttpServlet {
 					jsondata.put("book_isbn", list.get(i).getBook_isbn());
 					jsondata.put("book_description", list.get(i).getBook_description());
 					jsondata.put("book_stock", list.get(i).getBook_stock());
+					jsondata.put("product_type", list.get(i).getProduct_type());
 
 					arr.add(jsondata);
 				}
@@ -257,6 +259,7 @@ public class TextbookController extends HttpServlet {
 		String book_isbn = null;
 		String book_description = null;
 		int book_stock = 0;
+		String product_type = null;
 
 		System.out.println("#---setProperty--- on textbookBean");
 		if (request.getParameter("book_title") != null) {
@@ -323,6 +326,12 @@ public class TextbookController extends HttpServlet {
 			book_stock = Integer.parseInt(request.getParameter("book_stock"));
 			tBean.setBook_stock(book_stock);
 			System.out.println("setProperty" + book_stock);
+		}
+		
+		if (request.getParameter("product_type") != null) {
+			product_type = request.getParameter("product_type");
+			tBean.setProduct_type(product_type);
+			System.out.println("setProperty" + product_type);
 		}
 
 		return tBean;

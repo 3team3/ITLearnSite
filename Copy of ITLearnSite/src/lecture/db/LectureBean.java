@@ -4,6 +4,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class LectureBean {
+	
+	private int product_no;
+	private String product_type;
+	
 	private int lec_no, level;
 	private int lec_parentno;
 	private String lec_title;
@@ -155,6 +159,22 @@ public class LectureBean {
 
 	public void setOriginFiles(ArrayList originFiles) {
 		this.originFiles = originFiles;
+	}
+
+	public int getProduct_no() {
+		return product_no;
+	}
+
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
+	}
+
+	public String getProduct_type() {
+		return product_type;
+	}
+
+	public void setProduct_type(String product_type) {
+		this.product_type = product_type;
 	}
 
 }

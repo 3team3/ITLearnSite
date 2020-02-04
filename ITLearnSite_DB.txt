@@ -1,3 +1,4 @@
+
 /*회원 테이블*/
 create table member(
 email varchar2(40) primary key,
@@ -33,7 +34,7 @@ res_email varchar2(40),
 res_content varchar2(1000),
 res_filename varchar2(50),
 res_writedate date default sysdate,
-constraint res_email_fk foreign key(res_email) references member(email) on delete cascade
+constraint res_email_fk foreign key(res_email) references member(email)
 );
 
 insert into resource_table(res_no, res_title, res_email)
@@ -85,25 +86,9 @@ co_content varchar2(1000),
 constraint res_no_fk foreign key(res_no) references resource_table(res_no) on delete cascade
 );
 
-
 select * from resource_comments;
 
 /*이용문의게시판*/
-create table question_table(
-ques_no number(38) primary key,
-ques_parentno number(38) default 0,
-ques_title varchar2(50),
-ques_email varchar2(40),
-ques_pw varchar2(20),
-ques_content varchar2(4000),
-ques_writedate date default sysdate,
-ques_readcount number(38),
-constraint ques_email_fk foreign key(ques_email) references member(email) on delete cascade
-);
-
-select * from question_table;
-
-/*강의게시판*/
 create table question_table(
 ques_no number(38) primary key,
 ques_parentno number(38) default 0,
@@ -114,7 +99,54 @@ isSecret varchar2(10),
 isNotice varchar2(10),
 ques_writedate date default sysdate,
 ques_readcount number(38),
-ques_ref number(38)
+ques_ref number(38),
+ques_parentemail varchar2(40), 
+constraint ques_email_fk foreign key(ques_email) references member(email) on delete cascade
+);
+
+select * from question_table;
+
+CREATE TABLE lecture_table (
+    product_no number(38),
+    lec_no           NUMBER(38) PRIMARY KEY,
+    lec_parentno     NUMBER(38) DEFAULT 0,
+    lec_title        VARCHAR2(50),
+    lec_price        NUMBER(38),
+    lec_teacher    VARCHAR2(50),
+    lec_content      VARCHAR2(4000),
+    lec_imgfile      VARCHAR2(50),
+    lec_spofile      VARCHAR2(50),
+    lec_uploaddate   DATE DEFAULT SYSDATE,
+    product_type varchar2(10) default '강의'
+);
+
+/*강의 업로드*/
+
+CREATE TABLE lecture_list (
+    list_no             NUMBER(38),
+    lec_no              NUMBER(38),
+    lec_title           VARCHAR2(50),
+    list_title          VARCHAR2(50),
+    list_savefile       VARCHAR2(50),
+    list_originalfile   VARCHAR2(50),
+    CONSTRAINT lec_no_fk FOREIGN KEY ( lec_no )
+        REFERENCES lecture_table ( lec_no )
+            ON DELETE CASCADE,
+    constraint ll_no_pk PRIMARY key (list_no, lec_no)
+);
+
+create table lecture_comment (
+    co_no number(38),
+    list_no number(38),
+    lec_no  number(38),
+    co_email varchar2(40),    
+    co_date date default sysdate,
+    co_content varchar2(100),
+   CONSTRAINT lec_com_fk FOREIGN KEY ( list_no, lec_no )
+        REFERENCES lecture_list ( list_no, lec_no )
+            ON DELETE CASCADE,
+            CONSTRAINT co_email_fk FOREIGN KEY ( co_email )
+        REFERENCES member ( email )    
 );
 /*
 SELECT * 
@@ -159,6 +191,7 @@ FROM
     lecture_table;
 */
 INSERT INTO lecture_table (
+    product_no,
     lec_no,
     lec_title,
     lec_price,
@@ -166,7 +199,7 @@ INSERT INTO lecture_table (
     lec_imgfile,
     lec_spofile
 ) VALUES (
-    1,
+    BOOK_PRODUCT_SEQ.nextval,
     '신쌤 JSP',
     60000,
     'aaaa',
@@ -174,7 +207,9 @@ INSERT INTO lecture_table (
     'alim01.mp4'
 );
 
+select * from lecture_table;
 INSERT INTO lecture_table (
+     product_no,
     lec_no,
     lec_title,
     lec_price,
@@ -182,6 +217,7 @@ INSERT INTO lecture_table (
     lec_imgfile,
     lec_spofile
 ) VALUES (
+     BOOK_PRODUCT_SEQ.nextval,
     2,
     '동빈나 JAVA',
     60000,
@@ -191,6 +227,7 @@ INSERT INTO lecture_table (
 );
 
 INSERT INTO lecture_table (
+     product_no,
     lec_no,
     lec_title,
     lec_price,
@@ -198,6 +235,7 @@ INSERT INTO lecture_table (
     lec_imgfile,
     lec_spofile
 ) VALUES (
+  BOOK_PRODUCT_SEQ.nextval,
     3,
     '정미나 SQL',
     60000,
@@ -207,6 +245,7 @@ INSERT INTO lecture_table (
 );
 
 INSERT INTO lecture_table (
+ product_no,
     lec_no,
     lec_title,
     lec_price,
@@ -214,6 +253,7 @@ INSERT INTO lecture_table (
     lec_imgfile,
     lec_spofile
 ) VALUES (
+  BOOK_PRODUCT_SEQ.nextval,
     4,
     '리베하얀 CSS',
     60000,
@@ -235,9 +275,9 @@ create sequence book_product_Seq
 
 create table book_table(
 product_no number primary key, -- 상품 등록 번호로 조회
-book_title varchar2(400), -- 책 제목
-book_link varchar2(400), -- 링크
-book_image varchar2(400), -- 이미지 링크
+book_title varchar2(1000), -- 책 제목
+book_link varchar(1000), -- 링크
+book_image varchar2(1000), -- 이미지 링크
 book_author varchar2(400), --  저자
 book_price number, --  가격
 book_discount number, --할인가
@@ -245,66 +285,87 @@ book_publisher varchar2(30), -- 출판사
 book_pubdate date,--출판일                   
 book_isbn varchar2(30), -- pubdate
 book_description varchar2(4000),
-book_stock number
+book_stock number,
+product_type varchar2(10) default '도서' -- 도서 타입
 );
 
 select * from book_table;
+select * from lecture_table;
 
-/*장바구니*/
-create table cart_table(
-cart_num int primary key,
-email varchar2(20),
-pro_name varchar2(400) not null,
-pro_cnt number not null,
-pro_price number not null,
-pro_sort varchar2(20) not null,
-pro_img varchar2(400)
+
+select * from book_table;
+
+CREATE TABLE CART_TABLE(
+    CART_NUM INT PRIMARY KEY,
+    EMAIL VARCHAR2(100),
+    product_no int,
+    PRO_NAME VARCHAR2(500) NOT NULL,
+    PRO_CNT NUMBER NOT NULL,
+    pro_price number not null,
+    PRO_SORT VARCHAR2(20) NOT NULL,
+    PRO_IMG VARCHAR2(400)
 );
 
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(1,'test@test.com','2020시나공 정보처리 산업기사 실기[기본서]',1,31000,'교재');
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(2,'test@test.com','2021시나공 정보처리 산업기사 실기[기본서]',1,32000,'교재');
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(3,'test@test.com','2025시나공 정보처리 산업기사 실기[기본서]',1,36000,'교재');
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(4,'test@test.com','리베하얀 CSS',1,50000,'강의');
-
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(1,'test@test.com','리베하얀 CSS',1,50000,'강의');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(2,'test1@test.com','정미나 SQL',1,60000,'강의');
+select * from payment_table;
 select * from cart_table;
 
 /*결제*/
 create table payment_table(
 pay_no number(38) primary key,
-pay_cart_no number(38),
 pay_email varchar2(40),
 pay_name varchar2(50),
 pay_phonenumber varchar2(50),
 pay_address varchar2(50),
-pay_address1 varchar2(50),
-pay_address2 varchar2(50),
-pay_pro_name varchar2(400),
-pay_pro_cnt number,
-pay_pro_price number,
-pay_pro_sort varchar2(20),
+pay_address1 varchar2(100),
+pay_address2 varchar2(100),
+pay_pro1_name varchar2(400),
+pay_pro1_cnt number,
+pay_pro1_price number,
+pay_pro1_sort varchar2(20),
+pay_pro2_name varchar2(400),
+pay_pro2_cnt number,
+pay_pro2_price number,
+pay_pro2_sort varchar2(20),
+pay_pro3_name varchar2(400),
+pay_pro3_cnt number,
+pay_pro3_price number,
+pay_pro3_sort varchar2(20),
+pay_pro4_name varchar2(400),
+pay_pro4_cnt number,
+pay_pro4_price number,
+pay_pro4_sort varchar2(20),
+pay_pro5_name varchar2(400),
+pay_pro5_cnt number,
+pay_pro5_price number,
+pay_pro5_sort varchar2(20),
 pay_total varchar2(4000),
 pay_option number(2),
-constraint pay_email_fk foreign key(pay_email) references member(email) on delete cascade
+constraint pay_email_fk foreign key(pay_email) references member(email)
 );
 select * from payment_table;
 
-/*
+
 강의 구매 결제 확인 시 insert될 계정별 강의 리스트
 create table set_pay_lec_table(
 set_no number(3),
 set_email varchar2(40),
-set_lec_no number(38),
 set_lec_title varchar2(50),
 set_endDate date,
 constraint set_email_fk foreign key(set_email) references member(email)
 );
-*/
+select * from set_pay_lec_table;
+
 
 /*회원 삭제시 회원의 장바구니도 함께 삭제*/
 /*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
 
---테이블 모두 삭제
-/*
+/*테이블 모두 삭제
+drop table lecture_comment;
+drop table lecture_list;
+drop table product_stock;
+drop table product_table;
 drop table cart_table;
 drop table lecture_table;
 drop table member;
@@ -313,5 +374,7 @@ drop table question_table;
 drop table resource_comments;
 drop table resource_table;
 drop table book_table;
-drop sequence book_product_Seq;*/
+drop table set_pay_lec_table;
+*/
+SELECT * FROM CART_TABLE;
 commit;

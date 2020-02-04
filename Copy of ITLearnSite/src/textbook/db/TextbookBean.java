@@ -23,6 +23,7 @@ public class TextbookBean {
 	private String book_isbn;
 	private String book_description;
 	private int book_stock;
+	private String product_type;
 	
 	public String getBook_title() {
 		return book_title;
@@ -95,6 +96,12 @@ public class TextbookBean {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getProduct_type() {
+		return product_type;
+	}
+	public void setProduct_type(String product_type) {
+		this.product_type = product_type;
 	}
 	
 }

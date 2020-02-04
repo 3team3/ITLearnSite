@@ -82,15 +82,21 @@ function num(num1){
 							<th></th>
 						</tr>								
 			 <c:forEach  var="cartlist"   items="${requestScope.cartlist}">				 		
-					<tr>					
-						<td class="img"><img
-											src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img"></td>
+					<tr>
+						<c:if test ="${cartlist.pro_sort == '강의'}">
+							<td class="img"><img src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img"></td>
+						</c:if>					
+						
+						<c:if test ="${cartlist.pro_sort == '도서'}">
+							<td class="img"><img src="${cartlist.pro_img }" class="pro_img"></td>
+						</c:if>					
+						
 						<td class="name">${cartlist.pro_name }</td>
 							<td class="count">
 								<div class="quantity">																			
-											<a href="#" id="minusbtn"><img src="${path}/images/minus.png" alt="" width="20px" height="20px" class="bt_down"/></a> 
+											<a id="minusbtn"><img src="${path}/images/minus.png" alt="" width="20px" height="20px" class="bt_down"/></a> 
 											<input type="text" name="pro_cnt" value="${cartlist.pro_cnt }" class="num"> 
-											<a href="#" id="plusbtn"><img src="${path}/images/plus.png" alt="" width="20px" height="20px" class="bt_up"/></a> 
+											<a id="plusbtn"><img src="${path}/images/plus.png" alt="" width="20px" height="20px" class="bt_up"/></a> 
 											
 											<input type="button" class="btn btn-color1" value="변경" onclick="num(${cartlist.cart_num })">								
 								</div>

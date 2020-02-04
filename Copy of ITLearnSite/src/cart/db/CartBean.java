@@ -3,6 +3,7 @@ package cart.db;
 public class CartBean {
 	private int cart_num;
 	private String email;
+	private int product_no;
 	private String pro_name;
 	private int pro_cnt;
 	private int pro_price;
@@ -51,5 +52,11 @@ public class CartBean {
 	}
 	public void setPro_cnt(int pro_cnt) {
 		this.pro_cnt = pro_cnt;
+	}
+	public int getProduct_no() {
+		return product_no;
+	}
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
 	}	
 }
