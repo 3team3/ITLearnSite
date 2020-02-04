@@ -57,13 +57,7 @@
 							</tr>
 						</thead>
 						<c:set var="j" value="0" />
-						<c:forEach var="list" items="${requestScope.ResourceList}">
-						
-						
-							<script type="text/javascript">
-								alert("${list}")
-							</script>
-							
+						<c:forEach var="list" items="${requestScope.ResourceList}">						
 							
 							<tr>
 								<td>${list.res_no}</td>
@@ -100,9 +94,9 @@
 				<form action="resourceSelect.bo" method="post">
 					<div class="selector-wrap">
 						<select class="box selectbox" name="opt">
-							<option value="0" selected="selected">제목</option>
-							<option value="1">내용</option>
-							<option value="2">글쓴이</option>
+							<option value="res_title" selected="selected">제목</option>
+							<option value="res_content">내용</option>
+							<option value="res_email">글쓴이</option>
 						</select>
 					</div>
 					<div class="search-wrap">

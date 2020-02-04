@@ -184,7 +184,7 @@ public class ResourceDAOImpl implements ResourceDAO {
 
 	// 자료실 목록
 	@Override
-	public List selectAllResources(Map pagingMap) {
+	public List selectAllResources(Map pagingMap,String opt, String condition) {
 		List resoursesList = new ArrayList();
 
 		// 전달 받은 section 값과 pageNum 값을 가져옴
@@ -192,24 +192,68 @@ public class ResourceDAOImpl implements ResourceDAO {
 		int pageNum = (Integer) pagingMap.get("pageNum");
 
 		try {
-
+			/*
+			//자료실 검색
+		    @Override
+		    public ArrayList<ResourceBean> resourceSelect(HashMap<String, Object> listOpt){
+		    	
+		    	 ArrayList<ResourceBean> ResourceList = new ArrayList<ResourceBean>();
+		    	 String opt=(String)listOpt.get("opt"); //검색옵션
+		    	 
+		    	 String condition = (String)listOpt.get("condition"); //검색내용
+		    	 int start = (Integer)listOpt.get("start"); //페이지번호
+		    	 
+		    	 
+		    	 System.out.println("dao opt : " +opt);
+		    	 System.out.println("dao condition : " +condition);
+		    	 try{
+		             con = getConnection();
+		             
+		             sql="select * from resource_table where " + opt + " LIKE '%' || ? || '%'";
+		        	 pstmt = con.prepareStatement(sql);
+		        	 pstmt.setString(1, condition);            	 
+		        	 rs=pstmt.executeQuery();
+		     */        
+			
 			con = getConnection();
-			String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
-					+ "res_no, res_parentno, res_title, res_email, res_writedate " + "from (select level as lvl, "
-					+ "res_no, res_parentno, res_title, res_email, res_writedate " + "from resource_table " + "start with res_parentno=0 "
+			if(opt == null || opt.isEmpty() == true ){
+			sql = "select * from ( " + "select ROWNUM as recNum, lvl, "
+					+ "res_no, res_parentno, res_title, res_content, res_email, res_writedate " + "from (select level as lvl, "
+					+ "res_no, res_parentno, res_title, res_content, res_email, res_writedate " + "from resource_table " + "start with res_parentno=0 "
 					+ "connect by prior res_no = res_parentno " + "order siblings by res_no desc))"
 					+ "where recNum between(?-1)*100+(?-1)*10+1 " + "and (?-1)*100+?*10";
-
+			//" where " + opt + " LIKE '%' || ? || '%'" and 가능
 			// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
 			// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
+			System.out.println(sql);
 
-			System.out.println(query);
-
-			pstmt = con.prepareStatement(query);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, section);
 			pstmt.setInt(2, pageNum);
 			pstmt.setInt(3, section);
 			pstmt.setInt(4, pageNum);
+			
+			}else {
+				
+				sql = "select * from ( " + "select ROWNUM as recNum, lvl, "
+						+ "res_no, res_parentno, res_title, res_content, res_email, res_writedate " + "from (select level as lvl, "
+						+ "res_no, res_parentno, res_title, res_content, res_email, res_writedate " + "from resource_table " + "start with res_parentno=0 "
+						+ "connect by prior res_no = res_parentno " + "order siblings by res_no desc))"
+						+ " where " + opt + " LIKE '%' || ? || '%' "
+						+ "and recNum between(?-1)*100+(?-1)*10+1 " + "and (?-1)*100+?*10";
+				System.out.println(sql);
+
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, condition);
+				pstmt.setInt(2, section);
+				pstmt.setInt(3, pageNum);
+				pstmt.setInt(4, section);
+				pstmt.setInt(5, pageNum);
+			}
+
+			System.out.println(sql);
+
+			
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -253,14 +297,21 @@ public class ResourceDAOImpl implements ResourceDAO {
 	
 	//전체 글 개수
 	@Override
-	public int selectTotResources() {
+	public int selectTotResources(String opt, String condition) {
 		try {
 			con = getConnection();
 			
 			//전체 글 수 조회
-			String query = "select count(res_no) from resource_table";
-			System.out.println(query);
-			pstmt = con.prepareStatement(query);
+			if(opt == null || opt.isEmpty() == true ){
+			sql = "select count(res_no) from resource_table";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			}else {
+				sql = "select count(res_no) from resource_table"
+						+ " where " + opt + " LIKE '%' || ? || '%' ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, condition);
+			}
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
 				/*System.out.println(rs.getInt(1));*/
@@ -289,8 +340,15 @@ public class ResourceDAOImpl implements ResourceDAO {
     	 System.out.println("dao opt : " +opt);
     	 System.out.println("dao condition : " +condition);
     	 try{
-             con = getConnection();  
+             con = getConnection();
              
+             sql="select * from resource_table where " + opt + " LIKE '%' || ? || '%'";
+        	 pstmt = con.prepareStatement(sql);
+        	 pstmt.setString(1, condition);            	 
+        	 rs=pstmt.executeQuery();
+             
+             
+             /*
              //0: 제목 //1:내용// 2:글쓴이
              if(opt.equals("0")){
             	 sql="select * from resource_table where res_title LIKE '%' || ? || '%'";
@@ -311,7 +369,7 @@ public class ResourceDAOImpl implements ResourceDAO {
             	 pstmt.setString(1, condition); 
             	 rs=pstmt.executeQuery(); 
              }
-             
+             */
              while(rs.next())
              {ResourceBean rBean= new ResourceBean();
              rBean.setRes_no(rs.getInt("res_no"));

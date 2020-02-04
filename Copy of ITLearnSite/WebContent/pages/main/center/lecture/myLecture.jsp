@@ -18,17 +18,17 @@
 
 <script type="text/javascript">
 	function play(title) {
-		var width = 0;
-		var height = 0;
+		var width = 1000;
+		var height = 800;
 		/* 
 		var winL = (screen.width - 10) / 2;
 		var winT = (screen.height - 200) / 2;
 		"left=" + winL + "," + "top=" + winT + 
 		 */
-		 width = screen.width - 10;
-		 height = screen.width - 220;
+		/*  width = screen.width - 10;
+		 height = screen.width - 220; */
 		var property = "width=" + width + "," + "height=" + height + ","
-				+  " menubar=no, scrollbars=no, status=no, location=no, toolbar=no, menubar=no";
+				+  " menubar=no, scrollbars=no, status=no, location=no, toolbar=no, menubar=no,resizable=no";
 		
 		var url = "lecturePlay.lec?lec_title="+title;
 		/* var url = "resourceWrite.bo"; */
@@ -76,8 +76,7 @@
 									<tr class="tb_head">
 										<td>번호</td>
 										<td>강의명</td>
-										<td>만료일</td>
-										<td>삭제</td>
+										<td>만료일</td>										
 
 									</tr>
 								</thead>
@@ -94,11 +93,10 @@
 										<c:when test="${myList != null}">
 											<c:forEach var="bean" items="${myList }" varStatus="num">
 												<tr align="center">
-													<td width="10%">${num.count }</td>
-													<td width="40%"><a href="javascript:void(0);"
+													<td width="20%">${num.count }</td>
+													<td width="60%"><a href="javascript:void(0);"
 													onclick="play('${bean.set_lec_title }');">${bean.set_lec_title }</a></td>
-													<td width="20%">${bean.between }일남았습니다.</td>
-													<td></td>
+													<td width="20%">${bean.between }일남았습니다.</td>													
 												<tr>
 											</c:forEach>
 										</c:when>

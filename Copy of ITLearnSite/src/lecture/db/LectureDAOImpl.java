@@ -438,7 +438,7 @@ public class LectureDAOImpl implements LectureDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("맥스 : " + rs.getInt(1));
+				/*System.out.println("맥스 : " + rs.getInt(1));*/
 				check = rs.getInt(1);
 			}
 
@@ -456,10 +456,10 @@ public class LectureDAOImpl implements LectureDAO {
 		int check = 0;
 		try {
 			int co_no = getCommentsNo();
-			System.out.println("insert 전 : " + (co_no+1));
+			/*System.out.println("insert 전 : " + (co_no+1));
 			
 			System.out.println("list_no : " + cBean.getList_no());
-			System.out.println("lec_no : " + cBean.getLec_no());
+			System.out.println("lec_no : " + cBean.getLec_no());*/
 			
 			con = getConnection();
 			// co_no, res_no, co_email, co_date, co_content
@@ -496,12 +496,12 @@ public class LectureDAOImpl implements LectureDAO {
 			con = getConnection();
 			sql = "select * from lecture_comment where list_no = ? and lec_no = ? order by co_date desc";
 
-			System.out.println(cBean.getList_no());
+			/*System.out.println(cBean.getList_no());*/
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, cBean.getList_no());
 			pstmt.setInt(2, cBean.getLec_no());
 			rs = pstmt.executeQuery();
-			System.out.println("insertComments");
+			/*System.out.println("insertComments");*/
 
 			while (rs.next()) {
 				CommentsBean bean = new CommentsBean();
@@ -521,11 +521,14 @@ public class LectureDAOImpl implements LectureDAO {
 		} finally {
 			// 트랜젝션 반환
 			closeConnection();
+		
 		}
+		/*
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println("-------------------");
 			System.out.println(list.get(i).getCo_no());
 		}
+		*/
 		return list;
 	}
 
@@ -540,7 +543,7 @@ public class LectureDAOImpl implements LectureDAO {
 			pstmt.setInt(1, co_no);
 			pstmt.setString(2, email);
 			check = pstmt.executeUpdate();
-			System.out.println(check);
+			/*System.out.println(check);*/
 			if (check != 0) {
 				check = 1;
 			} else {

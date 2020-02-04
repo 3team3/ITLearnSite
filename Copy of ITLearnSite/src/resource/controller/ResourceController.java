@@ -69,7 +69,32 @@ public class ResourceController extends HttpServlet {
 			//자료실 main페이지 - list
 			if (path.equals("/resourceList.bo")) {
 				
+				/*
+				else if(path.equals("/resourceSelect.bo"))
+				{
+					System.out.println("resourceSelect.bo");
+					
+					String opt = request.getParameter("opt");
+					String condition = request.getParameter("condition");
+					
+					System.out.println("con opt" + opt);
+					System.out.println("con condition" + condition);
+					
+					List<ResourceBean> ResourceList = serv.resourceSelect(opt,condition);
+					request.setAttribute("ResourceList", ResourceList);
+					nextPage = "/main.jsp";
+					paging= "/pages/main/center/resource/resourceSelect.jsp";
+					request.setAttribute("paging", paging);
+				}
+				*/
+				
 				System.out.println("resourceList.bo");
+				
+				String opt = request.getParameter("opt");
+				String condition = request.getParameter("condition");
+				
+				System.out.println(opt);
+				System.out.println(condition);
 				
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
@@ -82,9 +107,11 @@ public class ResourceController extends HttpServlet {
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
 				
-				Map resourcesMap=serv.listResource(pagingMap);
+				Map resourcesMap=serv.listResource(pagingMap, opt, condition);
 				resourcesMap.put("section", section);
 				resourcesMap.put("pageNum", pageNum);
+				resourcesMap.put("opt", opt);
+				resourcesMap.put("condition", condition);
 				
 				request.setAttribute("resourcesMap", resourcesMap);
 				
