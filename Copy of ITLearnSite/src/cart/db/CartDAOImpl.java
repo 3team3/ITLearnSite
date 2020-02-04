@@ -42,6 +42,7 @@ public class CartDAOImpl implements CartDAO {
       }
    }
 
+   @Override
    public ArrayList<CartBean> getcartlist(String email) {
       ArrayList<CartBean> cartlist = new ArrayList<CartBean>();
       try {
@@ -104,7 +105,9 @@ public class CartDAOImpl implements CartDAO {
       return check;
 
    }
+   
 
+   @Override
    public int addCart(CartBean caBean) {
 
       String sql = "";
@@ -147,6 +150,7 @@ public class CartDAOImpl implements CartDAO {
       return result;
    }
 
+   @Override
    public void editCart(int pro_cnt, int cart_num) {
       int rs = 0;
       
@@ -164,7 +168,6 @@ public class CartDAOImpl implements CartDAO {
          closeConnection();
       }
    }
-
    // 장바구니 선택 삭제
    @Override
    public int delCart(int cart_num) {
@@ -182,21 +185,63 @@ public class CartDAOImpl implements CartDAO {
       return check;
    }
 
-   // 장바구니 전체 삭제
+   //장바구니 전체 삭제
    @Override
    public int delAllCart(String email) {
-      int check = 0;
-      try {
-         con = getConnection();
-         pstmt = con.prepareStatement("delete from cart_table where email = ?");
-         pstmt.setString(1, email);
-         check = pstmt.executeUpdate(); // 쿼리실행으로 삭제된 레코드 수 반환
-      } catch (Exception e) {
-         System.out.println("DelAllcart메소드에서 오류 :" + e);
-      } finally {
-         closeConnection();
-      }
-      return check;
+	   int dch = 0;
+	   try {
+		   con = getConnection();
+		   sql = "select pro_name from cart_table WHERE email = ?";
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, email);
+		   rs = pstmt.executeQuery();
+		   if(rs.next()){
+			   con = getConnection();
+	           pstmt = con.prepareStatement("delete from cart_table where email = ?");
+	           pstmt.setString(1, email);
+	           pstmt.executeUpdate();
+	           dch = 1;
+		   }  
+	        
+	      } catch (Exception e) {
+	         System.out.println("Delcart메소드에서 오류 :" + e);
+	      } finally {
+	         closeConnection();
+	      }
+	  return dch;
    }
+   
+   //장바구니 담긴 갯수 확인
+   @Override
+   public int cartMaxChk(String email){
+	   int check1 = 0;
+	   try {
+	         con = getConnection();
+	         sql = "SELECT COUNT(*) AS NUM FROM cart_table WHERE email=?";
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, email);
+	         int num ;
+	         rs = pstmt.executeQuery();
+	         
+
+	         if (rs.next()) {
+	        	num=rs.getInt("NUM");
+	            if (num==5) {
+	               //5개 존재
+	               check1 = 1;
+	            } else {
+	               //5개 존재 안함
+	               check1 = 0;
+	            }
+	         }
+	      } catch (Exception e) {
+	         System.out.println("cartMaxChk()메소드에서 오류 : " + e);
+	      } finally {
+	         closeConnection();
+	      }
+
+	  return check1;
+   }
+   
 
 }

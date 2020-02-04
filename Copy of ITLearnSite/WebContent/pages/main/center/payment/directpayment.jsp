@@ -22,7 +22,6 @@
 		document.getElementById("address").value = "";
 		document.getElementById("address1").value = "";
 		document.getElementById("address2").value = "";
-	
 	}
 </script>
 <head>
@@ -40,14 +39,13 @@
 	</script>
 </c:if>
 
-
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
         <div class="container">
           <div class="row align-items-end">
             <div class="col-lg-7">
-              <h2 class="mb-0">결제페이지</h2>
+              <h2 class="mb-0">바로 결제페이지</h2>
               <p>Payment page</p>
             </div>
           </div>
@@ -59,7 +57,7 @@
       <div class="container">
         <a href="index.jsp">메인화면</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">결제</span>
+        <span class="current">바로 결제</span>
       </div>
     </div>
 	
@@ -119,53 +117,19 @@
             </div>
         <hr>
         <h5>장바구니</h5>    	
-        	<c:set var="j" value="0"/>
+
         	<c:set var="total" value="0"/>
-        	<c:forEach  var="cartlist"   items="${requestScope.cartlist}">
-       		(${cartlist.pro_sort })
-       		${cartlist.pro_name }
-       		가격:${cartlist.pro_price }
-       		개수:${cartlist.pro_cnt }
+       		(${pro_sort })
+       		${pro_name }
+       		가격:${pro_price }
+       		개수:${pro_cnt}
        		<br>
-       		<c:set var="pro_price" value="${cartlist.pro_price}"/>
+       		<c:set var="pro_price" value="${pro_price}"/>
        		<c:set var="total" value="${total+pro_price}"/>
-       			<c:if test="${j==0}">
-				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro1_name">
-				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro1_cnt">
-				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro1_price">
-				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro1_sort">
-				</c:if>
-				<c:if test="${j==1}">
-				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro2_name">
-				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro2_cnt">
-				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro2_price">
-				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro2_sort">
-				</c:if>
-				
-				<c:if test="${j==2}">			
-				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro3_name">
-				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro3_cnt">
-				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro3_price">
-				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro3_sort">
-				</c:if>
-				
-				<c:if test="${j==3}">	
-				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro4_name">
-				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro4_cnt">
-				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro4_price">
-				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro4_sort">
-				</c:if>
-				
-				<c:if test="${j==4}">			
-				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro5_name">
-				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro5_cnt">
-				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro5_price">
-				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro5_sort">
-				</c:if>
-       		<c:set var="j" value="${j+1}" />
-       		</c:forEach>
-       		
-       			
+				<input type="hidden" value="${pro_name }" name="pay_pro1_name">
+				<input type="hidden" value="${pro_cnt }" name="pay_pro1_cnt">
+				<input type="hidden" value="${pro_price }" name="pay_pro1_price">
+				<input type="hidden" value="${pro_sort }" name="pay_pro1_sort">
 			<div class="pay_position">
 			<hr>
             <h5>총금액</h5>

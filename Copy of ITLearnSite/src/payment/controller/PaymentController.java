@@ -21,6 +21,7 @@ import member.service.MemberServiceImpl;
 import payment.db.PaymentBean;
 import payment.db.PaymentDAOImpl;
 import payment.service.PaymentServiceImpl;
+import textbook.controller.TextbookController;
 
 public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -62,22 +63,103 @@ public class PaymentController extends HttpServlet {
 				cartlist = caServ.getcartlist(email);
 				request.setAttribute("cartlist", cartlist);
 				
-				nextPage = "/main.jsp";
-				paging = "/pages/main/center/payment/payment.jsp";
-				request.setAttribute("paging", paging);
+				int check = pServ.cartnullChk(email);
+				if(check==1){
+					nextPage = "/main.jsp";
+					paging = "/pages/main/center/payment/payment.jsp";
+					request.setAttribute("paging", paging);
+				}
+				else{
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('장바구니가 비었습니다.');");
+					out.println("window.location.href='/ITLearnSite/cart.cart'");
+					out.println("</script>");
+					out.close();
+				}
 			}
 			//주문
 			else if(path.equals("/payment1.pay")){
 				pBean = getPaymentBeanProperty(request, response);
-				pServ.insertPayment(pBean);
 
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('주문완료');");
-				out.println("window.location.href='/ITLearnSite/index.do'");
-				out.println("</script>");
-				out.close();
+				session = request.getSession();
+				String email = (String)session.getAttribute("email");
+				String pro_name;
+				int result=0;
+				String book_title;
+				int book_stock;
+				//구분이 강의라면 강의 이름을 가지고 와서 강의가 존재하는지 알아보기						
+				if(pBean.getPay_pro1_sort()!=null && pBean.getPay_pro1_sort().equals("강의")){
+					pro_name = pBean.getPay_pro1_name();
+					result = pServ.payDupChk(pro_name,email);
+				}
+				if(pBean.getPay_pro2_sort()!=null && pBean.getPay_pro2_sort().equals("강의")){
+					pro_name = pBean.getPay_pro2_name();
+					result = pServ.payDupChk(pro_name,email);
+				}
+				if(pBean.getPay_pro3_sort()!=null && pBean.getPay_pro3_sort().equals("강의")){
+					pro_name = pBean.getPay_pro3_name();
+					result = pServ.payDupChk(pro_name,email);
+				}
+				if(pBean.getPay_pro4_sort()!=null && pBean.getPay_pro4_sort().equals("강의")){
+					pro_name = pBean.getPay_pro4_name();
+					result = pServ.payDupChk(pro_name,email);
+				}
+				if(pBean.getPay_pro5_sort()!=null && pBean.getPay_pro5_sort().equals("강의")){
+					pro_name = pBean.getPay_pro5_name();
+					result = pServ.payDupChk(pro_name,email);
+				}
+				
+				if(result==1){
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('이미 주문한 강의가 존재합니다.');");
+					out.println("window.location.href='/ITLearnSite/index.do'");
+					out.println("</script>");
+					out.close();
+				}else{
+					//주문
+					pServ.insertPayment(pBean);
+					
+					//재고 줄이기
+			        if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){      	
+			        	book_title = pBean.getPay_pro1_name();
+			        	book_stock = pBean.getPay_pro1_cnt();
+			        	pServ.deleteBookstock(book_title, book_stock);
+			        }
+			        if(pBean.getPay_pro2_name()!=null && pBean.getPay_pro2_sort().equals("도서")){
+			        	book_title = pBean.getPay_pro2_name();
+			        	book_stock = pBean.getPay_pro2_cnt();
+			        	pServ.deleteBookstock(book_title, book_stock);
+			        }
+			        if(pBean.getPay_pro3_name()!=null && pBean.getPay_pro3_sort().equals("도서")){
+			        	book_title = pBean.getPay_pro3_name();
+			        	book_stock = pBean.getPay_pro3_cnt();
+			        	pServ.deleteBookstock(book_title, book_stock);
+			        }
+			        if(pBean.getPay_pro4_name()!=null && pBean.getPay_pro4_sort().equals("도서")){
+			        	book_title = pBean.getPay_pro4_name();
+			        	book_stock = pBean.getPay_pro4_cnt();
+			        	pServ.deleteBookstock(book_title, book_stock);
+			        }
+			        if(pBean.getPay_pro5_name()!=null && pBean.getPay_pro5_sort().equals("도서")){
+			        	book_title = pBean.getPay_pro5_name();
+			        	book_stock = pBean.getPay_pro5_cnt();
+			        	pServ.deleteBookstock(book_title, book_stock);
+			        }
+					 
+					 
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('주문완료');");
+					out.println("window.location.href='/ITLearnSite/index.do'");
+					out.println("</script>");
+					out.close();
+				}
+				
 			}
 			//주문확인
 			else if(path.equals("/paymentCheck.pay"))
@@ -99,8 +181,42 @@ public class PaymentController extends HttpServlet {
 			{
 				session = request.getSession();
 				String email = (String)session.getAttribute("email");
-				pServ.deletePayment(email);
+				int pay_no = Integer.parseInt(request.getParameter("pay_no"));
+				String book_title;
+				int book_stock;
 				
+				pBean = pServ.selectPay(pay_no);
+				
+				//재고 원래대로
+				if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){
+		        	book_title = pBean.getPay_pro1_name();
+		        	book_stock = pBean.getPay_pro1_cnt();
+		        	pServ.originBookstock(book_title, book_stock);
+		        }
+		        if(pBean.getPay_pro2_name()!=null && pBean.getPay_pro2_sort().equals("도서")){
+		        	book_title = pBean.getPay_pro2_name();
+		        	book_stock = pBean.getPay_pro2_cnt();
+		        	pServ.originBookstock(book_title, book_stock);
+		        }
+		        if(pBean.getPay_pro3_name()!=null && pBean.getPay_pro3_sort().equals("도서")){
+		        	book_title = pBean.getPay_pro3_name();
+		        	book_stock = pBean.getPay_pro3_cnt();
+		        	pServ.originBookstock(book_title, book_stock);
+		        }
+		        if(pBean.getPay_pro4_name()!=null && pBean.getPay_pro4_sort().equals("도서")){
+		        	book_title = pBean.getPay_pro4_name();
+		        	book_stock = pBean.getPay_pro4_cnt();
+		        	pServ.originBookstock(book_title, book_stock);
+		        }
+		        if(pBean.getPay_pro5_name()!=null && pBean.getPay_pro5_sort().equals("도서")){
+		        	book_title = pBean.getPay_pro5_name();
+		        	book_stock = pBean.getPay_pro5_cnt();
+		        	pServ.originBookstock(book_title, book_stock);
+		        }
+				
+				//주문취소
+				pServ.deletePayment(email,pay_no);				
+					
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -108,6 +224,28 @@ public class PaymentController extends HttpServlet {
 				out.println("window.location.href='/ITLearnSite/paymentCheck.pay'");
 				out.println("</script>");
 				out.close();
+			}
+			//바로주문
+			else if(path.equals("/directPay.pay"))
+			{
+				session = request.getSession();
+				String email = (String)session.getAttribute("email");
+				mBean = mServ.callMember(email);
+				request.setAttribute("mBean", mBean);
+				
+				String pro_name = request.getParameter("pro_name");
+				int pro_price = Integer.parseInt(request.getParameter("pro_price"));
+				String pro_sort = request.getParameter("pro_sort");
+				int pro_cnt = Integer.parseInt(request.getParameter("pro_cnt"));
+				
+				request.setAttribute("pro_name", pro_name);
+				request.setAttribute("pro_price", pro_price);
+				request.setAttribute("pro_sort", pro_sort);
+				request.setAttribute("pro_cnt", pro_cnt);
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/payment/directpayment.jsp";
+				request.setAttribute("paging", paging);
 			}
 
 			System.out.println("nextPage = " + nextPage);

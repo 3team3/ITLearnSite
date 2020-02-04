@@ -38,17 +38,8 @@ function num(num1){
 	
 	
 </script>
+<link href="${path}/css/create.css" rel="stylesheet"> 
 
-<style>
-.num{
-width: 10%;
-}
-.pro_img{
-width: 100px;
-height: 100px;
-}
-
-</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
@@ -57,7 +48,7 @@ height: 100px;
           <div class="row align-items-end">
             <div class="col-lg-7">
               <h2 class="mb-0">장바구니</h2>
-              <p>장바구니->주문/결제->주문완료</p>
+              <p>Cart</p>
             </div>
           </div>
         </div>
@@ -77,25 +68,21 @@ height: 100px;
 		<div class="pagemargin">
 		<div class="content">
 		<form action="payment.pay" method="post" name="cfr"> 
-		<table class="table">			
+		<table class="table tablesize">			
 		<c:set var="j" value="0"/> 
 			<!-- MemberListController에서 넘겨 받은 request영역 안에 있는 list사이즈 만큼 반복 -->
 					<tr align="center">
 					
 						<tr>
-							<th colspan="3">상품정보</th>
+							<th colspan="2">상품정보</th>
 							<th>수량</th>
 							<th>가격</th>
 							<th>분류</th>
 							<th></th>
 							<th></th>
-						</tr>
-					
-				
+						</tr>								
 			 <c:forEach  var="cartlist"   items="${requestScope.cartlist}">				 		
-			  			 
-					<tr>
-						<td class="checkbox"><input type="checkbox"></td>
+					<tr>					
 						<td class="img"><img
 											src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img"></td>
 						<td class="name">${cartlist.pro_name }</td>
@@ -107,20 +94,17 @@ height: 100px;
 											
 											<input type="button" class="btn btn-color1" value="변경" onclick="num(${cartlist.cart_num })">								
 								</div>
-							</td>													
+							</td>				
 						<td class="price"> ${cartlist.pro_price }</td>
 						<td class="sort"> ${cartlist.pro_sort }</td>					
 						<td class="delete"><input type="button" class="btn btn-color1" value="삭제" onclick="location.href='cartDelete.cart?cart_num=${cartlist.cart_num}'"></td>								
 					</tr>					
-					
-	
 				<!-- j변수 값 1씩 증가 -->
 		<c:set var="j" value="${j+1}" />
 	
 			</c:forEach> 		
 		</table>
 		<div class="btn">
-		<input type="button" class="btn btn-color1" value="선택상품주문" onclick="">		
 		<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'">
 		<input type="submit" class="btn btn-color1" value="전체상품주문">
 		</div>

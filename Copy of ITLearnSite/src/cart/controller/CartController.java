@@ -78,7 +78,6 @@ public class CartController extends HttpServlet{
 					out.println("</script>");
 					out.close();
 				}else{				
-				
 				String pro_name=request.getParameter("pro_name");
 				String pro_sort=request.getParameter("pro_sort");
 				String pro_img=request.getParameter("pro_img");
@@ -86,10 +85,10 @@ public class CartController extends HttpServlet{
 				int pro_price=Integer.parseInt(request.getParameter("pro_price"));				
 				int pro_cnt=Integer.parseInt(request.getParameter("pro_cnt"));				
 				int result = caServ.cartDupChk(pro_name, email);
-				
+				int result1 = caServ.cartMaxChk(email);
+			
 				if (result == 1) 
 				{
-					
 					PrintWriter out = response.getWriter();
 					out.println("<script>");
 					out.println("alert('이미 장바구니에 있는 아이템입니다.');");
@@ -99,6 +98,16 @@ public class CartController extends HttpServlet{
 				} 
 				else
 				{
+					if(result1 == 1)
+					{
+						PrintWriter out = response.getWriter();
+						out.println("<script>");
+						out.println("alert('장바구니에 최대 5종류까지 담을 수 있습니다.');");
+						out.println("history.back();");
+						out.println("</script>");
+						out.close();
+					}else{
+					
 					if(pro_sort.equals("강의")){
 					
 					caBean.setEmail(email);
@@ -132,6 +141,7 @@ public class CartController extends HttpServlet{
 						
 					}
 				}
+				}
 				}	
 				
 				
@@ -157,13 +167,12 @@ public class CartController extends HttpServlet{
 				out.println("</script>");
 				out.close();
 				}
-				
-				
+			
 			}else if(path.equals("/cartAllDelete.cart")){//모두삭제
 				System.out.println("장바구니비우기");
 				String email = (String)request.getSession().getAttribute("email");
 				int dch=caServ.DelAllcart(email);
-				if(dch !=0){
+				if(dch ==1){
 					PrintWriter out = response.getWriter();
 					response.setContentType("text/html; charset=UTF-8");
 					out.println("<script>");
@@ -171,7 +180,15 @@ public class CartController extends HttpServlet{
 					out.println("location.href='cart.cart'");
 					out.println("</script>");
 					out.close();
-					}
+				}else{
+					PrintWriter out = response.getWriter();
+					response.setContentType("text/html; charset=UTF-8");
+					out.println("<script>");
+					out.println("alert('장바구니가 비었습니다.');");
+					out.println("location.href='cart.cart'");
+					out.println("</script>");
+					out.close();
+				}
 				
 				
 			}		
