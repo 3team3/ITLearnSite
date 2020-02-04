@@ -1,5 +1,6 @@
 package payment.db;
 
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -334,12 +335,12 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public void deleteBookstock(String book_title,int book_stock){
     	try{
-    		con = getConnection();
-    		sql = "update book_table set book_stock=book_stock-"+book_stock+" where book_title=?"; 
+    		con = getConnection();   		
+    		sql = "update book_table set book_stock=book_stock-"+book_stock+" where book_title='?'"; 
     		pstmt = con.prepareStatement(sql);
-    	    pstmt.setString(1,book_title); 
+    	    pstmt.setString(1,URLEncoder.encode(book_title,"utf-8")); 
     	    pstmt.executeUpdate();
-      	    
+    	    System.out.println("~~~~~~~~~~~~~~~"+URLEncoder.encode(book_title,"utf-8"));
     	}catch(Exception e){
     		System.out.println("deleteBookstock()메소드에서 오류 :"+e);
     	}finally{
@@ -372,9 +373,9 @@ public class PaymentDAOImpl implements PaymentDAO {
     public void originBookstock(String book_title,int book_stock){
     	try{
     		con = getConnection();
-    		sql = "update book_table set book_stock=book_stock+"+book_stock+" where book_title=?"; 
+    		sql = "update book_table set book_stock=book_stock+"+book_stock+" where book_title='?'"; 
     		pstmt = con.prepareStatement(sql);
-    	    pstmt.setString(1,book_title); 
+    	    pstmt.setString(1,URLEncoder.encode(book_title,"utf-8")); 
     	    pstmt.executeUpdate();
       	    
     	}catch(Exception e){

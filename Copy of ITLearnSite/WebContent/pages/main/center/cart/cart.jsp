@@ -74,19 +74,15 @@ function num(num1){
 					<tr align="center">
 					
 						<tr>
-							<th colspan="3">상품정보</th>
+							<th colspan="2">상품정보</th>
 							<th>수량</th>
 							<th>가격</th>
 							<th>분류</th>
 							<th></th>
 							<th></th>
-						</tr>
-					
-				
+						</tr>								
 			 <c:forEach  var="cartlist"   items="${requestScope.cartlist}">				 		
-			  			 
-					<tr>
-						<td class="checkbox"><input type="checkbox"></td>
+					<tr>					
 						<td class="img"><img
 											src="${path }/pages/main/center/lecture/temp/${cartlist.pro_img }" class="pro_img"></td>
 						<td class="name">${cartlist.pro_name }</td>
@@ -98,13 +94,11 @@ function num(num1){
 											
 											<input type="button" class="btn btn-color1" value="변경" onclick="num(${cartlist.cart_num })">								
 								</div>
-							</td>													
+							</td>				
 						<td class="price"> ${cartlist.pro_price }</td>
 						<td class="sort"> ${cartlist.pro_sort }</td>					
 						<td class="delete"><input type="button" class="btn btn-color1" value="삭제" onclick="location.href='cartDelete.cart?cart_num=${cartlist.cart_num}'"></td>								
 					</tr>					
-					
-	
 				<!-- j변수 값 1씩 증가 -->
 		<c:set var="j" value="${j+1}" />
 	

@@ -21,6 +21,7 @@ import member.service.MemberServiceImpl;
 import payment.db.PaymentBean;
 import payment.db.PaymentDAOImpl;
 import payment.service.PaymentServiceImpl;
+import textbook.controller.TextbookController;
 
 public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -123,7 +124,7 @@ public class PaymentController extends HttpServlet {
 					pServ.insertPayment(pBean);
 					
 					//재고 줄이기
-			        if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){
+			        if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){      	
 			        	book_title = pBean.getPay_pro1_name();
 			        	book_stock = pBean.getPay_pro1_cnt();
 			        	pServ.deleteBookstock(book_title, book_stock);
