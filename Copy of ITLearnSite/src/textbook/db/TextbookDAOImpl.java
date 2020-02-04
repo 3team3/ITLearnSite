@@ -138,43 +138,65 @@ public class TextbookDAOImpl implements TextbookDAO {
 	}
 
 	@Override
-	public ArrayList<TextbookBean> selectBookList() {
+	public ArrayList<TextbookBean> selectBookList(int num) {
+		System.out.println(num);
 		ArrayList<TextbookBean> list = new ArrayList<TextbookBean>();
 		try {
 			con = getConnection();
-			sql = "select * from book_table";
+			sql = "select * from ("
+					+ "select rownum rnum, book_table.* from"
+					+ " (select * from book_table order by product_no desc) book_table)"
+					+ " where rnum between ? and ?";
 			pstmt = con.prepareStatement(sql);
+			
+			//num > pagenum 
+			
+			//page당 글 갯수
+			int block = 5;
+			
+			if(num == 1) {
+				pstmt.setInt(1, num);
+				pstmt.setInt(2, num * block);
+			}
+			else if(num != 1)
+			{
+				pstmt.setInt(1, (num-1) * (block) + 1);
+				pstmt.setInt(2, (num-1) * (block) + block);
+			}
+			
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				System.out.println("TextbookDAOImpl.java");
 				System.out.println("----------------------");
-				System.out.println("product_no=" + rs.getInt(1));//product_no
-				System.out.println("title="+rs.getString(2));//title
-				System.out.println("link="+rs.getString(3));//link
-				System.out.println("img="+rs.getString(4));//image
-				System.out.println("author="+rs.getString(5));//author
-				System.out.println("price="+rs.getInt(6));//price
-				System.out.println("discount="+rs.getInt(7));//discount
-				System.out.println("publisher="+rs.getString(8));//publisher
-				System.out.println("pubdate="+rs.getDate(9));//pubdate
-				System.out.println("isbn="+rs.getString(10));//isbn
-				System.out.println("description="+rs.getString(11));//description
-				System.out.println("book_stock=" + rs.getString(12));//bookstock
+				System.out.println("num =" +rs.getInt(1));
+				System.out.println("product_no=" + rs.getInt(2));//product_no
+				System.out.println("title="+rs.getString(3));//title
+				System.out.println("link="+rs.getString(4));//link
+				System.out.println("img="+rs.getString(5));//image
+				System.out.println("author="+rs.getString(6));//author
+				System.out.println("price="+rs.getInt(7));//price
+				System.out.println("discount="+rs.getInt(8));//discount
+				System.out.println("publisher="+rs.getString(9));//publisher
+				System.out.println("pubdate="+rs.getDate(10));//pubdate
+				System.out.println("isbn="+rs.getString(11));//isbn
+				System.out.println("description="+rs.getString(12));//description
+				System.out.println("book_stock=" + rs.getString(13));//bookstock
 				
 				TextbookBean textBean = new TextbookBean();
-				textBean.setProduct_no(rs.getInt(1));
-				textBean.setBook_title(URLDecoder.decode(rs.getString(2),"utf-8"));
-				textBean.setBook_link(URLDecoder.decode(rs.getString(3),"utf-8"));
-				textBean.setBook_image(URLDecoder.decode(rs.getString(4),"utf-8"));
-				textBean.setBook_author(rs.getString(5));
-				textBean.setBook_price(rs.getInt(6));
-				textBean.setBook_discount(rs.getInt(7));
-				textBean.setBook_publisher(rs.getString(8));
-				textBean.setBook_pubdate(String.valueOf(rs.getDate(9)));
-				textBean.setBook_isbn(rs.getString(10));
-				textBean.setBook_description(rs.getString(11));
-				textBean.setBook_stock(rs.getInt(12));
+				textBean.setNum(rs.getInt(1));
+				textBean.setProduct_no(rs.getInt(2));
+				textBean.setBook_title(URLDecoder.decode(rs.getString(3),"utf-8"));
+				textBean.setBook_link(URLDecoder.decode(rs.getString(4),"utf-8"));
+				textBean.setBook_image(URLDecoder.decode(rs.getString(5),"utf-8"));
+				textBean.setBook_author(rs.getString(6));
+				textBean.setBook_price(rs.getInt(7));
+				textBean.setBook_discount(rs.getInt(8));
+				textBean.setBook_publisher(rs.getString(9));
+				textBean.setBook_pubdate(String.valueOf(rs.getDate(10)));
+				textBean.setBook_isbn(rs.getString(11));
+				textBean.setBook_description(rs.getString(12));
+				textBean.setBook_stock(rs.getInt(13));
 				list.add(textBean);
 			}
 		} catch (Exception e) {
@@ -222,5 +244,25 @@ public class TextbookDAOImpl implements TextbookDAO {
 			closeConnection();
 		}
 		return check;
+	}
+	
+	@Override
+	public int count() {
+		int count = 0;
+		try {
+			con = getConnection();
+			sql = "select count(*) from book_table";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+
+		} finally {
+			closeConnection();
+		}
+		return count;
 	}
 }

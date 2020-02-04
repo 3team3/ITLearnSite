@@ -15,8 +15,8 @@ public class TextbookServiceImpl implements TextbookService {
 	}
 	
 	@Override
-	public ArrayList<TextbookBean> selectBookList() {
-		return tbDAO.selectBookList();
+	public ArrayList<TextbookBean> selectBookList(int num) {
+		return tbDAO.selectBookList(num);
 	}
 	
 	
@@ -37,9 +37,16 @@ public class TextbookServiceImpl implements TextbookService {
 		int check = tbDAO.bookdelete(product_no);
 		return check;
 	}
-
+	
+	@Override
 	public int stockModify(int p_no, int price, int stock) {
 		int result = tbDAO.stockmodify(p_no, price, stock);
 		return result;
+	}
+	
+	@Override
+	public int count() {
+		int count = tbDAO.count();
+		return count;
 	}
 }

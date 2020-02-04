@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/bookstock.css">
+<script src="${path}/js/jquery-3.3.1.min.js"></script>
+<script src="${path}/js/makejs/bookList.js"></script>
 </head>
 <body>
 	<c:set var='booklist' value='${list}'></c:set>
@@ -37,11 +39,21 @@
 							<td>${books.book_title}</td>
 							<td><input id="price${books.product_no}" type="text" value="${books.book_price}" style="width: 70px;"></td>
 							<td><input id="stock${books.product_no}" type="text" value="${books.book_stock}" style="width: 70px;"></td>
-							<td><button onclick="modify('${books.product_no}');" >수정</button></td>
+							<td><button onclick="modify('${books.product_no}');">수정</button></td>
 							<td><button onclick="deleteQues('${books.product_no}');">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</table>
+
+				<c:set var="page" value="${count}"></c:set>
+				<!-- 전체 글수를 받아와서 block 단위로  -->
+				<div style="text-align: center;">
+					<c:forEach var="i" begin="1" end="${page}">
+						<c:if test="${page!=0}">
+							<a href="bookstock.text?num=${i}"><button onclick="booklist('bookList.text', '${i}')">${i}</button></a>
+						</c:if>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>

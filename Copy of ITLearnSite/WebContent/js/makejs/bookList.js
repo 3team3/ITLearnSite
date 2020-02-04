@@ -2,11 +2,12 @@ $(function(){
 	var path = window.location.pathname;
 	var path = path.split("/");
 	var path = path[2].trim();
+	var num = 1;
 	
 	var direction = path;
 	if(direction != null){
 		console.log("요청 페이지=" +direction);
-		booklist(direction);
+		booklist(direction, num);
 	}
 });
 
@@ -86,9 +87,13 @@ function setBookDetail(getData){
 	});
 	
 }
-function booklist(direction)
+function num(no){
+	var num = no;
+}
+
+function booklist(direction, num)
 {
-	var url = "bookselect.text";
+	var url = "bookselect.text?num="+num;
 	
 	var form_data = {
 			/**/

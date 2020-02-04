@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -25,8 +24,7 @@
 
 </head>
 
-<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
-	style="background-image: url('../images/bg_1.jpg')">
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
 	<div class="container">
 		<div class="row align-items-end justify-content-center text-center">
 			<div class="col-lg-7">
@@ -39,8 +37,7 @@
 
 <div class="custom-breadcrumns border-bottom">
 	<div class="container">
-		<a href="${path}/index.do">Home</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
+		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
 	</div>
 </div>
 <body>
@@ -48,6 +45,17 @@
 		<div class="pagewrap">
 			<div class="wrapboard"></div>
 			<hr>
+		</div>
+		<div class="pagewrap">
+			<c:set var="page" value="${count}"></c:set>
+			<!-- 전체 글수를 받아와서 block 단위로  -->
+			<div style="text-align: center;">
+				<c:forEach var="i" begin="1" end="${page}">
+					<c:if test="${page!=0}">
+						<button onclick="booklist('bookList.text', '${i}')">${i}</button>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </body>

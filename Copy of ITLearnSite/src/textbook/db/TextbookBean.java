@@ -10,6 +10,8 @@ public class TextbookBean {
 	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
 	}
+	
+	private int num;
 	private String book_title;
 	private String book_link;
 	private String book_image;
@@ -87,6 +89,12 @@ public class TextbookBean {
 	}
 	public void setBook_stock(int book_stock) {
 		this.book_stock = book_stock;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
 	}
 	
 }

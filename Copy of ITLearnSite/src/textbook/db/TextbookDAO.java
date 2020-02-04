@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface TextbookDAO{
 	//책리스트 
-	public ArrayList<TextbookBean>selectBookList();
+	public ArrayList<TextbookBean>selectBookList(int num);
 	//도서  등록
 	public int insertBook(TextbookBean tBean);
 	//도서 상세
@@ -13,5 +13,6 @@ public interface TextbookDAO{
 	public int bookdelete(int product_no);
 	//도서 재고/가격 수정
 	public int stockmodify(int p_no, int price, int stock);
-	
+	//전체 글 갯수
+	public int count();
 }
