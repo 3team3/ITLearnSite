@@ -184,7 +184,23 @@ public class TextbookController extends HttpServlet {
 		int check = tServ.deletebook(product_no);
 		System.out.println(check);
 
-		response.sendRedirect("bookList.text");
+		response.sendRedirect("bookstock.text");
+	    }
+	    else if(path.equals("/stockmodify.text")) {
+	    	
+	    	int price = Integer.parseInt(request.getParameter("price"));
+	    	int stock = Integer.parseInt(request.getParameter("stock"));
+	    	int p_no = Integer.parseInt(request.getParameter("p_no"));
+	    	
+	    	int result = tServ.stockModify(p_no, price , stock); 
+	    	PrintWriter out = response.getWriter();
+	    	if(result == 1) {
+	    		
+	    		out.print(1);
+	    	}
+	    	else if(result == 0) {
+	    		out.print(0);
+	    	}
 	    }
 	    System.out.println("nextPAge" + nextPage);
 	    // null PointException

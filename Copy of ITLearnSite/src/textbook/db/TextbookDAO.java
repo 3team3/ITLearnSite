@@ -11,4 +11,7 @@ public interface TextbookDAO{
 	public TextbookBean bookdetail(int product_no);
 	//도서 삭제
 	public int bookdelete(int product_no);
+	//도서 재고/가격 수정
+	public int stockmodify(int p_no, int price, int stock);
+	
 }

@@ -37,4 +37,9 @@ public class TextbookServiceImpl implements TextbookService {
 		int check = tbDAO.bookdelete(product_no);
 		return check;
 	}
+
+	public int stockModify(int p_no, int price, int stock) {
+		int result = tbDAO.stockmodify(p_no, price, stock);
+		return result;
+	}
 }

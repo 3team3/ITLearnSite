@@ -21,39 +21,68 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
-    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end">
-            <div class="col-lg-7">
-              <h2 class="mb-0">도서 등록</h2>
-              <p>by admin@admin.com</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
+		<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+			<div class="container">
+				<div class="row align-items-end">
+					<div class="col-lg-7">
+						<h2 class="mb-0">도서 등록</h2>
+						<p>by admin@admin.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="custom-breadcrumns border-bottom">
-      <div class="container">
-        <a href="index.jsp">메인화면</a>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">도서등록</span>
-      </div>
-    </div>
+	<div class="custom-breadcrumns border-bottom">
+		<div class="container">
+			<a href="index.jsp">메인화면</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서등록</span>
+		</div>
+	</div>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 				<form action="insertBook.text" method="post" role="form">
-					<span class="label label-[ENTER NAME HERE]">상품 등록</span> <select name="type" id="type" class="form-control" required="required"
-						onchange="select();">
-						<option value="">선택</option>
-						<option value="book">책</option>
-						<option value="lecture">강의</option>
-					</select>
+					<span class="label label-[ENTER NAME HERE]">상품 등록</span>
 
-					<div class="addtag"></div>
-					
+					<div class="addtag">
+						<legend>도서 정보</legend>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_title' name='book_title' placeholder='책제목'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_link' name='book_link' placeholder='책링크'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_image' name='book_image' placeholder='책이미지'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_author' name='book_author' placeholder='작가'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_price' name='book_price' placeholder='책가격'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_discount' name='book_discount' placeholder='할인금액'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_publisher' name='book_publisher' placeholder='출판사'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_pubdate' name='book_pubdate' placeholder='출판일'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_isbn' name='book_isbn' placeholder='isbn'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_description' name='book_description' placeholder='내용'>
+						</div>
+						<div class='form-group'>
+							<input type='text' class='form-control' id='book_description' name='book_stock' placeholder='재고'>
+						</div>
+						<br>
+						<button type='submit' class='btn btn-primary'>등록</button>
+					</div>
 					<br>
 				</form>
 			</div>

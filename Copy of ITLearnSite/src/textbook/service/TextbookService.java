@@ -13,4 +13,6 @@ public interface TextbookService {
 	public TextbookBean bookdetail(int product_no);
 	//도서 삭제
 	public int deletebook (int product_no);
+	//
+	public int stockModify(int p_no, int price , int stock);
 }

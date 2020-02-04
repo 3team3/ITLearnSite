@@ -86,11 +86,11 @@
 					<p>${detail.book_description }</p>
 				</div>
 
-				<div class="bookcontent">
-					<h3>사진</h3>
-					<hr>
-					<img src="">
-				</div>
+<!-- 				<div class="bookcontent"> -->
+<!-- 					<h3>사진</h3> -->
+<!-- 					<hr> -->
+<!-- 					<img src=""> -->
+<!-- 				</div> -->
 
 			</div>
 

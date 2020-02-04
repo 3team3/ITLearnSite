@@ -1,53 +1,55 @@
-function select() {
+//동적 태그 생성 하는 법      
 
-	if ($("#type").val() == 'book') {
-		var string = "<legend>도서 정보</legend>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
-		string += "</div>"
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_link' name ='book_link' placeholder='책링크'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_image' name ='book_image' placeholder='책이미지'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_author' name ='book_author' placeholder='작가'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_price' name ='book_price' placeholder='책가격'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_discount' name ='book_discount' placeholder='할인금액'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_publisher' name ='book_publisher' placeholder='출판사'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_pubdate' name ='book_pubdate' placeholder='출판일'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_isbn' name ='book_isbn' placeholder='isbn'>";
-		string += "</div>";
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_description' name ='book_description' placeholder='내용'>";
-		string += "</div>"
-		string += "<div class='form-group'>";
-		string += "<input type='text' class='form-control' id='book_description' name ='book_stock' placeholder='재고'>";
-		string += "</div>"
-		string += "<br>";
-		string += "<button type='submit' class='btn btn-primary'>등록</button>";
-	
-		$(".addtag").html(string);
-	} else if ($("#type").val() == 'lecture') {
-		var string = "<h1>강의 정보</h1>";
-		string += "<hr>";
-		string += "강의 제목 : <input type='text' name='book_title'><br><br>";
-		string += "강의 내용 : <textarea name ='book_content'></textarea><br><br>";
-		string += "<input type='submit' value='작성'>";
-		$(".addtag").html(string);
-	}
-};
+//function select() {
+
+//	if ($("#type").val() == 'book') {
+//		var string = "<legend>도서 정보</legend>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_title' name ='book_title' placeholder='책제목'>";
+//		string += "</div>"
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_link' name ='book_link' placeholder='책링크'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_image' name ='book_image' placeholder='책이미지'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_author' name ='book_author' placeholder='작가'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_price' name ='book_price' placeholder='책가격'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_discount' name ='book_discount' placeholder='할인금액'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_publisher' name ='book_publisher' placeholder='출판사'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_pubdate' name ='book_pubdate' placeholder='출판일'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_isbn' name ='book_isbn' placeholder='isbn'>";
+//		string += "</div>";
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_description' name ='book_description' placeholder='내용'>";
+//		string += "</div>"
+//		string += "<div class='form-group'>";
+//		string += "<input type='text' class='form-control' id='book_description' name ='book_stock' placeholder='재고'>";
+//		string += "</div>"
+//		string += "<br>";
+//		string += "<button type='submit' class='btn btn-primary'>등록</button>";
+//	
+////		$(".addtag").html(string);
+//	} else if ($("#type").val() == 'lecture') {
+//		var string = "<h1>강의 정보</h1>";
+//		string += "<hr>";
+//		string += "강의 제목 : <input type='text' name='book_title'><br><br>";
+//		string += "강의 내용 : <textarea name ='book_content'></textarea><br><br>";
+//		string += "<input type='submit' value='작성'>";
+//		$(".addtag").html(string);
+//	}
+//};
 
 function mod(text){
 	var gettext = text;

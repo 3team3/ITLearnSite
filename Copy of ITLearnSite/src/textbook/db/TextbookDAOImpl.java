@@ -202,4 +202,25 @@ public class TextbookDAOImpl implements TextbookDAO {
 		}
 		return check;
 	}
+	
+	@Override
+	public int stockmodify(int p_no, int price, int stock) {
+		int check = 0;
+		try {
+			con = getConnection();
+			sql = "update book_table set book_price = ?, book_stock = ? where product_no = ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, price);
+			pstmt.setInt(2, stock);
+			pstmt.setInt(3, p_no);
+			check = pstmt.executeUpdate();
+			System.out.println("####################UPDATE");
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			closeConnection();
+		}
+		return check;
+	}
 }
