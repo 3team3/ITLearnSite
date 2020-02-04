@@ -12,11 +12,10 @@ public interface CartService {
 	public int addCart(CartBean cbean);
 	
 	public int cartDupChk(String pro_name, String email);
-	
-	public int Delcart(int cart_num);
+
 	public void cartEdit(int pro_cnt, int cart_num);
 	public int DelAllcart(String email);
-	
+	public int Delcart(int cart_num);
 	//장바구니 담긴 갯수 확인
     public int cartMaxChk(String email);
 }

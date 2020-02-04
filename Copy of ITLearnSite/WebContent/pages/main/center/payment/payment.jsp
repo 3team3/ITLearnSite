@@ -40,6 +40,7 @@
 	</script>
 </c:if>
 
+
 <body data-spy="scroll" data-target=".site-navbar-target">
 	<div class="site-wrap">
     <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">

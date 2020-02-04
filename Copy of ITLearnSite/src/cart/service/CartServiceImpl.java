@@ -34,17 +34,18 @@ public CartServiceImpl(){
 		return result;
 	}
 	
-	public int Delcart(int cart_num){
-		System.out.println("Delcart");
-		int check=dao.delCart(cart_num);
-		return check;
-	}
+
 	
 	public void cartEdit(int pro_cnt, int cart_num){
 		System.out.println("cartEdit");		
 		dao.editCart(pro_cnt, cart_num);
 	
 		
+	}
+	public int Delcart(int cart_num){
+		System.out.println("Delcart");
+		int check=dao.delCart(cart_num);
+		return check;
 	}
 	
 	public int DelAllcart(String email){

@@ -167,13 +167,12 @@ public class CartController extends HttpServlet{
 				out.println("</script>");
 				out.close();
 				}
-				
-				
+			
 			}else if(path.equals("/cartAllDelete.cart")){//모두삭제
 				System.out.println("장바구니비우기");
 				String email = (String)request.getSession().getAttribute("email");
 				int dch=caServ.DelAllcart(email);
-				if(dch !=0){
+				if(dch ==1){
 					PrintWriter out = response.getWriter();
 					response.setContentType("text/html; charset=UTF-8");
 					out.println("<script>");
@@ -181,7 +180,15 @@ public class CartController extends HttpServlet{
 					out.println("location.href='cart.cart'");
 					out.println("</script>");
 					out.close();
-					}
+				}else{
+					PrintWriter out = response.getWriter();
+					response.setContentType("text/html; charset=UTF-8");
+					out.println("<script>");
+					out.println("alert('장바구니가 비었습니다.');");
+					out.println("location.href='cart.cart'");
+					out.println("</script>");
+					out.close();
+				}
 				
 				
 			}		

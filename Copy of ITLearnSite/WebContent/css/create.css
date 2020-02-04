@@ -55,18 +55,18 @@
 
 .before{
 	min-height: 1000px;
-	width:800px;
+	width:600px;
 	border-style: solid;
 	border-color: #4A56A8;
 }
 .after{
 	min-height: 1000px;
-	width:800px;
+	width:600px;
 	border-style: solid;
 	border-color: #4A56A8;
 }
 
-/*payment*/
+/*cart*/
 .num{
 	width: 10%;
 }
@@ -78,3 +78,22 @@
 	min-height: 100px;
 	min-width: 800px;
 }
+
+/*paymentCheck*/
+.check_left{
+	margin-right:100px;
+ 	margin-bottom: 50px;
+ 	max-width: 900px;
+ 	overflow: scroll;
+ 	height:800px;
+}
+.check_right{
+ 	margin-right: 100px;
+ 	max-width: 900px;
+	overflow: scroll;
+	height:800px;
+}
+.row_padding{
+	padding-left:50px;
+}
+

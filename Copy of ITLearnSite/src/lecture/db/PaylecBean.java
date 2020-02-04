@@ -6,7 +6,7 @@ public class PaylecBean {
 	private int set_no;
 	private String set_email;
 	private String set_lec_title;
-	private Date set_startDate;
+	private Date set_set_endDate;
 	public int getSet_no() {
 		return set_no;
 	}
@@ -25,12 +25,12 @@ public class PaylecBean {
 	public void setSet_lec_title(String set_lec_title) {
 		this.set_lec_title = set_lec_title;
 	}
-	public Date getSet_startDate() {
-		return set_startDate;
+	public Date getSet_set_endDate() {
+		return set_set_endDate;
 	}
-	public void setSet_startDate(Date set_startDate) {
-		this.set_startDate = set_startDate;
+	public void setSet_set_endDate(Date set_set_endDate) {
+		this.set_set_endDate = set_set_endDate;
 	}
-	
+
 	
 }
