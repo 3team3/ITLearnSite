@@ -1,4 +1,5 @@
-/*�쉶�썝 �뀒�씠釉�*/
+
+/*회원 테이블*/
 create table member(
 email varchar2(40) primary key,
 pw varchar2(20) not null,
@@ -15,16 +16,16 @@ sms number(2),
 auth varchar2(2) default 'N'
 );
 
-insert into member(email,pw,name,auth) values('admin@admin.com','1234','愿�由ъ옄','y');
+insert into member(email,pw,name,auth) values('admin@admin.com','1234','관리자','y');
 insert into member values
-('test@test.com','1234','�쉶�썝1',1,'2000','12','12','010-1234-5678','47246','遺��궛愿묒뿭�떆 遺��궛吏꾧뎄 �룞泥쒕줈 109 (遺��쟾�룞, �궪�븳怨⑤뱺寃뚯씠�듃)','�븘�씠�떚�쐧',1,'y');
+('test@test.com','1234','회원1',1,'2000','12','12','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
 insert into member values
-('test1@test.com','1234','�쉶�썝2',1,'1995','1','11','010-1234-5678','47246','遺��궛愿묒뿭�떆 遺��궛吏꾧뎄 �룞泥쒕줈 109 (遺��쟾�룞, �궪�븳怨⑤뱺寃뚯씠�듃)','�븘�씠�떚�쐧',1,'y');
+('test1@test.com','1234','회원2',1,'1995','1','11','010-1234-5678','47246','부산광역시 부산진구 동천로 109 (부전동, 삼한골든게이트)','아이티윌',1,'y');
 
 
 select * from member;
 
-/*�옄猷뚯떎 �뀒�씠釉�*/
+/*자료실 테이블*/
 create table resource_table(
 res_no number(38) primary key,
 res_parentno number(38) default 0,
@@ -33,7 +34,7 @@ res_email varchar2(40),
 res_content varchar2(1000),
 res_filename varchar2(50),
 res_writedate date default sysdate,
-constraint res_email_fk foreign key(res_email) references member(email) on delete cascade
+constraint res_email_fk foreign key(res_email) references member(email)
 );
 
 insert into resource_table(res_no, res_title, res_email)
@@ -75,7 +76,7 @@ values(18, 'asdf', 'test@test.com');
 
 select * from resource_table;
 
-/*�옄猷뚯떎 �뙎湲� �뀒�씠釉�*/
+/*자료실 댓글 테이블*/
 create table resource_comments(
 co_no number(38) primary key,
 res_no number(38),
@@ -85,25 +86,27 @@ co_content varchar2(1000),
 constraint res_no_fk foreign key(res_no) references resource_table(res_no) on delete cascade
 );
 
-
 select * from resource_comments;
 
-/*�씠�슜臾몄쓽寃뚯떆�뙋*/
+/*이용문의게시판*/
 create table question_table(
 ques_no number(38) primary key,
 ques_parentno number(38) default 0,
 ques_title varchar2(50),
 ques_email varchar2(40),
-ques_pw varchar2(20),
 ques_content varchar2(4000),
+isSecret varchar2(10),
+isNotice varchar2(10),
 ques_writedate date default sysdate,
 ques_readcount number(38),
+ques_ref number(38),
+ques_parentemail varchar2(40), 
 constraint ques_email_fk foreign key(ques_email) references member(email) on delete cascade
 );
 
 select * from question_table;
 
-/*媛뺤쓽寃뚯떆�뙋*/
+/*강의게시판*/
 CREATE TABLE lecture_table (
 lec_no  number(38) primary key,
 lec_parentno number(38) default 0,
@@ -165,7 +168,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     1,
-    '�떊�뙟 JSP',
+    '신쌤 JSP',
     60000,
     'aaaa',
     'alim01.png',
@@ -181,7 +184,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     2,
-    '�룞鍮덈굹 JAVA',
+    '동빈나 JAVA',
     60000,
     'aaaa',
     'dongjava01.png',
@@ -197,7 +200,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     3,
-    '�젙誘몃굹 SQL',
+    '정미나 SQL',
     60000,
     'aaaa',
     'jeongsql01.png',
@@ -213,7 +216,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     4,
-    '由щ쿋�븯�� CSS',
+    '리베하얀 CSS',
     60000,
     'aaaa',
     'ricss01.png',
@@ -224,31 +227,47 @@ select * from lecture_table;
 
 
 
-/*援먯옱寃뚯떆�뙋*/
---�떆���뒪 �깮�꽦
+/*교재게시판*/
+--시퀀스 생성
 create sequence book_product_Seq
     start with 1
     increment by 1;
 --drop SEQUENCE book_product_Seq;
 
 create table book_table(
-product_no number primary key, -- �긽�뭹 �벑濡� 踰덊샇濡� 議고쉶
-book_title varchar2(400), -- 梨� �젣紐�
-book_link varchar2(400), -- 留곹겕
-book_image varchar2(400), -- �씠誘몄� 留곹겕
-book_author varchar2(400), --  ���옄
-book_price number, --  媛�寃�
-book_discount number, --�븷�씤媛�
-book_publisher varchar2(30), -- 異쒗뙋�궗
-book_pubdate date,--異쒗뙋�씪                   
+product_no number primary key, -- 상품 등록 번호로 조회
+book_title varchar2(1000), -- 책 제목
+book_link varchar(1000), -- 링크
+book_image varchar2(1000), -- 이미지 링크
+book_author varchar2(400), --  저자
+book_price number, --  가격
+book_discount number, --할인가
+book_publisher varchar2(30), -- 출판사
+book_pubdate date,--출판일                   
 book_isbn varchar2(30), -- pubdate
 book_description varchar2(4000),
 book_stock number
 );
 
+insert into book_table values
+(
+BOOK_PRODUCT_SEQ.nextval,
+'JSPStudy의 JSP & Servlet 웹 프로그래밍 입문(Servlet추가)',
+'http%3A%2F%2Fbook.naver.com%2Fbookdb%2Fbook_detail.php%3Fbid%3D13797129',
+'https%3A%2F%2Fbookthumb-phinf.pstatic.net%2Fcover%2F137%2F971%2F13797129.jpg%3Ftype%3Dm1%26udate%3D20180810',
+'박은종',
+25000,
+22500,
+'이지스퍼블리싱',
+TO_DATE('20180806', 'yyyymmdd'),
+'1163030198 9791163030195',
+'%EC%99%95%EC%B4%88%EB%B3%B4%20%ED%95%99%EC%83%9D%EB%93%A4%EA%B3%BC%20%EB%B6%80%EB%8C%80%EB%81%BC%EB%A9%B0%20%EA%B9%A8%EB%8B%AC%EC%9D%80%20%EB%88%88%EB%86%92%EC%9D%B4%EB%A1%9C%20%3Cb%3E%EC%9E%90%EB%B0%94%3C%2Fb%3E%20%ED%95%99%EC%8A%B5%20%EB%85%B8%ED%95%98%EC%9A%B0%20%EB%8C%80%EA%B3%B5%EA%B0%9C!%0A%EA%B0%9C%EB%B0%9C%20%EC%8B%A4%EB%AC%B4%2010%EB%85%84%2C%20%EA%B0%95%EC%9D%98%2010%EB%85%84!%20%EB%AA%85%EA%B0%95%EC%82%AC%EC%9D%98%20%EA%B8%B0%EC%B4%88%20%ED%8A%BC%ED%8A%BC%20%EC%BD%94%EB%94%A9%20%EB%B0%A5%EC%83%81!%20%0A%EC%99%95%EC%B4%88%EB%B3%B4%20%ED%95%99%EC%83%9D%EB%93%A4%EA%B3%BC%20%EB%B6%80%EB%8C%80%EB%81%BC%EB%A9%B0%20%EA%B9%A8%EB%8B%AC%EC%9D%80%20%EB%88%88%EB%86%92%EC%9D%B4%EB%A1%9C%20%3Cb%3E%EC%9E%90%EB%B0%94%3C%2Fb%3E%20%ED%95%99%EC%8A%B5%20%EB%85%B8%ED%95%98%EC%9A%B0%20%EB%8C%80%EA%B3%B5%EA%B0%9C!%0A%EB%B9%84%EC%A0%84%EA%B3%B5%EC%9E%90%2C%20%EB%AC%B8%EA%B3%BC%EC%83%9D%EB%8F%84%20%EB%AC%B4%EB%A6%8E%EC%9D%84%20%E2%80%98%ED%83%81!%E2%80%99%20%EC%B9%98%EB%A9%B0%20%EC%9D%B4%ED%95%B4%ED%95%98%EB%8A%94%2020%EB%85%84%20%EA%B2%BD%EB%A0%A5%20%EB%AA%85%EA%B0%95%EC%82%AC%EC%9D%98%20%3Cb%3E%EC%9E%90%EB%B0%94%3C%2Fb%3E%20%EA%B0%95%EC%9D%98!%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EB%A5%BC%20%EA%BF%88%EA%BE%B8%EB%8A%94...%20'
+,100
+);
 select * from book_table;
 
-/*�옣諛붽뎄�땲*/
+
+/*장바구니*/
 create table cart_table(
 cart_num int primary key,
 email varchar2(20),
@@ -259,13 +278,13 @@ pro_sort varchar2(20) not null,
 pro_img varchar2(400)
 );
 
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(1,'test@test.com','2020�떆�굹怨� �젙蹂댁쿂由� �궛�뾽湲곗궗 �떎湲�[湲곕낯�꽌]',1,31000,'援먯옱');
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(2,'test@test.com','2021�떆�굹怨� �젙蹂댁쿂由� �궛�뾽湲곗궗 �떎湲�[湲곕낯�꽌]',1,32000,'援먯옱');
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(3,'test@test.com','2025�떆�굹怨� �젙蹂댁쿂由� �궛�뾽湲곗궗 �떎湲�[湲곕낯�꽌]',1,36000,'援먯옱');
-insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(4,'test@test.com','由щ쿋�븯�� CSS',1,50000,'媛뺤쓽');
+
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(1,'test@test.com','리베하얀 CSS',1,50000,'강의');
+insert into cart_table(cart_num, email, pro_name, pro_cnt, pro_price,pro_sort) values(2,'test1@test.com','정미나 SQL',1,60000,'강의');
 
 select * from cart_table;
 
+/*결제*/
 create table payment_table(
 pay_no number(38) primary key,
 pay_email varchar2(40),
@@ -298,53 +317,24 @@ pay_total varchar2(4000),
 pay_option number(2),
 constraint pay_email_fk foreign key(pay_email) references member(email)
 );
-
-create table set_pay_lec_table(
-set_no number(3),
-set_email varchar2(40),
-set_lec_no number(38),
-set_lec_title varchar2(50),
-set_endDate date,
-constraint set_email_fk foreign key(set_email) references member(email)
-);
-
-/*寃곗젣*/
-create table payment_table(
-pay_no number(38) primary key,
-pay_cart_no number(38),
-pay_email varchar2(40),
-pay_name varchar2(50),
-pay_phonenumber varchar2(50),
-pay_address varchar2(50),
-pay_address1 varchar2(50),
-pay_address2 varchar2(50),
-pay_pro_name varchar2(400),
-pay_pro_cnt number,
-pay_pro_price number,
-pay_pro_sort varchar2(20),
-pay_total varchar2(4000),
-pay_option number(2),
-constraint pay_email_fk foreign key(pay_email) references member(email) on delete cascade
-);
 select * from payment_table;
 
-/*
-媛뺤쓽 援щℓ 寃곗젣 �솗�씤 �떆 insert�맆 怨꾩젙蹂� 媛뺤쓽 由ъ뒪�듃
+
+강의 구매 결제 확인 시 insert될 계정별 강의 리스트
 create table set_pay_lec_table(
 set_no number(3),
 set_email varchar2(40),
-set_lec_no number(38),
 set_lec_title varchar2(50),
 set_endDate date,
 constraint set_email_fk foreign key(set_email) references member(email)
 );
-*/
+select * from set_pay_lec_table;
 
-/*�쉶�썝 �궘�젣�떆 �쉶�썝�쓽 �옣諛붽뎄�땲�룄 �븿猿� �궘�젣*/
+
+/*회원 삭제시 회원의 장바구니도 함께 삭제*/
 /*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
 
---�뀒�씠釉� 紐⑤몢 �궘�젣
-/*
+/*테이블 모두 삭제
 drop table cart_table;
 drop table lecture_table;
 drop table member;
@@ -353,5 +343,7 @@ drop table question_table;
 drop table resource_comments;
 drop table resource_table;
 drop table book_table;
-drop sequence book_product_Seq;*/
+drop table set_pay_lec_table;
+*/
+
 commit;
