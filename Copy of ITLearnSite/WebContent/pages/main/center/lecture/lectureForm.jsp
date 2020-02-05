@@ -106,32 +106,37 @@
 	}
 </script>
 
-
-</head>
-
-<body>
-
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
+	style="background-image: url('../images/bg_1.jpg')">
 	<div class="container">
-		<div class="row align-items-end justify-content-center text-center">			
-				<img src="${path }/images/lecture.png">			
+		<div class="row align-items-end justify-content-center text-center">
+			<div class="col-lg-7">
+				<h2 class="mb-0">강의 등록</h2>
+				<p>Lecture Register</p>
+			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="custom-breadcrumns border-bottom">
+<div class="custom-breadcrumns border-bottom">
 	<div class="container">
 		<a href="${path}/index.do">Home</a> <span
 			class="mx-3 icon-keyboard_arrow_right"></span> <a
 			href="${path}/lectureList.lec">강의실</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의	목록</span>
+			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의
+			목록</span>
 	</div>
-	</div>
+</div>
 
+</head>
 
+<body>
 	<div class="site-wrap">
 		<div class="site-section">
 			<div class="container">
 				<form method="post" action="lectureRegister.lec"
 					enctype="multipart/form-data" name="writeForm">
+
 
 					<div class="row">
 
