@@ -19,25 +19,19 @@
 		location.href="${path}/index.do";
 	</script>
 </c:if>
-<body data-spy="scroll" data-target=".site-navbar-target">
-	<div class="site-wrap">
-    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end">
-            <div class="col-lg-7">
-              <h2 class="mb-0">회원관리</h2>
-              <p>by admin@admin.com</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
 
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/admin1.png">			
+	</div>
+</div>
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">메인화면</a>
+        <a href="index.jsp">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">회원관리</span>
+        <span class="current">관리자</span>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">회원 관리</span>
       </div>
     </div>
 	
@@ -81,8 +75,8 @@
 						<td>${memberlist.address1}</td>
 						<td>${memberlist.address2}</td>
 						<td>${memberlist.sms}</td>
-						<td><input type="button" class="btn btn-color1" value="회원주문정보" onclick="location.href='${path}/paymentCheck.pay?email=${memberlist.email}'"></td>
-						<td><input type="button" class="btn btn-color1" value="회원삭제" onclick="location.href='${path}/AdminMemberDelete.admin?email=${memberlist.email}'"></td>						
+						<td><input type="button" class="btn btn-outline-dark" value="회원주문정보" onclick="location.href='${path}/paymentCheck.pay?email=${memberlist.email}'"></td>
+						<td><input type="button" class="btn btn-outline-dark" value="회원삭제" onclick="location.href='${path}/AdminMemberDelete.admin?email=${memberlist.email}'"></td>						
 					</tr>
 
 				<!-- j변수 값 1씩 증가 -->

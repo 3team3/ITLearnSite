@@ -1,5 +1,5 @@
 /*add css*/
-/*ÆäÀÌÁö °¡Àå ¹Ù±ù ¿µ¿ªÀ» ÁöÁ¤*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .gi-2x{
 	font-size: 2em;
 }
@@ -12,29 +12,29 @@
 	justify-content: center;
 	display: flex;
 }
-/*°Ô½ÃÆÇÀ» 4µîºÐ ÇßÀ» ¶§ : 
-	1. ÀüÃ¼±Û / glyphicon (±Û¾²±â ¹öÆ°)
-	2. °Ô½ÃÆÇ ¸®½ºÆ® ºÎºÐ
-	3. ÀüÃ¼±Û / ±Û¾²±â ¹öÆ°
-	4. ÆäÀÌÂ¡ ¹øÈ£
+/*ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ : 
+	1. ï¿½ï¿½Ã¼ï¿½ï¿½ / glyphicon (ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°)
+	2. ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îºï¿½
+	3. ï¿½ï¿½Ã¼ï¿½ï¿½ / ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
+	4. ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½ï¿½È£
 */
-/*°Ô½ÃÆÇ ÀüÃ¼¿µ¿ªÀ» °¨½Î´Â ºÎºÐ*/
+/*ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½Îºï¿½*/
 .wrapboard {
 /* 	border: solid red; */
 	width: 1000px;
 }
-/*¹öÆ°À» °¨½Î´Â ºÎºÐ*/
+/*ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½Îºï¿½*/
 .btn-wrap {
 /* 	border: solid red; */
 	display: inline-block;
 	width: 1000px;
 }
 
-/*ÀüÃ¼±Û/glyphiconÀ» °¨½Î´Â ¿µ¿ª*/
+/*ï¿½ï¿½Ã¼ï¿½ï¿½/glyphiconï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .header-btn {
 /* 	border: solid black; */
 }
-/*float left/ float right ¾µÀÏÀÌ ¸¹À¸¹Ç·Î µû·Î ¼³Á¤*/
+/*float left/ float right ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 .float-l {
 /* 	border: solid black; */
 	float: left;
@@ -48,7 +48,7 @@
 	text-align: center;
 }
 
-/*¹öÆ° »ö»ó*/
+/*ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½*/
 .btn-color1 {
 	color: #fff;
   	background-color: #4A56A8;
@@ -72,16 +72,27 @@
 .tb_head {
 /* 	border: solid black; */
 }
-/*°Ô½ÃÆÇ Çì´õ ºÎºÐ*/
+/*ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Îºï¿½*/
 thead {
-	color: black; /*ÄÃ·³ ÀÌ¸§ »ö*/
-	border-top: 3px solid #3C4790;
+	color: black; /*ï¿½Ã·ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½*/
+	/* border-top: 2px solid #3C4790;  */
+	border-top: 2px solid #353535 !important;
 	border-spacing: auto 10px;
 }
-/*°Ô½ÃÆÇ °£°Ý ºÎºÐ/ Å×µÎ¸®*/
+/*ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½/ ï¿½×µÎ¸ï¿½*/
 .tb_head>td {
-	border-bottom: 2px solid #3C4790;
+	border-bottom: 2px solid #353535 !important;
+	/* border-bottom: 2px solid #3C4790; */
 }
+
+/* #noticethead{
+	border-top: 2px solid #353535 !important;
+}
+#noticethead>tr>td{
+	border-bottom: 2px solid #353535 !important;
+}
+ */
+
 
 .tb_head>td:nth-child(1) {
 	width: 150px;
@@ -121,7 +132,7 @@ thead {
 	height: 35px;
 }
 .box{
-	border: solid 4px #4A56A8;
+	border: solid 3px #353535;
 }
 .lookimg{
 	margin-right : 12px;

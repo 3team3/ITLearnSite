@@ -21,16 +21,12 @@
 
 </head>
 
-   <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end justify-content-center text-center">
-            <div class="col-lg-7">
-              <h2 class="mb-0">자료실</h2>
-              <p>Resource room</p>
-            </div>
-          </div>
-        </div>
-      </div> 
+ <body>     
+    <div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/file.png">			
+		</div>
+	</div>
     
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
@@ -41,20 +37,11 @@
     </div>
     
     
-    
-<body>
 	<div class="pagemargin">
 		<div class="wrapboard">
 			<div class="row">
 				<div class="col-lg-12" style="display: inline-block; text-align: center;">
 					<div class="btn-wrap">
-						<div class="header-btn float-l">
-							<a href="resourceList.bo">
-								<button class="btn btn-color1">
-									<span>전체글</span>
-								</button>
-							</a>
-						</div>
 
 						<div class="header-btn float-r">
 							<a href=""> <!--  -->
@@ -134,7 +121,7 @@
 			<div class="btn-wrap">
 				<div class="header-btn float-l">
 					<a href="resourceList.bo">
-						<button class="btn btn-color1">
+						<button class="btn btn-outline-dark">
 							<span>전체글</span>
 						</button>
 					</a>
@@ -142,13 +129,14 @@
 
 				<div class="header-btn float-r">
 					<a href="resourceWrite.bo">
-						<button class="btn btn-color1">
+						<button class="btn btn-outline-dark">
 							<span>글쓰기</span>
 						</button>
 					</a>
 				</div>
 			</div>
 			<div class="btn-wrap text-align" style="margin-top:20px; margin-bottom: 20px">
+			
 				<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
 				<c:if test="${totResources != null }">
 					<c:choose>
@@ -181,21 +169,13 @@
 
 						<c:when test="${totResources< 100 }">
 							<!--등록된 글 개수가 100개 미만인 경우  -->
-							<%--
-						글수가 100개가 되지 않으므로 표시되는 페이지는
-	     				10개가 되지 않고, 전체 글수를 10으로 나누어
-	     				구한 몫에 1을 더한 페이지까지 표시합니다.
-	     			 --%>
+							<%--글수가 100개가 되지 않으므로 표시되는 페이지는 10개가 되지 않고, 전체 글수를 10으로 나누어 구한 몫에 1을 더한 페이지까지 표시합니다.--%>
 							<c:forEach var="page" begin="1" end="${totResources/10 +1}" step="1">
 								<c:choose>
-									<%--
-						페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우
-	         			페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄
-	         	 	--%>
+									<%-- 페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우 페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄 --%>
 									<c:when test="${page==pageNum }">
 										<a class="sel-page" href="${path }/resourceList.bo?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>
 									</c:when>
-
 									<%--페이지 번호를 클릭하면 section값과 pageNum값을 컨트롤러로 전송 합니다. --%>
 									<c:otherwise>
 										<a class="no-uline" href="${path}/resourceList.bo?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>

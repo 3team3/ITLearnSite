@@ -15,6 +15,10 @@
 .form {
 	width: 475px;
 }
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+h2,h4{
+font-family: 'NIXGONM-Vb';}
+
 </style>
 
 </head>

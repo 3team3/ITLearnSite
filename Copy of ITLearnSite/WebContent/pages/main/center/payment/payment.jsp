@@ -31,6 +31,11 @@
 <link href="${path}/css/style.css" rel="stylesheet"> 
 <link href="${path}/css/create.css" rel="stylesheet"> 
 <title>결제 페이지</title>
+<style type="text/css">
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+h5{
+font-family: 'NIXGONM-Vb';}
+</style>
 </head>
 <c:set var="email" value="${sessionScope.email}"></c:set>
 <c:if test="${email eq null}">
@@ -40,26 +45,17 @@
 	</script>
 </c:if>
 
-
-<body data-spy="scroll" data-target=".site-navbar-target">
-	<div class="site-wrap">
-    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end">
-            <div class="col-lg-7">
-              <h2 class="mb-0">결제페이지</h2>
-              <p>Payment page</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
+ <div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/order.png">			
+		</div>
+	</div>
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">메인화면</a>
+        <a href="index.jsp">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">결제</span>
+        <span class="current">주문하기</span>
       </div>
     </div>
 	
@@ -89,7 +85,7 @@
             </div>
             
             <div class="col-md-12 form-group">
-	            <label for="address">주소</label><input type="button" onclick="DaumPostcode();" class="btn btn-color1 post_position" value="우편번호 찾기">
+	            <label for="address">주소</label><input type="button" onclick="DaumPostcode();" class="btn btn-outline-secondary post_position" value="우편번호 찾기">
 	            <input type="text" name="address" id="address" placeholder="우편번호" readonly="readonly" class="form-control form-control-lg form-text" onblur="addressChk();" required>
 				<input type="text" name="address1" id="address1" placeholder="주소" readonly="readonly" class="form-control form-control-lg form-text" onblur="addressChk();" required> 
 				<input type="text" name="address2" id="address2" placeholder="상세주소" class="form-control form-control-lg form-text" onblur="addressChk();" required><br>
@@ -180,7 +176,7 @@
             <div>${total - total*0.05}원</div>
             <input type="hidden" name="pay_total" value="${total - total*0.05}">
             <div class="btn_right">
-            <button type="submit" class="btn btn-color1">주문하기</button>
+            <button type="submit" class="btn btn-outline-dark">주문하기</button>
             </div>
             </div>
     	</div>

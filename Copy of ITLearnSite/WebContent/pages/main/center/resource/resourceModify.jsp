@@ -18,17 +18,13 @@
 </head>
 	<body>
 	
-	   <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end justify-content-center text-center">
-            <div class="col-lg-7">
-              <h2 class="mb-0">자료실</h2>
-              <p>Resource room</p>
-            </div>
-          </div>
-        </div>
-      </div> 
+	 <div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/file.png">			
+		</div>
+	</div>
     
+		
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
         <a href="${path}/index.do">Home</a>
@@ -41,7 +37,7 @@
 	<div class="container mt-5 mb-5">
 	 <h1>자료실</h1>
 	<form action="updateResource.bo" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-		<table  class="table table-striped" style="text-align: center;">
+		<table  class="table" style="text-align: center;">
 			<tr>
 				<td>번호</td>
 				<td><input type="text" name="res_no" class="form-control" value="${rBean.res_no}" readonly></td>
@@ -71,8 +67,8 @@
 			</tr>
 			</table>
 			<div class="text-right">
-				<input type="button" value="목록으로" class="btn btn-color1" onclick="location.href='resourceList.bo'">
-				<input type="submit"  class="btn btn-color1" value="수정하기">
+				<input type="button" value="목록으로" class="btn btn-outline-dark" onclick="location.href='resourceList.bo'">
+				<input type="submit"  class="btn btn-outline-dark" value="수정하기">
 			</div>
 	</form> 
 	</div>
