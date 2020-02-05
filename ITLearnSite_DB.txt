@@ -200,6 +200,7 @@ INSERT INTO lecture_table (
     lec_spofile
 ) VALUES (
     BOOK_PRODUCT_SEQ.nextval,
+    1,
     '신쌤 JSP',
     60000,
     'aaaa',
@@ -227,7 +228,7 @@ INSERT INTO lecture_table (
 );
 
 INSERT INTO lecture_table (
-     product_no,
+    product_no,
     lec_no,
     lec_title,
     lec_price,
@@ -347,7 +348,7 @@ constraint pay_email_fk foreign key(pay_email) references member(email)
 select * from payment_table;
 
 
-강의 구매 결제 확인 시 insert될 계정별 강의 리스트
+--강의 구매 결제 확인 시 insert될 계정별 강의 리스트
 create table set_pay_lec_table(
 set_no number(3),
 set_email varchar2(40),
@@ -362,19 +363,21 @@ select * from set_pay_lec_table;
 /*alter table cart_table add constraint cart_email_fk foreign key(cart_email) references member(email) on delete cascade;*/
 
 /*테이블 모두 삭제
+drop sequence book_product_Seq;
 drop table lecture_comment;
 drop table lecture_list;
 drop table product_stock;
 drop table product_table;
 drop table cart_table;
 drop table lecture_table;
-drop table member;
 drop table payment_table;
 drop table question_table;
 drop table resource_comments;
 drop table resource_table;
 drop table book_table;
 drop table set_pay_lec_table;
+drop table member;
 */
+select * from lecture_table;
 SELECT * FROM CART_TABLE;
 commit;
