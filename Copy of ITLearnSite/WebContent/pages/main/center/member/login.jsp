@@ -5,8 +5,12 @@
 <html lang="ko">
 
 <head>
+<style type="text/css">
+#loginbtn{
+ width: 445px;
+}
+</style>
 </head>
-
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<c:if test="${ loginResult == -1 || loginResult == 0 }">
 		<script>
@@ -57,7 +61,7 @@
 							</div>
 							<div class="row">
 								<div class="col-12">
-									<input type="submit" value="로그인" class="btn btn-primary btn-lg px-5">
+									<input type="submit" id="loginbtn" value="로그인" class="btn btn-primary btn-lg px-5">
 								</div>
 							</div>
 						</div>
