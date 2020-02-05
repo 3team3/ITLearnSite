@@ -19,16 +19,12 @@
 </head>
 <body>
 
-	<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-		<div class="container">
-			<div class="row align-items-end justify-content-center text-center">
-				<div class="col-lg-7">
-					<h2 class="mb-0">자료실</h2>
-					<p>Resource room</p>
-				</div>
-			</div>
+	 <div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/file.png">			
 		</div>
 	</div>
+    
 
 	<div class="custom-breadcrumns border-bottom">
 		<div class="container">
@@ -40,7 +36,7 @@
 	<div class="container mt-5 mb-5">
 		<h1>자료실</h1>
 		<form action="resourceModify.bo" method="post">
-			<table class="table table-striped" style="text-align: center;">
+			<table class="table" style="text-align: center;">
 				<tr>
 					<td>번호</td>
 					<td><input type="text" name="res_no" class="form-control" value="${rBean.res_no}" readonly></td>
@@ -66,9 +62,9 @@
 				</tr>
 			</table>
 			<div class="text-right">
-				<input type="button" value="목록으로" class="btn btn-color1" onclick="location.href='resourceList.bo'"> 
-				<input type="submit" class="btn btn-color1" value="수정"> 
-				<input type="button" class="btn btn-color1" value="삭제" onclick="location.href='resourceDelete.bo?res_no=${rBean.res_no}'">
+				<input type="button" value="목록으로" class="btn btn-outline-dark" onclick="location.href='resourceList.bo'"> 
+				<input type="submit" class="btn btn-outline-dark" value="수정"> 
+				<input type="button" class="btn btn-outline-dark" value="삭제" onclick="location.href='resourceDelete.bo?res_no=${rBean.res_no}'">
 			</div>
 		</form>
 		<hr>
@@ -88,10 +84,12 @@
 			</div>
 			<hr>
 			<c:if test="${email == null}">
-				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="130" rows="3" style="resize:none" readonly="readonly" onclick="nologin();"></textarea>
+				<textarea id="commentContent" placeholder="로그인 후 댓글 작성이 가능합니다" cols="120" rows="3" style="resize:none" readonly="readonly" onclick="nologin();"></textarea>
 				<br>
 				<input type="hidden" id="res_no" name="res_no" value="${res_no}">
-				<input type="button" id="commentWrite" value="댓글 작성" onclick="nologin();">
+				<div class="text-right">
+				<input type="button" class="btn btn-outline-secondary" id="commentWrite" value="댓글 작성" onclick="nologin();">
+				</div>
 			</c:if>
 			<c:if test="${email != null }">
 				<form>
@@ -99,8 +97,10 @@
 					<!-- 현재 글에 comments table을 조회해서 코멘트 순서 번호를 가져와야함 select  -->
 					<input type="hidden" id="res_no" name="res_no" value="${res_no}"> 
 					<input type="hidden" id="co_email" name="co_email" value="${email}">
-					<textarea id="content" name="content" placeholder="바르고 고운말" cols="130" rows="3" style="resize:none"></textarea>
-					<input type="button" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
+					<textarea id="content" name="content" placeholder="바르고 고운말" cols="120" rows="3" style="resize:none"></textarea>
+					<div class="text-right">
+					<input type="button" class="btn btn-outline-secondary" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
+					</div>
 				</form>
 			</c:if>
 			<br>

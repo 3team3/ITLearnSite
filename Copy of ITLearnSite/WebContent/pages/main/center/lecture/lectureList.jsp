@@ -35,15 +35,9 @@
 					</a>
 				</div> -->
 
-<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
-	style="background-image: url('../images/bg_1.jpg')">
-	<div class="container">
-		<div class="row align-items-end justify-content-center text-center">
-			<div class="col-lg-7">
-				<h2 class="mb-0">강의실</h2>
-				<p>Lecture room</p>
-			</div>
-		</div>
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/lecture.png">			
 	</div>
 </div>
 
@@ -53,8 +47,6 @@
 			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의실</span>
 	</div>
 </div>
-
-
 
 <body>
 

@@ -22,16 +22,12 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 
-   <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end justify-content-center text-center">
-            <div class="col-lg-7">
-              <h2 class="mb-0">고객센터</h2>
-              <p>Customer Service Center</p>
-            </div>
-          </div>
-        </div>
-      </div> 
+<body>
+  	<div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/service.png">			
+		</div>
+	</div>
     
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
@@ -42,8 +38,6 @@
     </div>
     
     
-    
-<body>
 	<div class="pagemargin">
 		<div class="wrapboard">
 			<div class="row">
@@ -61,7 +55,7 @@
 			<div class="boardoutline">
 				<div class="content">
 					<table class="table">
-						<thead>
+						<thead id="noticethead" class="table-light">
 							<tr class="tb_head">
 								<td>번호</td>
 								<td>제목</td>
@@ -75,14 +69,14 @@
 							<%-- 공지사항이 있으면 공지사항 표시 --%>
 							<c:if test="${questionsList1 != null }">
 								<c:forEach var="question" items="${questionsList1 }" varStatus="questionNum">
-										<tr align="center">
-											<td width="5%">공지</td>
+										<tr align="center" class="table-light">
+											<td width="5%" class="text-success">공지</td>
 											<td align="left" width="30%">
 												<a class="cls1" href="questionView.ques?ques_no=${question.ques_no}">${question.ques_title}</a>
 											</td>
-											<td width="7%">${question.ques_email }</td>
-											<td width="7%"><fmt:formatDate value="${question.ques_writedate}" /></td>
-											<td width="7%">${question.ques_readcount }</td>
+											<td width="10%">${question.ques_email }</td>
+											<td width="10%"><fmt:formatDate value="${question.ques_writedate}" /></td>
+											<td width="10%">${question.ques_readcount }</td>
 										</tr>
 								</c:forEach>
 							</c:if>
@@ -168,7 +162,7 @@
 			<div class="btn-wrap">
 				<div class="header-btn float-l">
 					<a href="questionList.ques">
-						<button class="btn btn-color1">
+						<button class="btn btn-outline-dark">
 							<span>전체글</span>
 						</button>
 					</a>
@@ -176,7 +170,7 @@
 
 				<div class="header-btn float-r">
 					<a href="questionWrite.ques">
-						<button class="btn btn-color1">
+						<button class="btn btn-outline-dark">
 							<span>글쓰기</span>
 						</button>
 					</a>
@@ -215,17 +209,10 @@
 
 						<c:when test="${totQuestions < 100 }">
 							<!--등록된 글 개수가 100개 미만인 경우  -->
-							<%--
-						글수가 100개가 되지 않으므로 표시되는 페이지는
-	     				10개가 되지 않고, 전체 글수를 10으로 나누어
-	     				구한 몫에 1을 더한 페이지까지 표시합니다.
-	     			 --%>
+							<%--글수가 100개가 되지 않으므로 표시되는 페이지는 10개가 되지 않고, 전체 글수를 10으로 나누어 구한 몫에 1을 더한 페이지까지 표시합니다. --%>
 							<c:forEach var="page" begin="1" end="${totQuestions/10 +1}" step="1">
 								<c:choose>
-									<%--
-						페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우
-	         			페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄
-	         	 	--%>
+									<%-- 페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우 페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄 --%>
 									<c:when test="${page==pageNum }">
 										<a class="sel-page" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${page } </a>
 									</c:when>
@@ -251,7 +238,7 @@
 				<div class="search-wrap">
 					<input class="box inputbox" type="text" name="select_content"> 
 					<span class="lookimg"> 			
-						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
+						<button type="submit"><img src="${path}/images/look.png" width="30px" height="30px"></button>
 					</span>
 				</div>
 			</form>

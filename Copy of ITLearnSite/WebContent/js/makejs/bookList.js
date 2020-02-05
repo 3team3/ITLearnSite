@@ -52,9 +52,9 @@ function setBooklist(getData){
 			+		"</a>"
 			+			"<p class='book_price'> 가격 : " + getData.list[i].book_price + "원</p>"
 			+		"<div class='buttons'>"
-			+			"<a href='cartAdd.cart?&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort=도서&pro_cnt=1' class='btn btn-primary rounded-0 px-4'> 담기 </a>"
-			+			"<button class='btn btn-color1'> 맛보기 </button>"
-			+			"<input type='button' class='btn btn-danger float-r' value='삭제' onclick='deleteQues("+ p_no + ");'>"
+			+			"<a href='cartAdd.cart?&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort=도서&pro_cnt=1' class='btn btn-outline-primary rounded-0 px-4'> 담기 </a>"
+			+			"<button class='btn btn-outline-secondary'> 맛보기 </button>"
+			+			"<input type='button' class='btn btn-outline-danger float-r' value='삭제' onclick='deleteQues("+ p_no + ");'>"
 			+		"</div>"
 			+	"</div>"
 			+"</div>";

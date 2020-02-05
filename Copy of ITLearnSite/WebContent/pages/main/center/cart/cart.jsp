@@ -50,23 +50,15 @@ height: 100px;
 
 </style>
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target">
-	<div class="site-wrap">
-    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end">
-            <div class="col-lg-7">
-              <h2 class="mb-0">장바구니</h2>
-              <p>장바구니->주문/결제->주문완료</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
+ <div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/cart2.png">			
+		</div>
+	</div>
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">메인화면</a>
+        <a href="index.jsp">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">장바구니</span>
       </div>
@@ -105,12 +97,12 @@ height: 100px;
 											<input type="text" name="pro_cnt" value="${cartlist.pro_cnt }" class="num"> 
 											<a href="#" id="plusbtn"><img src="${path}/images/plus.png" alt="" width="20px" height="20px" class="bt_up"/></a> 
 											
-											<input type="button" class="btn btn-color1" value="변경" onclick="num(${cartlist.cart_num })">								
+											<input type="button" class="btn btn-outline-success" value="변경" onclick="num(${cartlist.cart_num })">								
 								</div>
 							</td>													
 						<td class="price"> ${cartlist.pro_price }</td>
 						<td class="sort"> ${cartlist.pro_sort }</td>					
-						<td class="delete"><input type="button" class="btn btn-color1" value="삭제" onclick="location.href='cartDelete.cart?cart_num=${cartlist.cart_num}'"></td>								
+						<td class="delete"><input type="button" class="btn btn-outline-danger" value="삭제" onclick="location.href='cartDelete.cart?cart_num=${cartlist.cart_num}'"></td>								
 					</tr>					
 					
 	
@@ -120,9 +112,9 @@ height: 100px;
 			</c:forEach> 		
 		</table>
 		<div class="btn">
-		<input type="button" class="btn btn-color1" value="선택상품주문" onclick="">		
-		<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'">
-		<input type="submit" class="btn btn-color1" value="전체상품주문">
+		<input type="button" class="btn btn-outline-dark" value="선택상품주문" onclick="">		
+		<input type="button" class="btn btn-outline-dark" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'">
+		<input type="submit" class="btn btn-outline-dark" value="전체상품주문">
 		</div>
 		  </form>
 		

@@ -58,10 +58,10 @@ function cmtlist()
 				var comments = 
 					"<tr>"
 					+ 	"<td width='10%'>"+getData.list[i].co_email+"</td>"
-					+		"<td width='70%'>"+getData.list[i].co_content+"</td>"
-					+ 		"<td width='10%'>"+getData.list[i].co_date+"</td>"
+					+		"<td width='65%'>"+getData.list[i].co_content+"</td>"
+					+ 		"<td width='15%'>"+getData.list[i].co_date+"</td>"
 					+		"<td width='7%'>" 
-					+			"<button onclick='deleteComment("+'"'+addr+'"'+");'" +">삭제</button>" 
+					+			"<button class='btn btn-light' onclick='deleteComment("+'"'+addr+'"'+");'" +">삭제</button>" 
 					+		"</td>"
 					+ 	"</tr>";
 				

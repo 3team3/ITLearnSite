@@ -2,33 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="email" value="${sessionScope.email}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<title>ITLearn</title>
-<!-- <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet"> -->
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style type="text/css">
-:lang(ko) {
-	font-family: 'NanumGothic', 'Noto Sans KR', sans-serif;
-}
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+h2,h5{
+font-family: 'NIXGONM-Vb';}
 </style>
-<link rel="stylesheet" href="${path}/fonts/icomoon/style.css">
-<link rel="stylesheet" href="${path}/css/bootstrap.min.css">
-<link rel="stylesheet" href="${path}/css/jquery-ui.css">
-<link rel="stylesheet" href="${path}/css/owl.carousel.min.css">
-<link rel="stylesheet" href="${path}/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="${path}/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="${path}/css/jquery.fancybox.min.css">
-<link rel="stylesheet" href="${path}/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="${path}/fonts/flaticon/font/flaticon.css">
-<link rel="stylesheet" href="${path}/css/aos.css">
-<link href="${path}/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="${path}/css/style.css">
 </head>
+
+<c:if test="${email eq null}">
+	<script type="text/javascript">
+		alert("로그인 후 조회가능합니다.");
+		location.href="${path}/index.do";
+	</script>
+</c:if>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -40,22 +30,20 @@
 	
  <div class="site-wrap">
 	
-   <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end justify-content-center text-center">
-            <div class="col-lg-7">
-              <h2 class="mb-0">마이페이지</h2>
-              <p>Mypage</p>
-            </div>
-          </div>
-        </div>
-      </div> 
+ <div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/mypage1.png">			
+	</div>
+</div>
+
     
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
         <a href="${path}/index.do">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
         <span class="current">마이페이지</span>
+	        <span class="mx-3 icon-keyboard_arrow_right"></span>
+	        <span class="current">회원정보 수정</span>
       </div>
     </div>
 
@@ -79,7 +67,7 @@
     </div>
     </div>
   </div>
-  
+  <%-- 
   <script src="${path}/js/jquery-3.3.1.min.js"></script>
   <script src="${path}/js/jquery-migrate-3.0.1.min.js"></script>
   <script src="${path}/js/jquery-ui.js"></script>
@@ -96,7 +84,7 @@
   <script src="${path}/js/jquery.mb.YTPlayer.min.js"></script>
   <script src="${path}/js/main.js"></script>
   <script src="${path}/js/makejs/commons.js"></script>
-  <script src="${path}/js/makejs/DaumPostAPI.js"></script>
+  <script src="${path}/js/makejs/DaumPostAPI.js"></script> --%>
   
 </body>
 </html>

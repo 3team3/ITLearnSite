@@ -14,34 +14,29 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-theme.min.css">
 <style>
-.container {
-	padding-bottom: 50px;
-}
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+body{
+font-family: 'NIXGONM-Vb';}
 </style>
-</head>
-<body data-spy="scroll" data-target=".site-navbar-target">
-	<div class="site-wrap">
-    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end">
-            <div class="col-lg-7">
-              <h2 class="mb-0">도서 등록</h2>
-              <p>by admin@admin.com</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
 
-    <div class="custom-breadcrumns border-bottom">
+</head>
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/admin3.png">			
+	</div>
+</div>
+ <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">메인화면</a>
+        <a href="index.jsp">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">도서등록</span>
+        <span class="current">관리자</span>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">도서 등록</span>
       </div>
     </div>
+   
 <body>
-	<div class="container">
+	<div class="container pb-5">
 		<div class="row">
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 				<form action="insertBook.text" method="post" role="form">

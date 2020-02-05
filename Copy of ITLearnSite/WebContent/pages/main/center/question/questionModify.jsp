@@ -18,17 +18,13 @@
 </head>
 	<body>
 	
-	    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end justify-content-center text-center">
-            <div class="col-lg-7">
-              <h2 class="mb-0">고객센터</h2>
-              <p>Customer Service Center</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    
+	<div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/service.png">			
+		</div>
+	</div>
+	
+	
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
         <a href="${path}/index.do">Home</a>
@@ -73,8 +69,8 @@
 			</tr>
 			</table>
 			<div class="text-right">
-				<input type="button" value="목록으로" class="btn btn-color1" onclick="location.href='questionList.ques'">
-				<input type="submit"  class="btn btn-color1" value="수정하기">
+				<input type="button" value="목록으로" class="btn btn-outline-dark" onclick="location.href='questionList.ques'">
+				<input type="submit"  class="btn btn-outline-dark" value="수정하기">
 			</div>
 	</form> 
 	</div>

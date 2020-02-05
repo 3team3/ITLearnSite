@@ -39,8 +39,7 @@
               <h3 class="footer-heading"><span>자주 찾는 메뉴</span></h3>
               <ul class="list-unstyled">
                   <li><a href="#">내 강의실</a></li>
-                  <li><a href="notice.noti">공지사항</a></li>
-                  <li><a href="qna.ques">이용 문의</a></li>
+                  <li><a href="#">고객센터</a></li>
                   <li><a href="resourceList.bo">자료실</a></li>                  
               </ul>
           </div>
@@ -51,7 +50,7 @@
             <div class="copyright">
                 <p>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved </a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
             </div>
