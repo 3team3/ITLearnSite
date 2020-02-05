@@ -9,6 +9,11 @@
 #loginbtn{
  width: 445px;
 }
+
+input[type=password] {
+font-family: fantasy;
+}
+
 </style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
