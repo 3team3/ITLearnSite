@@ -25,17 +25,12 @@ font-family: 'NIXGONM-Vb';}
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-	<div class="site-wrap">
-		<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-			<div class="container">
-				<div class="row align-items-end justify-content-center text-center">
-					<div class="col-lg-7">
-						<h2 class="mb-0">마이페이지</h2>
-						<p>Mypage</p>
-					</div>
-				</div>
-			</div>
-		</div>
+ <div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/mypage1.png">			
+	</div>
+</div>
+
 
 		<div class="custom-breadcrumns border-bottom">
 			<div class="container">
