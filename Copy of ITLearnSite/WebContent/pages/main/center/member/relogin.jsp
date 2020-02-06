@@ -15,7 +15,7 @@ input[type=password] {
 font-family: fantasy;}
 
 #loginbtn{
- width: 445px;
+ width: 100%;
 }
 
 

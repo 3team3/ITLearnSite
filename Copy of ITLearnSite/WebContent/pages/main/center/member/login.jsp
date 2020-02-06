@@ -7,7 +7,7 @@
 <head>
 <style type="text/css">
 #loginbtn{
- width: 445px;
+ width: 100%;
 }
 
 input[type=password] {
