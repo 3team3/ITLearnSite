@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${path}/css/member.css" rel="stylesheet"> 
+
 <link href="${path}/css/create.css" rel="stylesheet"> 
 <title>주문관리</title>
 </head>
@@ -20,39 +20,38 @@
 		location.href="${path}/index.do";
 	</script>
 </c:if>
- <div class="container">
-	<div class="row align-items-end justify-content-center text-center">			
-			<img src="${path }/images/mypage3.png">			
-	</div>
-</div>
+<body data-spy="scroll" data-target=".site-navbar-target">
+	<div class="site-wrap">
+    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+        <div class="container">
+          <div class="row align-items-end">
+            <div class="col-lg-7">
+              <h2 class="mb-0">주문확인</h2>
+              <p>Order confirmation</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
 
-    
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">Home</a>
+        <a href="index.jsp">메인화면</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">마이페이지</span>
-	        <span class="mx-3 icon-keyboard_arrow_right"></span>
-	        <span class="current">주문 확인</span>
+        <span class="current">주문확인</span>
       </div>
     </div>
 
 	<center>	
 		<div class="pagemargin">
 		<div class="content">
+		<div class="row row_padding">
+		<div class="check_left">
 		<h3>결제 전</h3>
-		
 		<table class="table before">
-			
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
 			
-			
-			<c:if test="${paymentList.pay_option==1}">
-			<tr>
-				<td colspan="4"></td>
-			</tr>
-			</c:if>
 			<c:if test="${paymentList.pay_option==0}">
 			<tr class="tb_head">
 				<td colspan="4">주문 : ${j+1}</td>
@@ -136,7 +135,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay'"></td>	
+				<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay?pay_no=${paymentList.pay_no}'"></td>	
 			</tr>
 				<!-- j변수 값 1씩 증가 -->
 				<c:set var="j" value="${j+1}" />
@@ -147,16 +146,13 @@
 			</tr>
 
 		</table>
+		</div>
+		<div class="check_right">
 		<h3>결제 후</h3>
 		<table class="table after">
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentList}"	>
 		
-			<c:if test="${paymentList.pay_option==0}">
-			<tr>
-				<td colspan="4"></td>
-			</tr>
-			</c:if>
 			<c:if test="${paymentList.pay_option==1}">
 			<tr class="tb_head">
 				<td colspan="4">주문 : ${j+1}</td>
@@ -240,6 +236,8 @@
 			</tr>
 
 		</table>
+		</div>
+		</div>
 		</div>
 		</div>
 	</center>
