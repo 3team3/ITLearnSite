@@ -10,9 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>이메일 인증이 완료 되었습니다. 이제 로그인이 가능합니다.</h1>
-	<a href="index.do">
-		<button>메인으로</button>
-	</a>
+	<div style="margin-top: 100px;">
+		<h1>이메일 인증이 완료 되었습니다. 이제 로그인이 가능합니다.</h1>
+		<a href="index.do">
+			<button>메인으로</button>
+		</a>
+	</div>
 </body>
 </html>

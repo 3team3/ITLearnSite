@@ -5,6 +5,10 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
@@ -22,6 +26,7 @@ import member.email.JoinMail;
 import member.service.MemberServiceImpl;
 import sun.security.action.GetIntegerAction;
 import sun.security.jca.GetInstance;
+import sun.security.provider.NativePRNG.NonBlocking;
 
 public class MemberController extends HttpServlet {
 
@@ -208,13 +213,22 @@ public class MemberController extends HttpServlet {
 				mBean = getMemberBeanProperty(request, response); // MemberBean에 값을 셋팅해주고 반환해주는 메소드
 				result = serv.InsertMember(mBean);// MemberService에 있는 메서드를 호출 // MemberService serv = new
 													// MemberService()
+				
+				/*##############################################################################*/
+				/*이메일 전송 쓰레드 이메일 보내는것이 오래걸리기 때문에 페이지가 대기하는것을 해결(BLOCKING방지)*/
 				String message = "<a href = " + request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/emailAuth.do?email="+mBean.getEmail()+">" +"링크"+ "</a>";
 				JoinMail mail = new JoinMail(mBean.getEmail(), message);
-				try {
-					mail.sendMail();//메일 전송
-				} catch (UnsupportedEncodingException | MessagingException e) {
-					e.printStackTrace();
-				}
+				
+				ExecutorService executorService = Executors.newCachedThreadPool();
+				
+				Future<Double> future = (Future<Double>) executorService.submit(() -> {
+					try {
+						mail.sendMail();//메일 전송 10초가량 또는 그이상 걸리는 것같음. 
+					} catch (UnsupportedEncodingException | MessagingException e) {
+						e.printStackTrace();
+					}
+				});
+				/*#################################################################################*/
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/member/joinSuccess.jsp";// 회원가입후 회원가입 성공페이지로 이동
 				request.setAttribute("paging", paging);

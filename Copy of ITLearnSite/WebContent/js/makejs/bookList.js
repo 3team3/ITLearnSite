@@ -61,17 +61,23 @@ function setBooklist(getData){
 	}
 	
 	var pageCount = getData.pageCount;
-	var pageNum = "";
-	var pageTag = "";
 	
-	for(var page = 1; pageCount > 1; page ++)
+	var pageTag = "";
+	var string2 ="";
+	for(var i = 1; i <= pageCount; i++)
 	{
-		pageNum = 
-			"<div style='text-align:center;'>" 
-			+	"<button onclick='booklist('bookList.text', "+page+")'>"+page+"</button>" 
-			+"</div>";
-		pageTag = pageNum+pageTag;
+		var paging ="<button onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>";
+		string2 = string2 + paging;
 	}
+	
+	console.log(string2);
+//	for(var page = 1; pageCount > 1; page ++)
+//	{
+//		var pageNum = "<div style='text-align:center;'>" 
+////			+	"<button onclick='booklist('bookList.text', "+page+")'>"+page+"</button>" 
+//			+"</div>";
+//		
+//	}
 //		<c:set var="page" value="${count}"></c:set>
 //		<!-- 전체 글수를 받아와서 block 단위로  -->
 //		<div style="text-align: center;">
@@ -82,7 +88,7 @@ function setBooklist(getData){
 //			</c:forEach>
 //		</div>
 	
-	$(".wrapboard").html(string);
+	$(".wrapboard").html(string+"<div style='text-align:center'> "+string2 + "</div>");
 }
 
 function setBookDetail(getData){
