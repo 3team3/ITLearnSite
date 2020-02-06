@@ -106,31 +106,28 @@
 	}
 </script>
 
-<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
-	style="background-image: url('../images/bg_1.jpg')">
-	<div class="container">
-		<div class="row align-items-end justify-content-center text-center">
-			<div class="col-lg-7">
-				<h2 class="mb-0">강의 등록</h2>
-				<p>Lecture Register</p>
-			</div>
-		</div>
-	</div>
-</div>
 
-<div class="custom-breadcrumns border-bottom">
-	<div class="container">
-		<a href="${path}/index.do">Home</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <a
-			href="${path}/lectureList.lec">강의실</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의
-			목록</span>
-	</div>
-</div>
+
+
 
 </head>
 
 <body>
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/admin5.png">			
+	</div>
+</div>
+	<div class="custom-breadcrumns border-bottom">
+		<div class="container">
+			<a href="${path}/index.do">Home</a> 
+			<span class="mx-3 icon-keyboard_arrow_right"></span> 
+			<span class="current">관리자</span>
+			<span class="mx-3 icon-keyboard_arrow_right"></span> 
+			<span class="current">강의 등록</span>
+		</div>
+	</div>
+
 	<div class="site-wrap">
 		<div class="site-section">
 			<div class="container">
@@ -184,16 +181,16 @@
 						</div>
 						<div id="tdImg" class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0"></div>
 					</div>
-					<div class="row" style="margin: 10px">
+					<div class="text-right" style="margin: 10px">
 						<input type="button" value="추가" onclick="addInput()"
-							class="btn btn-primary btn-lg px-5" style="margin: 10px;">
+							class="btn btn-outline-danger btn-lg px-5" style="margin: 10px;">
 						<input type="button" value="확인" onclick="complete();"
-							class="btn btn-primary btn-lg px-5" style="margin: 10px;" />
+							class="btn btn-outline-dark btn-lg px-5" style="margin: 10px;" />
 					</div>
 					<div class="row">
 						<div id="inputDiv" class="row"></div>
 					</div>
-					<div class="row">
+					<div class="text-center">
 						<input type="button" value="등록" onclick="fnWrite()"
 							class="btn btn-primary btn-lg px-5 submit" style="margin: 10px;" />
 						<input type="reset" value="다시작성"

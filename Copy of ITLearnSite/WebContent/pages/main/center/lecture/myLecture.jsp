@@ -41,23 +41,18 @@
 </head>
 
 <body>
-	<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
-		style="background-image: url('../images/bg_1.jpg')">
-		<div class="container">
-			<div class="row align-items-end justify-content-center text-center">
-				<div class="col-lg-7">
-					<h2 class="mb-0">나의 강의실</h2>
-					<p>Lecture Register</p>
-				</div>
-			</div>
-		</div>
+ <div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/mypage2.png">			
 	</div>
-
+</div>
 	<div class="custom-breadcrumns border-bottom">
 		<div class="container">
-			<a href="${path}/index.do">Home</a> <span
-				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">나의
-				강의실</span>
+			<a href="${path}/index.do">Home</a> 
+			<span class="mx-3 icon-keyboard_arrow_right"></span> 
+			<span class="current">마이페이지</span>
+			<span class="mx-3 icon-keyboard_arrow_right"></span> 
+			<span class="current">내 강의실</span>
 		</div>
 	</div>
 
@@ -66,7 +61,7 @@
 		<div class="pagewrap">
 			<div class="pagebottom">
 				<div class="divide">
-					<h3>나의 강의실</h3>
+					<h3>내 강의실</h3>
 					<hr>
 
 					<div class="boardoutline" style="margin-bottom: 100px;">
