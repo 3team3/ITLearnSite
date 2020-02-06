@@ -107,7 +107,7 @@ font-family: fantasy;
 								<div class="col-md-12 form-group">
 									<label for="address">sms수신동의</label><br> <input type="checkbox" class="mb-5" name="sms" id="sms" value="1"><br>
 								</div>
-								<div class="col-md-12 form-group">
+								<div class="col-md-12 form-group text-center">
 									<input type="submit" id="submit" value="수정하기" class="btn btn-primary btn-lg"> <input type="button" value="탈퇴하기"
 										onclick="location.href='${path}/MemberDeleteAction.do'" class="btn btn-primary btn-lg">
 								</div>

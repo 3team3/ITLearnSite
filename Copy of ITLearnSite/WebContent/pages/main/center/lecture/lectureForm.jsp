@@ -38,7 +38,7 @@
 	function addInput() {
 		// input태그를 추가할 div태그 위치 주소 가져오기
 		var div = document.getElementById("inputDiv");
-		var msg1 = "<div class='col-md-6 form-group'><input type ='text' name='list_title" + inputCnt + "' id='list_title" + inputCnt + "' placeholder='list " + inputCnt + "' class='form-control form-control-lg'/></div>";
+		var msg1 = "<div class='col-md-6 form-group'><input type ='text' name='list_title" + inputCnt + "' id='list_title" + inputCnt + "' placeholder='동영상설명 " + inputCnt + "' class='form-control form-control-lg'/></div>";
 		var msg2 = "<div class='col-md-6 form-group'><input type='file' name='upfile" + inputCnt + "' id='upfile" + inputCnt + "' class='form-control form-control-lg'/></div>";
 		/* var msg4 = "<br id='br" + inputCnt + "' />"; */
 		inputCnt++;
@@ -106,31 +106,25 @@
 	}
 </script>
 
-<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4"
-	style="background-image: url('../images/bg_1.jpg')">
-	<div class="container">
-		<div class="row align-items-end justify-content-center text-center">
-			<div class="col-lg-7">
-				<h2 class="mb-0">강의 등록</h2>
-				<p>Lecture Register</p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="custom-breadcrumns border-bottom">
-	<div class="container">
-		<a href="${path}/index.do">Home</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <a
-			href="${path}/lectureList.lec">강의실</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의
-			목록</span>
-	</div>
-</div>
 
 </head>
 
 <body>
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/admin5.png">			
+	</div>
+</div>
+	<div class="custom-breadcrumns border-bottom">
+		<div class="container">
+			<a href="${path}/index.do">Home</a> 
+			<span class="mx-3 icon-keyboard_arrow_right"></span> 
+			<span class="current">관리자</span>
+			<span class="mx-3 icon-keyboard_arrow_right"></span> 
+			<span class="current">강의 등록</span>
+		</div>
+	</div>
+
 	<div class="site-wrap">
 		<div class="site-section">
 			<div class="container">
@@ -164,16 +158,16 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-5 mr-auto align-self-center order-2 order-lg-1" style="padding: 10px;">
+						<div style="padding: 10px;">
 							<h3 class="section-title-underline mb-5">
                             <span>사용법</span>
                         </h3>
 							<p>
 							1. 이미지명과 동영상명을 동일하게 동명상명01 부터 시작하여 파일명을 작성한다.<br>
-							2. 이미지를 추가한다.<br>
-							3. 업로드할 동영상 파일 수 만큼 추가 버튼을 눌러 추가한다.<br>
-							4. 추가할 파일 수가 맞다면 확인 버튼을 누른다.<br>
-							5. 동영상 설명과 동영상 업로드 후 등록 버튼을 누른다.</p>
+							ex) 이미지: 인강 / 동영상: 인강01 <br>
+							2. 이미지 파일 추가를 위해 파일 선택 버튼을 누른 후 업로드한다.<br>
+							3. 업로드할 동영상 파일 수 만큼 추가 버튼을 눌러 추가한 후 확인 버튼을 누른다.<br>
+							4. 동영상 설명과 동영상 업로드 후 등록 버튼을 누른다.</p>
 						</div>
 					</div>
 					<div class="row">
@@ -184,16 +178,16 @@
 						</div>
 						<div id="tdImg" class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0"></div>
 					</div>
-					<div class="row" style="margin: 10px">
+					<div class="text-right" style="margin: 10px">
 						<input type="button" value="추가" onclick="addInput()"
-							class="btn btn-primary btn-lg px-5" style="margin: 10px;">
+							class="btn btn-outline-danger btn-lg px-5" style="margin: 10px;">
 						<input type="button" value="확인" onclick="complete();"
-							class="btn btn-primary btn-lg px-5" style="margin: 10px;" />
+							class="btn btn-outline-dark btn-lg px-5" style="margin: 10px;" />
 					</div>
 					<div class="row">
 						<div id="inputDiv" class="row"></div>
 					</div>
-					<div class="row">
+					<div class="text-center mt-5">
 						<input type="button" value="등록" onclick="fnWrite()"
 							class="btn btn-primary btn-lg px-5 submit" style="margin: 10px;" />
 						<input type="reset" value="다시작성"

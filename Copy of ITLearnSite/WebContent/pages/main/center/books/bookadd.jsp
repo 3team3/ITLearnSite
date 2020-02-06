@@ -78,7 +78,9 @@ font-family: 'NIXGONM-Vb';}
 							<input type='text' class='form-control' id='book_description' name='book_stock' placeholder='재고'>
 						</div>
 						<br>
-						<button type='submit' class='btn btn-primary'>등록</button>
+						<div class="text-right">
+						<button type='submit' class='btn btn-success'>등록</button>
+						</div>
 					</div>
 					<br>
 				</form>

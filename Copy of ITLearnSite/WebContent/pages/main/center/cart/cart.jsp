@@ -61,25 +61,20 @@
 <link href="${path}/css/create.css" rel="stylesheet">
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target">
-	<div class="site-wrap">
-		<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-			<div class="container">
-				<div class="row align-items-end">
-					<div class="col-lg-7">
-						<h2 class="mb-0">장바구니</h2>
-						<p>Cart</p>
-					</div>
-				</div>
-			</div>
+ <div class="container">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/cart2.png">			
 		</div>
 	</div>
 
-	<div class="custom-breadcrumns border-bottom">
-		<div class="container">
-			<a href="index.jsp">메인화면</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">장바구니</span>
-		</div>
-	</div>
+    <div class="custom-breadcrumns border-bottom">
+      <div class="container">
+        <a href="index.jsp">Home</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">장바구니</span>
+      </div>
+    </div>
+	
 
 	<!-- 장바구니에 대한 정보 출력 -->
 	<center>
@@ -157,8 +152,8 @@
 						</table>
 					</div>
 					<div class="btn">
-						<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'"> <input type="button"
-							class="btn btn-color1" value="전체상품주문" onclick="location.href='payment.pay'">
+						<input type="button" class="btn btn-outline-dark" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'"> <input type="button"
+							class="btn btn-outline-dark" value="전체상품주문" onclick="location.href='payment.pay'">
 					</div>
 				</form>
 

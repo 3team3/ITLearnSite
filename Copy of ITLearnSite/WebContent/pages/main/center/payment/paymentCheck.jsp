@@ -20,27 +20,23 @@
 		location.href="${path}/index.do";
 	</script>
 </c:if>
-<body data-spy="scroll" data-target=".site-navbar-target">
-	<div class="site-wrap">
-    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
-        <div class="container">
-          <div class="row align-items-end">
-            <div class="col-lg-7">
-              <h2 class="mb-0">주문확인</h2>
-              <p>Order confirmation</p>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">			
+			<img src="${path }/images/mypage3.png">			
+	</div>
+</div>
 
+    
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">메인화면</a>
+        <a href="index.jsp">Home</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">주문확인</span>
+        <span class="current">마이페이지</span>
+	        <span class="mx-3 icon-keyboard_arrow_right"></span>
+	        <span class="current">주문 확인</span>
       </div>
     </div>
+
 
 	<center>	
 		<div class="pagemargin">
