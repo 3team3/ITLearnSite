@@ -14,34 +14,37 @@
 <title>회원관리</title>
 </head>
 
-<div class="container">
-	<div class="row align-items-end justify-content-center text-center">			
-			<img src="${path }/images/admin2.png">			
-	</div>
-</div>
+<body data-spy="scroll" data-target=".site-navbar-target">
+	<div class="site-wrap">
+    <div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('../images/bg_1.jpg')">
+        <div class="container">
+          <div class="row align-items-end">
+            <div class="col-lg-7">
+              <h2 class="mb-0">주문확인</h2>
+              <p>Order confirmation</p>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
 
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
-        <a href="index.jsp">Home</a>
+        <a href="index.jsp">메인화면</a>
         <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">관리자</span>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">주문 관리</span>
+        <span class="current">주문확인</span>
       </div>
     </div>
 	
 	<center>	
 		<div class="pagemargin">
 		<div class="content">
+		<div class="row row_padding">
+		<div class="check_left">
 		<h3>결제 전</h3>
 		<table class="table before">
 			<c:set var="j" value="0"/>
 			<c:forEach  var="paymentList"   items="${requestScope.paymentlist}"	>
-			<c:if test="${paymentList.pay_option==1}">
-			<tr>
-				<td colspan="5"></td>
-			</tr>
-			</c:if>
 			<c:if test="${paymentList.pay_option==0}">
 			<tr class="tb_head">
 				<td colspan="5">주문번호 : ${paymentList.pay_no}</td>
@@ -53,8 +56,7 @@
 				<td>이름</td>
 				<td>${paymentList.pay_name}</td>
 				<td>전화번호</td>
-				<td>${paymentList.pay_phonenumber}</td>
-				<td></td>
+				<td colspan="2">${paymentList.pay_phonenumber}</td>	
 			</tr>
 			<tr>			
 				<td>우편번호</td>
@@ -165,16 +167,12 @@ function check(){
 				<td colspan="5"></td>
 			</tr>
 		</table>
-		
+		</div>
+		<div class="check_right">
 		<h3>결제 후</h3>
 		<table class="table after">
 			<c:set var="j" value="0"/>
-			<c:forEach  var="paymentList"   items="${requestScope.paymentlist}"	>
-			<c:if test="${paymentList.pay_option==0}">
-			<tr>
-				<td colspan="5"></td>
-			</tr>
-			</c:if>			
+			<c:forEach  var="paymentList"   items="${requestScope.paymentlist}"	>		
 			<c:if test="${paymentList.pay_option==1}">
 			<tr class="tb_head">
 				<td colspan="5">주문번호 : ${paymentList.pay_no}</td>
@@ -186,8 +184,7 @@ function check(){
 				<td>이름</td>
 				<td>${paymentList.pay_name}</td>
 				<td>전화번호</td>
-				<td>${paymentList.pay_phonenumber}</td>
-				<td></td>
+				<td colspan="2">${paymentList.pay_phonenumber}</td>		
 			</tr>
 			<tr>			
 				<td>우편번호</td>
@@ -267,7 +264,8 @@ function check(){
 				<td colspan="5"></td>
 			</tr>
 		</table>
-		
+		</div>
+		</div>
 		</div>
 		</div>
 	</center>
