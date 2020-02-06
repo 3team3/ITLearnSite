@@ -3,7 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-    request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8");
 %>
 
 <!DOCTYPE html>
@@ -19,21 +19,17 @@
 
 <c:set var="naverlink" value="${requestScope.result.items[0].link}"></c:set>
 <link rel="stylesheet" href="${path}/css/bookList.css">
-<script src="${path}/js/jquery-3.3.1.min.js"></script>
-<script src="${path}/js/makejs/bookList.js"></script>
-
 </head>
 
-	<div class="container">
-		<div class="row align-items-end justify-content-center text-center">			
-				<img src="${path }/images/book.png">			
-		</div>
+<div class="container">
+	<div class="row align-items-end justify-content-center text-center">
+		<img src="${path }/images/book.png">
 	</div>
+</div>
 
 <div class="custom-breadcrumns border-bottom">
 	<div class="container">
-		<a href="${path}/index.do">Home</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
+		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
 	</div>
 </div>
 
@@ -42,8 +38,6 @@
 		<div class="pagewrap">
 			<div class="wrapboard"></div>
 			<hr>
-		</div>
-		<div class="pagewrap">
 			<c:set var="page" value="${count}"></c:set>
 			<!-- 전체 글수를 받아와서 block 단위로  -->
 			<div style="text-align: center;">
@@ -55,5 +49,7 @@
 			</div>
 		</div>
 	</div>
+	<script src="${path}/js/jquery-3.3.1.min.js"></script>
+	<script src="${path}/js/makejs/bookList.js"></script>
 </body>
 </html>

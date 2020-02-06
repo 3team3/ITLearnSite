@@ -35,6 +35,7 @@ public class LectureServiceImpl implements LectureService {
 		lecturesMap.put("lecturesList", lecturesList);
 
 		lecturesMap.put("totLectures", totLectures);
+		
 
 		return lecturesMap;
 	}

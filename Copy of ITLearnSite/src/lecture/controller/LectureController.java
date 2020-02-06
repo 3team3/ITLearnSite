@@ -84,15 +84,17 @@ public class LectureController extends HttpServlet {
 
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
-
+				
 				Map lecturesMap = lServ.listLecture(pagingMap);
 				lecturesMap.put("section", section);
 				lecturesMap.put("pageNum", pageNum);
+				
+				System.out.println(lecturesMap.get("totLectures"));
 				/*
 				 * System.out.println("controller : " + lecturesMap);
 				 */
 				request.setAttribute("lecturesMap", lecturesMap);
-
+				
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/lecture/lectureList.jsp";
 				request.setAttribute("paging", paging);
