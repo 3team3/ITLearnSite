@@ -30,7 +30,6 @@ function Request(){
 
 function setBooklist(getData){
 	var string ="";
-	
 	for(var i = 0; i < getData.list.length; i++) {
 		var booktitle = decodeURIComponent(getData.list[i].book_title);
 		
@@ -58,9 +57,31 @@ function setBooklist(getData){
 			+		"</div>"
 			+	"</div>"
 			+"</div>";
-			
 		string = string + comments;
 	}
+	
+	var pageCount = getData.pageCount;
+	var pageNum = "";
+	var pageTag = "";
+	
+	for(var page = 1; pageCount > 1; page ++)
+	{
+		pageNum = 
+			"<div style='text-align:center;'>" 
+			+	"<button onclick='booklist('bookList.text', "+page+")'>"+page+"</button>" 
+			+"</div>";
+		pageTag = pageNum+pageTag;
+	}
+//		<c:set var="page" value="${count}"></c:set>
+//		<!-- 전체 글수를 받아와서 block 단위로  -->
+//		<div style="text-align: center;">
+//			<c:forEach var="i" begin="1" end="${page}">
+//				<c:if test="${page!=0}">
+//					<button onclick="booklist('bookList.text', '${i}')">${i}</button>
+//				</c:if>
+//			</c:forEach>
+//		</div>
+	
 	$(".wrapboard").html(string);
 }
 

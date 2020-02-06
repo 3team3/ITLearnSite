@@ -36,17 +36,10 @@
 <body>
 	<div class="container">
 		<div class="pagewrap">
-			<div class="wrapboard"></div>
-			<hr>
-			<c:set var="page" value="${count}"></c:set>
-			<!-- 전체 글수를 받아와서 block 단위로  -->
-			<div style="text-align: center;">
-				<c:forEach var="i" begin="1" end="${page}">
-					<c:if test="${page!=0}">
-						<button onclick="booklist('bookList.text', '${i}')">${i}</button>
-					</c:if>
-				</c:forEach>
+			<div class="wrapboard">
 			</div>
+			<hr>
+			
 		</div>
 	</div>
 	<script src="${path}/js/jquery-3.3.1.min.js"></script>

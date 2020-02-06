@@ -14,7 +14,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>4분할</title>
 <style>
 html, body {
 	height: 100%;
@@ -25,8 +24,8 @@ html, body {
 }
 
  .wrap {
-	width: 910px;
-	height: 725px;
+	width: 100%;
+	height: 100%;
 } 
 
 .div {

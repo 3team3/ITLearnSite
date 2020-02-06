@@ -175,7 +175,7 @@ public class TextbookController extends HttpServlet {
 				}
 				JSONObject booklist = new JSONObject();
 				booklist.put("list", arr);
-
+				booklist.put("pageCount", count);
 				jsonString = booklist.toJSONString();
 				System.out.println(jsonString);
 
@@ -185,6 +185,7 @@ public class TextbookController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("count", count);
 				request.setAttribute("paging", paging);
+				paging = "/pages/main/center/books/bookList.jsp";
 
 			} else if (path.equals("/bookdetail.text")) {
 				tBean = getTextbookBeanProperty(request, response);
