@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -17,37 +16,23 @@
 <title>Insert title here</title>
 <link href="${path}/css/lectureDetail.css" rel="stylesheet">
 <style type="text/css">
-	body {
-		word-break: break-all;
-	}	
-	
+body {
+	word-break: break-all;
+}
 </style>
 </head>
 
 <body>
 	<div class="container">
-		<div class="row align-items-end justify-content-center text-center">			
-				<img src="${path }/images/lecture.png">			
+		<div class="row align-items-end justify-content-center text-center">
+			<img src="${path }/images/lecture.png">
 		</div>
 	</div>
-
-	<div class="custom-breadcrumns border-bottom">
-	<div class="container">
-		<a href="${path}/index.do">Home</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <a
-			href="${path}/lectureList.lec">강의실</a> <span
-			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의
-			목록</span>
-	</div>
-</div>
-
+	
 	<div class="custom-breadcrumns border-bottom">
 		<div class="container">
-			<a href="${path}/index.do">Home</a> <span
-				class="mx-3 icon-keyboard_arrow_right"></span> <a
-				href="${path}/lectureList.lec">강의실</a> <span
-				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의
-				상세</span>
+			<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <a href="${path}/lectureList.lec">강의실</a> <span
+				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의 상세</span>
 		</div>
 	</div>
 
@@ -56,19 +41,17 @@
 		<div class="list">
 			<div class='wrap'>
 				<div class='bookimg'>
-					<img
-						src='${path }/pages/main/center/lecture/temp/${lecBean.lec_imgfile}'>
+					<img src='${path }/pages/main/center/lecture/temp/${lecBean.lec_imgfile}'>
 				</div>
 				<div class='bookinfo'>
-					<span class='booktitle'> ${lecBean.lec_title}</span> <span
-						class='bookdetail'>
+					<span class='booktitle'> ${lecBean.lec_title}</span> <span class='bookdetail'>
 						<div class='detail-align'>
 							<p class='p1'>강사 :</p>
 							<p class='p2'>${lecBean.lec_teacher}</p>
 						</div>
 						<div class='detail-align'>
 							<p class='p1'>30일 :</p>
-							<p class='p2'>${lecBean.lec_price } 원</p>
+							<p class='p2'>${lecBean.lec_price }원</p>
 						</div> <!-- <div class='detail-align'>
 							<p class='p1'></p>
 							<p class='p2'>
@@ -100,7 +83,7 @@
 		<div class="divide">
 			<h3>강의 설명</h3>
 			<hr>
-			
+
 			<p>${lecBean.lec_content}</p>
 			<h3>목차</h3>
 			<hr>
@@ -140,7 +123,7 @@
 					</table>
 				</div>
 			</div>
-			
+
 
 		</div>
 	</div>

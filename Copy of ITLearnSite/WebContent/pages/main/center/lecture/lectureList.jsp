@@ -75,7 +75,7 @@
 							<div class="col-lg-4 col-md-6 mb-4">
 								<div class="course-1-item">
 									<figure class="thumnail">
-										<a href="${path }/lectureDetail.lec?lec_no=${lecture.lec_no}"><img src="${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }"
+										<a href="${path }/lectureDetail.lec?lec_no=${lecture.lec_no}"><img style="width: 300px;height: 200px;" src="${path }/pages/main/center/lecture/temp/${lecture.lec_imgfile }"
 											alt="Image" class="img-fluid"></a>
 										<div class="price">￦${lecture.lec_price }</div>
 										<div class="category">
@@ -167,8 +167,6 @@
 				</c:when>
 			</c:choose>
 		</c:if>
-	</div>
-
 	</div>
 </body>
 </html>
