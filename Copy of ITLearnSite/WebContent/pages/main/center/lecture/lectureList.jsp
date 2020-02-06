@@ -46,7 +46,7 @@
 
 <div class="custom-breadcrumns border-bottom">
 	<div class="container">
-		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의실</span>
+		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">강의</span>
 	</div>
 </div>
 

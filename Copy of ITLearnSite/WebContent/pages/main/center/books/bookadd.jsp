@@ -91,7 +91,7 @@ font-family: 'NIXGONM-Vb';}
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 						<br> <span class="input-group-btn">
-							<button type="button" class="btn btn-primary" onclick="bookSearch(1);">Go!</button>
+							<button type="button" class="btn btn-outline-primary" onclick="bookSearch(1);">Go!</button>
 						</span>
 					</div>
 				</div>
@@ -144,7 +144,7 @@ font-family: 'NIXGONM-Vb';}
 					</table>
 				</div>
 				<div class="paging row justify-content-center align-self-center">
-					<a class="btn btn-primary" role="button">이전</a>
+					<a class="btn btn-outline-dark" role="button">이전</a>
 					<button class="pagenum btn btn-default" role="button" onclick="bookSearch(1);">1</button>
 					<button class="pagenum btn btn-default" role="button" onclick="bookSearch(2);">2</button>
 					<button class="pagenum btn btn-default" role="button" onclick="bookSearch(3);">3</button>
@@ -155,7 +155,7 @@ font-family: 'NIXGONM-Vb';}
 					<button class="pagenum btn btn-default" role="button" onclick="bookSearch(8);">8</button>
 					<button class="pagenum btn btn-default" role="button" onclick="bookSearch(9);">9</button>
 					<button class="pagenum btn btn-default" role="button" onclick="bookSearch(10);">10</button>
-					<button class="btn btn-primary" role="button">다음</button>
+					<button class="btn btn-outline-dark" role="button">다음</button>
 				</div>
 			</div>
 		</div>

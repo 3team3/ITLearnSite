@@ -10,6 +10,15 @@
  @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
 h2,h5{
 font-family: 'NIXGONM-Vb';}
+
+input[type=password] {
+font-family: fantasy;}
+
+#loginbtn{
+ width: 100%;
+}
+
+
 </style>
 </head>
 
@@ -29,7 +38,6 @@ font-family: 'NIXGONM-Vb';}
 	</c:if>
 	
  <div class="site-wrap">
-	
  <div class="container">
 	<div class="row align-items-end justify-content-center text-center">			
 			<img src="${path }/images/mypage1.png">			
@@ -48,23 +56,31 @@ font-family: 'NIXGONM-Vb';}
     </div>
 
 
-    <div class="justify-content-center text-center section-title-underline mt-5">
+    <div class="justify-content-center text-center section-title-underline mt-5 mb-5">
             <h2><span>비밀번호 확인</span></h2>
   	</div>
 
-    <div class="site-section">
-       	<div class="container">
+       	<div class="container justify-content-center text-center">
         	<h5><span>본인 확인을 위해 비밀번호를 다시 한번 입력해주세요</span></h5>
-        <hr/>
+        	
         <form action="relogin1.do" method="post">
-        <div class="col-md-12 form-group">
-        	<input type="hidden" name = "email" value="${requestScope.email}">
-            <input type="password" placeholder="비밀번호" name="pw" required class="form-control form-control-lg"><br>
-            <input type="submit" value="확인" class="login btn btn-primary btn-lg">
-        </div>
+        <div class="row justify-content-center">
+			<div class="col-md-5">
+				<div class="row">
+		        	<input type="hidden" name = "email" value="${requestScope.email}">
+		            <div class="col-md-12 form-group">
+		            	<input type="password" name="pw" required class="form-control form-control-lg"><br>
+		            </div>
+	            </div>
+				<div class="row">
+					<div class="col-12">
+	           		 	<input type="submit" id="loginbtn" value="확인" class="login btn btn-primary btn-lg">
+	       			</div>
+	       		</div>
+	       	 </div>
+	      </div>
         </form>
-        <hr/>
-    </div>
+        
     </div>
   </div>
   <%-- 

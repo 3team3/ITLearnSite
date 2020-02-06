@@ -22,24 +22,22 @@
 </head>
 
 <div class="container">
-	<div class="row align-items-end justify-content-center text-center">
-		<img src="${path }/images/book.png">
+		<div class="row align-items-end justify-content-center text-center">			
+				<img src="${path }/images/book.png">			
+		</div>
 	</div>
-</div>
 
 <div class="custom-breadcrumns border-bottom">
 	<div class="container">
-		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
+		<a href="${path}/index.do">Home</a> <span
+			class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서</span>
 	</div>
 </div>
-
 <body>
 	<div class="container">
 		<div class="pagewrap">
-			<div class="wrapboard">
-			</div>
+			<div class="wrapboard"></div>
 			<hr>
-			
 		</div>
 	</div>
 	<script src="${path}/js/jquery-3.3.1.min.js"></script>

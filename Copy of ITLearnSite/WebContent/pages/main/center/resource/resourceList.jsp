@@ -86,27 +86,7 @@
 											<%-- varStatus의 count 속성을 이용 글번호를 1부터 자동으로 표시 --%>
 											<td width="5%">${resource.res_no }</td>
 											<td align="left" width="35%">
-												<%--왼쪽으로 30px만큼 여백을 준 후 글제목을 표시할 목적으로 여백을 줌 --%> <span style="padding-right: 30px;"></span> <c:choose>
-													<%-- <forEach> 태그 반복 시 각 글의 level 값이 1보다 크다면 답변글(자식글) --%>
-													<c:when test="${resource.level > 1 }">
-														<%-- 
-									다시 내부 <forEach 태그 이용, 1부터 level 값까지 반복
-									부모글 밑에 들여스기하여 답급(자식글)표시
-									 --%>
-														<c:forEach begin="1" end="${resource.level }" step="1">
-															<span style="padding-left: 10px;"></span>
-														</c:forEach>
-														<%--
-								 	공백 다음 자식들 표시
-								  --%>
-														<span style="font-size: 12px;">[답변]</span>
 														<a class="cls1" href="resourceView.bo?res_no=${resource.res_no}">${resource.res_title}</a>
-													</c:when>
-													<%-- level값이 1보다 크지 않으면 부모글이므로 공백 없이 표시 --%>
-													<c:otherwise>
-														<a class="cls1" href="resourceView.bo?res_no=${resource.res_no}">${resource.res_title}</a>
-													</c:otherwise>
-												</c:choose>
 											</td>
 											<td width="10%">${resource.res_email }</td>
 											<td width="10%"><fmt:formatDate value="${resource.res_writedate}" /></td>
