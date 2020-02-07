@@ -80,6 +80,7 @@
 	<center>
 		<div class="pagemargin">
 			<div class="content">
+				<c:set var="total" value="0"/>
 				<form action="payment.pay" method="post" name="cfr">
 					<table class="table tablesize">
 						<c:set var="j" value="0" />
@@ -141,7 +142,7 @@
 							</tr>
 							<!-- j변수 값 1씩 증가 -->
 							<c:set var="j" value="${j+1}" />
-
+							<c:set var="total" value="${total+cartlist.pro_price}"/>
 						</c:forEach>
 					</table>
 					<div>
@@ -152,8 +153,9 @@
 						</table>
 					</div>
 					<div class="btn">
-						<input type="button" class="btn btn-outline-dark" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'"> <input type="button"
-							class="btn btn-outline-dark" value="전체상품주문" onclick="location.href='payment.pay'">
+	
+						<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'"> <input type="button"
+							class="btn btn-color1" value="전체상품주문" onclick="location.href='payment.pay'">
 					</div>
 				</form>
 

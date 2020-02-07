@@ -126,33 +126,38 @@ font-family: 'NIXGONM-Vb';}
        		<c:set var="pro_price" value="${cartlist.pro_price}"/>
        		<c:set var="total" value="${total+pro_price}"/>
        			<c:if test="${j==0}">
+       			<input type="hidden" value="${cartlist.product_no}" name="pay_pro1_no">
 				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro1_name">
 				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro1_cnt">
 				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro1_price">
 				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro1_sort">
 				</c:if>
 				<c:if test="${j==1}">
+				<input type="hidden" value="${cartlist.product_no}" name="pay_pro2_no">
 				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro2_name">
 				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro2_cnt">
 				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro2_price">
 				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro2_sort">
 				</c:if>
 				
-				<c:if test="${j==2}">			
+				<c:if test="${j==2}">	
+				<input type="hidden" value="${cartlist.product_no}" name="pay_pro3_no">		
 				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro3_name">
 				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro3_cnt">
 				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro3_price">
 				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro3_sort">
 				</c:if>
 				
-				<c:if test="${j==3}">	
+				<c:if test="${j==3}">
+				<input type="hidden" value="${cartlist.product_no}" name="pay_pro4_no">	
 				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro4_name">
 				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro4_cnt">
 				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro4_price">
 				<input type="hidden" value="${cartlist.pro_sort }" name="pay_pro4_sort">
 				</c:if>
 				
-				<c:if test="${j==4}">			
+				<c:if test="${j==4}">
+				<input type="hidden" value="${cartlist.product_no}" name="pay_pro5_no">			
 				<input type="hidden" value="${cartlist.pro_name }" name="pay_pro5_name">
 				<input type="hidden" value="${cartlist.pro_cnt }" name="pay_pro5_cnt">
 				<input type="hidden" value="${cartlist.pro_price }" name="pay_pro5_price">

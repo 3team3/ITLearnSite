@@ -83,7 +83,11 @@ public class PaymentDAOImpl implements PaymentDAO {
             	paymentBean.setPay_pro5_sort(rs.getString("pay_pro5_sort"));
             	paymentBean.setPay_total(rs.getString("pay_total"));
             	paymentBean.setPay_option(rs.getInt("pay_option"));
-            	
+            	paymentBean.setPay_pro1_no(rs.getInt("pay_pro1_no"));
+            	paymentBean.setPay_pro2_no(rs.getInt("pay_pro2_no"));
+            	paymentBean.setPay_pro3_no(rs.getInt("pay_pro3_no"));
+            	paymentBean.setPay_pro4_no(rs.getInt("pay_pro4_no"));
+            	paymentBean.setPay_pro5_no(rs.getInt("pay_pro5_no"));          	
             	paymentList.add(paymentBean);
             	
             }                    
@@ -135,6 +139,11 @@ public class PaymentDAOImpl implements PaymentDAO {
             	paymentBean.setPay_pro5_sort(rs.getString("pay_pro5_sort"));
             	paymentBean.setPay_total(rs.getString("pay_total"));
             	paymentBean.setPay_option(rs.getInt("pay_option"));
+            	paymentBean.setPay_pro1_no(rs.getInt("pay_pro1_no"));
+            	paymentBean.setPay_pro2_no(rs.getInt("pay_pro2_no"));
+            	paymentBean.setPay_pro3_no(rs.getInt("pay_pro3_no"));
+            	paymentBean.setPay_pro4_no(rs.getInt("pay_pro4_no"));
+            	paymentBean.setPay_pro5_no(rs.getInt("pay_pro5_no"));
             	
             	paymentList.add(paymentBean);
             	
@@ -164,12 +173,12 @@ public class PaymentDAOImpl implements PaymentDAO {
 			
             //주문 DB
 			sql = "insert into payment_table(pay_no,pay_email,pay_name,pay_phonenumber,pay_address,pay_address1,pay_address2,"
-            		+ "pay_pro1_name,pay_pro1_cnt,pay_pro1_price,pay_pro1_sort,"
-            		+ "pay_pro2_name,pay_pro2_cnt,pay_pro2_price,pay_pro2_sort,"
-            		+ "pay_pro3_name,pay_pro3_cnt,pay_pro3_price,pay_pro3_sort,"
-            		+ "pay_pro4_name,pay_pro4_cnt,pay_pro4_price,pay_pro4_sort,"
-            		+ "pay_pro5_name,pay_pro5_cnt,pay_pro5_price,pay_pro5_sort,"
-            		+ "pay_total,pay_option) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            		+ "pay_pro1_no,pay_pro1_name,pay_pro1_cnt,pay_pro1_price,pay_pro1_sort,"
+            		+ "pay_pro2_no,pay_pro2_name,pay_pro2_cnt,pay_pro2_price,pay_pro2_sort,"
+            		+ "pay_pro3_no,pay_pro3_name,pay_pro3_cnt,pay_pro3_price,pay_pro3_sort,"
+            		+ "pay_pro4_no,pay_pro4_name,pay_pro4_cnt,pay_pro4_price,pay_pro4_sort,"
+            		+ "pay_pro5_no,pay_pro5_name,pay_pro5_cnt,pay_pro5_price,pay_pro5_sort,"
+            		+ "pay_total,pay_option) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	        pstmt = con.prepareStatement(sql);
 	        
 	        pstmt.setInt(1,pay_no);
@@ -180,14 +189,17 @@ public class PaymentDAOImpl implements PaymentDAO {
 	        pstmt.setString(6,pBean.getPay_address1());
 	        pstmt.setString(7,pBean.getPay_address2());
 	        int j;
-	        if(pBean.getPay_pro1_name()!=null){
-		        pstmt.setString(8,pBean.getPay_pro1_name());
-		        pstmt.setInt(9,pBean.getPay_pro1_cnt());
-		        pstmt.setInt(10,pBean.getPay_pro1_price());
-		        pstmt.setString(11,pBean.getPay_pro1_sort());
+	        if(pBean.getPay_pro1_no()!=0){
+	        	pstmt.setInt(8, pBean.getPay_pro1_no());
+		        pstmt.setString(9,pBean.getPay_pro1_name());
+		        pstmt.setInt(10,pBean.getPay_pro1_cnt());
+		        pstmt.setInt(11,pBean.getPay_pro1_price());
+		        pstmt.setString(12,pBean.getPay_pro1_sort());
 		                       
-		        j=12;
-		      	while(j<28){
+		        j=13;
+		      	while(j<32){
+		      		pstmt.setInt(j, 0);
+		      		j++;
 		        	pstmt.setString(j,"x");
 		        	j++;
 					pstmt.setInt(j,0);
@@ -197,14 +209,17 @@ public class PaymentDAOImpl implements PaymentDAO {
 					pstmt.setString(j,"x");
 					j++;
 		      	}
-		      	if(pBean.getPay_pro2_name()!=null){
-			        pstmt.setString(12,pBean.getPay_pro2_name());
-			        pstmt.setInt(13,pBean.getPay_pro2_cnt());
-			        pstmt.setInt(14,pBean.getPay_pro2_price());
-			        pstmt.setString(15,pBean.getPay_pro2_sort());
+		      	if(pBean.getPay_pro2_no()!=0){
+		      		pstmt.setInt(13, pBean.getPay_pro2_no());
+			        pstmt.setString(14,pBean.getPay_pro2_name());
+			        pstmt.setInt(15,pBean.getPay_pro2_cnt());
+			        pstmt.setInt(16,pBean.getPay_pro2_price());
+			        pstmt.setString(17,pBean.getPay_pro2_sort());
 			        
-			        j=16;
-			      	while(j<28){
+			        j=18;
+			      	while(j<32){
+			      		pstmt.setInt(j, 0);
+			      		j++;
 			        	pstmt.setString(j,"x");
 			        	j++;
 						pstmt.setInt(j,0);
@@ -214,14 +229,17 @@ public class PaymentDAOImpl implements PaymentDAO {
 						pstmt.setString(j,"x");
 						j++;
 			      	}
-			      	if(pBean.getPay_pro3_name()!=null){
-			        	pstmt.setString(16,pBean.getPay_pro3_name());
-					    pstmt.setInt(17,pBean.getPay_pro3_cnt());
-					    pstmt.setInt(18,pBean.getPay_pro3_price());
-					    pstmt.setString(19,pBean.getPay_pro3_sort());
+			      	if(pBean.getPay_pro3_no()!=0){
+			      		pstmt.setInt(18, pBean.getPay_pro3_no());
+			        	pstmt.setString(19,pBean.getPay_pro3_name());
+					    pstmt.setInt(20,pBean.getPay_pro3_cnt());
+					    pstmt.setInt(21,pBean.getPay_pro3_price());
+					    pstmt.setString(22,pBean.getPay_pro3_sort());
 					    
-					    j=20;
-				      	while(j<28){
+					    j=23;
+				      	while(j<32){
+				      		pstmt.setInt(j, 0);
+				      		j++;
 				        	pstmt.setString(j,"x");
 				        	j++;
 							pstmt.setInt(j,0);
@@ -231,14 +249,17 @@ public class PaymentDAOImpl implements PaymentDAO {
 							pstmt.setString(j,"x");
 							j++;
 				      	}
-				      	if(pBean.getPay_pro4_name()!=null){
-			        		pstmt.setString(20,pBean.getPay_pro4_name());
-						    pstmt.setInt(21,pBean.getPay_pro4_cnt());
-						    pstmt.setInt(22,pBean.getPay_pro4_price());
-						    pstmt.setString(23,pBean.getPay_pro4_sort());   
+				      	if(pBean.getPay_pro4_no()!=0){
+				      		pstmt.setInt(23, pBean.getPay_pro4_no());
+			        		pstmt.setString(24,pBean.getPay_pro4_name());
+						    pstmt.setInt(25,pBean.getPay_pro4_cnt());
+						    pstmt.setInt(26,pBean.getPay_pro4_price());
+						    pstmt.setString(27,pBean.getPay_pro4_sort());   
 						   
-						    j=24;
-						    while(j<28){
+						    j=28;
+						    while(j<32){
+						    	pstmt.setInt(j, 0);
+					      		j++;
 					        	pstmt.setString(j,"x");
 					        	j++;
 								pstmt.setInt(j,0);
@@ -248,19 +269,20 @@ public class PaymentDAOImpl implements PaymentDAO {
 								pstmt.setString(j,"x");
 								j++;
 					      	}
-						    if(pBean.getPay_pro5_name()!=null){
-			        			pstmt.setString(24,pBean.getPay_pro5_name());
-			 			        pstmt.setInt(25,pBean.getPay_pro5_cnt());
-			 			        pstmt.setInt(26,pBean.getPay_pro5_price());
-			 			        pstmt.setString(27,pBean.getPay_pro5_sort());
+						    if(pBean.getPay_pro5_no()!=0){
+						    	pstmt.setInt(28, pBean.getPay_pro5_no());
+			        			pstmt.setString(29,pBean.getPay_pro5_name());
+			 			        pstmt.setInt(30,pBean.getPay_pro5_cnt());
+			 			        pstmt.setInt(31,pBean.getPay_pro5_price());
+			 			        pstmt.setString(32,pBean.getPay_pro5_sort());
 			 			       
 					        }
 				      	}
 			      	}
 		      	} 	
 	        }
-	        pstmt.setString(28,pBean.getPay_total());
-	        pstmt.setInt(29,0);
+	        pstmt.setString(33,pBean.getPay_total());
+	        pstmt.setInt(34,0);
 	        
 			pstmt.executeUpdate();	
 			
@@ -321,10 +343,15 @@ public class PaymentDAOImpl implements PaymentDAO {
             	pBean.setPay_pro5_sort(rs.getString("pay_pro5_sort"));
             	pBean.setPay_total(rs.getString("pay_total"));
             	pBean.setPay_option(rs.getInt("pay_option"));
+            	pBean.setPay_pro1_no(rs.getInt("pay_pro1_no"));
+            	pBean.setPay_pro2_no(rs.getInt("pay_pro2_no"));
+            	pBean.setPay_pro3_no(rs.getInt("pay_pro3_no"));
+            	pBean.setPay_pro4_no(rs.getInt("pay_pro4_no"));
+            	pBean.setPay_pro5_no(rs.getInt("pay_pro5_no"));
             	
             }                    
         }catch(Exception e){
-                System.out.println("getPaymentlist()메소드에서 오류 :"+e);
+                System.out.println("selectPay()메소드에서 오류 :"+e);
         }finally{
             closeConnection();  
         }
@@ -333,14 +360,13 @@ public class PaymentDAOImpl implements PaymentDAO {
     
     //주문 후 도서 재고 줄이기
     @Override
-    public void deleteBookstock(String book_title,int book_stock){
+    public void deleteBookstock(int product_no,int book_stock){
     	try{
     		con = getConnection();   		
-    		sql = "update book_table set book_stock=book_stock-"+book_stock+" where book_title='?'"; 
+    		sql = "update book_table set book_stock=book_stock-"+book_stock+" where product_no=?"; 
     		pstmt = con.prepareStatement(sql);
-    	    pstmt.setString(1,URLEncoder.encode(book_title,"utf-8")); 
-    	    pstmt.executeUpdate();
-    	    System.out.println("~~~~~~~~~~~~~~~"+URLEncoder.encode(book_title,"utf-8"));
+    	    pstmt.setInt(1,product_no); 
+    	    pstmt.executeUpdate(); 	   
     	}catch(Exception e){
     		System.out.println("deleteBookstock()메소드에서 오류 :"+e);
     	}finally{
@@ -370,12 +396,12 @@ public class PaymentDAOImpl implements PaymentDAO {
     
     //주문 취소 후 도서 재고 원래대로 
     @Override
-    public void originBookstock(String book_title,int book_stock){
+    public void originBookstock(int product_no,int book_stock){
     	try{
-    		con = getConnection();
-    		sql = "update book_table set book_stock=book_stock+"+book_stock+" where book_title='?'"; 
+    		con = getConnection();   		
+    		sql = "update book_table set book_stock=book_stock+"+book_stock+" where product_no=?"; 
     		pstmt = con.prepareStatement(sql);
-    	    pstmt.setString(1,URLEncoder.encode(book_title,"utf-8")); 
+    	    pstmt.setInt(1,product_no); 
     	    pstmt.executeUpdate();
       	    
     	}catch(Exception e){

@@ -87,7 +87,7 @@ public class PaymentController extends HttpServlet {
 				String email = (String)session.getAttribute("email");
 				String pro_name;
 				int result=0;
-				String book_title;
+				int product_no;
 				int book_stock;
 				//구분이 강의라면 강의 이름을 가지고 와서 강의가 존재하는지 알아보기						
 				if(pBean.getPay_pro1_sort()!=null && pBean.getPay_pro1_sort().equals("강의")){
@@ -125,29 +125,29 @@ public class PaymentController extends HttpServlet {
 					
 					//재고 줄이기
 			        if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){      	
-			        	book_title = pBean.getPay_pro1_name();
+			        	product_no = pBean.getPay_pro1_no();
 			        	book_stock = pBean.getPay_pro1_cnt();
-			        	pServ.deleteBookstock(book_title, book_stock);
+			        	pServ.deleteBookstock(product_no,book_stock);
 			        }
-			        if(pBean.getPay_pro2_name()!=null && pBean.getPay_pro2_sort().equals("도서")){
-			        	book_title = pBean.getPay_pro2_name();
+			        if(pBean.getPay_pro2_name()!=null && pBean.getPay_pro2_sort().equals("도서")){      	
+			        	product_no = pBean.getPay_pro2_no();
 			        	book_stock = pBean.getPay_pro2_cnt();
-			        	pServ.deleteBookstock(book_title, book_stock);
+			        	pServ.deleteBookstock(product_no,book_stock);
 			        }
-			        if(pBean.getPay_pro3_name()!=null && pBean.getPay_pro3_sort().equals("도서")){
-			        	book_title = pBean.getPay_pro3_name();
+			        if(pBean.getPay_pro3_name()!=null && pBean.getPay_pro3_sort().equals("도서")){      	
+			        	product_no = pBean.getPay_pro3_no();
 			        	book_stock = pBean.getPay_pro3_cnt();
-			        	pServ.deleteBookstock(book_title, book_stock);
+			        	pServ.deleteBookstock(product_no,book_stock);
 			        }
-			        if(pBean.getPay_pro4_name()!=null && pBean.getPay_pro4_sort().equals("도서")){
-			        	book_title = pBean.getPay_pro4_name();
+			        if(pBean.getPay_pro4_name()!=null && pBean.getPay_pro4_sort().equals("도서")){      	
+			        	product_no = pBean.getPay_pro4_no();
 			        	book_stock = pBean.getPay_pro4_cnt();
-			        	pServ.deleteBookstock(book_title, book_stock);
+			        	pServ.deleteBookstock(product_no,book_stock);
 			        }
-			        if(pBean.getPay_pro5_name()!=null && pBean.getPay_pro5_sort().equals("도서")){
-			        	book_title = pBean.getPay_pro5_name();
+			        if(pBean.getPay_pro5_name()!=null && pBean.getPay_pro5_sort().equals("도서")){      	
+			        	product_no = pBean.getPay_pro5_no();
 			        	book_stock = pBean.getPay_pro5_cnt();
-			        	pServ.deleteBookstock(book_title, book_stock);
+			        	pServ.deleteBookstock(product_no,book_stock);
 			        }
 					 
 					 
@@ -182,37 +182,38 @@ public class PaymentController extends HttpServlet {
 				session = request.getSession();
 				String email = (String)session.getAttribute("email");
 				int pay_no = Integer.parseInt(request.getParameter("pay_no"));
-				String book_title;
+				int product_no;
 				int book_stock;
 				
 				pBean = pServ.selectPay(pay_no);
-				
-				//재고 원래대로
-				if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){
-		        	book_title = pBean.getPay_pro1_name();
+				//재고 늘리기
+		        if(pBean.getPay_pro1_name()!=null && pBean.getPay_pro1_sort().equals("도서")){      	
+		        	product_no = pBean.getPay_pro1_no();
 		        	book_stock = pBean.getPay_pro1_cnt();
-		        	pServ.originBookstock(book_title, book_stock);
+		        	pServ.originBookstock(product_no,book_stock);
 		        }
-		        if(pBean.getPay_pro2_name()!=null && pBean.getPay_pro2_sort().equals("도서")){
-		        	book_title = pBean.getPay_pro2_name();
+		        if(pBean.getPay_pro2_name()!=null && pBean.getPay_pro2_sort().equals("도서")){      	
+		        	product_no = pBean.getPay_pro2_no();
 		        	book_stock = pBean.getPay_pro2_cnt();
-		        	pServ.originBookstock(book_title, book_stock);
+		        	pServ.originBookstock(product_no,book_stock);
 		        }
-		        if(pBean.getPay_pro3_name()!=null && pBean.getPay_pro3_sort().equals("도서")){
-		        	book_title = pBean.getPay_pro3_name();
+		        if(pBean.getPay_pro3_name()!=null && pBean.getPay_pro3_sort().equals("도서")){      	
+		        	product_no = pBean.getPay_pro3_no();
 		        	book_stock = pBean.getPay_pro3_cnt();
-		        	pServ.originBookstock(book_title, book_stock);
+		        	pServ.originBookstock(product_no,book_stock);
 		        }
-		        if(pBean.getPay_pro4_name()!=null && pBean.getPay_pro4_sort().equals("도서")){
-		        	book_title = pBean.getPay_pro4_name();
+		        if(pBean.getPay_pro4_name()!=null && pBean.getPay_pro4_sort().equals("도서")){      	
+		        	product_no = pBean.getPay_pro4_no();
 		        	book_stock = pBean.getPay_pro4_cnt();
-		        	pServ.originBookstock(book_title, book_stock);
+		        	pServ.originBookstock(product_no,book_stock);
 		        }
-		        if(pBean.getPay_pro5_name()!=null && pBean.getPay_pro5_sort().equals("도서")){
-		        	book_title = pBean.getPay_pro5_name();
+		        if(pBean.getPay_pro5_name()!=null && pBean.getPay_pro5_sort().equals("도서")){      	
+		        	product_no = pBean.getPay_pro5_no();
 		        	book_stock = pBean.getPay_pro5_cnt();
-		        	pServ.originBookstock(book_title, book_stock);
+		        	pServ.originBookstock(product_no,book_stock);
 		        }
+				
+				
 				
 				//주문취소
 				pServ.deletePayment(email,pay_no);				
@@ -267,26 +268,32 @@ public class PaymentController extends HttpServlet {
 		String pay_address = null;
 		String pay_address1 = null;
 		String pay_address2 = null;
+		
+		int pay_pro1_no = 0;
 		String pay_pro1_name = " ";
 		int pay_pro1_cnt = 0;
 		int pay_pro1_price = 0;
 		String pay_pro1_sort = null;
 		
+		int pay_pro2_no = 0;
 		String pay_pro2_name = null;
 		int pay_pro2_cnt = 0;
 		int pay_pro2_price = 0;
 		String pay_pro2_sort = null;
 		
+		int pay_pro3_no = 0;
 		String pay_pro3_name = null;
 		int pay_pro3_cnt = 0;
 		int pay_pro3_price = 0;
 		String pay_pro3_sort = null;
 		
+		int pay_pro4_no = 0;
 		String pay_pro4_name = null;
 		int pay_pro4_cnt = 0;
 		int pay_pro4_price = 0;
 		String pay_pro4_sort = null;
 		
+		int pay_pro5_no = 0;
 		String pay_pro5_name = null;
 		int pay_pro5_cnt = 0;
 		int pay_pro5_price = 0;
@@ -444,7 +451,32 @@ public class PaymentController extends HttpServlet {
 		{
 			pay_option = Integer.parseInt(request.getParameter("pay_option"));
 			pBean.setPay_option(pay_option);
-		}		
+		}	
+		if(request.getParameter("pay_pro1_no") != null)
+		{
+			pay_pro1_no = Integer.parseInt(request.getParameter("pay_pro1_no"));
+			pBean.setPay_pro1_no(pay_pro1_no);
+		}
+		if(request.getParameter("pay_pro2_no") != null)
+		{
+			pay_pro2_no = Integer.parseInt(request.getParameter("pay_pro2_no"));
+			pBean.setPay_pro2_no(pay_pro2_no);
+		}
+		if(request.getParameter("pay_pro3_no") != null)
+		{
+			pay_pro3_no = Integer.parseInt(request.getParameter("pay_pro3_no"));
+			pBean.setPay_pro3_no(pay_pro3_no);
+		}
+		if(request.getParameter("pay_pro4_no") != null)
+		{
+			pay_pro4_no = Integer.parseInt(request.getParameter("pay_pro4_no"));
+			pBean.setPay_pro4_no(pay_pro4_no);
+		}
+		if(request.getParameter("pay_pro5_no") != null)
+		{
+			pay_pro5_no = Integer.parseInt(request.getParameter("pay_pro5_no"));
+			pBean.setPay_pro5_no(pay_pro5_no);
+		}
 		return pBean;
 	}
 }

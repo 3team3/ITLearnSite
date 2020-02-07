@@ -32,11 +32,11 @@ public interface PaymentService {
     public int cartnullChk(String email);
     
     //주문 후 도서 재고 줄이기
-    public void deleteBookstock(String book_title,int book_stock);
+    public void deleteBookstock(int product_no,int book_stock);
     
     //주문 후 도서 재고 원래대로 하기 위해 상품 주문 정보 가져오기
     public PaymentBean selectPay(int pay_no);
     
     //주문 취소 후 도서 재고 원래대로 
-    public void originBookstock(String book_title,int book_stock);
+    public void originBookstock(int product_no,int book_stock);
 }

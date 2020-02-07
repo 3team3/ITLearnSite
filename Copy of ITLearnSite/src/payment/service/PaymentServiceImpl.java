@@ -67,8 +67,8 @@ public class PaymentServiceImpl implements PaymentService{
     
     //주문 후 도서 재고 줄이기
     @Override
-    public void deleteBookstock(String book_title,int book_stock){
-    	pDao.deleteBookstock(book_title, book_stock);
+    public void deleteBookstock(int product_no,int book_stock){
+    	pDao.deleteBookstock(product_no,book_stock);
     }
     
     //주문 후 도서 재고 원래대로 하기 위해 상품 주문 정보 가져오기
@@ -82,8 +82,8 @@ public class PaymentServiceImpl implements PaymentService{
     
     //주문 취소 후 도서 재고 원래대로 
     @Override
-    public void originBookstock(String book_title,int book_stock){
-    	pDao.originBookstock(book_title, book_stock);
+    public void originBookstock(int product_no,int book_stock){
+    	pDao.originBookstock(product_no,book_stock);
     }
   
 }

@@ -9,32 +9,37 @@ public class PaymentBean {
 	private String pay_address1;
 	private String pay_address2;
 	
+	private int pay_pro1_no;
 	private String pay_pro1_name;
 	private int pay_pro1_cnt;
 	private int pay_pro1_price;
 	private String pay_pro1_sort;
 	
+	private int pay_pro2_no;
 	private String pay_pro2_name;
 	private int pay_pro2_cnt;
 	private int pay_pro2_price;
 	private String pay_pro2_sort;
 	
+	private int pay_pro3_no;
 	private String pay_pro3_name;
 	private int pay_pro3_cnt;
 	private int pay_pro3_price;
 	private String pay_pro3_sort;
 	
+	private int pay_pro4_no;
 	private String pay_pro4_name;
 	private int pay_pro4_cnt;
 	private int pay_pro4_price;
 	private String pay_pro4_sort;
 	
+	private int pay_pro5_no;
 	private String pay_pro5_name;
 	private int pay_pro5_cnt;
 	private int pay_pro5_price;
 	private String pay_pro5_sort;
 	
-	
+
 	private String pay_total;
 	private int pay_option;
 	public int getPay_no() {
@@ -210,6 +215,36 @@ public class PaymentBean {
 	}
 	public void setPay_option(int pay_option) {
 		this.pay_option = pay_option;
+	}
+	public int getPay_pro1_no() {
+		return pay_pro1_no;
+	}
+	public void setPay_pro1_no(int pay_pro1_no) {
+		this.pay_pro1_no = pay_pro1_no;
+	}
+	public int getPay_pro2_no() {
+		return pay_pro2_no;
+	}
+	public void setPay_pro2_no(int pay_pro2_no) {
+		this.pay_pro2_no = pay_pro2_no;
+	}
+	public int getPay_pro3_no() {
+		return pay_pro3_no;
+	}
+	public void setPay_pro3_no(int pay_pro3_no) {
+		this.pay_pro3_no = pay_pro3_no;
+	}
+	public int getPay_pro4_no() {
+		return pay_pro4_no;
+	}
+	public void setPay_pro4_no(int pay_pro4_no) {
+		this.pay_pro4_no = pay_pro4_no;
+	}
+	public int getPay_pro5_no() {
+		return pay_pro5_no;
+	}
+	public void setPay_pro5_no(int pay_pro5_no) {
+		this.pay_pro5_no = pay_pro5_no;
 	}
 	
 	
