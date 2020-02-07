@@ -13,6 +13,13 @@
 <link href="${path}/css/create.css" rel="stylesheet"> 
 <title>주문관리</title>
 </head>
+
+<style type="text/css">
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+h3{
+font-family: 'NIXGONM-Vb';}
+</style>
+
 <c:set var="email" value="${sessionScope.email}"></c:set>
 <c:if test="${email eq null}">
 	<script type="text/javascript">
@@ -125,13 +132,7 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td>주문취소</td>	
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><input type="button" class="btn btn-color1" value="x" onclick="location.href='${path}/paymentDelete.pay?pay_no=${paymentList.pay_no}'"></td>	
+				<td><input type="button" class="btn btn-outline-dark" value="주문취소" onclick="location.href='${path}/paymentDelete.pay?pay_no=${paymentList.pay_no}'"></td>	
 			</tr>
 				<!-- j변수 값 1씩 증가 -->
 				<c:set var="j" value="${j+1}" />

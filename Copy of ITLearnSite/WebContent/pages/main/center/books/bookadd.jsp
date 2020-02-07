@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap-theme.min.css">
 <style>
  @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
-body{
+body, h3{
 font-family: 'NIXGONM-Vb';}
 </style>
 
@@ -40,10 +40,11 @@ font-family: 'NIXGONM-Vb';}
 		<div class="row">
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 				<form action="insertBook.text" method="post" role="form">
-					<span class="label label-[ENTER NAME HERE]">상품 등록</span>
-
+					<!-- <span class="label label-[ENTER NAME HERE]">상품 등록</span> -->
 					<div class="addtag">
-						<legend>도서 정보</legend>
+						<div class="mt-5">
+							<h3>도서 정보</h3>
+						</div>
 						<div class='form-group'>
 							<input type='text' class='form-control' id='book_title' name='book_title' placeholder='책제목'>
 						</div>
@@ -79,7 +80,7 @@ font-family: 'NIXGONM-Vb';}
 						</div>
 						<br>
 						<div class="text-right">
-						<button type='submit' class='btn btn-success'>등록</button>
+						<button type='submit' class="btn btn-outline-success">등록</button>
 						</div>
 					</div>
 					<br>
@@ -87,9 +88,10 @@ font-family: 'NIXGONM-Vb';}
 			</div>
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
 			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-				<div class="row">
+				<div class="row mt-5">
 					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-						<span class="label">네이버 책 검색</span> <input type="text" class="form-control" id="word" name="word" placeholder="Search">
+						<span class="label">네이버 책 검색</span> 
+						<input type="text" class="form-control" id="word" name="word" placeholder="Search">
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 						<br> <span class="input-group-btn">
@@ -97,7 +99,7 @@ font-family: 'NIXGONM-Vb';}
 						</span>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row mt-5">
 					<br> <br> <span class="label">[검색 결과 : <span class="find"></span>건]
 					</span>
 					<table class="table">

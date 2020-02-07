@@ -99,7 +99,7 @@
 					<input type="hidden" id="co_email" name="co_email" value="${email}">
 					<textarea id="content" name="content" placeholder="바르고 고운말" cols="120" rows="3" style="resize:none"></textarea>
 					<div class="text-right">
-					<input type="button" class="btn btn-outline-secondary" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
+					<input type="button" class="btn btn-outline-dark" id="commentWrite" name="commentWrite" value="댓글 작성" onclick="comments();">
 					</div>
 				</form>
 			</c:if>

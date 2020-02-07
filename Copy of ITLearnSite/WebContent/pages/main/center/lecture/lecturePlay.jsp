@@ -14,7 +14,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/ITLearnSite/css/bootstrap.min.css">
 <style>
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+body{
+font-family: 'NIXGONM-Vb';}
+
 html, body {
 	height: 100%;
 	padding : 0;
@@ -29,16 +34,17 @@ html, body {
 } 
 
 .div {
-	background-color: #eee;
+	background-color: #fff;
 	color: #5aa;
 	float: left;
-	border: 1px solid #5aa; 
-	color: #5aa;
+	border: 1px solid #353535; 
+	color: #353535;
 }
 
-/* .tb {
+.tb {
 	width: 100%;
-} */
+} 
+
 #d1 {
 	width: 70%;
 	height: 70%; 
@@ -61,21 +67,25 @@ html, body {
 	height: 29.5%;
 	overflow-y: scroll;
 }
+
+#content {
+width: 95%;
+}
+
 .tb th {
-	background-color: #5aa;
+	background-color: #353535;
 	color: #fff;
 	text-align: center;
 	text-transform: uppercase;
 }
 
 .tb tr {
-	background-color: #eee;
-	color: #5aa;
+	background-color: #fff;
+	color: #353535;
 }
 
 .tb tr:HOVER {
-	background-color: #24a;
-	color: #6af;
+	background-color: #F2FFED;
 	cursor: pointer;
 }
 
@@ -162,7 +172,7 @@ a {
 						+		"<td width='50%'>"+getData.list[i].co_content+"</td>"
 						+ 		"<td width='20%'>"+getData.list[i].co_date+"</td>"
 						+		"<td width='10%'>" 
-						+			"<button onclick='deleteComment("+'"'+addr+'"'+");'" +">삭제</button>" 
+						+			"<button class='btn btn-light' onclick='deleteComment("+'"'+addr+'"'+");'" +">삭제</button>" 
 						+		"</td>"
 						+ 	"</tr>";
 					
@@ -255,9 +265,9 @@ a {
 
 		</div>
 		<div id="d3" class="div">
-			<span>
+			<div class="ml-3 mt-3">
 				<h5>댓글</h5>
-			</span>
+			</div>
 			<hr>
 
 			<!-- co_no ? autoincrements? 로직 생각해보기-->
@@ -265,18 +275,23 @@ a {
 			<input type="hidden" id="list_no" name="list_no" value="" /> <input
 				type="hidden" id="lec_no" name="lec_no" value="" /> <input
 				type="hidden" id="co_email" name="co_email" value="${email}" />
-			<textarea id="content" name="content" placeholder="바르고 고운말" cols="80"
+			<textarea class="ml-3" id="content" name="content" placeholder="바르고 고운말" cols="80"
 				rows="3" style="resize: none"></textarea>
-			<input type="button" id="commentWrite" name="commentWrite"
+			<div class="text-right mr-4">
+			<input type="button" class="btn btn-outline-dark" id="commentWrite" name="commentWrite"
 				value="댓글 작성" onclick="comments();">
+			</div>
 			<hr>
 			<div>
 				<div class='row' id="comments"></div>
 			</div>			
 		</div>
 		<div id="d4" class="div">
-			강의명 : ${lecBean.lec_title }</br>강사 명 : ${lecBean.lec_teacher}<br> 강의
-			내용 : <br> ${lecBean.lec_content }
+			<div class="ml-3 mt-5">
+			강의명 : ${lecBean.lec_title }<br>
+			강사명 : ${lecBean.lec_teacher}<br> 
+			강의내용 : <br> ${lecBean.lec_content }<br>
+			</div>
 		</div>
 	</div>
 </body>

@@ -39,6 +39,11 @@
 </script>
 
 </head>
+<style>
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+h3{
+font-family: 'NIXGONM-Vb';}
+</style>
 
 <body>
 	 <div class="container">

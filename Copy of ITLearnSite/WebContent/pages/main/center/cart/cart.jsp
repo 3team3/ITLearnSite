@@ -110,7 +110,7 @@
 											<%-- 										<c:out value="${cartlist.pro_cnt}"></c:out> --%>
 											<a id="plusbtn"><img src="${path}/images/plus.png" alt="" width="20px" height="20px" class="bt_up" /></a> 
 											<input id="link${i}"
-												type="hidden" class="btn btn-color1" value="변경">
+												type="hidden" class="btn btn-outline-success" value="변경">
 										</div>
 									</td>
 								</c:if>
@@ -126,7 +126,7 @@
 											<%-- 										<c:out value="${i}"></c:out> --%>
 											<%-- 										<c:out value="${cartlist.pro_cnt}"></c:out> --%>
 											<a id="plusbtn"><img src="${path}/images/plus.png" alt="" width="20px" height="20px" class="bt_up" /></a> <input id="link${i}"
-												type="button" class="btn btn-color1" value="변경">
+												type="button" class="btn btn-outline-success" value="변경">
 
 										</div>
 									</td>
@@ -137,7 +137,7 @@
 								</c:if>
 								<td class="price" style="width: 100px;">${cartlist.pro_price }</td>
 								<td class="sort" style="width: 100px;">${cartlist.pro_sort }</td>
-								<td class="delete"><input type="button" class="btn btn-color1" value="삭제"
+								<td class="delete"><input type="button" class="btn btn-outline-danger" value="삭제"
 									onclick="location.href='cartDelete.cart?cart_num=${cartlist.cart_num}'"></td>
 							</tr>
 							<!-- j변수 값 1씩 증가 -->
@@ -154,8 +154,8 @@
 					</div>
 					<div class="btn">
 	
-						<input type="button" class="btn btn-color1" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'"> <input type="button"
-							class="btn btn-color1" value="전체상품주문" onclick="location.href='payment.pay'">
+						<input type="button" class="btn btn-outline-secondary" value="장바구니 비우기" onclick="location.href='cartAllDelete.cart'"> <input type="button"
+							class="btn btn-outline-dark" value="전체상품주문" onclick="location.href='payment.pay'">
 					</div>
 				</form>
 

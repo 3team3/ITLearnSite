@@ -99,7 +99,7 @@ font-family: fantasy;
 								</div>
 								<div class="col-md-12 form-group">
 									<label for="address">주소</label> <input type="text" name="address" id="address" placeholder="우편번호" value="${mBean.address}" readonly="readonly"
-										class="form-control form-control-lg"> <br> <input type="button" onclick="DaumPostcode();" class="btn btn-primary btn-lg" value="우편번호 찾기"><br>
+										class="form-control form-control-lg"> <br> <input type="button" onclick="DaumPostcode();" class="btn btn-outline-dark btn-lg" value="우편번호 찾기"><br>
 									<input type="text" name="address1" id="address1" placeholder="주소" value="${mBean.address1}" readonly="readonly" required="required"
 										class="mt-5 form-control form-control-lg"> <br> <input type="text" name="address2" id="address2" placeholder="상세주소"
 										value="${mBean.address2}" required="required" class="form-control form-control-lg"> <br>
@@ -108,8 +108,8 @@ font-family: fantasy;
 									<label for="address">sms수신동의</label><br> <input type="checkbox" class="mb-5" name="sms" id="sms" value="1"><br>
 								</div>
 								<div class="col-md-12 form-group text-center">
-									<input type="submit" id="submit" value="수정하기" class="btn btn-primary btn-lg"> <input type="button" value="탈퇴하기"
-										onclick="location.href='${path}/MemberDeleteAction.do'" class="btn btn-primary btn-lg">
+									<input type="submit" id="submit" value="수정하기" class="btn btn-outline-success btn-lg"> <input type="button" value="탈퇴하기"
+										onclick="location.href='${path}/MemberDeleteAction.do'" class="btn btn-outline-secondary btn-lg">
 								</div>
 							</form>
 						</div>

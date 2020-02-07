@@ -11,7 +11,13 @@
 <script src="${path}/js/jquery-3.3.1.min.js"></script>
 <script src="${path}/js/makejs/bookList.js"></script>
 </head>
+<style type="text/css">
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+body{
+font-family: 'NIXGONM-Vb';}
+</style>
 <body>
+
 <div class="container">
 	<div class="row align-items-end justify-content-center text-center">			
 			<img src="${path }/images/admin4.png">			
@@ -31,11 +37,7 @@
     
 	<c:set var='booklist' value='${list}'></c:set>
 	<div class="container">
-		<div class="pagewrap">
-			<div class="pagetitle">
-				<h1>재고 관리 페이지</h1>
-				<hr>
-			</div>
+		<div class="pagewrap text-center">
 
 			<div class="bookwrap pt-5 pb-5">
 				<table class="tborder table-condensed table-bordered">
@@ -56,8 +58,8 @@
 							<td>${books.book_title}</td>
 							<td><input id="price${books.product_no}" type="text" value="${books.book_price}" style="width: 70px;"></td>
 							<td><input id="stock${books.product_no}" type="text" value="${books.book_stock}" style="width: 70px;"></td>
-							<td><button onclick="modify('${books.product_no}');">수정</button></td>
-							<td><button onclick="deleteQues('${books.product_no}');">삭제</button></td>
+							<td><button class="btn btn-outline-success" onclick="modify('${books.product_no}');">수정</button></td>
+							<td><button class="btn btn-outline-secondary" onclick="deleteQues('${books.product_no}');">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -67,7 +69,7 @@
 				<div style="text-align: center;">
 					<c:forEach var="i" begin="1" end="${page}">
 						<c:if test="${page!=0}">
-							<a href="bookstock.text?num=${i}"><button onclick="booklist('bookList.text', '${i}')">${i}</button></a>
+							<a href="bookstock.text?num=${i}"><button class="btn btn-light" onclick="booklist('bookList.text', '${i}')">${i}</button></a>
 						</c:if>
 					</c:forEach>
 				</div>

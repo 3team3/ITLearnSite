@@ -76,7 +76,7 @@
 						<td>${memberlist.address2}</td>
 						<td>${memberlist.sms}</td>
 						<td><input type="button" class="btn btn-outline-dark" value="회원주문정보" onclick="location.href='${path}/paymentCheck.pay?email=${memberlist.email}'"></td>
-						<td><input type="button" class="btn btn-outline-dark" value="회원삭제" onclick="location.href='${path}/AdminMemberDelete.admin?email=${memberlist.email}'"></td>						
+						<td><input type="button" class="btn btn-outline-secondary" value="회원삭제" onclick="location.href='${path}/AdminMemberDelete.admin?email=${memberlist.email}'"></td>						
 					</tr>
 
 				<!-- j변수 값 1씩 증가 -->

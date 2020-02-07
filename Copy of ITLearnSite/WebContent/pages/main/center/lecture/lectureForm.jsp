@@ -189,9 +189,9 @@
 					</div>
 					<div class="text-center mt-5">
 						<input type="button" value="등록" onclick="fnWrite()"
-							class="btn btn-primary btn-lg px-5 submit" style="margin: 10px;" />
+							class="btn btn-outline-success btn-lg px-5 submit" style="margin: 10px;" />
 						<input type="reset" value="다시작성"
-							class="btn btn-primary btn-lg px-5 cancel" style="margin: 10px;" />
+							class="btn btn-outline-secondary btn-lg px-5 cancel" style="margin: 10px;" />
 					</div>
 				</form>
 

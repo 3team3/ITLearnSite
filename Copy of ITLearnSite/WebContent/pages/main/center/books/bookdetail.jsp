@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/bookdetail.css">
+
 </head>
 <div class="container">
 	<div class="row align-items-end justify-content-center text-center">			
@@ -21,7 +22,6 @@
 		<a href="${path}/index.do">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서보기</span>
 	</div>
 </div>
-
 <body>
 	<div class="container">
 		<div class="row">

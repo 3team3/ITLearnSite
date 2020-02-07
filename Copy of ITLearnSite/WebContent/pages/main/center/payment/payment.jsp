@@ -85,7 +85,7 @@ font-family: 'NIXGONM-Vb';}
             </div>
             
             <div class="col-md-12 form-group">
-	            <label for="address">주소</label><input type="button" onclick="DaumPostcode();" class="btn btn-outline-secondary post_position" value="우편번호 찾기">
+	            <label for="address">주소</label><input type="button" onclick="DaumPostcode();" class="btn btn-outline-dark post_position" value="우편번호 찾기">
 	            <input type="text" name="address" id="address" placeholder="우편번호" readonly="readonly" class="form-control form-control-lg form-text" onblur="addressChk();" required>
 				<input type="text" name="address1" id="address1" placeholder="주소" readonly="readonly" class="form-control form-control-lg form-text" onblur="addressChk();" required> 
 				<input type="text" name="address2" id="address2" placeholder="상세주소" class="form-control form-control-lg form-text" onblur="addressChk();" required><br>

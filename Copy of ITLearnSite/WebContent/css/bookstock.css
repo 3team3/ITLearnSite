@@ -1,4 +1,6 @@
 @charset "UTF-8";
+@font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+
 .pagewrap{
 	width: 1200px;
     height: auto;
@@ -10,14 +12,14 @@
 }
 
 .bookwrap{
-	border:solid red 1px;
+	/*border:solid red 1px;*/
 	margin-bottom: 20px;
 	margin-top : 20px;
 }
 
 .tborder{
-	border: solid orange 1px;
-	font-family: fantasy;
+	/* border: solid orange 1px; */
+	font-family: 'NIXGONM-Vb';
 	font-size: 20px;
 	color:black;
 	text-align: center;

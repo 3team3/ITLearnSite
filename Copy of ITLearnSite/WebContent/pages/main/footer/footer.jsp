@@ -38,8 +38,7 @@
           <div class="col-lg-3">
               <h3 class="footer-heading"><span>자주 찾는 메뉴</span></h3>
               <ul class="list-unstyled">
-                  <li><a href="#">내 강의실</a></li>
-                  <li><a href="#">고객센터</a></li>
+                  <li><a href="questionList.ques">고객센터</a></li>
                   <li><a href="resourceList.bo">자료실</a></li>                  
               </ul>
           </div>

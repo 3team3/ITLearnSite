@@ -52,8 +52,7 @@ function setBooklist(getData){
 			+		"</a>"
 			+			"<p class='book_price'> 가격 : " + getData.list[i].book_price + "원</p>"
 			+		"<div class='buttons'>"
-			+			"<a href='cartAdd.cart?&product_no="+getData.list[i].product_no+ "&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort="+getData.list[i].product_type+"&pro_cnt=1' class='btn btn-primary rounded-0 px-4'> 담기 </a>"
-			+			"<button class='btn btn-color1'> 맛보기 </button>"
+			+			"<a href='cartAdd.cart?&product_no="+getData.list[i].product_no+ "&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort="+getData.list[i].product_type+"&pro_cnt=1' class='btn btn-outline-success rounded-0 px-4'> 담기 </a>"
 			+		"</div>"
 			+	"</div>"
 			+"</div>";
@@ -66,7 +65,7 @@ function setBooklist(getData){
 	var string2 ="";
 	for(var i = 1; i <= pageCount; i++)
 	{
-		var paging ="<button onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>";
+		var paging ="<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>";
 		string2 = string2 + paging;
 	}
 	

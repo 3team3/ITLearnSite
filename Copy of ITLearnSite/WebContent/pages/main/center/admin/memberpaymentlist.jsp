@@ -13,7 +13,11 @@
 <link href="${path}/css/create.css" rel="stylesheet"> 
 <title>회원관리</title>
 </head>
-
+<style>
+ @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+h3{
+font-family: 'NIXGONM-Vb';}
+</style>
 
 <div class="container">
 	<div class="row align-items-end justify-content-center text-center">			
@@ -134,7 +138,7 @@
                     <input type="hidden" id="pay_option" name="pay_option">
                     <input type="hidden" id="pay_no" name="pay_no" value="${paymentList.pay_no}">
                 </td>
-                <td><button onclick="check()" class="btn btn-color1">변경</button></td>      
+                <td><button onclick="check()" class="btn btn-outline-dark">변경</button></td>      
           	</tr>
 <script>
 function payment(){
