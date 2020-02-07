@@ -264,10 +264,10 @@ import question.db.QuestionBean;
 				String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
 						+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
 						+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
+						+ "where isNotice = 'n'"
 						+ "start with ques_parentno=0 "
 						+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
-						+ "where recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)"
-						+ "AND isNotice = 'n'";
+						+ "where recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)";
 
 				// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
 				// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
