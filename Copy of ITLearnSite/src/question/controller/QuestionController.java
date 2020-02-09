@@ -65,13 +65,16 @@ public class QuestionController extends HttpServlet {
 				pagingMap.put("pageNum", pageNum);
 				
 				Map questionsMap1=qServ.listQuestion1();
-				
 				Map questionsMap2=qServ.listQuestion2(pagingMap);
+				
 				questionsMap2.put("section", section);
 				questionsMap2.put("pageNum", pageNum);
 				
+				int countNotice = qServ.countNotice();
+				
 				request.setAttribute("questionsMap1", questionsMap1);
 				request.setAttribute("questionsMap2", questionsMap2);
+				request.setAttribute("countNotice", countNotice);
 				request.setAttribute("email", email);
 				
 				nextPage = "/main.jsp";

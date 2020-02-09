@@ -64,6 +64,12 @@ public class QuestionServiceImpl implements QuestionService {
 				questionsMap2.put("totQuestions", totQuestions);
 				return questionsMap2;
 			}
+			
+		//공지사항 글개수
+			@Override
+			public int countNotice() {
+				return qDao.countNotice();
+			}
 		
 		//조회수 증가
 			@Override
@@ -89,5 +95,6 @@ public class QuestionServiceImpl implements QuestionService {
 			public int addReply(QuestionBean qBean) {
 				return qDao.insertQuestion(qBean);
 			}
+
 			
 }

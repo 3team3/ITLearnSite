@@ -63,8 +63,10 @@
 			</table>
 			<div class="text-right">
 				<input type="button" value="목록으로" class="btn btn-outline-dark" onclick="location.href='resourceList.bo'"> 
+				<c:if test="${ email == 'admin@admin.com'}" >
 				<input type="submit" class="btn btn-outline-dark" value="수정"> 
 				<input type="button" class="btn btn-outline-dark" value="삭제" onclick="location.href='resourceDelete.bo?res_no=${rBean.res_no}'">
+				</c:if>
 			</div>
 		</form>
 		<hr>

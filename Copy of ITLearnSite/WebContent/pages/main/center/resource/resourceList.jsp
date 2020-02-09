@@ -107,6 +107,7 @@
 					</a>
 				</div>
 
+				<c:if test="${ email == 'admin@admin.com'}" >
 				<div class="header-btn float-r">
 					<a href="resourceWrite.bo">
 						<button class="btn btn-outline-dark">
@@ -114,6 +115,7 @@
 						</button>
 					</a>
 				</div>
+				</c:if>
 			</div>
 			<div class="btn-wrap text-align" style="margin-top:20px; margin-bottom: 20px">
 			

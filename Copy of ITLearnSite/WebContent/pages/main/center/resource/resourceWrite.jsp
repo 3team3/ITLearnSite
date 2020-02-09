@@ -16,12 +16,12 @@
  
 </head>
 <c:set var="email" value="${sessionScope.email}"></c:set>
-<c:if test="${email eq null}">
+<%-- <c:if test="${email eq null}">
 	<script type="text/javascript">
 		alert("로그인 후 글쓰기가 가능합니다.");
 		location.href="resourceList.bo";
 	</script>
-</c:if>
+</c:if> --%>
 <body>
 
 <div class="site-wrap">

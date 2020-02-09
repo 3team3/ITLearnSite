@@ -25,6 +25,9 @@ public interface QuestionService {
 	/*일반글 조회 - 페이징 기능에 필요한 글목록과 전체 글 개수를 조회*/
 	public Map listQuestion2(Map<String, Integer> pagingMap);
 	
+	/*공지사항 글 개수*/
+	public int countNotice();
+	
 	/*조회수 증가*/
 	public void updateReadcount(int ques_no);
 	

@@ -14,6 +14,7 @@
 <c:set var="questionsList1" value="${questionsMap1.questionsList1}" />
 <c:set var="questionsList2" value="${questionsMap2.questionsList2}" />
 <c:set var="totQuestions" value="${questionsMap2.totQuestions}" />
+<c:set var="countNotice" value="${countNotice}" />
 <c:set var="section" value="${questionsMap2.section}" />
 <c:set var="pageNum" value="${questionsMap2.pageNum}" />
 <c:set var="email" value="${email}" />
@@ -28,7 +29,7 @@
 				<img src="${path }/images/service.png">			
 		</div>
 	</div>
-    
+	
     <div class="custom-breadcrumns border-bottom">
       <div class="container">
         <a href="${path}/index.do">Home</a>
@@ -36,8 +37,7 @@
         <span class="current">고객센터</span>
       </div>
     </div>
-    
-    
+   
 	<div class="pagemargin">
 		<div class="wrapboard">
 			<div class="row">
@@ -180,10 +180,9 @@
 				<%--전체 글수에 따라 페이징 표시를 다르게 합니다. --%>
 				<c:if test="${totQuestions != null }">
 					<c:choose>
-						<c:when test="${totQuestions >100 }">
-							<!-- 전체 글수가 100보다 클때... -->
+						<c:when test="${totQuestions >(10-countNotice)*10 }">
+							<!-- 공지사항을 제외한 전체 글 수가 10페이지를 넘길 때 -->
 							<c:forEach var="page" begin="1" end="10" step="1">
-
 								<%--섹션값 2부터는 앞 섹션으로 이동할수 있는 pre를 표시합니다. --%>
 								<c:if test="${section >1 && page==1 }">
 									<a class="no-uline" href="${path }/questionList.ques?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
@@ -191,26 +190,25 @@
 
 								<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
 
-								<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
+								<%--페이지번호 10 오른쪽에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
 								<c:if test="${page ==10 }">
 									<a class="no-uline" href="${path }/questionList.ques?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
 								</c:if>
 							</c:forEach>
 						</c:when>
 
-						<%--전체글수가 100개일떄는 첫번째 섹션의 10개의 페이지만 표시하면 됩니다. --%>
-						<c:when test="${totQuestions ==100 }">
-							<!--등록된 글 개수가 100개인경우  -->
+						<%--공지사항을 제외한 전체글수가 10페이지일 때 10개의 페이지만 표시 --%>
+						<c:when test="${totQuestions == (10-countNotice)*10  }">
 							<c:forEach var="page" begin="1" end="10" step="1">
-								<a class="no-uline" href="#">${page } </a>
+								<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${page } </a>
 							</c:forEach>
 						</c:when>
 
 
-						<c:when test="${totQuestions < 100 }">
-							<!--등록된 글 개수가 100개 미만인 경우  -->
-							<%--글수가 100개가 되지 않으므로 표시되는 페이지는 10개가 되지 않고, 전체 글수를 10으로 나누어 구한 몫에 1을 더한 페이지까지 표시합니다. --%>
-							<c:forEach var="page" begin="1" end="${totQuestions/10 +1}" step="1">
+						<c:when test="${totQuestions < (10-countNotice)*10  }">
+							<!--등록된 글 개수가 10페이지 미만일 경우  -->
+							<%--글수가 10페이지를 채우지 않으므로 표시되는 페이지는 10개가 되지 않고, 공지사항을 제외한 전체 글수를 한페이지에 들어갈 글 수로 나누어 구한 몫에 1을 더한 페이지까지 표시합니다. --%>
+							<c:forEach var="page" begin="1" end="${totQuestions/(10-countNotice) +1}" step="1">
 								<c:choose>
 									<%-- 페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우 페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄 --%>
 									<c:when test="${page==pageNum }">

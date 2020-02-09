@@ -232,7 +232,8 @@ import question.db.QuestionBean;
 		
 		
 	//페이징 처리를 위해 공지사항 갯수 가져오기
-		private int countNotice(){
+		@Override
+		public int countNotice(){
 			try {
 				con = getConnection();
 				String query = "select count(*) from question_table where isNotice='y' ";
@@ -323,14 +324,14 @@ import question.db.QuestionBean;
 			return questionsList2;
 		}
 	
-	//전체 글 개수
+	//공지사항을 제외한 전체 글 개수
 	@Override
 	public int selectTotQuestions() {
 		try {
 			con = getConnection();
 			
 			//전체 글 수 조회
-			String query = "select count(ques_no) from question_table";
+			String query = "select count(ques_no) from question_table where isNotice='n'";
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
@@ -344,7 +345,7 @@ import question.db.QuestionBean;
 		}
 		return 0;	
 	}
-	
+
 	//조회수 증가
 	@Override
 	public void updateReadcount(int ques_no){

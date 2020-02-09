@@ -22,8 +22,11 @@ public interface QuestionDAO{
 	/*글 목록- 일반글 */
 	public List selectQuestions(Map pagingMap);
 	
-	/*전체 글 개수*/
+	/*공지사항 제외 글 개수*/
 	public int selectTotQuestions();
+	
+	/*공지사항 글 개수*/
+	public int countNotice();
 	
 	/*글 내용*/
 	public QuestionBean questionView(int ques_no);
