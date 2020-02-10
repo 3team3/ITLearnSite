@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.cj.Session;
 
 import member.db.MemberBean;
 import member.db.MemberDAOImpl;
@@ -267,6 +268,7 @@ public class MemberController extends HttpServlet {
 					request.setAttribute("loginResult", loginResult);
 					HttpSession session = request.getSession();
 					session.setAttribute("email", email);
+					session.setAttribute("loginAuth", "normal");
 					
 					nextPage = "/main.jsp";
 					paging = "/pages/main/center/default.jsp";
@@ -285,6 +287,92 @@ public class MemberController extends HttpServlet {
 					nextPage = "/login.do";
 				}
 			} 
+			else if (path.equals("/nvlogin.do"))
+			{
+				mBean.setEmail(request.getParameter("email"));
+				mBean.setName(request.getParameter("name"));
+				System.out.println(request.getParameter("gender"));
+				
+				int gen=0;
+				
+				if(request.getParameter("gender").equals("M"))
+				{
+					gen = 1;
+					System.out.println("Man");
+					
+					mBean.setGender(gen);
+				}
+				else if (request.getParameter("gender").equals("W")){
+					System.out.println("Woman");
+					gen = 2;
+					mBean.setGender(gen);
+				}
+				
+				System.out.println(mBean.getName()+mBean.getEmail()+mBean.getGender());
+				int check = serv.emailDupChk(mBean);
+				
+				if(check == 1)
+				{
+					System.out.println("중복");
+					PrintWriter out = response.getWriter();
+					out.print(1);
+					HttpSession session = request.getSession();
+					session.setAttribute("email", mBean.getEmail());
+					session.setAttribute("loginAuth", "naver");
+					return;
+				}
+				else {
+					System.out.println("중복 x");
+					PrintWriter out = response.getWriter();
+					out.print(0);
+					result = serv.InsertMember(mBean);
+					HttpSession session = request.getSession();
+					session.setAttribute("email", mBean.getEmail());
+					session.setAttribute("loginAuth", "naver");
+					return;
+				}
+				
+				
+//				nextPage = "/main.jsp";
+//				paging = "/index.do";
+//				request.setAttribute("paging", paging);
+			} 
+			else if(path.equals("/callback.do"))
+			{
+				
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/callback.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/callbackModify.do"))
+			{
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/callbackModify.jsp";
+				request.setAttribute("paging", paging);
+			}
+			else if(path.equals("/naverModifylogin.do"))
+			{
+				
+				HttpSession session = request.getSession();
+				String email = (String) session.getAttribute("email");
+				if(email.equals(session.getAttribute("email")))
+				{
+					PrintWriter out = response.getWriter();
+					out.print("success");
+				}
+				
+			}
+			else if(path.equals("/naverModify.do"))
+			{
+				HttpSession session = request.getSession();
+				String email = (String) session.getAttribute("email");
+				mBean = serv.callMember(email);
+				
+				request.setAttribute("mBean", mBean);
+				nextPage = "/main.jsp";
+				paging = "/pages/main/center/member/naverModify.jsp?email="+email;
+				request.setAttribute("paging", paging);
+			}
 			else if (path.equals("/logout.do")) 
 			{
 				HttpSession session = request.getSession();
@@ -385,8 +473,8 @@ public class MemberController extends HttpServlet {
 					request.setAttribute("paging", paging);
 					HttpSession session = request.getSession();
 					session.invalidate();
-				}
-				// ##########회원수정 ############## End
+			}
+				
 				
 			
 				
@@ -408,6 +496,7 @@ public class MemberController extends HttpServlet {
 		String pw = null;
 		String name = null;
 		int gender = 0;
+		String gender1 = null;
 		String birth_year = null;
 		String birth_month = null;
 		String birth_day = null;
@@ -437,10 +526,11 @@ public class MemberController extends HttpServlet {
 			mBean.setName(name);
 			System.out.println("name = " + name);
 		}
-		if (request.getParameter("gender") != null) {
-			gender = Integer.parseInt(request.getParameter("gender"));
-			mBean.setGender(gender);
-			System.out.println("gender=" + gender);
+		if(request.getParameter("gender") != null)
+		{
+				gender = Integer.parseInt(request.getParameter("gender"));
+				mBean.setGender(gender);
+				System.out.println("gender=" + gender);
 		}
 		if (request.getParameter("birth_year") != null) {
 			birth_year = request.getParameter("birth_year");

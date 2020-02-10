@@ -245,6 +245,36 @@ function modifySubmitter(){
 	}
 }
 
+function naverModifySubmitter(){
+		
+	
+	if($("#address").val() == "")
+	{
+		$("#address").focus();
+		return false;
+	}
+	else if($("#address1").val() == "")
+	{
+		$("#address1").focus();
+		return false;
+	}
+	else if($("#address2").val() == "")
+	{
+		$("#address2").focus();
+		return false;
+	}
+	else if($("#phonenumber").val() == "")
+	{
+		$("#phonenumber").focus();
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+
 
 
 

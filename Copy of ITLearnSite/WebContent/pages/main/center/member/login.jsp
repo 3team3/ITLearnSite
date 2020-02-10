@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
@@ -6,69 +7,96 @@
 
 <head>
 <style type="text/css">
-#loginbtn{
- width: 100%;
+#loginbtn {
+	width: 100%;
 }
 
 input[type=password] {
-font-family: fantasy;
+	font-family: fantasy;
 }
-
 </style>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${path}/js/makejs/socialLogin.js"></script>
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body data-spy="scroll" data-target=".site-navbar-target"
+	data-offset="300">
 	<c:if test="${ loginResult == -1 || loginResult == 0 }">
 		<script>
 			alert("이메일 혹은 비밀번호가 틀렸습니다.");
 		</script>
 	</c:if>
 
-	<c:if test="${email != null }">
-		<script>
-			alert("이미 로그인 중입니다.");
-			location.href = "../index.jsp";
-		</script>
-	</c:if>
+<%-- 	<c:if test="${email != null }"> --%>
+<!-- 		<script> -->
+// 			alert("이미 로그인 중입니다.");
+// 			location.href = "index.do";
+<!-- 		</script> -->
+<%-- 	</c:if> --%>
 
 
-	 <div class="container">
-	<div class="row align-items-end justify-content-center text-center">			
-			<img src="${path }/images/login.png">			
-	</div>
-</div>
-
-
-
-		<div class="custom-breadcrumns border-bottom">
-			<div class="container">
-				<a href="index.jsp">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">로그인</span>
-			</div>
+	<div class="container">
+		<div class="row align-items-end justify-content-center text-center">
+			<img src="${path }/images/login.png">
 		</div>
+	</div>
 
-		<div class="site-section">
-			<div class="container">
 
-				<form action="${path}/login1.do" method="post">
-					<div class="row justify-content-center">
-						<div class="col-md-5">
-							<div class="row">
-								<div class="col-md-12 form-group">
-									<label for="email">이메일</label> <input type="text" id="email" name="email" class="form-control form-control-lg">
-								</div>
-								<div class="col-md-12 form-group">
-									<label for="password">비밀번호</label> <input type="password" id="password" name="pw" id="pw" class="form-control form-control-lg">
-								</div>
+
+	<div class="custom-breadcrumns border-bottom">
+		<div class="container">
+			<a href="index.jsp">Home</a> <span
+				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">로그인</span>
+		</div>
+	</div>
+
+	<div class="site-section">
+		<div class="container">
+
+			<form id="form" action="${path}/login1.do" method="post">
+				<div class="row justify-content-center">
+					<div class="col-md-5">
+						<div class="row">
+							<div class="col-md-12 form-group">
+								<label for="email">이메일</label> <input type="text" id="email"
+									name="email" class="form-control form-control-lg">
 							</div>
-							<div class="row">
-								<div class="col-12">
-									<input type="submit" id="loginbtn" value="로그인" class="btn btn-primary btn-lg px-5">
-								</div>
+							<div class="col-md-12 form-group">
+								<label for="password">비밀번호</label> <input type="password"
+									id="password" name="pw" id="pw"
+									class="form-control form-control-lg">
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-12">
+								<input type="submit" id="loginbtn" value="로그인"
+									class="btn btn-primary btn-lg px-5">
+							</div>
+						</div>
+						<div>
+							<div id="naver_id_login"></div>
+						</div>
+						<script type="text/javascript">
+							var naver_id_login = new naver_id_login(
+									"NhEDrGuvXvRCwueSRLso",
+									"http://localhost:8090/ITLearnSite/callback.do");
+							
+							//
+							var state = naver_id_login.getUniqState();
+							naver_id_login.setButton("white", 2, 40);
+							naver_id_login.setDomain("http://localhost:8090/ITLearnSite");
+							naver_id_login.setState(state);
+							naver_id_login.setPopup();
+							naver_id_login.init_naver_id_login();
+						</script>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
