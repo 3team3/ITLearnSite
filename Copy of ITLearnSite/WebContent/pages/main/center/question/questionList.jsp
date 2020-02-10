@@ -226,17 +226,18 @@
 				</c:if>
 			</div>
 			<div class="btn-wrap text-align">
-			<form action="questionSelect.ques" method="post" >
+			<form action="questionList.ques" method="post" >
 				<div class="selector-wrap">
-					<select class="box selectbox" name="select_subject">
-							<option value="title" selected="selected">제목</option>
-							<option value="content">내용</option>	
-					</select>			
+					<select class="box selectbox" name="opt">
+							<option value="ques_title" selected="selected">제목</option>
+							<option value="ques_content">내용</option>
+							<option value="ques_email">글쓴이</option>							
+					</select>	
 				</div>
 				<div class="search-wrap">
-					<input class="box inputbox" type="text" name="select_content"> 
+					<input class="box inputbox" type="text" name="condition"> 
 					<span class="lookimg"> 			
-						<button type="submit"><img src="${path}/images/look.png" width="30px" height="30px"></button>
+						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
 					</span>
 				</div>
 			</form>

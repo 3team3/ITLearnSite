@@ -14,7 +14,7 @@
            
           </div>
           <div class="col-lg-3">
-            <h3 class="footer-heading"><span>Our Team</span></h3>
+            <h3 class="footer-heading"><span>개발팀</span></h3>
             <ul class="list-unstyled">
                 <li>김태균</li>
                 <li>배재영</li>
@@ -25,21 +25,19 @@
             </ul>
           </div>
           <div class="col-lg-3">
-              <h3 class="footer-heading"><span>Our Courses</span></h3>
+              <h3 class="footer-heading"><span>자주 찾는 메뉴</span></h3>
               <ul class="list-unstyled">
-                  <li><a href="#">Math</a></li>
-                  <li><a href="#">Science &amp; Engineering</a></li>
-                  <li><a href="#">Arts &amp; Humanities</a></li>
-                  <li><a href="#">Economics &amp; Finance</a></li>
-                  <li><a href="#">Business Administration</a></li>
-                  <li><a href="#">Computer Science</a></li>
+                  <li><a href="lectureList.lec">강의</a></li>
+                  <li><a href="bookList.text">도서</a></li>
+                  <li><a href="questionList.ques">고객센터</a></li>
+                  <li><a href="resourceList.bo">자료실</a></li>  
               </ul>
           </div>
           <div class="col-lg-3">
-              <h3 class="footer-heading"><span>자주 찾는 메뉴</span></h3>
+              <h3 class="footer-heading"><span>홈페이지</span></h3>
               <ul class="list-unstyled">
-                  <li><a href="questionList.ques">고객센터</a></li>
-                  <li><a href="resourceList.bo">자료실</a></li>                  
+                  <li><a href="login.do">로그인</a></li>
+                  <li><a href="joinMember.do">회원가입</a></li>             
               </ul>
           </div>
         </div>

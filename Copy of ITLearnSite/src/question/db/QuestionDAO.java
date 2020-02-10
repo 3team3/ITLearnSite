@@ -20,10 +20,10 @@ public interface QuestionDAO{
 	public List selectNotice();
 	
 	/*글 목록- 일반글 */
-	public List selectQuestions(Map pagingMap);
+	public List selectQuestions(Map pagingMap,  String opt, String condition);
 	
 	/*공지사항 제외 글 개수*/
-	public int selectTotQuestions();
+	public int selectTotQuestions(String opt, String condition);
 	
 	/*공지사항 글 개수*/
 	public int countNotice();

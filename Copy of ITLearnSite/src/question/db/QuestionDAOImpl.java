@@ -252,7 +252,7 @@ import question.db.QuestionBean;
 		
 	//일반글 가져오기
 		@Override
-		public List selectQuestions(Map pagingMap) {
+		public List selectQuestions(Map pagingMap, String opt, String condition) {
 			List questionsList2 = new ArrayList();
 
 			// 전달 받은 section 값과 pageNum 값을 가져옴
@@ -262,26 +262,55 @@ import question.db.QuestionBean;
 
 			try {
 				con = getConnection();
-				String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
-						+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
-						+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
-						+ "where isNotice = 'n'"
-						+ "start with ques_parentno=0 "
-						+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
-						+ "where recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)";
+				if(opt == null || opt.isEmpty() == true ){
+					String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
+							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
+							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
+							+ "where isNotice = 'n'"
+							+ "start with ques_parentno=0 "
+							+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
+							+ "where recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)";
 
-				// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
-				// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
+					// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
+					// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
 
-				System.out.println(query);
+					System.out.println(query);
 
-				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1, section);
-				pstmt.setInt(2, pageNum);
-				pstmt.setInt(3, countNotice);
-				pstmt.setInt(4, section);
-				pstmt.setInt(5, pageNum);
-				pstmt.setInt(6, countNotice);
+					pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, section);
+					pstmt.setInt(2, pageNum);
+					pstmt.setInt(3, countNotice);
+					pstmt.setInt(4, section);
+					pstmt.setInt(5, pageNum);
+					pstmt.setInt(6, countNotice);					
+				
+				}else{
+					String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
+							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
+							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
+							+ "where isNotice = 'n'"
+							+ "start with ques_parentno=0 "
+							+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
+							+ " where " + opt + " LIKE '%' || ? || '%' "
+							+ "and recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)";
+
+					// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
+					// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
+
+					System.out.println(query);
+
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, condition);
+					pstmt.setInt(2, section);
+					pstmt.setInt(3, pageNum);
+					pstmt.setInt(4, countNotice);
+					pstmt.setInt(5, section);
+					pstmt.setInt(6, pageNum);
+					pstmt.setInt(7, countNotice);
+					
+				}
+				
+				
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
@@ -326,17 +355,26 @@ import question.db.QuestionBean;
 	
 	//공지사항을 제외한 전체 글 개수
 	@Override
-	public int selectTotQuestions() {
+	public int selectTotQuestions(String opt, String condition) {
 		try {
 			con = getConnection();
 			
+		
 			//전체 글 수 조회
+			if(opt == null || opt.isEmpty() == true ){
 			String query = "select count(ques_no) from question_table where isNotice='n'";
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
+			}else{
+				String query = "select count(ques_no) from question_table where isNotice='n'"
+						+ " and " + opt + " LIKE '%' || ? || '%' ";
+				System.out.println(query);
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, condition);
+			}
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
-				return (rs.getInt(1));				
+				return (rs.getInt(1));			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -422,4 +460,3 @@ import question.db.QuestionBean;
     
     
 }
-

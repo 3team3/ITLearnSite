@@ -23,7 +23,7 @@ public interface QuestionService {
 	public Map listQuestion1();
 	
 	/*일반글 조회 - 페이징 기능에 필요한 글목록과 전체 글 개수를 조회*/
-	public Map listQuestion2(Map<String, Integer> pagingMap);
+	public Map listQuestion2(Map<String, Integer> pagingMap, String opt, String condition);
 	
 	/*공지사항 글 개수*/
 	public int countNotice();

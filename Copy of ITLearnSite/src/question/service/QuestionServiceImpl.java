@@ -51,13 +51,13 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		//리스트- 일반글
 			@Override
-			public Map listQuestion2(Map<String, Integer> pagingMap) {
+			public Map listQuestion2(Map<String, Integer> pagingMap, String opt, String condition) {
 	
 				Map questionsMap2 = new HashMap();
 				// 전달된 pagingMap 사용, 글 목록 조회
-				List<QuestionBean> questionsList2 = qDao.selectQuestions(pagingMap);
+				List<QuestionBean> questionsList2 = qDao.selectQuestions(pagingMap, opt, condition);
 				// 테이블에 존재하는 전체 글 수 조회
-				int totQuestions = qDao.selectTotQuestions();
+				int totQuestions = qDao.selectTotQuestions(opt, condition);
 				// 조회된 글 목록을 ArrayList에 저장, 다시 HashMap에 저장
 				questionsMap2.put("questionsList2", questionsList2);
 				// 조회된 전체 글 수를 HashMap에 저장

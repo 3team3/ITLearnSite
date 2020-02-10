@@ -9,7 +9,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/css/bookdetail.css">
-
+<style>
+@font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+body{font-family: 'NIXGONM-Vb';}
+</style>
 </head>
 <div class="container">
 	<div class="row align-items-end justify-content-center text-center">			

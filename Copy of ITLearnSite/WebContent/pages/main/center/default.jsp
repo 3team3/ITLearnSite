@@ -1,11 +1,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <title>Insert title here</title>
 </head>
-<body>
+
+<SCRIPT LANGUAGE="JavaScript"> 
+
+function getCookie( name ){ 
+var nameOfCookie = name + "="; 
+var x = 0; 
+while ( x <= document.cookie.length ) 
+{ 
+var y = (x+nameOfCookie.length); 
+if ( document.cookie.substring( x, y ) == nameOfCookie ) { 
+if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) 
+endOfCookie = document.cookie.length; 
+return unescape( document.cookie.substring( y, endOfCookie ) ); 
+} 
+x = document.cookie.indexOf( " ", x ) + 1; 
+if ( x == 0 ) 
+break; 
+} 
+return ""; 
+} 
+
+//폼의 체크 박스를 체그 하면 새창이 나타나지 않으며, 체크 하지 않았을 경우, 계속 나타납니다. 
+
+if ( getCookie( "Notice" ) != "done" ) { 
+//새창으로 열릴 페이지의 경로 및 크기와 위치를 지정해 주세요. 
+noticeWindow  =  window.open('${path}/pages/main/center/popup.jsp','','width=500, height=330, left=1400, top=670,scrollbars=no,toolbar=no,menubar=no,location=no,status=no,resizable=no'); 
+noticeWindow.opener = self; } 
+ 
+</SCRIPT> 
+
+
+
+<%-- function notice_getCookie( name ){
+    var nameOfCookie = name + "=";
+    var x = 0;
+    while ( x <= document.cookie.length )
+    {
+            var y = (x+nameOfCookie.length);
+            if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+                    if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+                            endOfCookie = document.cookie.length;
+                    return unescape( document.cookie.substring( y, endOfCookie ) );
+            }
+            x = document.cookie.indexOf( " ", x ) + 1;
+            if ( x == 0 )
+                    break;
+    }
+    return "";
+}
+if ( notice_getCookie( "Notice" ) != "done" )
+{
+	var option = "width=500, height=330, left=1400, top=670,scrollbars=no,toolbar=no,menubar=no,location=no,status=no,resizable=no";
+        window.open('${path}/pages/main/center/popup.jsp','',option); 
+}
+
+function getCookie(name) 
+{ 
+	var cookie = document.cookie; 
+	if (document.cookie != "") 
+	{ 
+		var cookie_array = cookie.split("; "); 
+		for ( var index in cookie_array) 
+		{ 
+			var cookie_name = cookie_array[index].split("="); 
+			if (cookie_name[0] == "popupYN") 
+			{ 
+				return cookie_name[1];
+			} 
+		} 
+	} 
+		return ; 
+	} 
+function openPopup(url) 
+{ 
+	var cookieCheck = getCookie("popupYN"); 
+	if (cookieCheck != 2) 
+	{
+		var option = "width=500, height=330, left=1400, top=670,scrollbars=no,toolbar=no,menubar=no,location=no,status=no,resizable=no;";
+		window.open(url, 0, option);
+	}
+} 
+ --%>
+
+<body onload="notice_getCookie('Notice');">
 	<div class="hero-slide owl-carousel site-blocks-cover">
 		<div class="intro-section">
 			<img src="images/hero_1.jpg"; data-aos="fade-up">
@@ -43,238 +128,98 @@
 					<div class="owl-slide-3 owl-carousel">
 						<div class="course-1-item">
 							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="images/course_1.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
+								<a href="${path}/lectureList.lec"><img src="images/alim.png" alt="Image" class="img-fluid"></a>
+								<div class="price">50000원</div>
 								<div class="category">
-									<h3>Mobile Application</h3>
+									<h3>강의1</h3>
 								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
+							</figure>							
 						</div>
-
 						<div class="course-1-item">
 							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="images/course_2.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
+								<a href="${path}/lectureList.lec"><img src="images/dongjava.png" alt="Image" class="img-fluid"></a>
+								<div class="price">50000원</div>
 								<div class="category">
-									<h3>Web Design</h3>
+									<h3>강의2</h3>
 								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
+							</figure>					
 						</div>
-
 						<div class="course-1-item">
 							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="images/course_3.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
+								<a href="${path}/lectureList.lec"><img src="images/jeongsql.png" alt="Image" class="img-fluid"></a>
+								<div class="price">50000원</div>
 								<div class="category">
-									<h3>Arithmetic</h3>
+									<h3>강의3</h3>
 								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="courses-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
+							</figure>		
 						</div>
-
 						<div class="course-1-item">
 							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="images/course_4.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
+								<a href="${path}/lectureList.lec"><img src="images/ricss.png" alt="Image" class="img-fluid"></a>
+								<div class="price">50000원</div>
 								<div class="category">
-									<h3>Mobile Application</h3>
+									<h3>강의4</h3>
 								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="images/course_5.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Web Design</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-
-						<div class="course-1-item">
-							<figure class="thumnail">
-								<a href="course-single.jsp"><img src="images/course_6.jpg" alt="Image" class="img-fluid"></a>
-								<div class="price">$99.00</div>
-								<div class="category">
-									<h3>Mobile Application</h3>
-								</div>
-							</figure>
-							<div class="course-1-content pb-4">
-								<h2>How To Create Mobile Apps Using Ionic</h2>
-								<div class="rating text-center mb-3">
-									<span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span> <span
-										class="icon-star2 text-warning"></span> <span class="icon-star2 text-warning"></span>
-								</div>
-								<p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-								<p>
-									<a href="course-single.jsp" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a>
-								</p>
-							</div>
-						</div>
-
+							</figure>	
+						</div>			
 					</div>
-
 				</div>
 			</div>
-
-
-
 		</div>
 	</div>
-
 
 	<!-- // 05 - Block -->
 	<div class="site-section">
 		<div class="container">
-			<div class="row mb-5">
+			<div class="row mb-5 justify-content-center text-center">
 				<div class="col-lg-4">
 					<h2 class="section-title-underline">
-						<span>Books</span>
+						<span>인기 교재</span>
 					</h2>
 				</div>
 			</div>
-
 
 			<div class="owl-slide owl-carousel">
 
 				<div class="ftco-testimonial-1">
 					<div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-						<img src="images/person_1.jpg" alt="Image" class="img-fluid mr-3">
+						<img src="" alt="Image" class="img-fluid mr-3">
 						<div>
-							<h3>Allison Holmes</h3>
-							<span>Designer</span>
+							<h3>책제목1</h3>
+							<span>저자</span>
 						</div>
 					</div>
 					<div>
-						<p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore
-							dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
+						<p>&ldquo;책설명~~~~ &rdquo;</p>
 					</div>
 				</div>
 
 				<div class="ftco-testimonial-1">
 					<div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-						<img src="images/person_2.jpg" alt="Image" class="img-fluid mr-3">
+						<img src="" alt="Image" class="img-fluid mr-3">
 						<div>
-							<h3>Allison Holmes</h3>
-							<span>Designer</span>
+							<h3>책제목2</h3>
+							<span>저자</span>
 						</div>
 					</div>
 					<div>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure
-							maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!</p>
+						<p>&ldquo;책설명~~~~ &rdquo;</p>
 					</div>
 				</div>
 
 				<div class="ftco-testimonial-1">
 					<div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-						<img src="images/person_4.jpg" alt="Image" class="img-fluid mr-3">
+						<img src="" alt="Image" class="img-fluid mr-3">
 						<div>
-							<h3>Allison Holmes</h3>
-							<span>Designer</span>
+							<h3>책제목3</h3>
+							<span>저자</span>
 						</div>
 					</div>
 					<div>
-						<p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore
-							dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
+						<p>&ldquo;책설명~~~~ &rdquo;</p>
 					</div>
 				</div>
 
-				<div class="ftco-testimonial-1">
-					<div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-						<img src="images/person_3.jpg" alt="Image" class="img-fluid mr-3">
-						<div>
-							<h3>Allison Holmes</h3>
-							<span>Designer</span>
-						</div>
-					</div>
-					<div>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure
-							maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!</p>
-					</div>
-				</div>
-
-				<div class="ftco-testimonial-1">
-					<div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-						<img src="images/person_2.jpg" alt="Image" class="img-fluid mr-3">
-						<div>
-							<h3>Allison Holmes</h3>
-							<span>Designer</span>
-						</div>
-					</div>
-					<div>
-						<p>&ldquo;Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore
-							dolore iure maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!&rdquo;</p>
-					</div>
-				</div>
-
-				<div class="ftco-testimonial-1">
-					<div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-						<img src="images/person_4.jpg" alt="Image" class="img-fluid mr-3">
-						<div>
-							<h3>Allison Holmes</h3>
-							<span>Designer</span>
-						</div>
-					</div>
-					<div>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia nobis libero quidem aut tempore dolore iure
-							maiores, perferendis, provident numquam illum nisi amet necessitatibus. A, provident aperiam!</p>
-					</div>
-				</div>
 
 			</div>
 

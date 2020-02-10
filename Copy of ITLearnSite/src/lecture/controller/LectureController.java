@@ -199,11 +199,18 @@ public class LectureController extends HttpServlet {
 						+ "/lectureList.lec';" + "</script>");
 				return;
 
+			//내 강의실
 			} else if (path.equals("/myLecture.lec")) {
-
+				String email = (String) request.getSession().getAttribute("email");
+				if (email == null) {
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('로그인을 해주세요.');");
+					out.println("history.back();");
+					out.println("</script>");
+					out.close();
+				}else{
 				System.out.println("myLecture.lec");
-
-				String email = request.getParameter("email");
 
 				List myList = lServ.myLecture(email);
 				/* System.out.println(myList); */
@@ -213,7 +220,7 @@ public class LectureController extends HttpServlet {
 				nextPage = "/main.jsp";
 				paging = "/pages/main/center/lecture/myLecture.jsp";
 				request.setAttribute("paging", paging);
-
+				}
 			} else if (path.equals("/lecturePlay.lec")) {
 
 				System.out.println("lecturePlay.lec");

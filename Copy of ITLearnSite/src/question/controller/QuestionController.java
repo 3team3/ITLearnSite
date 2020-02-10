@@ -51,7 +51,11 @@ public class QuestionController extends HttpServlet {
 			if(path.equals("/questionList.ques"))
 			{
 				System.out.println("questionList.ques");
+				String opt = request.getParameter("opt");
+				String condition = request.getParameter("condition");
 				
+				System.out.println(opt);
+				System.out.println(condition);
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
 				String email = (String)request.getSession().getAttribute("email");
@@ -65,10 +69,12 @@ public class QuestionController extends HttpServlet {
 				pagingMap.put("pageNum", pageNum);
 				
 				Map questionsMap1=qServ.listQuestion1();
-				Map questionsMap2=qServ.listQuestion2(pagingMap);
+				Map questionsMap2=qServ.listQuestion2(pagingMap, opt, condition);
 				
 				questionsMap2.put("section", section);
 				questionsMap2.put("pageNum", pageNum);
+				questionsMap2.put("opt", opt);
+				questionsMap2.put("condition", condition);
 				
 				int countNotice = qServ.countNotice();
 				
@@ -289,4 +295,3 @@ public class QuestionController extends HttpServlet {
 		return qBean;
 	}
 }
-

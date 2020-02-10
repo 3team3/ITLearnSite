@@ -3,7 +3,6 @@
 
 }
 p{
-	font-family: sans-serif;
 	font-size: 20px;
 	color:black;
 }
@@ -59,13 +58,13 @@ p{
 
 .col-margin > p{
 	width : 800px;
-	height: 20px;
+	height: auto;
 }
 
 .bookcontent{
     margin-left: 130px;
     float:left;
-    width:850px;
+    width: 800px;
     height:auto;
 /*     border : solid yellow 1px; */
 }
