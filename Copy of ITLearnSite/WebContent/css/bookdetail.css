@@ -2,10 +2,7 @@
 /*     border: solid purple 1px; */
 
 }
-p{
-	font-size: 20px;
-	color:black;
-}
+
 .wrap{
     width:1200px;
     min-height: 700px;
@@ -68,3 +65,7 @@ p{
     height:auto;
 /*     border : solid yellow 1px; */
 }
+
+/*추가*/
+@font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
+body{font-family: 'NIXGONM-Vb';}

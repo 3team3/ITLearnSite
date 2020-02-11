@@ -90,6 +90,16 @@
          <servlet-name>textbookController</servlet-name>
          <url-pattern>*.text</url-pattern>
       </servlet-mapping>
+   <!-- 교재 후기(textbook_comments)  -->   
+      <servlet>
+         <servlet-name>textbookcommentsController</servlet-name>
+         <servlet-class>textbookcomments.controller.TextbookCommentsController</servlet-class>
+      </servlet>
+      <!-- URL패턴 맵핑 -->
+      <servlet-mapping>
+         <servlet-name>textbookcommentsController</servlet-name>
+         <url-pattern>*.tbc</url-pattern>
+      </servlet-mapping>   
    
    <!-- 장바구니(cart_table)  -->   
       <servlet>

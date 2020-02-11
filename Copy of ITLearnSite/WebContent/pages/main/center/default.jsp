@@ -32,7 +32,7 @@ return "";
 
 if ( getCookie( "Notice" ) != "done" ) { 
 //새창으로 열릴 페이지의 경로 및 크기와 위치를 지정해 주세요. 
-noticeWindow  =  window.open('${path}/pages/main/center/popup.jsp','','width=500, height=330, left=1400, top=670,scrollbars=no,toolbar=no,menubar=no,location=no,status=no,resizable=no'); 
+noticeWindow  =  window.open('${path}/pages/main/center/popup.jsp','','width=510, height=350, left=1400, top=650,scrollbars=no,toolbar=no,menubar=no,location=no,status=no,resizable=no'); 
 noticeWindow.opener = self; } 
  
 </SCRIPT> 
