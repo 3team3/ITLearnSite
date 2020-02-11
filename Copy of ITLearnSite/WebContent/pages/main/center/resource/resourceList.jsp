@@ -131,11 +131,16 @@
 									<a class="no-uline" href="${path }/listArticles.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
 								</c:if>
 
+								<%--게시글이 있는 페이지까지만 페이징 처리함 --%>
+								<c:if test="${(section-1)*10 +page < totResources/10 +1}">
 								<a class="no-uline" href="${path }/resourceList.bo?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${(section-1)*10 +page } </a>
+								</c:if>
 
 								<%--페이지번호 10 오른쪾에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
 								<c:if test="${page ==10 }">
-									<a class="no-uline" href="${path }/board8/resourceList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+									<c:if test="${(section-1)*10 +page < totResources/10 +1}">
+										<a class="no-uline" href="${path }/board8/resourceList.bo?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+									</c:if>
 								</c:if>
 							</c:forEach>
 						</c:when>
@@ -180,7 +185,7 @@
 				<div class="search-wrap">
 					<input class="box inputbox" type="text" name="condition"> 
 					<span class="lookimg"> 			
-						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
+						<button class="btn btn-light" type="submit"><img src="${path}/images/look.png" width="27px" height="27px"></button>
 					</span>
 				</div>
 			</form>

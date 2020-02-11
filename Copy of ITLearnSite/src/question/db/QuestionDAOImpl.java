@@ -269,8 +269,7 @@ import question.db.QuestionBean;
 							+ "where isNotice = 'n'"
 							+ "start with ques_parentno=0 "
 							+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
-							+ "where recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)";
-
+							+ "where recNum between(?-1)*(10-?)*10+(?-1)*(10-?)+1 " + "and (?-1)*(10-?)*10+?*(10-?)";
 					// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
 					// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
 
@@ -278,21 +277,23 @@ import question.db.QuestionBean;
 
 					pstmt = con.prepareStatement(query);
 					pstmt.setInt(1, section);
-					pstmt.setInt(2, pageNum);
-					pstmt.setInt(3, countNotice);
-					pstmt.setInt(4, section);
-					pstmt.setInt(5, pageNum);
-					pstmt.setInt(6, countNotice);					
+					pstmt.setInt(2, countNotice);
+					pstmt.setInt(3, pageNum);
+					pstmt.setInt(4, countNotice);
+					pstmt.setInt(5, section);
+					pstmt.setInt(6, countNotice);
+					pstmt.setInt(7, pageNum);
+					pstmt.setInt(8, countNotice);			
 				
 				}else{
 					String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
 							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
 							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
-							+ "where isNotice = 'n'"
+							+ "where isNotice = 'n' and isSecret = 'n'"
 							+ "start with ques_parentno=0 "
 							+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
 							+ " where " + opt + " LIKE '%' || ? || '%' "
-							+ "and recNum between(?-1)*100+(?-1)*(10-?)+1 " + "and (?-1)*100+?*(10-?)";
+							+ "and recNum between(?-1)*(10-?)*10+(?-1)*(10-?)+1 " + "and (?-1)*(10-?)*10+?*(10-?)";
 
 					// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
 					// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
@@ -302,11 +303,13 @@ import question.db.QuestionBean;
 					pstmt = con.prepareStatement(query);
 					pstmt.setString(1, condition);
 					pstmt.setInt(2, section);
-					pstmt.setInt(3, pageNum);
-					pstmt.setInt(4, countNotice);
-					pstmt.setInt(5, section);
-					pstmt.setInt(6, pageNum);
+					pstmt.setInt(3, countNotice);
+					pstmt.setInt(4, pageNum);
+					pstmt.setInt(5, countNotice);
+					pstmt.setInt(6, section);
 					pstmt.setInt(7, countNotice);
+					pstmt.setInt(8, pageNum);
+					pstmt.setInt(9, countNotice);			
 					
 				}
 				

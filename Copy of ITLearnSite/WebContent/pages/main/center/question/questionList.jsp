@@ -11,10 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:set var="questionsList1" value="${questionsMap1.questionsList1}" />
-<c:set var="questionsList2" value="${questionsMap2.questionsList2}" />
-<c:set var="totQuestions" value="${questionsMap2.totQuestions}" />
-<c:set var="countNotice" value="${countNotice}" />
+<c:set var="questionsList1" value="${questionsMap1.questionsList1}" /> <!-- 공지사항리스트 -->
+<c:set var="questionsList2" value="${questionsMap2.questionsList2}" /> <!-- 일반글리스트 -->
+<c:set var="totQuestions" value="${questionsMap2.totQuestions}" /> <!-- 일반글 개수 -->
+<c:set var="countNotice" value="${countNotice}" /> <!-- 공지사항 개수 -->
 <c:set var="section" value="${questionsMap2.section}" />
 <c:set var="pageNum" value="${questionsMap2.pageNum}" />
 <c:set var="email" value="${email}" />
@@ -185,18 +185,23 @@
 							<c:forEach var="page" begin="1" end="10" step="1">
 								<%--섹션값 2부터는 앞 섹션으로 이동할수 있는 pre를 표시합니다. --%>
 								<c:if test="${section >1 && page==1 }">
-									<a class="no-uline" href="${path }/questionList.ques?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; pre </a>
+									<a class="no-uline" href="${path }/questionList.ques?section=${section-1}&pageNum=1">&nbsp; pre </a>
 								</c:if>
-
-								<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
-
+								
+								<%--게시글이 있는 페이지까지만 페이징 처리함 --%>
+								<c:if test="${(section-1)*10 +page < totQuestions/(10-countNotice) +1}">
+									<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+								</c:if>
+								
 								<%--페이지번호 10 오른쪽에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
 								<c:if test="${page ==10 }">
-									<a class="no-uline" href="${path }/questionList.ques?section=${section+1}&pageNum=${section*10+1}">&nbsp; next</a>
+									<c:if test="${(section-1)*10 +page < totQuestions/(10-countNotice) +1}">
+									<a class="no-uline" href="${path }/questionList.ques?section=${section+1}&pageNum=1">&nbsp; next</a>
+									</c:if>
 								</c:if>
 							</c:forEach>
 						</c:when>
-
+						
 						<%--공지사항을 제외한 전체글수가 10페이지일 때 10개의 페이지만 표시 --%>
 						<c:when test="${totQuestions == (10-countNotice)*10  }">
 							<c:forEach var="page" begin="1" end="10" step="1">
@@ -237,7 +242,7 @@
 				<div class="search-wrap">
 					<input class="box inputbox" type="text" name="condition"> 
 					<span class="lookimg"> 			
-						<button type="submit"><img src="${path}/images/look.png" width="30px" height="35px"></button>
+							<button class="btn btn-light" type="submit"><img src="${path}/images/look.png" width="27px" height="27px"></button>
 					</span>
 				</div>
 			</form>
