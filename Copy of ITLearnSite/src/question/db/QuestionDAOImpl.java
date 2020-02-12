@@ -250,142 +250,144 @@ import question.db.QuestionBean;
 			return 0;
 		}
 		
-	//일반글 가져오기
-		@Override
-		public List selectQuestions(Map pagingMap, String opt, String condition) {
-			List questionsList2 = new ArrayList();
+		//일반글 가져오기
+				@Override
+				public List selectQuestions(Map pagingMap, String opt, String condition) {
+					List questionsList2 = new ArrayList();
 
-			// 전달 받은 section 값과 pageNum 값을 가져옴
-			int section = (Integer) pagingMap.get("section");
-			int pageNum = (Integer) pagingMap.get("pageNum");
-			int countNotice = countNotice();
+					// 전달 받은 section 값과 pageNum 값을 가져옴
+					int section = (Integer) pagingMap.get("section");
+					int pageNum = (Integer) pagingMap.get("pageNum");
+					int countNotice = countNotice();
 
-			try {
-				con = getConnection();
-				if(opt == null || opt.isEmpty() == true ){
-					String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
-							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
-							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
-							+ "where isNotice = 'n'"
-							+ "start with ques_parentno=0 "
-							+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
-							+ "where recNum between(?-1)*(10-?)*10+(?-1)*(10-?)+1 " + "and (?-1)*(10-?)*10+?*(10-?)";
-					// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
-					// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
+					try {
+						con = getConnection();
+						if(opt == null || opt.isEmpty() == true ){
+							String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
+									+ "ques_no, ques_parentno, ques_title, ques_email, ques_content, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
+									+ "ques_no, ques_parentno, ques_title, ques_email, ques_content, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
+									+ "where isNotice = 'n'"
+									+ "start with ques_parentno=0 "
+									+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
+									+ "where recNum between(?-1)*(10-?)*10+(?-1)*(10-?)+1 " + "and (?-1)*(10-?)*10+?*(10-?)";
+							// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
+							// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
 
-					System.out.println(query);
+							System.out.println(query);
 
-					pstmt = con.prepareStatement(query);
-					pstmt.setInt(1, section);
-					pstmt.setInt(2, countNotice);
-					pstmt.setInt(3, pageNum);
-					pstmt.setInt(4, countNotice);
-					pstmt.setInt(5, section);
-					pstmt.setInt(6, countNotice);
-					pstmt.setInt(7, pageNum);
-					pstmt.setInt(8, countNotice);			
-				
-				}else{
-					String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
-							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
-							+ "ques_no, ques_parentno, ques_title, ques_email, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
-							+ "where isNotice = 'n' and isSecret = 'n'"
-							+ "start with ques_parentno=0 "
-							+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
-							+ " where " + opt + " LIKE '%' || ? || '%' "
-							+ "and recNum between(?-1)*(10-?)*10+(?-1)*(10-?)+1 " + "and (?-1)*(10-?)*10+?*(10-?)";
+							pstmt = con.prepareStatement(query);
+							pstmt.setInt(1, section);
+							pstmt.setInt(2, countNotice);
+							pstmt.setInt(3, pageNum);
+							pstmt.setInt(4, countNotice);
+							pstmt.setInt(5, section);
+							pstmt.setInt(6, countNotice);
+							pstmt.setInt(7, pageNum);
+							pstmt.setInt(8, countNotice);			
+						
+						}else{
+							String query = "select * from ( " + "select ROWNUM as recNum, lvl, "
+									+ "ques_no, ques_parentno, ques_title, ques_email, ques_content, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from (select level as lvl, "
+									+ "ques_no, ques_parentno, ques_title, ques_email, ques_content, ques_writedate, ques_readcount, isSecret, isNotice, ques_ref, ques_parentemail " + "from question_table "
+									+ "where isNotice = 'n' and isSecret = 'n'"
+									+ " and " + opt + " LIKE '%' || ? || '%' "
+									+ "start with ques_parentno=0 "
+									+ "connect by prior ques_no = ques_parentno " + "order siblings by ques_ref desc))"
+									+ "where recNum between(?-1)*(10-?)*10+(?-1)*(10-?)+1 " + "and (?-1)*(10-?)*10+?*(10-?)";
 
-					// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
-					// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
+							// section과 pageNum 값으로 레코드 번호의 범위를 조건으로 정한
+							// (이들 값이 각각 1로 전송 시, between 1 and 10이 됨)
 
-					System.out.println(query);
+							System.out.println(query);
 
-					pstmt = con.prepareStatement(query);
-					pstmt.setString(1, condition);
-					pstmt.setInt(2, section);
-					pstmt.setInt(3, countNotice);
-					pstmt.setInt(4, pageNum);
-					pstmt.setInt(5, countNotice);
-					pstmt.setInt(6, section);
-					pstmt.setInt(7, countNotice);
-					pstmt.setInt(8, pageNum);
-					pstmt.setInt(9, countNotice);			
-					
+							pstmt = con.prepareStatement(query);
+							pstmt.setString(1, condition);
+							pstmt.setInt(2, section);
+							pstmt.setInt(3, countNotice);
+							pstmt.setInt(4, pageNum);
+							pstmt.setInt(5, countNotice);
+							pstmt.setInt(6, section);
+							pstmt.setInt(7, countNotice);
+							pstmt.setInt(8, pageNum);
+							pstmt.setInt(9, countNotice);		
+							
+						}
+						
+						
+						ResultSet rs = pstmt.executeQuery();
+
+						while (rs.next()) {
+
+							int level = rs.getInt("lvl");
+							int ques_no = rs.getInt("ques_no");
+							int ques_parentno = rs.getInt("ques_parentno");
+							String ques_title = rs.getString("ques_title");
+							String ques_email = rs.getString("ques_email");
+							String ques_content = rs.getString("ques_content");
+							Date ques_writedate = rs.getDate("ques_writedate");
+							int ques_readcount = rs.getInt("ques_readcount");
+							String isNotice = rs.getString("isNotice");
+							String isSecret = rs.getString("isSecret");
+							int ques_ref = rs.getInt("ques_ref");
+							String ques_parentemail = rs.getString("ques_parentemail");
+							
+							QuestionBean bean = new QuestionBean();
+
+							bean.setLevel(level);
+							bean.setQues_no(ques_no);
+							bean.setQues_parentno(ques_parentno);
+							bean.setQues_title(ques_title);
+							bean.setQues_email(ques_email);
+							bean.setQues_content(ques_content);
+							bean.setQues_writedate(ques_writedate);
+							bean.setQues_readcount(ques_readcount);
+							bean.setIsNotice(isNotice);
+							bean.setIsSecret(isSecret);
+							bean.setQues_ref(ques_ref);
+							bean.setQues_parentemail(ques_parentemail);
+							
+							questionsList2.add(bean);
+						}
+						System.out.println("QuestionsList : " + questionsList2);
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						closeConnection();
+					}
+					return questionsList2;
 				}
-				
-				
-				ResultSet rs = pstmt.executeQuery();
-
-				while (rs.next()) {
-
-					int level = rs.getInt("lvl");
-					int ques_no = rs.getInt("ques_no");
-					int ques_parentno = rs.getInt("ques_parentno");
-					String ques_title = rs.getString("ques_title");
-					String ques_email = rs.getString("ques_email");
-					Date ques_writedate = rs.getDate("ques_writedate");
-					int ques_readcount = rs.getInt("ques_readcount");
-					String isNotice = rs.getString("isNotice");
-					String isSecret = rs.getString("isSecret");
-					int ques_ref = rs.getInt("ques_ref");
-					String ques_parentemail = rs.getString("ques_parentemail");
-					
-					QuestionBean bean = new QuestionBean();
-
-					bean.setLevel(level);
-					bean.setQues_no(ques_no);
-					bean.setQues_parentno(ques_parentno);
-					bean.setQues_title(ques_title);
-					bean.setQues_email(ques_email);
-					bean.setQues_writedate(ques_writedate);
-					bean.setQues_readcount(ques_readcount);
-					bean.setIsNotice(isNotice);
-					bean.setIsSecret(isSecret);
-					bean.setQues_ref(ques_ref);
-					bean.setQues_parentemail(ques_parentemail);
-					
-					questionsList2.add(bean);
-				}
-				System.out.println("QuestionsList : " + questionsList2);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				closeConnection();
-			}
-			return questionsList2;
-		}
-	
-	//공지사항을 제외한 전체 글 개수
-	@Override
-	public int selectTotQuestions(String opt, String condition) {
-		try {
-			con = getConnection();
 			
-		
-			//전체 글 수 조회
-			if(opt == null || opt.isEmpty() == true ){
-			String query = "select count(ques_no) from question_table where isNotice='n'";
-			System.out.println(query);
-			pstmt = con.prepareStatement(query);
-			}else{
-				String query = "select count(ques_no) from question_table where isNotice='n'"
-						+ " and " + opt + " LIKE '%' || ? || '%' ";
-				System.out.println(query);
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, condition);
+			//공지사항을 제외한 전체 글 개수
+			@Override
+			public int selectTotQuestions(String opt, String condition) {
+				try {
+					con = getConnection();
+					
+				
+					//전체 글 수 조회
+					if(opt == null || opt.isEmpty() == true ){
+					String query = "select count(ques_no) from question_table where isNotice='n'";
+					System.out.println(query);
+					pstmt = con.prepareStatement(query);
+					}else{
+						String query = "select count(ques_no) from question_table where isNotice='n' and isSecret='n'"
+								+ " and " + opt + " LIKE '%' || ? || '%' ";
+						System.out.println(query);
+						pstmt = con.prepareStatement(query);
+						pstmt.setString(1, condition);
+					}
+					ResultSet rs = pstmt.executeQuery();
+					if(rs.next()){
+						return (rs.getInt(1));			
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {	
+					closeConnection();		
+				}
+				return 0;	
 			}
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()){
-				return (rs.getInt(1));			
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {	
-			closeConnection();		
-		}
-		return 0;	
-	}
 
 	//조회수 증가
 	@Override

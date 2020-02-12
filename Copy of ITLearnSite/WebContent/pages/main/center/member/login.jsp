@@ -8,7 +8,11 @@
 <head>
 <style type="text/css">
 #loginbtn {
-	width: 100%;
+	width: 48%;
+}
+
+#naver_id_login{
+	  float: right;  
 }
 
 input[type=password] {
@@ -65,20 +69,19 @@ input[type=password] {
 									name="email" class="form-control form-control-lg">
 							</div>
 							<div class="col-md-12 form-group">
-								<label for="password">비밀번호</label> <input type="password"
+								<label for="password">비밀번호</label> 
+								<input type="password"
 									id="password" name="pw" id="pw"
-									class="form-control form-control-lg">
+									class="form-control form-control-lg mb-3">
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-12">
+						<div class="text-center">
 								<input type="submit" id="loginbtn" value="로그인"
 									class="btn btn-primary btn-lg px-5">
-							</div>
+								<div id="naver_id_login"></div>
 						</div>
-						<div>
-							<div id="naver_id_login"></div>
-						</div>
+						
+						
 						<script type="text/javascript">
 							var naver_id_login = new naver_id_login(
 									"NhEDrGuvXvRCwueSRLso",
@@ -86,7 +89,7 @@ input[type=password] {
 							
 							//
 							var state = naver_id_login.getUniqState();
-							naver_id_login.setButton("white", 2, 40);
+							naver_id_login.setButton("white", 3, 50);
 							naver_id_login.setDomain("http://localhost:8090/ITLearnSite");
 							naver_id_login.setState(state);
 							naver_id_login.setPopup();
@@ -96,7 +99,6 @@ input[type=password] {
 				</div>
 			</form>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

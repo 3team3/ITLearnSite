@@ -19,6 +19,8 @@
 <c:set var="pageNum" value="${questionsMap2.pageNum}" />
 <c:set var="email" value="${email}" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="opt" value="${questionsMap2.opt}"/>
+<c:set var="condition" value="${questionsMap2.condition}"/>
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
@@ -190,7 +192,7 @@
 								
 								<%--게시글이 있는 페이지까지만 페이징 처리함 --%>
 								<c:if test="${(section-1)*10 +page < totQuestions/(10-countNotice) +1}">
-									<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${(section-1)*10 +page } </a>
+									<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${(section-1)*10 +page } </a>
 								</c:if>
 								
 								<%--페이지번호 10 오른쪽에는 다음섹션으로 이동할수 있는 next를 표시합니다.--%>
@@ -205,7 +207,7 @@
 						<%--공지사항을 제외한 전체글수가 10페이지일 때 10개의 페이지만 표시 --%>
 						<c:when test="${totQuestions == (10-countNotice)*10  }">
 							<c:forEach var="page" begin="1" end="10" step="1">
-								<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${page } </a>
+								<a class="no-uline" href="${path }/questionList.ques?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>
 							</c:forEach>
 						</c:when>
 
@@ -217,12 +219,12 @@
 								<c:choose>
 									<%-- 페이지번호와 컨트롤러에서 넘어온 pageNum이 같은경우 페이지번호를 빨간색으로 표시하여 현재 사용자가 보고 있는 페이지임을 나타냄 --%>
 									<c:when test="${page==pageNum }">
-										<a class="sel-page" href="${path }/questionList.ques?section=${section}&pageNum=${page}">${page } </a>
+										<a class="sel-page" href="${path }/questionList.ques?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>
 									</c:when>
 
 									<%--페이지 번호를 클릭하면 section값과 pageNum값을 컨트롤러로 전송 합니다. --%>
 									<c:otherwise>
-										<a class="no-uline" href="${path}/questionList.ques?section=${section}&pageNum=${page}">${page } </a>
+										<a class="no-uline" href="${path}/questionList.ques?section=${section}&pageNum=${page}&opt=${opt}&condition=${condition}">${page } </a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
