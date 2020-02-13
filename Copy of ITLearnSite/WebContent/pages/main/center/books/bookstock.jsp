@@ -1,7 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
+<c:set var="count" value="${count}"></c:set>
+<!-- 전체 글 수 -->
+<c:set var="pagePerData" value="5"></c:set>
+<!-- 한페이지에 보여줄 데이타 수 -->
+<c:set var="block" value="2"></c:set>
+<!-- 한페이지 당 보여줄 페이지 수 -->
+<c:set var="beginPageNum" value="0"></c:set>
+<!-- 시작 글 번호 -->
+
+<c:set var="nowBlock" value="${nowBlock}"></c:set>
+<!-- 현재 보여질 블럭 -->
+<c:set var="totalPage" value="0"></c:set>
+<!-- 총 페이지 수 -->
+<c:set var="totalBlock" value="0">
+</c:set>
+<!-- 총 블럭 수 -->
+<c:set var="nowPage" value="${nowPage}"></c:set>
+<!-- 현재페이지 -->
+<c:set var="num" value="${param.num}"></c:set>
+
+<!-- 총 페이지 갯수 결정 -->
+<c:choose>
+	<c:when test="${count % pagePerData == 0}">
+		<fmt:parseNumber var="totalPage" integerOnly="true" value="${count / pagePerData}"></fmt:parseNumber>
+	</c:when>
+	<c:otherwise>
+		<fmt:parseNumber var="totalPage" integerOnly="true" value="${(count / pagePerData) + 1 }"></fmt:parseNumber>
+	</c:otherwise>
+</c:choose>
+
+<!-- 총 블럭 수 결정 -->
+<c:choose>
+	<c:when test="${totalPage%block == 0}">
+		<fmt:parseNumber var="totalBlock" integerOnly="true" value="${totalPage / block }"></fmt:parseNumber>
+	</c:when>
+	<c:otherwise>
+		<fmt:parseNumber var="totalBlock" integerOnly="true" value="${(totalPage / block) + 1 }"></fmt:parseNumber>
+	</c:otherwise>
+</c:choose>
+
+<!-- 현재 페이지가 null이 아닐 때 -->
+<c:if test="${not empty nowPage }">
+	<fmt:parseNumber var="nowPage" integerOnly="true" value="${nowPage}"></fmt:parseNumber>
+</c:if>
+<!-- 현재 블럭이 null이 아닐 때 -->
+<c:if test="${not empty nowBlock }">
+	<fmt:parseNumber var="nowBlock" integerOnly="true" value="${nowBlock}"></fmt:parseNumber>
+</c:if>
+<c:if test="${empty nowBlock }">
+	<fmt:parseNumber var="nowBlock" integerOnly="true" value="0"></fmt:parseNumber>
+</c:if>
+<c:set var="beginPageNum" value="${nowPage * pagePerData}"></c:set>
+
+<c:set var="pageNum" value="${param.pageNum}"></c:set>
+
+<c:if test="${empty pageNum }">
+	<c:set var="pageNum" value="1"></c:set>
+</c:if>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +87,7 @@ body {
 
 	<div class="container">
 		<div class="row align-items-end justify-content-center text-center">
-			<img src="${path }/images/admin4.png">
+			<img src="${path}/images/admin4.png">
 		</div>
 	</div>
 
@@ -39,7 +99,12 @@ body {
 	</div>
 
 
+
 	<c:set var='booklist' value='${list}'></c:set>
+
+	<c:set var="loop_flag" value="false"></c:set>
+	<c:set var="loop_flag2" value="false"></c:set>
+
 	<div class="container">
 		<div class="pagewrap text-center">
 
@@ -55,59 +120,74 @@ body {
 						<th width="150px" height="112px">삭제</th>
 					</tr>
 					<!-- 	책 제목 / 수량 / -->
-					<c:forEach var="books" begin="0" items="${booklist}">
-						<tr>
-							<td>${books.product_no}</td>
-							<td><img src="${books.book_image}"></td>
-							<td>${books.book_title}</td>
-							<td><input id="price${books.product_no}" type="text" value="${books.book_price}" style="width: 70px;"></td>
-							<td><input id="stock${books.product_no}" type="text" value="${books.book_stock}" style="width: 70px;"></td>
-							<td><button class="btn btn-outline-success" onclick="modify('${books.product_no}');">수정</button></td>
-							<td><button class="btn btn-outline-secondary" onclick="deleteQues('${books.product_no}');">삭제</button></td>
-						</tr>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${not empty list}">
+							<c:forEach var="books" items="${booklist}" begin="${beginPageNum}" end="${(beginPageNum + pagePerData) - 1}" step="1" varStatus="status">
+								<c:if test="${beginPageNum == count}">
+									<c:set var="loop_flag" value="true"></c:set>
+									<c:set var="loop_flag2" value="true"></c:set>
+								</c:if>
+								<c:if test="${not loop_flag}">
+									<tr>
+										<td>${books.product_no}</td>
+										<td><img src="${books.book_image}"></td>
+										<td>${books.book_title}</td>
+										<td><input id="price${books.product_no}" type="text" value="${books.book_price}" style="width: 70px;"></td>
+										<td><input id="stock${books.product_no}" type="text" value="${books.book_stock}" style="width: 70px;"></td>
+										<td><button class="btn btn-outline-success" onclick="modify('${books.product_no}');">수정</button></td>
+										<td><button class="btn btn-outline-secondary" onclick="deleteQues('${books.product_no}');">삭제</button></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+							<div style="text-align: center;">
+								<c:if test="${count > 0 && nowBlock > 0 } ">
+									<a href="${path}/bookstock.text?nowBlock=${nowBlock-1}&num=${(nowBlock-1) * block}">◀</a>
+								</c:if>
+
+								<c:forEach var = "i" begin="0" end="${block-1}" step="1" varStatus="status">
+									<c:if test="${not loop_flag2}">
+										<c:if test="${(nowBlock * block) + status.index == totalPage}">
+											<c:set var="loop_flag2" value="true"></c:set>
+										</c:if>
+
+										<c:if test="${not loop_flag2}">
+											<a href="${path}/bookstock.text?nowBlock=${nowBlock}&num=${i+1}"> ${nowBlock * block  + 1+ status.index}
+											</a>
+											
+											<c:if test="${(nowBlock * block) + 1 + status.index == count}">
+												<c:set var="loop_flag2" value="true"></c:set>
+											</c:if>
+										</c:if>
+									</c:if>
+								</c:forEach>
+
+								<c:if test="${totalBlock > nowBlock+1}">
+									<a href="${path}/bookstock.text?nowBlock=${nowBlock}&num=${(nowBlock+1) * block}">▶</a>
+								</c:if>
+							</div>
+
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td>데이터가 없습니다.</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
 				</table>
-				<!-- 				if(pageCount <= 5) -->
-				<!-- 	{ -->
-				<!-- 		pageCount = 1; -->
-				<!-- 	} -->
 
-				<!-- 	if(pageCount > 5) -->
-				<!-- 	{ -->
-				<!-- 		if(pageCount % 5 != 0){ -->
-				<!-- 			pageCount = pageCount / 5 + 1; -->
-				<!-- 		}  -->
-				<!-- 		else if(pageCount % 5 == 0){ -->
-				<!-- 			pageCount = pageCount / 5; -->
-				<!-- 		} -->
-				<!-- 	} -->
+				<%-- <c:set var="count" value="${count}"></c:set> <!-- 전체 글 수 --> --%>
+				<%-- <c:set var="pagePerData" value="5"></c:set><!-- 한페이지에 보여줄 데이타 수 --> --%>
+				<%-- <c:set var="block" value="2"></c:set> <!-- 한페이지 당 보여줄 페이지 수 --> --%>
+				<%-- <c:set var="beginPageNum" value="0"></c:set> <!-- 시작 글 번호 --> --%>
 
-				<!-- 	for(var i = 1; i <= pageCount; i++) -->
-				<!-- 	{ -->
-				<!-- 		var paging ="<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>"; -->
-				<!-- 		string2 = string2 + paging; -->
-				<!-- 	} -->
+				<%-- <c:set var="nowBlock" value="${blockNum}"></c:set> <!-- 현재 보여질 블럭 --> --%>
+				<%-- <c:set var="totalPage" value="0"></c:set> <!-- 총 페이지 수 --> --%>
+				<%-- <c:set var="totalBlock" value="0"> </c:set> <!-- 총 블럭 수 --> --%>
+				<%-- <c:set var="nowPage" value="${nowPage}"></c:set> <!-- 현재페이지 --> --%>
 
-				<c:set var="counting" value="${count}"></c:set>
+
 				<!-- 전체 글수를 받아와서 block 단위로  -->
-				<div style="text-align: center;">
-					<c:if test="${counting <= 5}">
-						<c:set var ="page1" value="${counting = 1}"></c:set>
-					</c:if>
-					
-					<c:if test="${counting > 5}">
-						<c:if test = "${counting % 5 != 0 }">
-							<c:set var ="page1" value="${counting = (counting / 5) + 1}"></c:set>
-						</c:if>
-						<c:if test = "${counting % 5 == 0 }">
-							<c:set var ="page1" value="${counting = (counting / 5)}"></c:set>
-						</c:if>
-					</c:if>
-					
-					<c:forEach var="start" begin="${end}" end="${page1-2}">
-							<a href="bookstock.text?num=${start+1}"><button class="btn btn-light" onclick="booklist('bookList.text', '${start+1}')">${start+1}</button></a>
-					</c:forEach>
-				</div>
+
 			</div>
 		</div>
 	</div>
