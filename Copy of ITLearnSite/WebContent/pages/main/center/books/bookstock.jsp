@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,9 @@
 <style type="text/css">
 @font-face {
 	font-family: 'NIXGONM-Vb';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff');
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff')
+		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -67,47 +70,44 @@ body {
 						</tr>
 					</c:forEach>
 				</table>
-				<!-- 				if(pageCount <= 5) -->
-				<!-- 	{ -->
-				<!-- 		pageCount = 1; -->
-				<!-- 	} -->
+				<c:if test="${count > 0}">
+					<c:set var="pageCount" value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
+					<c:set var="startPage" value="${pageGroupSize*(numPageGroup-1)+1}" />
+					<c:set var="endPage" value="${startPage + pageGroupSize-1}" />
 
-				<!-- 	if(pageCount > 5) -->
-				<!-- 	{ -->
-				<!-- 		if(pageCount % 5 != 0){ -->
-				<!-- 			pageCount = pageCount / 5 + 1; -->
-				<!-- 		}  -->
-				<!-- 		else if(pageCount % 5 == 0){ -->
-				<!-- 			pageCount = pageCount / 5; -->
-				<!-- 		} -->
-				<!-- 	} -->
-
-				<!-- 	for(var i = 1; i <= pageCount; i++) -->
-				<!-- 	{ -->
-				<!-- 		var paging ="<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>"; -->
-				<!-- 		string2 = string2 + paging; -->
-				<!-- 	} -->
-
-				<c:set var="counting" value="${count}"></c:set>
-				<!-- 전체 글수를 받아와서 block 단위로  -->
-				<div style="text-align: center;">
-					<c:if test="${counting <= 5}">
-						<c:set var ="page1" value="${counting = 1}"></c:set>
+					<c:if test="${endPage > pageCount}">
+						<c:set var="endPage" value="${pageCount}" />
 					</c:if>
-					
-					<c:if test="${counting > 5}">
-						<c:if test = "${counting % 5 != 0 }">
-							<c:set var ="page1" value="${counting = (counting / 5) + 1}"></c:set>
-						</c:if>
-						<c:if test = "${counting % 5 == 0 }">
-							<c:set var ="page1" value="${counting = (counting / 5)}"></c:set>
-						</c:if>
+
+
+					<!-- << 처음으로 < 이전으로 -->
+					<c:if test="${numPageGroup > 1}">
+						<a href="./bookstock.text?pageNum=${(numPageGroup-2)*pageGroupSize+1 }"><button>[이전]</button></a>
 					</c:if>
-					
-					<c:forEach var="start" begin="${end}" end="${page1-2}">
-							<a href="bookstock.text?num=${start+1}"><button class="btn btn-light" onclick="booklist('bookList.text', '${start+1}')">${start+1}</button></a>
+
+
+
+
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<a href="bookstock.text?pageNum=${i}">
+						[ <font color="#000000" /> 
+							<c:if test="${currentPage == i}">
+									<font color="#bbbbbb" />
+							</c:if> 
+						${i} 
+						</font>]
+						</a>
 					</c:forEach>
-				</div>
+
+
+					<!-- 소수점 형태이므로 인트형태로 변경  -->
+					<fmt:parseNumber var="maxPage" value="${pageCount}" />
+
+					<!-- >> 맨뒤로 > 다음으로 -->
+					<c:if test="${numPageGroup < pageGroupCount}">
+						<a href="./bookstock.text?pageNum=${numPageGroup*pageGroupSize+1}"><button>[다음]</button></a>
+					</c:if>
+				</c:if>
 			</div>
 		</div>
 	</div>
