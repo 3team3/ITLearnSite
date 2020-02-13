@@ -16,7 +16,7 @@
 <%-- 	<%=response.sendRedirect("callbackModify.do") %> --%>
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("NhEDrGuvXvRCwueSRLso",
-				"http://localhost:8090/ITLearnSite/callbackModify.do");
+				"http://192.168.2.15:8090/ITLearnSite/callbackModify.do");
 		var email = "";
 
 		var url = "naverModifylogin.do";
