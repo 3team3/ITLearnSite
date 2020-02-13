@@ -100,12 +100,12 @@ input[type=password] {
 			<script type="text/javascript">
 							var naver_id_login = new naver_id_login(
 									"NhEDrGuvXvRCwueSRLso",
-									"http://localhost:8090/ITLearnSite/callbackModify.do");
+									"http://192.168.2.15:8090/ITLearnSite/callbackModify.do");
 							
 							//
 							var state = naver_id_login.getUniqState();
 							naver_id_login.setButton("white", 2, 40);
-							naver_id_login.setDomain("http://localhost:8090/ITLearnSite");
+							naver_id_login.setDomain("http://192.168.2.15:8090/ITLearnSite");
 							naver_id_login.setState(state);
 							naver_id_login.setPopup();
 							naver_id_login.init_naver_id_login();
