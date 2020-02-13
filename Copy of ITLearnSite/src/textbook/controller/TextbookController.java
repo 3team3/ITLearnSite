@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -67,11 +68,58 @@ public class TextbookController extends HttpServlet {
 				if (request.getParameter("num") != null) {
 					num = Integer.parseInt(request.getParameter("num"));
 				}
+				
+				
+				//########################################################
+				//한 페이지 당 보여줄 수
+				final int pageSize = 5;
+				//블럭 당 페이지 수
+				final int pageGroupSize = 2;
+				//페이지 번호
+				String pageNum = request.getParameter("pageNum");
+				
+				if(pageNum == null)
+				{
+					pageNum = "1";
+				}
+				
+				int currentPage = Integer.parseInt(pageNum);
+				int startRow = (currentPage - 1) * pageSize + 1;// 한페이지의 시작글 번호
+				int endRow = currentPage * pageSize; //한페이지의 마지막 글번호
+				
 				int count = tServ.count();
 				System.out.println("글갯수" + count);
 				
-				// 조회데이터
-				ArrayList<TextbookBean> list = tServ.selectBookList(num);
+				int number = 0;
+				ArrayList<TextbookBean> list = null;
+				if(count > 0)
+				{
+					if(endRow > count)
+					{
+						endRow = count;
+					}
+					// 조회데이터
+					list = tServ.selectBookList(startRow, endRow);
+					
+				}
+				number = count - (currentPage - 1) *pageSize;
+				
+				int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize*pageGroupSize) == 0 ? 0 : 1);
+				
+				int numPageGroup = (int)Math.ceil((double)currentPage/pageGroupSize);
+				
+				request.setAttribute("currentPage", new Integer(currentPage));
+				request.setAttribute("startRow", new Integer(startRow));
+				request.setAttribute("endRow", new Integer(endRow));
+				request.setAttribute("count", new Integer(count));
+				request.setAttribute("pageSize", new Integer(pageSize));
+				request.setAttribute("number", new Integer(number));
+				request.setAttribute("pageGroupSize", new Integer(pageGroupSize));
+				request.setAttribute("numPageGroup", new Integer(numPageGroup));
+				request.setAttribute("pageGroupCount", new Integer(pageGroupCount));
+				//###########################################################
+				
+				
 				// 페이징을 위한 전체 글 갯수
 
 				// jsondata로 파싱
@@ -105,11 +153,12 @@ public class TextbookController extends HttpServlet {
 				booklist.put("count", count);
 				
 				jsonString = booklist.toJSONString();
-
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("list", arr);
 				request.setAttribute("count", count);
 				request.setAttribute("paging", paging);
+				request.setAttribute("num" , num);
 				
 			} else if (path.equals("/insertBook.text")) {
 				// 로직
@@ -131,9 +180,58 @@ public class TextbookController extends HttpServlet {
 				if (request.getParameter("num") != null) {
 					num = Integer.parseInt(request.getParameter("num"));
 				}
-				ArrayList<TextbookBean> list = tServ.selectBookList(num);
-				// 페이징
+				
+				
+				//########################################################
+				//한 페이지 당 보여줄 수
+				final int pageSize = 5;
+				//블럭 당 페이지 수
+				final int pageGroupSize = 2;
+				//페이지 번호
+				String pageNum = request.getParameter("pageNum");
+				
+				if(pageNum == null)
+				{
+					pageNum = "1";
+				}
+				
+				int currentPage = Integer.parseInt(pageNum);
+				int startRow = (currentPage - 1) * pageSize + 1;// 한페이지의 시작글 번호
+				int endRow = currentPage * pageSize; //한페이지의 마지막 글번호
+				
 				int count = tServ.count();
+				System.out.println("글갯수" + count);
+				
+				int number = 0;
+				ArrayList<TextbookBean> list = null;
+				if(count > 0)
+				{
+					if(endRow > count)
+					{
+						endRow = count;
+					}
+					// 조회데이터
+					list = tServ.selectBookList(startRow, endRow);
+					
+				}
+				number = count - (currentPage - 1) *pageSize;
+				
+				int pageGroupCount = count / (pageSize * pageGroupSize) + (count % (pageSize*pageGroupSize) == 0 ? 0 : 1);
+				
+				int numPageGroup = (int)Math.ceil((double)currentPage/pageGroupSize);
+				
+				HashMap<String, Integer> page = new HashMap<String, Integer>();
+				
+				page.put("currentPage", new Integer(currentPage));
+				page.put("startRow", new Integer(startRow));
+				page.put("endRow", new Integer(endRow));
+				page.put("count", new Integer(count));
+				page.put("pageSize", new Integer(pageSize));
+				page.put("number", new Integer(number));
+				page.put("pageGroupSize", new Integer(pageGroupSize));
+				page.put("numPageGroup", new Integer(numPageGroup));
+				page.put("pageGroupCount", new Integer(pageGroupCount));
+				//###########################################################
 
 				// jsondata로 파싱
 				JSONObject jsondata = new JSONObject();
@@ -165,6 +263,8 @@ public class TextbookController extends HttpServlet {
 				JSONObject booklist = new JSONObject();
 				booklist.put("list", arr);
 				booklist.put("count", count);
+				booklist.put("page", page);
+				
 				jsonString = booklist.toJSONString();
 				System.out.println(jsonString);
 
@@ -327,3 +427,4 @@ public class TextbookController extends HttpServlet {
 		return tBean;
 	}
 }
+
