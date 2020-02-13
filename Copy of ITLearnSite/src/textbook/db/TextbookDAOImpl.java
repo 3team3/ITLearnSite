@@ -1,5 +1,6 @@
 package textbook.db;
 
+import java.net.InetAddress;
 import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,7 +140,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 
 	@Override
 	public ArrayList<TextbookBean> selectBookList(int num) {
-		System.out.println(num);
+		
 		ArrayList<TextbookBean> list = new ArrayList<TextbookBean>();
 		try {
 			con = getConnection();
@@ -150,19 +151,16 @@ public class TextbookDAOImpl implements TextbookDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			//num > pagenum 
+			// 1 ~ 5번  num-1 + 1  +   ~ num-1 + 5
+			// 6 ~ 10번 (num - 1) * 5  ~ 
+			// 11 ~ 15번
 			
 			//page당 글 갯수
 			int block = 5;
+			pstmt.setInt(1, (num-1) * (block) + 1);
+			pstmt.setInt(2, (num-1) * (block) + block);
+			int i = 0;
 			
-			if(num == 1) {
-				pstmt.setInt(1, num);
-				pstmt.setInt(2, num * block);
-			}
-			else if(num != 1)
-			{
-				pstmt.setInt(1, (num-1) * (block) + 1);
-				pstmt.setInt(2, (num-1) * (block) + block);
-			}
 			
 			rs = pstmt.executeQuery();
 

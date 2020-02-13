@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,29 +12,33 @@
 <script src="${path}/js/makejs/bookList.js"></script>
 </head>
 <style type="text/css">
- @font-face { font-family: 'NIXGONM-Vb'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff'); font-weight: normal; font-style: normal; }
-body{
-font-family: 'NIXGONM-Vb';}
+@font-face {
+	font-family: 'NIXGONM-Vb';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: 'NIXGONM-Vb';
+}
 </style>
 <body>
 
-<div class="container">
-	<div class="row align-items-end justify-content-center text-center">			
-			<img src="${path }/images/admin4.png">			
+	<div class="container">
+		<div class="row align-items-end justify-content-center text-center">
+			<img src="${path }/images/admin4.png">
+		</div>
 	</div>
-</div>
 
-	 <div class="custom-breadcrumns border-bottom">
-      <div class="container">
-        <a href="index.jsp">Home</a>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">관리자</span>
-        <span class="mx-3 icon-keyboard_arrow_right"></span>
-        <span class="current">도서 재고 관리</span>
-      </div>
-    </div>
-    
-    
+	<div class="custom-breadcrumns border-bottom">
+		<div class="container">
+			<a href="index.jsp">Home</a> <span class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">관리자</span> <span
+				class="mx-3 icon-keyboard_arrow_right"></span> <span class="current">도서 재고 관리</span>
+		</div>
+	</div>
+
+
 	<c:set var='booklist' value='${list}'></c:set>
 	<div class="container">
 		<div class="pagewrap text-center">
@@ -63,14 +67,45 @@ font-family: 'NIXGONM-Vb';}
 						</tr>
 					</c:forEach>
 				</table>
+				<!-- 				if(pageCount <= 5) -->
+				<!-- 	{ -->
+				<!-- 		pageCount = 1; -->
+				<!-- 	} -->
 
-				<c:set var="page" value="${count}"></c:set>
+				<!-- 	if(pageCount > 5) -->
+				<!-- 	{ -->
+				<!-- 		if(pageCount % 5 != 0){ -->
+				<!-- 			pageCount = pageCount / 5 + 1; -->
+				<!-- 		}  -->
+				<!-- 		else if(pageCount % 5 == 0){ -->
+				<!-- 			pageCount = pageCount / 5; -->
+				<!-- 		} -->
+				<!-- 	} -->
+
+				<!-- 	for(var i = 1; i <= pageCount; i++) -->
+				<!-- 	{ -->
+				<!-- 		var paging ="<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>"; -->
+				<!-- 		string2 = string2 + paging; -->
+				<!-- 	} -->
+
+				<c:set var="counting" value="${count}"></c:set>
 				<!-- 전체 글수를 받아와서 block 단위로  -->
 				<div style="text-align: center;">
-					<c:forEach var="i" begin="1" end="${page}">
-						<c:if test="${page!=0}">
-							<a href="bookstock.text?num=${i}"><button class="btn btn-light" onclick="booklist('bookList.text', '${i}')">${i}</button></a>
+					<c:if test="${counting <= 5}">
+						<c:set var ="page1" value="${counting = 1}"></c:set>
+					</c:if>
+					
+					<c:if test="${counting > 5}">
+						<c:if test = "${counting % 5 != 0 }">
+							<c:set var ="page1" value="${counting = (counting / 5) + 1}"></c:set>
 						</c:if>
+						<c:if test = "${counting % 5 == 0 }">
+							<c:set var ="page1" value="${counting = (counting / 5)}"></c:set>
+						</c:if>
+					</c:if>
+					
+					<c:forEach var="start" begin="${end}" end="${page1-2}">
+							<a href="bookstock.text?num=${start+1}"><button class="btn btn-light" onclick="booklist('bookList.text', '${start+1}')">${start+1}</button></a>
 					</c:forEach>
 				</div>
 			</div>

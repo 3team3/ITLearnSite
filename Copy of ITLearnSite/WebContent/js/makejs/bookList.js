@@ -59,10 +59,26 @@ function setBooklist(getData){
 		string = string + comments;
 	}
 	
-	var pageCount = getData.pageCount;
-	
+	var pageCount = getData.count;
+	console.log(pageCount);
 	var pageTag = "";
 	var string2 ="";
+	
+	if(pageCount <= 5)
+	{
+		pageCount = 1;
+	}
+	
+	if(pageCount > 5)
+	{
+		if(pageCount % 5 != 0){
+			pageCount = pageCount / 5 + 1;
+		} 
+		else if(pageCount % 5 == 0){
+			pageCount = pageCount / 5;
+		}
+	}
+	
 	for(var i = 1; i <= pageCount; i++)
 	{
 		var paging ="<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>";

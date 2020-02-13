@@ -68,14 +68,8 @@ public class TextbookController extends HttpServlet {
 					num = Integer.parseInt(request.getParameter("num"));
 				}
 				int count = tServ.count();
-
-				if (count / 5 > 0) {
-					if (count % 5 != 0) {
-						count = (int) (count / 5) + 1;
-					} else if (count % 5 == 0) {
-						count = (int) (count / 5);
-					}
-				}
+				System.out.println("글갯수" + count);
+				
 				// 조회데이터
 				ArrayList<TextbookBean> list = tServ.selectBookList(num);
 				// 페이징을 위한 전체 글 갯수
@@ -108,13 +102,15 @@ public class TextbookController extends HttpServlet {
 				}
 				JSONObject booklist = new JSONObject();
 				booklist.put("list", arr);
-
+				booklist.put("count", count);
+				
 				jsonString = booklist.toJSONString();
 
 				HttpSession session = request.getSession();
 				session.setAttribute("list", arr);
+				request.setAttribute("count", count);
 				request.setAttribute("paging", paging);
-				session.setAttribute("count", count);
+				
 			} else if (path.equals("/insertBook.text")) {
 				// 로직
 				// getProperty 메서드로 넘어온 값을 tBean 객체로 받음
@@ -139,13 +135,6 @@ public class TextbookController extends HttpServlet {
 				// 페이징
 				int count = tServ.count();
 
-				if (count / 5 > 0) {
-					if (count % 5 != 0) {
-						count = (int) (count / 5) + 1;
-					} else if (count % 5 == 0) {
-						count = (int) (count / 5);
-					}
-				}
 				// jsondata로 파싱
 				JSONObject jsondata = new JSONObject();
 				Date date = null;
@@ -175,7 +164,7 @@ public class TextbookController extends HttpServlet {
 				}
 				JSONObject booklist = new JSONObject();
 				booklist.put("list", arr);
-				booklist.put("pageCount", count);
+				booklist.put("count", count);
 				jsonString = booklist.toJSONString();
 				System.out.println(jsonString);
 
@@ -183,7 +172,7 @@ public class TextbookController extends HttpServlet {
 				out.print(jsonString);
 
 				HttpSession session = request.getSession();
-				session.setAttribute("count", count);
+				request.setAttribute("count", count);
 				request.setAttribute("paging", paging);
 				paging = "/pages/main/center/books/bookList.jsp";
 
