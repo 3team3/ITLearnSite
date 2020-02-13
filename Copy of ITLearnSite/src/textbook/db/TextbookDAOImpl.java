@@ -139,7 +139,7 @@ public class TextbookDAOImpl implements TextbookDAO {
 	}
 
 	@Override
-	public ArrayList<TextbookBean> selectBookList(int num) {
+	public ArrayList<TextbookBean> selectBookList(int startRow, int endRow) {
 		
 		ArrayList<TextbookBean> list = new ArrayList<TextbookBean>();
 		try {
@@ -157,8 +157,8 @@ public class TextbookDAOImpl implements TextbookDAO {
 			
 			//page당 글 갯수
 			int block = 5;
-			pstmt.setInt(1, (num-1) * (block) + 1);
-			pstmt.setInt(2, (num-1) * (block) + block);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			int i = 0;
 			
 			

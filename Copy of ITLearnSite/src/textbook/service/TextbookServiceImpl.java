@@ -15,11 +15,10 @@ public class TextbookServiceImpl implements TextbookService {
 	}
 	
 	@Override
-	public ArrayList<TextbookBean> selectBookList(int num) {
-		return tbDAO.selectBookList(num);
+	public ArrayList<TextbookBean> selectBookList(int startRow, int endRow) {
+		// TODO Auto-generated method stub
+		return tbDAO.selectBookList(startRow, endRow);
 	}
-	
-	
 	@Override
 	public int insertBook(TextbookBean tBean) {
 		int result = tbDAO.insertBook(tBean);
