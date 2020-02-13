@@ -163,7 +163,7 @@ a {
 					</tbody>
 				</table>
 				 */
-				 string = "<button onclick='cmtlist();'" +">새로고침</button><table class='table'><tbody id='cmt'>"
+				 string = "<button class='btn btn-light ml-3' onclick='cmtlist();'" +">새로고침</button><table class='table'><tbody id='cmt'>"
 				for (var i = 0; i < getData.list.length; i++) {
 					addr = "commentsDelete.lec?co_no="+getData.list[i].co_no;
 					var comments = 

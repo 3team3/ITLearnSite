@@ -23,7 +23,15 @@
 <c:set var="condition" value="${questionsMap2.condition}"/>
 
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<style type="text/css">
 
+ #width_writedate {
+ clear:both;
+    width:20%;
+  }
+
+
+</style>
 </head>
 
 <body>
@@ -63,7 +71,7 @@
 								<td>번호</td>
 								<td>제목</td>
 								<td>글쓴이</td>
-								<td class="width_writedate">작성일</td>
+								<td id="width_writedate">작성일</td>
 								<td width="10%">조회수</td>
 							</tr>
 						</thead>

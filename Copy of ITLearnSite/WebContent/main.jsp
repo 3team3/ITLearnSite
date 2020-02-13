@@ -6,6 +6,9 @@
 <html lang="ko">
 
 <head>
+<title>ITLearn</title>
+
+
 <link rel="stylesheet" href="${path}/fonts/icomoon/style.css">
 <link rel="stylesheet" href="${path}/css/bootstrap.min.css">
 <link rel="stylesheet" href="${path}/css/jquery-ui.css">
@@ -40,7 +43,6 @@ font-family: 'NIXGONM-Vb';}
 	<c:set var="pages" value="/pages/main/center/default.jsp" />
 </c:if>
 
-<c:out value="${pages}"></c:out>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	<div>
 		<div class="site-wrap" style="height: 100px; width: 100%">
