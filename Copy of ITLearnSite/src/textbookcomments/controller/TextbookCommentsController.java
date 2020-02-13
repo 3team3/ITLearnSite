@@ -94,11 +94,11 @@ public class TextbookCommentsController extends HttpServlet {
 			}
 			else if(path.equals("/TextbookCommentsDelete.tbc"))
 			{
-				tcBean=getTextbookCommentsBeanProperty(request, response);
+				int bo_no = Integer.parseInt(request.getParameter("bo_no"));
 				HttpSession session= request.getSession();
 				String email = (String)session.getAttribute("email");
 				
-				int check = tcServ.TextbookcommentsDelete(tcBean.getBo_no(), email);
+				int check = tcServ.TextbookcommentsDelete(bo_no, email);
 				PrintWriter out = response.getWriter();
 				if(check == 1)
 				{

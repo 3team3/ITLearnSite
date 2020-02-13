@@ -294,19 +294,26 @@ public class MemberController extends HttpServlet {
 				System.out.println(request.getParameter("gender"));
 				
 				int gen=0;
-				
-				if(request.getParameter("gender").equals("M"))
-				{
+				if(request.getParameter("gender")!=null){
+					if(request.getParameter("gender").equals("M"))
+					{
+						gen = 1;
+						System.out.println("Man");
+						
+						mBean.setGender(gen);
+					}
+					else{
+						System.out.println("Woman");
+						gen = 2;
+						mBean.setGender(gen);
+					}
+				}else{
 					gen = 1;
 					System.out.println("Man");
-					
 					mBean.setGender(gen);
 				}
-				else if (request.getParameter("gender").equals("W")){
-					System.out.println("Woman");
-					gen = 2;
-					mBean.setGender(gen);
-				}
+				
+				
 				
 				System.out.println(mBean.getName()+mBean.getEmail()+mBean.getGender());
 				int check = serv.emailDupChk(mBean);

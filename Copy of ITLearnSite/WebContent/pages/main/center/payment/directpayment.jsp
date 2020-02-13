@@ -121,6 +121,7 @@
        		<br>
        		<c:set var="pro_price" value="${pro_price}"/>
        		<c:set var="total" value="${total+pro_price}"/>
+       			<input type="hidden" value="${product_no}" name="pay_pro1_no">
 				<input type="hidden" value="${pro_name }" name="pay_pro1_name">
 				<input type="hidden" value="${pro_cnt }" name="pay_pro1_cnt">
 				<input type="hidden" value="${pro_price }" name="pay_pro1_price">

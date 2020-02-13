@@ -43,7 +43,7 @@ public class TextbookCommentsDAOImpl implements TextbookCommentsDAO {
     	try 
     	{
     		con = getConnection();
-    	 	sql = "select max(co_no) from resource_comments";
+    	 	sql = "select max(bo_no) from book_comments";
     		pstmt = con.prepareStatement(sql);
     		rs = pstmt.executeQuery();
     		

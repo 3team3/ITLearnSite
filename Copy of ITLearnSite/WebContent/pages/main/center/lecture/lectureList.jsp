@@ -89,7 +89,7 @@
 
 											<a
 												href="cartAdd.cart?&product_no=${lecture.product_no}&pro_name=${lecture.lec_title }&pro_price=${lecture.lec_price }&pro_img=${lecture.lec_imgfile}&pro_sort=${lecture.product_type}&pro_cnt=1"
-												class="btn btn-outline-success rounded-0 px-4">장바구니</a> <a href="directPay.pay?pro_name=${lecture.lec_title }&pro_price=${lecture.lec_price}&pro_sort=강의&pro_cnt=1"
+												class="btn btn-outline-success rounded-0 px-4">장바구니</a> <a href="directPay.pay?product_no=${lecture.product_no}&pro_name=${lecture.lec_title }&pro_price=${lecture.lec_price}&pro_sort=강의&pro_cnt=1"
 												class="btn btn-outline-dark rounded-0 px-4">구매하기</a>
 												<a style="margin: 5px;"	href="${path }/pages/main/center/lecture/temp/${lecture.lec_spofile }" class="btn btn-outline-primary rounded-0 px-4" data-fancybox="">맛보기</a>
 											<c:if test="${email eq 'admin@admin.com' }">

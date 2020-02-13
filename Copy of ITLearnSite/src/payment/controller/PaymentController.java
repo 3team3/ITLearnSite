@@ -234,11 +234,13 @@ public class PaymentController extends HttpServlet {
 				mBean = mServ.callMember(email);
 				request.setAttribute("mBean", mBean);
 				
+				int product_no =  Integer.parseInt(request.getParameter("product_no"));
 				String pro_name = request.getParameter("pro_name");
 				int pro_price = Integer.parseInt(request.getParameter("pro_price"));
 				String pro_sort = request.getParameter("pro_sort");
 				int pro_cnt = Integer.parseInt(request.getParameter("pro_cnt"));
 				
+				request.setAttribute("product_no", product_no);
 				request.setAttribute("pro_name", pro_name);
 				request.setAttribute("pro_price", pro_price);
 				request.setAttribute("pro_sort", pro_sort);

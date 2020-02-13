@@ -61,11 +61,11 @@ function cmtlist()
 				}
 				var comments = 
 					"<tr>"
-					+ 	"<td width='10%'>"+getData.list[i].bo_email+"</td>"
-					+ 	"<td>"+bo_evaluation+"</td>"			
-					+		"<td width='65%'>"+getData.list[i].bo_content+"</td>"
-					+ 		"<td width='15%'>"+getData.list[i].bo_date+"</td>"
-					+		"<td width='7%'>" 
+					+ 	"<td>"+getData.list[i].bo_email+"</td>"
+					+ 	"<td class='color_b'>"+bo_evaluation+"</td>"			
+					+		"<td width='500px' style='word-break:break-all'>"+getData.list[i].bo_content+"</td>"
+					+ 		"<td>"+getData.list[i].bo_date+"</td>"
+					+		"<td>" 
 					+			"<button class='btn btn-outline-dark' onclick='deleteTextbookComments("+'"'+addr+'"'+");'" +">삭제</button>" 
 					+		"</td>"
 					+ 	"</tr>";

@@ -22,7 +22,13 @@
     text-decoration:none;
 }
 .star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#777;}
+.star_rating a.on {color:#183661;}
+.color_b{
+	color:#183661;
+}
+.container_b{
+	color:black;
+}
 
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -52,7 +58,7 @@ $( document ).ready(function() {
 	</div>
 </div>
 <body>
-	<div class="container">
+	<div class="container container_b">
 		<div class="row">
 			<div class="wrap">
 				<div class="row">
