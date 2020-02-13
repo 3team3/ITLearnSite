@@ -115,9 +115,10 @@ font-family: 'NIXGONM-Vb';}
             </div>
         <hr>
         <h5>장바구니</h5>    	
-        	<c:set var="j" value="0"/>
+        	
         	<c:set var="total" value="0"/>
         	<c:forEach  var="cartlist"   items="${requestScope.cartlist}">
+        	<c:set var="j" value="0"/>
        		(${cartlist.pro_sort })
        		${cartlist.pro_name }
        		가격:${cartlist.pro_price }

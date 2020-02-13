@@ -456,32 +456,55 @@ public class PaymentDAOImpl implements PaymentDAO {
             	if(rs.getString("pay_pro1_sort").equals("강의"))
             	{
             		plBean.setSet_lec_title(rs.getString("pay_pro1_name"));
+            		sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
+            		pstmt = con.prepareStatement(sql);
+         	        pstmt.setInt(1,plBean.getSet_no());
+         	        pstmt.setString(2,plBean.getSet_email() );
+         	        pstmt.setString(3,plBean.getSet_lec_title());	        
+         	        pstmt.executeUpdate();
             	}
             	if(rs.getString("pay_pro2_sort").equals("강의"))
             	{
             		plBean.setSet_lec_title(rs.getString("pay_pro2_name"));
+            		sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
+                    pstmt = con.prepareStatement(sql);
+         	        pstmt.setInt(1,plBean.getSet_no());
+         	        pstmt.setString(2,plBean.getSet_email() );
+         	        pstmt.setString(3,plBean.getSet_lec_title());	        
+         	        pstmt.executeUpdate();
             	}
             	if(rs.getString("pay_pro3_sort").equals("강의"))
             	{
             		plBean.setSet_lec_title(rs.getString("pay_pro3_name"));
+            		sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
+                    pstmt = con.prepareStatement(sql);
+         	        pstmt.setInt(1,plBean.getSet_no());
+         	        pstmt.setString(2,plBean.getSet_email() );
+         	        pstmt.setString(3,plBean.getSet_lec_title());	        
+         	        pstmt.executeUpdate();
             	}
             	if(rs.getString("pay_pro4_sort").equals("강의"))
             	{
             		plBean.setSet_lec_title(rs.getString("pay_pro4_name"));
+            		sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
+                    pstmt = con.prepareStatement(sql);
+         	        pstmt.setInt(1,plBean.getSet_no());
+         	        pstmt.setString(2,plBean.getSet_email() );
+         	        pstmt.setString(3,plBean.getSet_lec_title());	        
+         	        pstmt.executeUpdate();
             	}
             	if(rs.getString("pay_pro5_sort").equals("강의"))
             	{
             		plBean.setSet_lec_title(rs.getString("pay_pro5_name"));
+            		sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
+                    pstmt = con.prepareStatement(sql);
+         	        pstmt.setInt(1,plBean.getSet_no());
+         	        pstmt.setString(2,plBean.getSet_email() );
+         	        pstmt.setString(3,plBean.getSet_lec_title());	        
+         	        pstmt.executeUpdate();
             	}         	      	         	
             }  
-            
-            sql = "insert into set_pay_lec_table(set_no,set_email,set_lec_title, set_endDate) values(?,?,?,(sysdate + 30))";
-            pstmt = con.prepareStatement(sql);
-	        pstmt.setInt(1,plBean.getSet_no());
-	        pstmt.setString(2,plBean.getSet_email() );
-	        pstmt.setString(3,plBean.getSet_lec_title());	        
-	        pstmt.executeUpdate();	
-            
+
 	      
 	        
 		}catch(Exception e){
