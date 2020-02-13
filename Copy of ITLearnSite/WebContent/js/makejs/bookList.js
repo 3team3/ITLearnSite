@@ -58,52 +58,71 @@ function setBooklist(getData){
 			+"</div>";
 		string = string + comments;
 	}
+	//######################################################
+	//페이징 처리
+	//페이지수
+	var count = getData.count;
+	//시작 번호
+	var startRow = getData.page.startRow;
+	//그룹 번호
+	var numPageGroup = getData.page.numPageGroup;
+	//페이지 그룹 수
+	var pageGroupCount = getData.page.pageGroupCount;
+
+	//페이지의 마지막 번호
+	var endRow = getData.page.endRow;
 	
-	var pageCount = getData.count;
-	console.log(pageCount);
+	//페이지 사이즈
+	var pageSize = getData.page.pageSize;
+	
+	//현재 페이지
+	var currentPage = getData.page.currentPage;
+	
+	//페이지 그룹 크기
+	var pageGroupSize = getData.page.pageGroupSize;
+	
 	var pageTag = "";
 	var string2 ="";
-	
-	if(pageCount <= 5)
+	var frontTag = ""; 
+	var middleTag = "";
+	var backTag = "";
+	if(count > 0)
 	{
-		pageCount = 1;
-	}
-	
-	if(pageCount > 5)
-	{
-		if(pageCount % 5 != 0){
-			pageCount = pageCount / 5 + 1;
-		} 
-		else if(pageCount % 5 == 0){
-			pageCount = pageCount / 5;
+		var pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1 );
+		
+		var startPage = pageGroupSize * (numPageGroup - 1) + 1;
+		
+		var endPage = startPage + pageGroupSize - 1;
+		
+		if(endPage > pageCount)
+		{
+		   endPage = pageCount;
+		}
+		
+		if(numPageGroup > 1)
+		{
+			var page = ((numPageGroup - 2) * pageGroupSize + 1);
+			frontTag = 
+				"<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +page+ "')" + '"'+">" + "[이전]" + "</button>";
+			
+		}
+		
+		for(var i = startPage; i <= endPage ; i++)
+		{
+			middleTag = "<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>";
+			string2  = string2 + middleTag ;
+		}
+		
+		if(numPageGroup < pageGroupCount)
+		{
+			var page = (numPageGroup * pageGroupSize + 1);
+			backTag = "<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +page+ "')" + '"'+">" + "[다음]" + "</button>";
 		}
 	}
 	
-	for(var i = 1; i <= pageCount; i++)
-	{
-		var paging ="<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +i+ "')" + '"'+">" + i + "</button>";
-		string2 = string2 + paging;
-	}
-	
 	console.log(string2);
-//	for(var page = 1; pageCount > 1; page ++)
-//	{
-//		var pageNum = "<div style='text-align:center;'>" 
-////			+	"<button onclick='booklist('bookList.text', "+page+")'>"+page+"</button>" 
-//			+"</div>";
-//		
-//	}
-//		<c:set var="page" value="${count}"></c:set>
-//		<!-- 전체 글수를 받아와서 block 단위로  -->
-//		<div style="text-align: center;">
-//			<c:forEach var="i" begin="1" end="${page}">
-//				<c:if test="${page!=0}">
-//					<button onclick="booklist('bookList.text', '${i}')">${i}</button>
-//				</c:if>
-//			</c:forEach>
-//		</div>
 	
-	$(".wrapboard").html(string+"<div style='text-align:center'> "+string2 + "</div>");
+	$(".wrapboard").html(string+"<div style='text-align:center'> "+frontTag + string2 + backTag + "</div>");
 }
 
 function setBookDetail(getData){
@@ -135,7 +154,7 @@ function num(no){
 
 function booklist(direction, num)
 {
-	var url = "bookselect.text?num="+num;
+	var url = "bookselect.text?pageNum="+num;
 	
 	var form_data = {
 			/**/
