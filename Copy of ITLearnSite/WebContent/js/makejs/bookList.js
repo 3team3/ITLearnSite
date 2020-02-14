@@ -30,34 +30,45 @@ function Request(){
 
 function setBooklist(getData){
 	var string ="";
-	for(var i = 0; i < getData.list.length; i++) {
-		var booktitle = decodeURIComponent(getData.list[i].book_title);
-		
-		/*pasing 책이름*/
-		var title = booktitle.split('[');
-		title = title[0];
-//		title = title.substring(0, title.length-1);
-		var uri = decodeURIComponent(getData.list[i].book_image);
-		console.log(uri);
-		var p_no =  getData.list[i].product_no;
-		
-		var comments = 
-			"<div class='booklist'>"
-			+ 	"<div class='bookimg'>"
-			+		"<img src='"+decodeURIComponent(getData.list[i].book_image)+"'>"
-			+	"</div>"
-			+	"<div class='content_wrap'>"
-			+		"<a href='bookdetail.text?product_no=" + getData.list[i].product_no +"'>"
-			+			"<p class='booktitle'>" + booktitle + "</p>"
-			+		"</a>"
-			+			"<p class='book_price'> 가격 : " + getData.list[i].book_price + "원</p>"
-			+		"<div class='buttons'>"
-			+			"<a href='cartAdd.cart?&product_no="+getData.list[i].product_no+ "&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort="+getData.list[i].product_type+"&pro_cnt=1' class='btn btn-outline-success rounded-0 px-4'> 담기 </a>"
-			+		"</div>"
-			+	"</div>"
-			+"</div>";
-		string = string + comments;
+	
+	if(getData == null)
+	{
+		$(".wrapboard").html("<div style='text-align:center;'> " + "등록된 도서가 없습니다." + "</div>");
 	}
+	else
+	{
+		for(var i = 0; i < getData.list.length; i++) {
+			var booktitle = decodeURIComponent(getData.list[i].book_title);
+			
+			/*pasing 책이름*/
+			var title = booktitle.split('[');
+			title = title[0];
+//			title = title.substring(0, title.length-1);
+			var uri = decodeURIComponent(getData.list[i].book_image);
+			console.log(uri);
+			var p_no =  getData.list[i].product_no;
+			
+			var comments = 
+				"<div class='booklist'>"
+				+ 	"<div class='bookimg'>"
+				+		"<img src='"+decodeURIComponent(getData.list[i].book_image)+"'>"
+				+	"</div>"
+				+	"<div class='content_wrap'>"
+				+		"<a href='bookdetail.text?product_no=" + getData.list[i].product_no +"'>"
+				+			"<p class='booktitle'>" + booktitle + "</p>"
+				+		"</a>"
+				+			"<p class='book_price'> 가격 : " + getData.list[i].book_price + "원</p>"
+				+		"<div class='buttons'>"
+				+			"<a href='cartAdd.cart?&product_no="+getData.list[i].product_no+ "&pro_name="+decodeURIComponent(getData.list[i].book_title)+"&pro_price="+getData.list[i].book_price+"&pro_img="+decodeURIComponent(getData.list[i].book_image)+"&pro_sort="+getData.list[i].product_type+"&pro_cnt=1' class='btn btn-outline-success rounded-0 px-4'> 담기 </a>"
+				+		"</div>"
+				+	"</div>"
+				+"</div>";
+			string = string + comments;
+		}
+		console.log(string2);
+		
+	}
+	
 	//######################################################
 	//페이징 처리
 	//페이지수
@@ -119,9 +130,6 @@ function setBooklist(getData){
 			backTag = "<button class='btn btn-light' onclick = " +'"'+ "booklist('bookList.text'," + "'" +page+ "')" + '"'+">" + "[다음]" + "</button>";
 		}
 	}
-	
-	console.log(string2);
-	
 	$(".wrapboard").html(string+"<div style='text-align:center'> "+frontTag + string2 + backTag + "</div>");
 }
 
@@ -179,8 +187,7 @@ function booklist(direction, num)
 			}
 		},
 		error : function(request,status,error){
-			alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			console.log(error);
+			setBooklist(null);
 		}
 	});
 }
