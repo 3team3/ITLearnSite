@@ -37,4 +37,8 @@ public interface QuestionDAO{
 	/*글 검색*/
 	public ArrayList<QuestionBean> questionSelect(HashMap<String, Object> listOpt);
 	
+	/*답글 작성 시 부모글 내용 받아오기*/
+	public QuestionBean getContent(int ques_no);
+	
+	
 }

@@ -36,5 +36,8 @@ public interface QuestionService {
 
 	/*고객센터 답글쓰기*/
 	public int addReply(QuestionBean qBean);
+	
+	/*부모글 내용 받아오기*/
+	public QuestionBean getContent(int ques_no);
 
 }

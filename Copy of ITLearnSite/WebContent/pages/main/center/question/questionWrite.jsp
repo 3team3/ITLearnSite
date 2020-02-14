@@ -51,7 +51,7 @@
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td colspan="3"><input type="text" name="ques_title" class="form-control" placeholder="제목을 입력하세요."></td>
+					<td colspan="3"><input type="text" name="ques_title" class="form-control" placeholder="제목을 입력하세요." required="required"></td>
 				</tr>
 				<tr>
 					<td>내용</td>

@@ -95,6 +95,12 @@ public class QuestionServiceImpl implements QuestionService {
 			public int addReply(QuestionBean qBean) {
 				return qDao.insertQuestion(qBean);
 			}
+			
+			
+		//부모글 내용 받아오기
+			public QuestionBean getContent(int ques_no) {
+				return qDao.getContent(ques_no);
+			}
 
 			
 }

@@ -463,5 +463,31 @@ import question.db.QuestionBean;
              return QuestionList;                    
          }
     
+  //부모글 내용 가져오기
+  	@Override
+  	public QuestionBean getContent(int ques_no){
+  		QuestionBean qBean = new QuestionBean();
+  		try {
+  			Connection conn=null;
+  			PreparedStatement pstmt = null;
+  			ResultSet rs = null;
+  			String sql = "";
+  			
+  			conn = getConnection();
+  			sql = "select ques_content from question_table where ques_no=?";
+  			pstmt = conn.prepareStatement(sql);
+  			pstmt.setInt(1, ques_no);	
+  			rs = pstmt.executeQuery();
+  			if (rs.next()) {
+  				qBean.setQues_content(rs.getString("ques_content"));}
+  				
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  		} finally {
+  			closeConnection();	
+  		}
+  		return qBean;
+  	}
+    
     
 }

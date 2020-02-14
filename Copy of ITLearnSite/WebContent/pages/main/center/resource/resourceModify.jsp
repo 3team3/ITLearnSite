@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="res_title" class="form-control" value="${rBean.res_title}" ></td>
+				<td><input type="text" name="res_title" class="form-control" value="${rBean.res_title}" required="required"></td>
 			</tr>
 			<tr>
 				<td>글쓴이</td>

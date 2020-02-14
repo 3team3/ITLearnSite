@@ -176,7 +176,10 @@ public class QuestionController extends HttpServlet {
 			else if(path.equals("/questionReply.ques"))
 			{
 				String ques_parentemail = request.getParameter("ques_parentemail");
+				int ques_no = Integer.parseInt(request.getParameter("ques_no"));
+				
 				qBean = getQuestionBeanProperty(request, response);
+				qServ.getContent(ques_no);
 				qBean.setQues_parentemail(ques_parentemail);
 				request.setAttribute("qBean", qBean);
 				
